@@ -12,6 +12,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { StatsBand } from "@/components/StatsBand";
 import { WhyUs } from "@/components/WhyUs";
 import { absoluteUrl, medicalClinicJsonLd } from "@/lib/clinic";
+import { activeHeroSlidesQueryOptions } from "@/lib/hero-slides.queries";
 import { useSiteContent } from "@/lib/site-content";
 import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
@@ -21,8 +22,12 @@ const DESCRIPTION =
   "Поликлиника, травмпункт 24/7, хирургия, лаборатория и стационар в Бишкеке. Онлайн-запись к врачу за минуту.";
 
 export const Route = createFileRoute("/")({
-  loader: ({ context }) => {
-    void context.queryClient.ensureQueryData(specialtiesQueryOptions());
+  loader: async ({ context }) => {
+    // Баннер — LCP-элемент: грузим слайды на сервере, чтобы картинка была в HTML.
+    await Promise.all([
+      context.queryClient.ensureQueryData(activeHeroSlidesQueryOptions()),
+      context.queryClient.ensureQueryData(specialtiesQueryOptions()),
+    ]);
   },
   head: () => ({
     meta: [
