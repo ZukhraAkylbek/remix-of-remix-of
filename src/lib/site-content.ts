@@ -43,6 +43,11 @@ export const CONTENT_FIELDS: ContentField[] = [
   // Хедер
   { key: "header.phone", label: "Телефон в хедере", group: "Хедер", kind: "text", fallback: "+996 779 909 009" },
   { key: "header.cta", label: "Текст кнопки записи", group: "Хедер", kind: "text", fallback: "Записаться" },
+  { key: "header.phone_note", label: "Подпись над телефоном", group: "Хедер", kind: "text", fallback: "Круглосуточная запись по телефону:" },
+  { key: "header.action_home", label: "Кнопка 1 — название", group: "Хедер", kind: "text", fallback: "Вызвать врача на дом" },
+  { key: "header.action_home_href", label: "Кнопка 1 — адрес", group: "Хедер", kind: "text", fallback: "/uslugi/vyzov-vracha-na-dom" },
+  { key: "header.action_emergency", label: "Кнопка 2 — название", group: "Хедер", kind: "text", fallback: "Скорая помощь" },
+  { key: "header.action_emergency_href", label: "Кнопка 2 — адрес", group: "Хедер", kind: "text", fallback: "/travmpunkt" },
 
   // Hero
   { key: "hero.eyebrow", label: "Надзаголовок", group: "Главный баннер", kind: "text", fallback: "Клиники «Авиценна» · Бишкек" },
