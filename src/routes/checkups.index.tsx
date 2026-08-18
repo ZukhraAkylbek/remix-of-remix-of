@@ -263,8 +263,6 @@ function CheckupsPage() {
   );
 }
 
-type Card = ReturnType<typeof useSuspenseQuery<{ cards: never }>> extends never ? never : never;
-
 function ProgramCard({
   card,
 }: {
@@ -350,7 +348,7 @@ type Extra = {
   icon: string | null;
 };
 
-function CheckupBuilder({ base, addons }: { base?: Extra; addons: Extra[] }) {
+function CheckupBuilder({ base, addons }: { base: Extra | undefined; addons: Extra[] }) {
   const [selected, setSelected] = useState<string[]>([]);
   const basePrice = priceValue(base?.price);
   const addonsPrice = useMemo(
