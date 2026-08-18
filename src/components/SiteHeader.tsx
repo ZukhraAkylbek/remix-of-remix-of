@@ -18,6 +18,7 @@ export const HEADER_NAV_SLOTS = [
   { label: "Поликлиника", href: "/#vrachi" },
   { label: "Чекапы", href: "/checkups" },
   { label: "Стационар", href: "/napravleniya/statsionar" },
+  { label: "Диагностика", href: "/diagnostika" },
 ];
 
 const isExternal = (href: string) => /^(https?:|tel:|mailto:)/i.test(href);
