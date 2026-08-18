@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { GripVertical, Image as ImageIcon, Plus, Trash2, Upload } from "lucide-react";
 
+import { CHECKUP_ICON_KEYS } from "@/components/checkups/CheckupIcon";
 import { PageHeader, Panel } from "@/components/admin/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -67,19 +68,45 @@ type CardRow = {
   badge: string | null;
   image_url: string | null;
   price: string | null;
+  price_note: string | null;
+  icon: string | null;
+  includes: string | null;
   body: string | null;
   sort_order: number;
   is_active: boolean;
 };
 
+type ExtraRow = {
+  id: string;
+  group_key: string;
+  title: string;
+  price: string | null;
+  note: string | null;
+  icon: string | null;
+  sort_order: number;
+  is_active: boolean;
+};
+
+const EXTRA_GROUPS: { key: string; label: string; hint: string }[] = [
+  { key: "base", label: "Базовый чекап (конструктор)", hint: "Один пункт: название, цена, в «Заметке» — список входящего построчно" },
+  { key: "addon", label: "Дополнительные пакеты", hint: "Плитки с плюсом в конструкторе" },
+  { key: "female", label: "Женское здоровье", hint: "Список программ с ценами" },
+  { key: "male", label: "Мужское здоровье", hint: "Список программ с ценами" },
+  { key: "lab", label: "Лабораторные пакеты", hint: "Плитки с иконкой и ценой" },
+  { key: "benefit", label: "Преимущества (нижняя полоса)", hint: "Заголовок + пояснение в «Заметке»" },
+];
+
+const EXTRA_SELECT = "id, group_key, title, price, note, icon, sort_order, is_active";
+
 const SECTION_SELECT = "id, key, title, subtitle, body, sort_order, is_active";
 const CARD_SELECT =
-  "id, slug, title, subtitle, badge, image_url, price, body, sort_order, is_active";
+  "id, slug, title, subtitle, badge, image_url, price, price_note, icon, includes, body, sort_order, is_active";
 
 function AdminCheckups() {
   const queryClient = useQueryClient();
   const [sectionDraft, setSectionDraft] = useState<Partial<SectionRow> | null>(null);
   const [cardDraft, setCardDraft] = useState<Partial<CardRow> | null>(null);
+  const [extraDraft, setExtraDraft] = useState<Partial<ExtraRow> | null>(null);
   const [order, setOrder] = useState<SectionRow[]>([]);
   const [dragId, setDragId] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -89,6 +116,7 @@ function AdminCheckups() {
   const invalidate = () => {
     void queryClient.invalidateQueries({ queryKey: ["admin-checkup-sections"] });
     void queryClient.invalidateQueries({ queryKey: ["admin-checkup-cards"] });
+    void queryClient.invalidateQueries({ queryKey: ["admin-checkup-extras"] });
     void refreshSite();
   };
 
@@ -114,6 +142,59 @@ function AdminCheckups() {
       if (error) throw error;
       return data ?? [];
     },
+  });
+
+  const { data: extras } = useQuery({
+    queryKey: ["admin-checkup-extras"],
+    queryFn: async (): Promise<ExtraRow[]> => {
+      const { data, error } = await supabase
+        .from("checkup_extras")
+        .select(EXTRA_SELECT)
+        .order("group_key", { ascending: true })
+        .order("sort_order", { ascending: true });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+
+  const saveExtra = useMutation({
+    mutationFn: async (values: Partial<ExtraRow>) => {
+      const payload = {
+        group_key: values.group_key ?? "addon",
+        title: (values.title ?? "").trim(),
+        price: values.price ?? null,
+        note: values.note ?? null,
+        icon: values.icon ?? null,
+        is_active: values.is_active ?? true,
+        sort_order: values.sort_order ?? 99,
+      };
+      if (!payload.title) throw new Error("Укажите название");
+      if (values.id) {
+        const { error } = await supabase.from("checkup_extras").update(payload).eq("id", values.id);
+        if (error) throw new Error(error.message);
+      } else {
+        const { error } = await supabase.from("checkup_extras").insert(payload);
+        if (error) throw new Error(error.message);
+      }
+    },
+    onSuccess: () => {
+      toast.success("Сохранено");
+      setExtraDraft(null);
+      invalidate();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const removeExtra = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("checkup_extras").delete().eq("id", id);
+      if (error) throw new Error(error.message);
+    },
+    onSuccess: () => {
+      toast.success("Удалено");
+      invalidate();
+    },
+    onError: (e: Error) => toast.error(e.message),
   });
 
   useEffect(() => {
@@ -197,6 +278,9 @@ function AdminCheckups() {
         subtitle: values.subtitle ?? null,
         badge: values.badge ?? null,
         price: values.price ?? null,
+        price_note: values.price_note ?? null,
+        icon: values.icon ?? null,
+        includes: values.includes ?? null,
         body: values.body ?? null,
         image_url: values.image_url ?? null,
         is_active: values.is_active ?? true,
@@ -430,6 +514,154 @@ function AdminCheckups() {
         </Panel>
       </div>
 
+      <div className="mt-5 grid gap-5 lg:grid-cols-2">
+        {EXTRA_GROUPS.map((groupItem) => {
+          const rows = (extras ?? []).filter((row) => row.group_key === groupItem.key);
+          return (
+            <Panel key={groupItem.key} title={groupItem.label} description={groupItem.hint}>
+              <ul className="space-y-2">
+                {rows.map((row) => (
+                  <li
+                    key={row.id}
+                    className="border-admin-line bg-card grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border px-3 py-2.5"
+                  >
+                    <button
+                      type="button"
+                      className="min-w-0 text-left"
+                      onClick={() => setExtraDraft({ ...row })}
+                    >
+                      <p className="truncate text-[15px] font-bold">{row.title}</p>
+                      <p className="text-admin-muted truncate text-[12px]">
+                        {row.price ?? "без цены"}
+                        {row.is_active ? "" : " · скрыто"}
+                      </p>
+                    </button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-destructive rounded-xl"
+                      aria-label="Удалить"
+                      onClick={() => {
+                        if (confirm("Удалить пункт?")) removeExtra.mutate(row.id);
+                      }}
+                    >
+                      <Trash2 className="size-4" />
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+              <Button
+                variant="outline"
+                className="border-admin-line mt-3 h-10 w-full rounded-xl"
+                onClick={() =>
+                  setExtraDraft({
+                    group_key: groupItem.key,
+                    is_active: true,
+                    sort_order: rows.length + 1,
+                  })
+                }
+              >
+                <Plus className="mr-1.5 size-4" /> Добавить
+              </Button>
+            </Panel>
+          );
+        })}
+      </div>
+
+      {/* Редактор пункта списков */}
+      <Sheet open={extraDraft !== null} onOpenChange={(open) => !open && setExtraDraft(null)}>
+        <SheetContent className="w-full overflow-y-auto sm:max-w-lg">
+          <SheetHeader>
+            <SheetTitle>{extraDraft?.id ? "Пункт" : "Новый пункт"}</SheetTitle>
+            <SheetDescription>
+              Название, цена, иконка и заметка (для базового чекапа — список входящего построчно).
+            </SheetDescription>
+          </SheetHeader>
+          <div className="space-y-4 px-4 pb-8">
+            <div>
+              <Label className="text-sm">Раздел</Label>
+              <select
+                className="border-admin-line bg-card mt-2 h-11 w-full rounded-xl border px-3 text-sm"
+                value={String(extraDraft?.group_key ?? "addon")}
+                onChange={(e) =>
+                  setExtraDraft((prev) => ({ ...prev, group_key: e.target.value }))
+                }
+              >
+                {EXTRA_GROUPS.map((g) => (
+                  <option key={g.key} value={g.key}>
+                    {g.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <Label className="text-sm">Название</Label>
+              <Input
+                className="mt-2 h-11 rounded-xl"
+                value={String(extraDraft?.title ?? "")}
+                onChange={(e) => setExtraDraft((prev) => ({ ...prev, title: e.target.value }))}
+              />
+            </div>
+            <div>
+              <Label className="text-sm">Цена (например «+5 800 сом»)</Label>
+              <Input
+                className="mt-2 h-11 rounded-xl"
+                value={String(extraDraft?.price ?? "")}
+                onChange={(e) => setExtraDraft((prev) => ({ ...prev, price: e.target.value }))}
+              />
+            </div>
+            <div>
+              <Label className="text-sm">Иконка</Label>
+              <select
+                className="border-admin-line bg-card mt-2 h-11 w-full rounded-xl border px-3 text-sm"
+                value={String(extraDraft?.icon ?? "")}
+                onChange={(e) => setExtraDraft((prev) => ({ ...prev, icon: e.target.value }))}
+              >
+                <option value="">— по умолчанию —</option>
+                {CHECKUP_ICON_KEYS.map((key) => (
+                  <option key={key} value={key}>
+                    {key}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <Label className="text-sm">Заметка / список (каждый пункт с новой строки)</Label>
+              <Textarea
+                className="mt-2 min-h-28 rounded-xl"
+                value={String(extraDraft?.note ?? "")}
+                onChange={(e) => setExtraDraft((prev) => ({ ...prev, note: e.target.value }))}
+              />
+            </div>
+            <div>
+              <Label className="text-sm">Порядок</Label>
+              <Input
+                type="number"
+                className="mt-2 h-11 rounded-xl"
+                value={String(extraDraft?.sort_order ?? 1)}
+                onChange={(e) =>
+                  setExtraDraft((prev) => ({ ...prev, sort_order: Number(e.target.value) }))
+                }
+              />
+            </div>
+            <div className="flex items-center justify-between">
+              <Label className="text-sm">Показывать на сайте</Label>
+              <Switch
+                checked={Boolean(extraDraft?.is_active ?? true)}
+                onCheckedChange={(v) => setExtraDraft((prev) => ({ ...prev, is_active: v }))}
+              />
+            </div>
+            <Button
+              className="bg-admin-blue hover:bg-admin-blue/90 h-11 w-full rounded-xl font-semibold text-white"
+              disabled={saveExtra.isPending}
+              onClick={() => extraDraft && saveExtra.mutate(extraDraft)}
+            >
+              Сохранить
+            </Button>
+          </div>
+        </SheetContent>
+      </Sheet>
+
       {/* Редактор блока */}
       <Sheet open={sectionDraft !== null} onOpenChange={(open) => !open && setSectionDraft(null)}>
         <SheetContent className="w-full overflow-y-auto sm:max-w-lg">
@@ -564,6 +796,37 @@ function AdminCheckups() {
                 className="mt-2 h-11 rounded-xl"
                 value={String(cardDraft?.price ?? "")}
                 onChange={(e) => setCardDraft((prev) => ({ ...prev, price: e.target.value }))}
+              />
+            </div>
+            <div>
+              <Label className="text-sm">Примечание к цене (например «до 10 лет / от 10–16 лет»)</Label>
+              <Input
+                className="mt-2 h-11 rounded-xl"
+                value={String(cardDraft?.price_note ?? "")}
+                onChange={(e) => setCardDraft((prev) => ({ ...prev, price_note: e.target.value }))}
+              />
+            </div>
+            <div>
+              <Label className="text-sm">Иконка карточки</Label>
+              <select
+                className="border-admin-line bg-card mt-2 h-11 w-full rounded-xl border px-3 text-sm"
+                value={String(cardDraft?.icon ?? "")}
+                onChange={(e) => setCardDraft((prev) => ({ ...prev, icon: e.target.value }))}
+              >
+                <option value="">— по умолчанию —</option>
+                {CHECKUP_ICON_KEYS.map((key) => (
+                  <option key={key} value={key}>
+                    {key}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <Label className="text-sm">Список «Что входит?» (каждый пункт с новой строки)</Label>
+              <Textarea
+                className="mt-2 min-h-28 rounded-xl"
+                value={String(cardDraft?.includes ?? "")}
+                onChange={(e) => setCardDraft((prev) => ({ ...prev, includes: e.target.value }))}
               />
             </div>
             <div>
