@@ -14,7 +14,7 @@ export const HEADER_NAV_SLOTS = [
   { label: "Травмпункт 24/7", href: "/travmpunkt" },
   { label: "О нас", href: "/about" },
   { label: "Услуги", href: "/#uslugi" },
-  { label: "Хирургия", href: "/napravleniya/hirurgiya" },
+  { label: "Хирургия", href: "/hirurgiya" },
   { label: "Поликлиника", href: "/#vrachi" },
   { label: "Чекапы", href: "/checkups" },
   { label: "Стационар", href: "/napravleniya/statsionar" },
