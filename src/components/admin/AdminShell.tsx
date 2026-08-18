@@ -34,6 +34,7 @@ const NAV: { to: string; label: string; icon: typeof LayoutDashboard; exact?: bo
   { to: "/admin/napravleniya", label: "Направления", icon: Stethoscope },
   { to: "/admin/checkups", label: "Чекапы", icon: ClipboardList },
   { to: "/admin/doctors", label: "Врачи", icon: UserRound },
+  { to: "/admin/surgery", label: "Хирургия", icon: Scissors },
   { to: "/admin/services", label: "Услуги", icon: HeartPulse },
   { to: "/admin/diagnostics", label: "Диагностика", icon: Microscope },
   { to: "/admin/branches", label: "Филиалы", icon: MapPin },
