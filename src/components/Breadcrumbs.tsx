@@ -31,7 +31,7 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
               {index > 0 && <ChevronRight className="size-3.5 shrink-0" aria-hidden="true" />}
               {item.href && !isLast ? (
                 <Link
-                  to={item.href}
+                  to={item.href as "/"}
                   className="hover:text-brand-green font-medium transition-colors"
                 >
                   {item.label}
