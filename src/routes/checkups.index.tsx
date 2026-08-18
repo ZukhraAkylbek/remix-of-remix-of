@@ -228,40 +228,85 @@ function CheckupsPage() {
           </section>
         )}
 
-        {/* Остальные разделы — аккордеон */}
-        {rest.length > 0 && (
-          <section>
-            <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:py-16">
-              <div className="divide-border border-border divide-y border-y">
-                {rest.map((item) => (
-                  <details key={item.id} id={item.key} className="group py-5">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
-                      <h2 className="text-foreground text-[20px] font-extrabold sm:text-[22px]">
-                        {item.title}
-                      </h2>
-                      <ChevronRight className="text-muted-foreground size-5 shrink-0 transition-transform group-open:rotate-90" />
-                    </summary>
-                    {item.subtitle && (
-                      <p className="text-muted-foreground mt-3 text-[16px] leading-relaxed">
-                        {item.subtitle}
-                      </p>
-                    )}
-                    {item.body && (
-                      <p className="text-muted-foreground mt-3 text-[16px] leading-relaxed whitespace-pre-line">
-                        {item.body}
-                      </p>
-                    )}
-                  </details>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+        {/* Остальные разделы из админки */}
+        {rest.map((item, sectionIndex) => (
+          <ExtraSection key={item.id} item={item} tinted={sectionIndex % 2 === 1} />
+        ))}
+
       </main>
       <SiteFooter />
     </div>
   );
 }
+
+function ExtraSection({
+  item,
+  tinted,
+}: {
+  item: { key: string; title: string; subtitle: string | null; body: string | null };
+  tinted: boolean;
+}) {
+  const items = lines(item.body);
+  const isFaq = item.key === "faq" || /вопрос/i.test(item.title);
+
+  return (
+    <section id={item.key} className={tinted ? "bg-surface-soft" : undefined}>
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
+        <h2 className="text-foreground text-2xl font-extrabold tracking-tight sm:text-[32px]">
+          {item.title}
+        </h2>
+        {item.subtitle && (
+          <p className="text-muted-foreground mt-3 max-w-2xl text-[16px] leading-relaxed">
+            {item.subtitle}
+          </p>
+        )}
+
+        {isFaq ? (
+          <div className="divide-border border-border mt-7 max-w-4xl divide-y border-y">
+            {items.map((row) => {
+              const match = row.match(/^(.*?\?)\s*(.*)$/);
+              const question = match?.[1] ?? row;
+              const answer = match?.[2] ?? "";
+              return (
+                <details key={row} className="group py-4">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
+                    <span className="text-foreground text-[16px] font-bold">{question}</span>
+                    <ChevronRight className="text-muted-foreground size-5 shrink-0 transition-transform group-open:rotate-90" />
+                  </summary>
+                  {answer && (
+                    <p className="text-muted-foreground mt-2 text-[15px] leading-relaxed">
+                      {answer}
+                    </p>
+                  )}
+                </details>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {items.map((row, index) => {
+              const text = row.replace(/^\s*(?:\d+[.)]|[—–-])\s*/, "");
+              return (
+                <div
+                  key={row}
+                  className="border-border bg-card rounded-3xl border p-5"
+                >
+                  <span className="bg-surface-green text-brand-green-dark grid size-10 place-items-center rounded-full text-[14px] font-extrabold">
+                    {index + 1}
+                  </span>
+                  <p className="text-foreground mt-4 text-[14px] leading-relaxed font-semibold">
+                    {text}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 
 function ProgramCard({
   card,
