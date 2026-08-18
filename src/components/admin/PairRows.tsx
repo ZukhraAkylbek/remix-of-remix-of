@@ -48,9 +48,22 @@ export function PairRows({
   addLabel,
   multilineText = false,
 }: Props) {
-  const pairs = parsePairsText(value);
+  // Локальное состояние нужно, чтобы пустая новая строка не исчезала:
+  // serializePairs отбрасывает пустые пары, поэтому по value её не восстановить.
+  const [pairs, setPairs] = useState<Pair[]>(() => parsePairsText(value));
 
-  const update = (next: Pair[]) => onChange(serializePairs(next));
+  useEffect(() => {
+    setPairs((current) => {
+      const incoming = value ?? "";
+      if (serializePairs(current) === incoming) return current;
+      return parsePairsText(incoming);
+    });
+  }, [value]);
+
+  const update = (next: Pair[]) => {
+    setPairs(next);
+    onChange(serializePairs(next));
+  };
 
   const move = (index: number, dir: -1 | 1) => {
     const next = [...pairs];
