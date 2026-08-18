@@ -7,7 +7,8 @@ import { Reveal } from "@/components/Reveal";
 import photoSurgery from "@/assets/image.webp.asset.json";
 import photoNurse from "@/assets/image.png.asset.json";
 import photoXray from "@/assets/image-2.png.asset.json";
-import { fetchActiveHeroSlides, type HeroSlideWithUrl } from "@/lib/hero-slides";
+import { type HeroSlideWithUrl } from "@/lib/hero-slides";
+import { activeHeroSlidesQueryOptions } from "@/lib/hero-slides.queries";
 import { BOOKING_URL } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
