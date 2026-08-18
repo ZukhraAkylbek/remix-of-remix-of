@@ -26,6 +26,7 @@ import { Route as HirurgiyaIndexRouteImport } from './routes/hirurgiya.index'
 import { Route as HirurgiyaSlugRouteImport } from './routes/hirurgiya.$slug'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
+import { Route as UslugiIndexRouteImport } from './routes/uslugi.index'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminBranchesRouteImport } from './routes/_authenticated/admin/branches'
 import { Route as AuthenticatedAdminCheckupsRouteImport } from './routes/_authenticated/admin/checkups'
@@ -127,6 +128,11 @@ const NapravleniyaIndexRoute = NapravleniyaIndexRouteImport.update({
 const NapravleniyaSlugRoute = NapravleniyaSlugRouteImport.update({
   id: '/napravleniya/$slug',
   path: '/napravleniya/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UslugiIndexRoute = UslugiIndexRouteImport.update({
+  id: '/uslugi/',
+  path: '/uslugi/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
@@ -250,6 +256,7 @@ export interface FileRoutesByFullPath {
   '/diagnostika/': typeof DiagnostikaIndexRoute
   '/hirurgiya/': typeof HirurgiyaIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
+  '/uslugi/': typeof UslugiIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
@@ -285,6 +292,7 @@ export interface FileRoutesByTo {
   '/diagnostika': typeof DiagnostikaIndexRoute
   '/hirurgiya': typeof HirurgiyaIndexRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
+  '/uslugi': typeof UslugiIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
@@ -323,6 +331,7 @@ export interface FileRoutesById {
   '/diagnostika/': typeof DiagnostikaIndexRoute
   '/hirurgiya/': typeof HirurgiyaIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
+  '/uslugi/': typeof UslugiIndexRoute
   '/_authenticated/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/_authenticated/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
@@ -361,6 +370,7 @@ export interface FileRouteTypes {
     | '/diagnostika/'
     | '/hirurgiya/'
     | '/napravleniya/'
+    | '/uslugi/'
     | '/admin/branches'
     | '/admin/checkups'
     | '/admin/content'
@@ -396,6 +406,7 @@ export interface FileRouteTypes {
     | '/diagnostika'
     | '/hirurgiya'
     | '/napravleniya'
+    | '/uslugi'
     | '/admin/branches'
     | '/admin/checkups'
     | '/admin/content'
@@ -433,6 +444,7 @@ export interface FileRouteTypes {
     | '/diagnostika/'
     | '/hirurgiya/'
     | '/napravleniya/'
+    | '/uslugi/'
     | '/_authenticated/admin/branches'
     | '/_authenticated/admin/checkups'
     | '/_authenticated/admin/content'
@@ -470,6 +482,7 @@ export interface RootRouteChildren {
   DiagnostikaIndexRoute: typeof DiagnostikaIndexRoute
   HirurgiyaIndexRoute: typeof HirurgiyaIndexRoute
   NapravleniyaIndexRoute: typeof NapravleniyaIndexRoute
+  UslugiIndexRoute: typeof UslugiIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -591,6 +604,13 @@ declare module '@tanstack/react-router' {
       path: '/napravleniya/$slug'
       fullPath: '/napravleniya/$slug'
       preLoaderRoute: typeof NapravleniyaSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/uslugi/': {
+      id: '/uslugi/'
+      path: '/uslugi'
+      fullPath: '/uslugi/'
+      preLoaderRoute: typeof UslugiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/': {
@@ -798,6 +818,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiagnostikaIndexRoute: DiagnostikaIndexRoute,
   HirurgiyaIndexRoute: HirurgiyaIndexRoute,
   NapravleniyaIndexRoute: NapravleniyaIndexRoute,
+  UslugiIndexRoute: UslugiIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
