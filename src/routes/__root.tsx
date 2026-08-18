@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import { LeadPopup } from "@/components/LeadPopup";
 import { LiveEditProvider } from "@/components/live-edit/LiveEdit";
 import { MobileNavBar } from "@/components/MobileNavBar";
 import { SiteTypography } from "@/components/SiteTypography";
@@ -149,6 +150,7 @@ function RootComponent() {
           <Outlet />
         </div>
         <MobileNavBar />
+        <LeadPopup />
       </LiveEditProvider>
     </QueryClientProvider>
   );

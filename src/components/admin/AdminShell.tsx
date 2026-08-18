@@ -20,6 +20,7 @@ import {
   X,
   ExternalLink,
   Sparkles,
+  MessageSquare,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -38,6 +39,7 @@ const NAV: { to: string; label: string; icon: typeof LayoutDashboard; exact?: bo
   { to: "/admin/media", label: "Медиа", icon: Images },
   { to: "/admin/header", label: "Меню хедера", icon: PanelTop },
   { to: "/admin/mobile-nav", label: "Мобильное меню", icon: Smartphone },
+  { to: "/admin/popups", label: "Попапы и заявки", icon: MessageSquare },
   { to: "/admin/seo", label: "SEO", icon: Search },
   { to: "/admin/settings", label: "Настройки", icon: Settings },
 ];

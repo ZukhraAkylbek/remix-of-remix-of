@@ -35,6 +35,7 @@ import { Route as AuthenticatedAdminMediaRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminMobileNavRouteImport } from './routes/_authenticated/admin/mobile-nav'
 import { Route as AuthenticatedAdminNapravleniyaRouteImport } from './routes/_authenticated/admin/napravleniya'
 import { Route as AuthenticatedAdminPagesRouteImport } from './routes/_authenticated/admin/pages'
+import { Route as AuthenticatedAdminPopupsRouteImport } from './routes/_authenticated/admin/popups'
 import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticated/admin/seo'
 import { Route as AuthenticatedAdminServicesRouteImport } from './routes/_authenticated/admin/services'
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
@@ -176,6 +177,12 @@ const AuthenticatedAdminPagesRoute = AuthenticatedAdminPagesRouteImport.update({
   path: '/pages',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminPopupsRoute =
+  AuthenticatedAdminPopupsRouteImport.update({
+    id: '/popups',
+    path: '/popups',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminSeoRoute = AuthenticatedAdminSeoRouteImport.update({
   id: '/seo',
   path: '/seo',
@@ -219,6 +226,7 @@ export interface FileRoutesByFullPath {
   '/admin/mobile-nav': typeof AuthenticatedAdminMobileNavRoute
   '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/admin/pages': typeof AuthenticatedAdminPagesRoute
+  '/admin/popups': typeof AuthenticatedAdminPopupsRoute
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/admin/services': typeof AuthenticatedAdminServicesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
@@ -248,6 +256,7 @@ export interface FileRoutesByTo {
   '/admin/mobile-nav': typeof AuthenticatedAdminMobileNavRoute
   '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/admin/pages': typeof AuthenticatedAdminPagesRoute
+  '/admin/popups': typeof AuthenticatedAdminPopupsRoute
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/admin/services': typeof AuthenticatedAdminServicesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
@@ -280,6 +289,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/mobile-nav': typeof AuthenticatedAdminMobileNavRoute
   '/_authenticated/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/_authenticated/admin/pages': typeof AuthenticatedAdminPagesRoute
+  '/_authenticated/admin/popups': typeof AuthenticatedAdminPopupsRoute
   '/_authenticated/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/_authenticated/admin/services': typeof AuthenticatedAdminServicesRoute
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
@@ -312,6 +322,7 @@ export interface FileRouteTypes {
     | '/admin/mobile-nav'
     | '/admin/napravleniya'
     | '/admin/pages'
+    | '/admin/popups'
     | '/admin/seo'
     | '/admin/services'
     | '/admin/settings'
@@ -341,6 +352,7 @@ export interface FileRouteTypes {
     | '/admin/mobile-nav'
     | '/admin/napravleniya'
     | '/admin/pages'
+    | '/admin/popups'
     | '/admin/seo'
     | '/admin/services'
     | '/admin/settings'
@@ -372,6 +384,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/mobile-nav'
     | '/_authenticated/admin/napravleniya'
     | '/_authenticated/admin/pages'
+    | '/_authenticated/admin/popups'
     | '/_authenticated/admin/seo'
     | '/_authenticated/admin/services'
     | '/_authenticated/admin/settings'
@@ -578,6 +591,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPagesRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/popups': {
+      id: '/_authenticated/admin/popups'
+      path: '/popups'
+      fullPath: '/admin/popups'
+      preLoaderRoute: typeof AuthenticatedAdminPopupsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/seo': {
       id: '/_authenticated/admin/seo'
       path: '/seo'
@@ -614,6 +634,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminMobileNavRoute: typeof AuthenticatedAdminMobileNavRoute
   AuthenticatedAdminNapravleniyaRoute: typeof AuthenticatedAdminNapravleniyaRoute
   AuthenticatedAdminPagesRoute: typeof AuthenticatedAdminPagesRoute
+  AuthenticatedAdminPopupsRoute: typeof AuthenticatedAdminPopupsRoute
   AuthenticatedAdminSeoRoute: typeof AuthenticatedAdminSeoRoute
   AuthenticatedAdminServicesRoute: typeof AuthenticatedAdminServicesRoute
   AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
@@ -633,6 +654,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminMobileNavRoute: AuthenticatedAdminMobileNavRoute,
     AuthenticatedAdminNapravleniyaRoute: AuthenticatedAdminNapravleniyaRoute,
     AuthenticatedAdminPagesRoute: AuthenticatedAdminPagesRoute,
+    AuthenticatedAdminPopupsRoute: AuthenticatedAdminPopupsRoute,
     AuthenticatedAdminSeoRoute: AuthenticatedAdminSeoRoute,
     AuthenticatedAdminServicesRoute: AuthenticatedAdminServicesRoute,
     AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
