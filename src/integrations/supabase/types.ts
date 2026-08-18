@@ -835,6 +835,57 @@ export type Database = {
         }
         Relationships: []
       }
+      trauma_sections: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          is_active: boolean
+          key: string
+          primary_label: string | null
+          primary_url: string | null
+          secondary_label: string | null
+          secondary_url: string | null
+          sort_order: number
+          subtitle: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          key: string
+          primary_label?: string | null
+          primary_url?: string | null
+          secondary_label?: string | null
+          secondary_url?: string | null
+          sort_order?: number
+          subtitle?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          key?: string
+          primary_label?: string | null
+          primary_url?: string | null
+          secondary_label?: string | null
+          secondary_url?: string | null
+          sort_order?: number
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
