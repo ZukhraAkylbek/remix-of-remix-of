@@ -78,6 +78,10 @@ type DirectionRow = {
   diagnostics: string | null;
   steps: string | null;
   faq: string | null;
+  advantages: string | null;
+  symptoms: string | null;
+  about_title: string | null;
+  doctor_slugs: string | null;
   meta_title: string | null;
   meta_description: string | null;
   sort_order: number;
@@ -87,7 +91,7 @@ type DirectionRow = {
 const SECTION_SELECT =
   "id, key, title, subtitle, body, image_url, primary_label, primary_url, secondary_label, secondary_url, sort_order, is_active";
 const DIRECTION_SELECT =
-  "id, slug, title, subtitle, icon, image_url, body, diseases, procedures, diagnostics, steps, faq, meta_title, meta_description, sort_order, is_active";
+  "id, slug, title, subtitle, icon, image_url, body, diseases, procedures, diagnostics, steps, faq, advantages, symptoms, about_title, doctor_slugs, meta_title, meta_description, sort_order, is_active";
 
 const LIST_HINT = "По строке на пункт. Формат: «Заголовок — описание» (описание необязательно).";
 
@@ -199,6 +203,10 @@ function AdminSurgery() {
         diagnostics: values.diagnostics ?? null,
         steps: values.steps ?? null,
         faq: values.faq ?? null,
+        advantages: values.advantages ?? null,
+        symptoms: values.symptoms ?? null,
+        about_title: values.about_title ?? null,
+        doctor_slugs: values.doctor_slugs ?? null,
         meta_title: values.meta_title ?? null,
         meta_description: values.meta_description ?? null,
         is_active: values.is_active ?? true,
@@ -546,11 +554,37 @@ function AdminSurgery() {
                   </Button>
                 </div>
               </Field>
-              <Field label="Текст «Что мы лечим»">
+              <Field label="Заголовок блока «О направлении»">
+                <Input
+                  value={directionDraft.about_title ?? ""}
+                  onChange={(e) =>
+                    setDirectionDraft({ ...directionDraft, about_title: e.target.value })
+                  }
+                />
+              </Field>
+              <Field label="Текст «О направлении»">
                 <Textarea
                   rows={5}
                   value={directionDraft.body ?? ""}
                   onChange={(e) => setDirectionDraft({ ...directionDraft, body: e.target.value })}
+                />
+              </Field>
+              <Field label="Преимущества" hint={LIST_HINT}>
+                <Textarea
+                  rows={4}
+                  value={directionDraft.advantages ?? ""}
+                  onChange={(e) =>
+                    setDirectionDraft({ ...directionDraft, advantages: e.target.value })
+                  }
+                />
+              </Field>
+              <Field label="Когда обратиться (симптомы)" hint={LIST_HINT}>
+                <Textarea
+                  rows={5}
+                  value={directionDraft.symptoms ?? ""}
+                  onChange={(e) =>
+                    setDirectionDraft({ ...directionDraft, symptoms: e.target.value })
+                  }
                 />
               </Field>
               <Field label="Заболевания" hint={LIST_HINT}>
@@ -592,6 +626,18 @@ function AdminSurgery() {
                   rows={5}
                   value={directionDraft.faq ?? ""}
                   onChange={(e) => setDirectionDraft({ ...directionDraft, faq: e.target.value })}
+                />
+              </Field>
+              <Field
+                label="Врачи направления"
+                hint="Слаги врачей через запятую. Пусто — врачи подберутся автоматически."
+              >
+                <Textarea
+                  rows={2}
+                  value={directionDraft.doctor_slugs ?? ""}
+                  onChange={(e) =>
+                    setDirectionDraft({ ...directionDraft, doctor_slugs: e.target.value })
+                  }
                 />
               </Field>
               <Field label="SEO title">
