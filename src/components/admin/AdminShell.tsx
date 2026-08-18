@@ -8,6 +8,7 @@ import {
   Stethoscope,
   UserRound,
   HeartPulse,
+  Scissors,
   Microscope,
   MapPin,
   Images,
