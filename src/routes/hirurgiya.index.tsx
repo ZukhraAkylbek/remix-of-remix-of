@@ -8,6 +8,7 @@ import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
@@ -51,6 +52,7 @@ function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader breadcrumb="Хирургия" />
+      <Breadcrumbs items={[{ label: "Хирургия" }]} />
       <main className="mx-auto max-w-7xl px-4 py-16 sm:px-6">{children}</main>
       <SiteFooter />
     </div>
@@ -156,6 +158,7 @@ function SurgeryPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader breadcrumb="Хирургия" />
+      <Breadcrumbs items={[{ label: "Хирургия" }]} />
 
       {faqItems.length > 0 && (
         <script

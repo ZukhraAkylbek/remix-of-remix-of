@@ -6,6 +6,7 @@ import { ArrowRight, CalendarCheck, ChevronRight } from "lucide-react";
 import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SymptomNavigator } from "@/components/SymptomNavigator";
 import { absoluteUrl } from "@/lib/clinic";
@@ -50,6 +51,7 @@ function PageShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Диагностика" }]} />
       <main className="mx-auto max-w-7xl px-4 py-16 sm:px-6">{children}</main>
       <SiteFooter />
     </div>
@@ -78,6 +80,7 @@ function DiagnosticsPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Диагностика" }]} />
       <main>
         {hero && (
           <section className="border-border border-b">

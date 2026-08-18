@@ -6,6 +6,7 @@ import { ArrowRight, CalendarCheck, Check, ChevronRight, Minus, Plus } from "luc
 import { CheckupIcon } from "@/components/checkups/CheckupIcon";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/clinic";
 import { checkupPageQueryOptions } from "@/lib/checkups.queries";
@@ -74,6 +75,7 @@ function CheckupsPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Чекапы" }]} />
       <main>
         {/* Hero */}
         <section className="border-border border-b">
