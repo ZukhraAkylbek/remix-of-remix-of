@@ -21,8 +21,12 @@ const DESCRIPTION =
   "Поликлиника, травмпункт 24/7, хирургия, лаборатория и стационар в Бишкеке. Онлайн-запись к врачу за минуту.";
 
 export const Route = createFileRoute("/")({
-  loader: ({ context }) => {
-    void context.queryClient.ensureQueryData(specialtiesQueryOptions());
+  loader: async ({ context }) => {
+    // Баннер — LCP-элемент: грузим слайды на сервере, чтобы картинка была в HTML.
+    await Promise.all([
+      context.queryClient.ensureQueryData(activeHeroSlidesQueryOptions()),
+      context.queryClient.ensureQueryData(specialtiesQueryOptions()),
+    ]);
   },
   head: () => ({
     meta: [
