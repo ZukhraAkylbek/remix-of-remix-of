@@ -34,7 +34,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
   return (
     <header className="bg-background/95 border-border sticky top-0 z-50 border-b backdrop-blur">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-3 px-4 py-3.5 sm:px-6 lg:flex-nowrap lg:gap-8">
-        <div className="flex min-w-0 items-center gap-3">
+        <div className="flex min-w-0 shrink-0 items-center gap-3">
           <Link to="/" className="flex shrink-0 items-center" aria-label="Авиценна — на главную">
             <img
               src={logo.url}
@@ -46,7 +46,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
           </Link>
 
           {breadcrumb && (
-            <span className="text-muted-foreground hidden truncate text-sm sm:block">
+            <span className="text-muted-foreground hidden truncate text-sm sm:block lg:hidden">
               / {breadcrumb}
             </span>
           )}
@@ -54,23 +54,23 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
 
         <nav
           aria-label="Главное меню"
-          className="hidden items-center gap-5 lg:flex xl:gap-7"
+          className="hidden items-center gap-5 lg:flex lg:flex-wrap xl:gap-7"
         >
           {navItems.map((item) => (
             <a
               key={`${item.label}-${item.href}`}
               href={item.href}
               {...(isExternal(item.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="text-foreground hover:text-brand-green whitespace-nowrap text-[15px] font-semibold transition-colors"
+              className="text-foreground hover:text-brand-green shrink-0 whitespace-nowrap text-[15px] font-semibold transition-colors"
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <SiteSearch className="order-last w-full min-w-0 lg:order-none lg:w-auto lg:min-w-[200px] lg:flex-1" />
+        <SiteSearch className="order-last w-full min-w-0 lg:order-none lg:w-auto lg:min-w-[180px] lg:flex-1" />
 
-        <div className="ml-auto flex items-center gap-3 lg:gap-4">
+        <div className="ml-auto flex shrink-0 items-center gap-3 lg:gap-4">
           <a
             href={BOOKING_URL}
             target="_blank"
