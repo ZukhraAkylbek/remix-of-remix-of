@@ -21,6 +21,8 @@ import { Route as ChekapyIndexRouteImport } from './routes/chekapy.index'
 import { Route as ChekapySlugRouteImport } from './routes/chekapy.$slug'
 import { Route as DiagnostikaIndexRouteImport } from './routes/diagnostika.index'
 import { Route as DiagnostikaSlugRouteImport } from './routes/diagnostika.$slug'
+import { Route as HirurgiyaIndexRouteImport } from './routes/hirurgiya.index'
+import { Route as HirurgiyaSlugRouteImport } from './routes/hirurgiya.$slug'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
@@ -39,6 +41,7 @@ import { Route as AuthenticatedAdminPopupsRouteImport } from './routes/_authenti
 import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticated/admin/seo'
 import { Route as AuthenticatedAdminServicesRouteImport } from './routes/_authenticated/admin/services'
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
+import { Route as AuthenticatedAdminSurgeryRouteImport } from './routes/_authenticated/admin/surgery'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -97,6 +100,16 @@ const DiagnostikaIndexRoute = DiagnostikaIndexRouteImport.update({
 const DiagnostikaSlugRoute = DiagnostikaSlugRouteImport.update({
   id: '/diagnostika/$slug',
   path: '/diagnostika/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HirurgiyaIndexRoute = HirurgiyaIndexRouteImport.update({
+  id: '/hirurgiya/',
+  path: '/hirurgiya/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HirurgiyaSlugRoute = HirurgiyaSlugRouteImport.update({
+  id: '/hirurgiya/$slug',
+  path: '/hirurgiya/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NapravleniyaIndexRoute = NapravleniyaIndexRouteImport.update({
@@ -200,6 +213,12 @@ const AuthenticatedAdminSettingsRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminSurgeryRoute =
+  AuthenticatedAdminSurgeryRouteImport.update({
+    id: '/surgery',
+    path: '/surgery',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -210,10 +229,12 @@ export interface FileRoutesByFullPath {
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
+  '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
   '/diagnostika/': typeof DiagnostikaIndexRoute
+  '/hirurgiya/': typeof HirurgiyaIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
@@ -230,6 +251,7 @@ export interface FileRoutesByFullPath {
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/admin/services': typeof AuthenticatedAdminServicesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -240,10 +262,12 @@ export interface FileRoutesByTo {
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
+  '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups': typeof CheckupsIndexRoute
   '/chekapy': typeof ChekapyIndexRoute
   '/diagnostika': typeof DiagnostikaIndexRoute
+  '/hirurgiya': typeof HirurgiyaIndexRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
@@ -260,6 +284,7 @@ export interface FileRoutesByTo {
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/admin/services': typeof AuthenticatedAdminServicesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
@@ -273,10 +298,12 @@ export interface FileRoutesById {
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
+  '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
   '/diagnostika/': typeof DiagnostikaIndexRoute
+  '/hirurgiya/': typeof HirurgiyaIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/_authenticated/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
@@ -293,6 +320,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/_authenticated/admin/services': typeof AuthenticatedAdminServicesRoute
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/_authenticated/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -306,10 +334,12 @@ export interface FileRouteTypes {
     | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
+    | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/checkups/'
     | '/chekapy/'
     | '/diagnostika/'
+    | '/hirurgiya/'
     | '/napravleniya/'
     | '/admin/branches'
     | '/admin/checkups'
@@ -326,6 +356,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/services'
     | '/admin/settings'
+    | '/admin/surgery'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -336,10 +367,12 @@ export interface FileRouteTypes {
     | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
+    | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/checkups'
     | '/chekapy'
     | '/diagnostika'
+    | '/hirurgiya'
     | '/napravleniya'
     | '/admin/branches'
     | '/admin/checkups'
@@ -356,6 +389,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/services'
     | '/admin/settings'
+    | '/admin/surgery'
     | '/admin'
   id:
     | '__root__'
@@ -368,10 +402,12 @@ export interface FileRouteTypes {
     | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
+    | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/checkups/'
     | '/chekapy/'
     | '/diagnostika/'
+    | '/hirurgiya/'
     | '/napravleniya/'
     | '/_authenticated/admin/branches'
     | '/_authenticated/admin/checkups'
@@ -388,6 +424,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/seo'
     | '/_authenticated/admin/services'
     | '/_authenticated/admin/settings'
+    | '/_authenticated/admin/surgery'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -400,10 +437,12 @@ export interface RootRouteChildren {
   CheckupsSlugRoute: typeof CheckupsSlugRoute
   ChekapySlugRoute: typeof ChekapySlugRoute
   DiagnostikaSlugRoute: typeof DiagnostikaSlugRoute
+  HirurgiyaSlugRoute: typeof HirurgiyaSlugRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
   CheckupsIndexRoute: typeof CheckupsIndexRoute
   ChekapyIndexRoute: typeof ChekapyIndexRoute
   DiagnostikaIndexRoute: typeof DiagnostikaIndexRoute
+  HirurgiyaIndexRoute: typeof HirurgiyaIndexRoute
   NapravleniyaIndexRoute: typeof NapravleniyaIndexRoute
 }
 
@@ -491,6 +530,20 @@ declare module '@tanstack/react-router' {
       path: '/diagnostika/$slug'
       fullPath: '/diagnostika/$slug'
       preLoaderRoute: typeof DiagnostikaSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hirurgiya/': {
+      id: '/hirurgiya/'
+      path: '/hirurgiya'
+      fullPath: '/hirurgiya/'
+      preLoaderRoute: typeof HirurgiyaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hirurgiya/$slug': {
+      id: '/hirurgiya/$slug'
+      path: '/hirurgiya/$slug'
+      fullPath: '/hirurgiya/$slug'
+      preLoaderRoute: typeof HirurgiyaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/napravleniya/': {
@@ -619,6 +672,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminSettingsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/surgery': {
+      id: '/_authenticated/admin/surgery'
+      path: '/surgery'
+      fullPath: '/admin/surgery'
+      preLoaderRoute: typeof AuthenticatedAdminSurgeryRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
@@ -638,6 +698,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminSeoRoute: typeof AuthenticatedAdminSeoRoute
   AuthenticatedAdminServicesRoute: typeof AuthenticatedAdminServicesRoute
   AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
+  AuthenticatedAdminSurgeryRoute: typeof AuthenticatedAdminSurgeryRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
@@ -658,6 +719,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminSeoRoute: AuthenticatedAdminSeoRoute,
     AuthenticatedAdminServicesRoute: AuthenticatedAdminServicesRoute,
     AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
+    AuthenticatedAdminSurgeryRoute: AuthenticatedAdminSurgeryRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   }
 
@@ -686,10 +748,12 @@ const rootRouteChildren: RootRouteChildren = {
   CheckupsSlugRoute: CheckupsSlugRoute,
   ChekapySlugRoute: ChekapySlugRoute,
   DiagnostikaSlugRoute: DiagnostikaSlugRoute,
+  HirurgiyaSlugRoute: HirurgiyaSlugRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
   CheckupsIndexRoute: CheckupsIndexRoute,
   ChekapyIndexRoute: ChekapyIndexRoute,
   DiagnostikaIndexRoute: DiagnostikaIndexRoute,
+  HirurgiyaIndexRoute: HirurgiyaIndexRoute,
   NapravleniyaIndexRoute: NapravleniyaIndexRoute,
 }
 export const routeTree = rootRouteImport
