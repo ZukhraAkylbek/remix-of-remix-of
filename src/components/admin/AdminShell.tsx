@@ -9,6 +9,7 @@ import {
   UserRound,
   HeartPulse,
   Scissors,
+  Ambulance,
   Microscope,
   MapPin,
   Images,
