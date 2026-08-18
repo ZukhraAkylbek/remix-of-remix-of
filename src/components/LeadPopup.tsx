@@ -72,7 +72,9 @@ export function LeadPopup() {
     setPending(true);
     try {
       await submitLead({
-        ...parsed.data,
+        name: parsed.data.name,
+        phone: parsed.data.phone,
+        comment: parsed.data.comment ?? "",
         source: window.location.pathname,
         popup_id: popup.id,
       });
@@ -139,7 +141,7 @@ export function LeadPopup() {
                   <div className="space-y-1.5">
                     <Label htmlFor="lead-name">Имя</Label>
                     <Input id="lead-name" name="name" maxLength={100} placeholder="Ваше имя" />
-                    {errors.name && <p className="text-destructive text-xs">{errors.name}</p>}
+                    {errors['name'] && <p className="text-destructive text-xs">{errors['name']}</p>}
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="lead-phone">Телефон</Label>
@@ -150,7 +152,7 @@ export function LeadPopup() {
                       maxLength={40}
                       placeholder="+996 700 000 000"
                     />
-                    {errors.phone && <p className="text-destructive text-xs">{errors.phone}</p>}
+                    {errors['phone'] && <p className="text-destructive text-xs">{errors['phone']}</p>}
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="lead-comment">Комментарий</Label>
@@ -161,9 +163,9 @@ export function LeadPopup() {
                       maxLength={1000}
                       placeholder="К какому специалисту хотите записаться?"
                     />
-                    {errors.comment && <p className="text-destructive text-xs">{errors.comment}</p>}
+                    {errors['comment'] && <p className="text-destructive text-xs">{errors['comment']}</p>}
                   </div>
-                  {errors.form && <p className="text-destructive text-sm">{errors.form}</p>}
+                  {errors['form'] && <p className="text-destructive text-sm">{errors['form']}</p>}
                   <Button type="submit" className="w-full" disabled={pending}>
                     {pending ? "Отправляем…" : popup.button_text || "Оставить заявку"}
                   </Button>
