@@ -45,10 +45,7 @@ export function HeroBanner({
   statValue = "15+",
   statLabel = "лет медицинской практики",
 }: HeroBannerProps) {
-  const { data } = useQuery({
-    queryKey: ["hero-slides", "active"],
-    queryFn: fetchActiveHeroSlides,
-  });
+  const { data } = useQuery(activeHeroSlidesQueryOptions());
   const slides = data && data.length > 0 ? data : FALLBACK_SLIDES;
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
