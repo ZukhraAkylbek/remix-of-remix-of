@@ -1,1 +1,0 @@
-DELETE FROM public.hero_slides WHERE image_url LIKE 'seed/%';

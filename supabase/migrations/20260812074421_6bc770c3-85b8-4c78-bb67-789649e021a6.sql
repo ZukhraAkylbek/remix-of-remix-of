@@ -1,1 +1,0 @@
-ALTER TABLE public.site_content ADD COLUMN IF NOT EXISTS style_json jsonb;
