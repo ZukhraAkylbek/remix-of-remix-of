@@ -1,9 +1,15 @@
 import { createServerFn } from "@tanstack/react-start";
 
 export const fetchCheckupPage = createServerFn({ method: "GET" }).handler(async () => {
-  const { listCheckupSections, listCheckupCards } = await import("./checkups.server");
-  const [sections, cards] = await Promise.all([listCheckupSections(), listCheckupCards()]);
-  return { sections, cards };
+  const { listCheckupSections, listCheckupCards, listCheckupExtras } = await import(
+    "./checkups.server"
+  );
+  const [sections, cards, extras] = await Promise.all([
+    listCheckupSections(),
+    listCheckupCards(),
+    listCheckupExtras(),
+  ]);
+  return { sections, cards, extras };
 });
 
 export const fetchCheckupCard = createServerFn({ method: "GET" })
