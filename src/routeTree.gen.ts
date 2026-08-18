@@ -41,6 +41,7 @@ import { Route as AuthenticatedAdminPopupsRouteImport } from './routes/_authenti
 import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticated/admin/seo'
 import { Route as AuthenticatedAdminServicesRouteImport } from './routes/_authenticated/admin/services'
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
+import { Route as AuthenticatedAdminSurgeryRouteImport } from './routes/_authenticated/admin/surgery'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -212,6 +213,12 @@ const AuthenticatedAdminSettingsRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminSurgeryRoute =
+  AuthenticatedAdminSurgeryRouteImport.update({
+    id: '/surgery',
+    path: '/surgery',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -244,6 +251,7 @@ export interface FileRoutesByFullPath {
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/admin/services': typeof AuthenticatedAdminServicesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -276,6 +284,7 @@ export interface FileRoutesByTo {
   '/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/admin/services': typeof AuthenticatedAdminServicesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
@@ -311,6 +320,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/seo': typeof AuthenticatedAdminSeoRoute
   '/_authenticated/admin/services': typeof AuthenticatedAdminServicesRoute
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/_authenticated/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -346,6 +356,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/services'
     | '/admin/settings'
+    | '/admin/surgery'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -378,6 +389,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/services'
     | '/admin/settings'
+    | '/admin/surgery'
     | '/admin'
   id:
     | '__root__'
@@ -412,6 +424,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/seo'
     | '/_authenticated/admin/services'
     | '/_authenticated/admin/settings'
+    | '/_authenticated/admin/surgery'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -659,6 +672,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminSettingsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/surgery': {
+      id: '/_authenticated/admin/surgery'
+      path: '/surgery'
+      fullPath: '/admin/surgery'
+      preLoaderRoute: typeof AuthenticatedAdminSurgeryRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
@@ -678,6 +698,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminSeoRoute: typeof AuthenticatedAdminSeoRoute
   AuthenticatedAdminServicesRoute: typeof AuthenticatedAdminServicesRoute
   AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
+  AuthenticatedAdminSurgeryRoute: typeof AuthenticatedAdminSurgeryRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
@@ -698,6 +719,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminSeoRoute: AuthenticatedAdminSeoRoute,
     AuthenticatedAdminServicesRoute: AuthenticatedAdminServicesRoute,
     AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
+    AuthenticatedAdminSurgeryRoute: AuthenticatedAdminSurgeryRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   }
 
