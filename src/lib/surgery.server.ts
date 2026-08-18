@@ -27,6 +27,10 @@ export type SurgeryDirection = {
   diagnostics: string | null;
   steps: string | null;
   faq: string | null;
+  advantages: string | null;
+  symptoms: string | null;
+  about_title: string | null;
+  doctor_slugs: string | null;
   meta_title: string | null;
   meta_description: string | null;
   sort_order: number;
@@ -45,7 +49,7 @@ export type SurgeryDoctor = {
 const SECTION_SELECT =
   "id, key, title, subtitle, body, image_url, primary_label, primary_url, secondary_label, secondary_url, sort_order";
 const DIRECTION_SELECT =
-  "id, slug, title, subtitle, icon, image_url, body, diseases, procedures, diagnostics, steps, faq, meta_title, meta_description, sort_order, updated_at";
+  "id, slug, title, subtitle, icon, image_url, body, diseases, procedures, diagnostics, steps, faq, advantages, symptoms, about_title, doctor_slugs, meta_title, meta_description, sort_order, updated_at";
 
 export async function listSurgerySections(): Promise<SurgerySection[]> {
   const { data, error } = await publicClient()
@@ -101,5 +105,49 @@ export async function listSurgeons(): Promise<SurgeryDoctor[]> {
     .order("sort_order", { ascending: true });
 
   if (error) throw error;
+  return data ?? [];
+}
+
+const DOCTOR_SELECT = "slug, full_name, job_title, photo_url, bio, experience_years";
+
+/** Врачи конкретного направления: по явному списку слагов либо по родственной специальности. */
+export async function listDirectionDoctors(
+  directionSlug: string,
+  doctorSlugs: string | null,
+): Promise<SurgeryDoctor[]> {
+  const supabase = publicClient();
+  const explicit = (doctorSlugs ?? "")
+    .split(/[\n,]/)
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  if (explicit.length > 0) {
+    const { data } = await supabase
+      .from("doctors")
+      .select(DOCTOR_SELECT)
+      .in("slug", explicit)
+      .eq("is_active", true);
+    return data ?? [];
+  }
+
+  const stem = directionSlug.replace(/iya$|ya$|-hirurgiya$/g, "").slice(0, 6);
+  const { data: specialties } = await supabase
+    .from("specialties")
+    .select("id, slug")
+    .eq("is_active", true);
+
+  const ids = (specialties ?? [])
+    .filter((s) => stem.length > 3 && s.slug.includes(stem))
+    .map((s) => s.id);
+
+  if (ids.length === 0) return listSurgeons();
+
+  const { data } = await supabase
+    .from("doctors")
+    .select(DOCTOR_SELECT)
+    .in("specialty_id", ids)
+    .eq("is_active", true)
+    .order("sort_order", { ascending: true });
+
   return data ?? [];
 }
