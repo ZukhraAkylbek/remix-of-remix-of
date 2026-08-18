@@ -584,6 +584,113 @@ export type Database = {
         }
         Relationships: []
       }
+      service_blocks: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          is_active: boolean
+          key: string
+          primary_label: string | null
+          primary_url: string | null
+          secondary_label: string | null
+          secondary_url: string | null
+          service_id: string
+          sort_order: number
+          subtitle: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          key: string
+          primary_label?: string | null
+          primary_url?: string | null
+          secondary_label?: string | null
+          secondary_url?: string | null
+          service_id: string
+          sort_order?: number
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          key?: string
+          primary_label?: string | null
+          primary_url?: string | null
+          secondary_label?: string | null
+          secondary_url?: string | null
+          service_id?: string
+          sort_order?: number
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_blocks_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "service_pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      service_pages: {
+        Row: {
+          created_at: string
+          icon: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          meta_description: string | null
+          meta_title: string | null
+          slug: string
+          sort_order: number
+          summary: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          icon?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
+          slug: string
+          sort_order?: number
+          summary?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          icon?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
+          slug?: string
+          sort_order?: number
+          summary?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       site_content: {
         Row: {
           image_path: string | null
