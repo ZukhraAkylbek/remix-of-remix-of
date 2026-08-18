@@ -121,7 +121,6 @@ function SpecialtyPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
-      <Breadcrumbs items={[{ label: "Направления" }]} />
       <main>
         <section className="border-border border-b">
           <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.3fr_1fr] lg:py-16">

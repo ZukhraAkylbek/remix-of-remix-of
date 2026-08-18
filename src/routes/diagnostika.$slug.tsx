@@ -140,7 +140,6 @@ function DiagnosticsItemPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
-      <Breadcrumbs items={[{ label: "Диагностика" }]} />
       <main>
         {/* Hero */}
         <section className="border-border border-b">

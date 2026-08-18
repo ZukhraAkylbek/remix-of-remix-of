@@ -69,7 +69,6 @@ function CheckupCardPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
-      <Breadcrumbs items={[{ label: "Чекапы" }]} />
       <main>
         <section className="border-border border-b">
           <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_460px] lg:items-center lg:py-16">
