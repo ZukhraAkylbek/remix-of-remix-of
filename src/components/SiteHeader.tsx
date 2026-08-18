@@ -9,24 +9,27 @@ import { Editable } from "@/components/live-edit/LiveEdit";
 import { SiteSearch } from "@/components/SiteSearch";
 import { useSiteContent } from "@/lib/site-content";
 
-const NAV = [
-  { label: "Направления", to: "/napravleniya" as const },
-  { label: "Чекапы", to: "/checkups" as const },
-];
-
-const NAV_ANCHORS = [
-  { label: "Поликлиника", href: "/#napravleniya" },
-  { label: "Услуги", href: "/#uslugi" },
-  { label: "Диагностика", href: "/diagnostika" },
+export const HEADER_NAV_SLOTS = [
+  { label: "Главная", href: "/" },
+  { label: "Травмпункт 24/7", href: "/napravleniya/travmpunkt" },
   { label: "О нас", href: "/about" },
+  { label: "Услуги", href: "/#uslugi" },
+  { label: "Хирургия", href: "/napravleniya/hirurgiya" },
+  { label: "Поликлиника", href: "/#vrachi" },
+  { label: "Чекапы", href: "/checkups" },
+  { label: "Стационар", href: "/napravleniya/statsionar" },
 ];
 
-
+const isExternal = (href: string) => /^(https?:|tel:|mailto:)/i.test(href);
 
 export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
   const [open, setOpen] = useState(false);
   const { t } = useSiteContent();
   const ctaLabel = t("header.cta");
+  const navItems = HEADER_NAV_SLOTS.map((slot, i) => ({
+    label: t(`header.nav.${i + 1}.label`, slot.label),
+    href: t(`header.nav.${i + 1}.href`, slot.href),
+  })).filter((item) => item.label.trim() && item.href.trim());
 
   return (
     <header className="bg-background/95 border-border sticky top-0 z-50 border-b backdrop-blur">
@@ -53,21 +56,12 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
           aria-label="Главное меню"
           className="hidden items-center gap-5 lg:flex xl:gap-7"
         >
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="text-foreground hover:text-brand-green whitespace-nowrap text-[15px] font-semibold transition-colors"
-              activeProps={{ className: "text-brand-green" }}
-            >
-              {item.label}
-            </Link>
-          ))}
-          {NAV_ANCHORS.map((item) => (
+          {navItems.map((item) => (
             <a
-              key={item.href}
+              key={`${item.label}-${item.href}`}
               href={item.href}
-              className="text-muted-foreground hover:text-foreground whitespace-nowrap text-[15px] font-medium transition-colors"
+              {...(isExternal(item.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="text-foreground hover:text-brand-green whitespace-nowrap text-[15px] font-semibold transition-colors"
             >
               {item.label}
             </a>
@@ -100,22 +94,13 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
       {open && (
         <div className="border-border bg-background border-t lg:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col px-4 py-2 sm:px-6">
-            {NAV.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setOpen(false)}
-                className="border-border text-foreground border-b py-3.5 text-lg font-semibold"
-              >
-                {item.label}
-              </Link>
-            ))}
-            {NAV_ANCHORS.map((item) => (
+            {navItems.map((item) => (
               <a
-                key={item.href}
+                key={`${item.label}-${item.href}`}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="border-border text-foreground border-b py-3.5 text-lg font-medium last:border-0"
+                {...(isExternal(item.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="border-border text-foreground border-b py-3.5 text-lg font-semibold"
               >
                 {item.label}
               </a>

@@ -29,6 +29,7 @@ import { Route as AuthenticatedAdminCheckupsRouteImport } from './routes/_authen
 import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin/content'
 import { Route as AuthenticatedAdminDiagnosticsRouteImport } from './routes/_authenticated/admin/diagnostics'
 import { Route as AuthenticatedAdminDoctorsRouteImport } from './routes/_authenticated/admin/doctors'
+import { Route as AuthenticatedAdminHeaderRouteImport } from './routes/_authenticated/admin/header'
 import { Route as AuthenticatedAdminHeroRouteImport } from './routes/_authenticated/admin/hero'
 import { Route as AuthenticatedAdminMediaRouteImport } from './routes/_authenticated/admin/media'
 import { Route as AuthenticatedAdminMobileNavRouteImport } from './routes/_authenticated/admin/mobile-nav'
@@ -142,6 +143,12 @@ const AuthenticatedAdminDoctorsRoute =
     path: '/doctors',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminHeaderRoute =
+  AuthenticatedAdminHeaderRouteImport.update({
+    id: '/header',
+    path: '/header',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminHeroRoute = AuthenticatedAdminHeroRouteImport.update({
   id: '/hero',
   path: '/hero',
@@ -206,6 +213,7 @@ export interface FileRoutesByFullPath {
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
+  '/admin/header': typeof AuthenticatedAdminHeaderRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
   '/admin/media': typeof AuthenticatedAdminMediaRoute
   '/admin/mobile-nav': typeof AuthenticatedAdminMobileNavRoute
@@ -234,6 +242,7 @@ export interface FileRoutesByTo {
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
+  '/admin/header': typeof AuthenticatedAdminHeaderRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
   '/admin/media': typeof AuthenticatedAdminMediaRoute
   '/admin/mobile-nav': typeof AuthenticatedAdminMobileNavRoute
@@ -265,6 +274,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
   '/_authenticated/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/_authenticated/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
+  '/_authenticated/admin/header': typeof AuthenticatedAdminHeaderRoute
   '/_authenticated/admin/hero': typeof AuthenticatedAdminHeroRoute
   '/_authenticated/admin/media': typeof AuthenticatedAdminMediaRoute
   '/_authenticated/admin/mobile-nav': typeof AuthenticatedAdminMobileNavRoute
@@ -296,6 +306,7 @@ export interface FileRouteTypes {
     | '/admin/content'
     | '/admin/diagnostics'
     | '/admin/doctors'
+    | '/admin/header'
     | '/admin/hero'
     | '/admin/media'
     | '/admin/mobile-nav'
@@ -324,6 +335,7 @@ export interface FileRouteTypes {
     | '/admin/content'
     | '/admin/diagnostics'
     | '/admin/doctors'
+    | '/admin/header'
     | '/admin/hero'
     | '/admin/media'
     | '/admin/mobile-nav'
@@ -354,6 +366,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/content'
     | '/_authenticated/admin/diagnostics'
     | '/_authenticated/admin/doctors'
+    | '/_authenticated/admin/header'
     | '/_authenticated/admin/hero'
     | '/_authenticated/admin/media'
     | '/_authenticated/admin/mobile-nav'
@@ -523,6 +536,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminDoctorsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/header': {
+      id: '/_authenticated/admin/header'
+      path: '/header'
+      fullPath: '/admin/header'
+      preLoaderRoute: typeof AuthenticatedAdminHeaderRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/hero': {
       id: '/_authenticated/admin/hero'
       path: '/hero'
@@ -588,6 +608,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
   AuthenticatedAdminDiagnosticsRoute: typeof AuthenticatedAdminDiagnosticsRoute
   AuthenticatedAdminDoctorsRoute: typeof AuthenticatedAdminDoctorsRoute
+  AuthenticatedAdminHeaderRoute: typeof AuthenticatedAdminHeaderRoute
   AuthenticatedAdminHeroRoute: typeof AuthenticatedAdminHeroRoute
   AuthenticatedAdminMediaRoute: typeof AuthenticatedAdminMediaRoute
   AuthenticatedAdminMobileNavRoute: typeof AuthenticatedAdminMobileNavRoute
@@ -606,6 +627,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
     AuthenticatedAdminDiagnosticsRoute: AuthenticatedAdminDiagnosticsRoute,
     AuthenticatedAdminDoctorsRoute: AuthenticatedAdminDoctorsRoute,
+    AuthenticatedAdminHeaderRoute: AuthenticatedAdminHeaderRoute,
     AuthenticatedAdminHeroRoute: AuthenticatedAdminHeroRoute,
     AuthenticatedAdminMediaRoute: AuthenticatedAdminMediaRoute,
     AuthenticatedAdminMobileNavRoute: AuthenticatedAdminMobileNavRoute,
