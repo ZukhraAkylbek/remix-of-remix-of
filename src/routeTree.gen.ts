@@ -43,6 +43,7 @@ import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedAdminServicesRouteImport } from './routes/_authenticated/admin/services'
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
 import { Route as AuthenticatedAdminSurgeryRouteImport } from './routes/_authenticated/admin/surgery'
+import { Route as AuthenticatedAdminTraumaRouteImport } from './routes/_authenticated/admin/trauma'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -225,6 +226,12 @@ const AuthenticatedAdminSurgeryRoute =
     path: '/surgery',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminTraumaRoute =
+  AuthenticatedAdminTraumaRouteImport.update({
+    id: '/trauma',
+    path: '/trauma',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -259,6 +266,7 @@ export interface FileRoutesByFullPath {
   '/admin/services': typeof AuthenticatedAdminServicesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
+  '/admin/trauma': typeof AuthenticatedAdminTraumaRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -293,6 +301,7 @@ export interface FileRoutesByTo {
   '/admin/services': typeof AuthenticatedAdminServicesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
+  '/admin/trauma': typeof AuthenticatedAdminTraumaRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
@@ -330,6 +339,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/services': typeof AuthenticatedAdminServicesRoute
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/_authenticated/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
+  '/_authenticated/admin/trauma': typeof AuthenticatedAdminTraumaRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -367,6 +377,7 @@ export interface FileRouteTypes {
     | '/admin/services'
     | '/admin/settings'
     | '/admin/surgery'
+    | '/admin/trauma'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -401,6 +412,7 @@ export interface FileRouteTypes {
     | '/admin/services'
     | '/admin/settings'
     | '/admin/surgery'
+    | '/admin/trauma'
     | '/admin'
   id:
     | '__root__'
@@ -437,6 +449,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/services'
     | '/_authenticated/admin/settings'
     | '/_authenticated/admin/surgery'
+    | '/_authenticated/admin/trauma'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -699,6 +712,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminSurgeryRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/trauma': {
+      id: '/_authenticated/admin/trauma'
+      path: '/trauma'
+      fullPath: '/admin/trauma'
+      preLoaderRoute: typeof AuthenticatedAdminTraumaRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
@@ -719,6 +739,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminServicesRoute: typeof AuthenticatedAdminServicesRoute
   AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
   AuthenticatedAdminSurgeryRoute: typeof AuthenticatedAdminSurgeryRoute
+  AuthenticatedAdminTraumaRoute: typeof AuthenticatedAdminTraumaRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
@@ -740,6 +761,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminServicesRoute: AuthenticatedAdminServicesRoute,
     AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
     AuthenticatedAdminSurgeryRoute: AuthenticatedAdminSurgeryRoute,
+    AuthenticatedAdminTraumaRoute: AuthenticatedAdminTraumaRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   }
 
