@@ -3,6 +3,8 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import {
   LayoutDashboard,
   FileText,
+  Type,
+
   Stethoscope,
   UserRound,
   HeartPulse,
