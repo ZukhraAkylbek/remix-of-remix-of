@@ -723,10 +723,13 @@ export type Database = {
       }
       surgery_directions: {
         Row: {
+          about_title: string | null
+          advantages: string | null
           body: string | null
           created_at: string
           diagnostics: string | null
           diseases: string | null
+          doctor_slugs: string | null
           faq: string | null
           icon: string | null
           id: string
@@ -739,14 +742,18 @@ export type Database = {
           sort_order: number
           steps: string | null
           subtitle: string | null
+          symptoms: string | null
           title: string
           updated_at: string
         }
         Insert: {
+          about_title?: string | null
+          advantages?: string | null
           body?: string | null
           created_at?: string
           diagnostics?: string | null
           diseases?: string | null
+          doctor_slugs?: string | null
           faq?: string | null
           icon?: string | null
           id?: string
@@ -759,14 +766,18 @@ export type Database = {
           sort_order?: number
           steps?: string | null
           subtitle?: string | null
+          symptoms?: string | null
           title: string
           updated_at?: string
         }
         Update: {
+          about_title?: string | null
+          advantages?: string | null
           body?: string | null
           created_at?: string
           diagnostics?: string | null
           diseases?: string | null
+          doctor_slugs?: string | null
           faq?: string | null
           icon?: string | null
           id?: string
@@ -779,6 +790,7 @@ export type Database = {
           sort_order?: number
           steps?: string | null
           subtitle?: string | null
+          symptoms?: string | null
           title?: string
           updated_at?: string
         }
