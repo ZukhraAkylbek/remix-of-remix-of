@@ -342,40 +342,37 @@ function AdminServices() {
 
         <div className="grid gap-5">
           {current && (
-            <Panel
-              title={current.title}
-              actions={
-                <div className="flex items-center gap-2">
-                  <Switch
-                    checked={current.is_active}
-                    onCheckedChange={(is_active) =>
-                      toggleService.mutate({ id: current.id, is_active })
-                    }
-                  />
-                  <Button
-                    variant="outline"
-                    className="border-admin-line h-9 rounded-lg"
-                    onClick={() => setServiceDraft(current)}
-                  >
-                    Настройки услуги
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="text-destructive h-9 rounded-lg"
-                    onClick={() => removeService.mutate(current.id)}
-                  >
-                    <Trash2 className="size-4" />
-                  </Button>
-                  <Button
-                    className="bg-admin-blue hover:bg-admin-blue/90 h-9 rounded-lg font-semibold text-white"
-                    onClick={() => setBlockDraft({ service_id: current.id, is_active: true })}
-                  >
-                    <Plus className="mr-1.5 size-4" /> Блок
-                  </Button>
-                </div>
-              }
-            >
+            <Panel title={current.title}>
+              <div className="mb-4 flex flex-wrap items-center gap-2">
+                <Switch
+                  checked={current.is_active}
+                  onCheckedChange={(is_active) =>
+                    toggleService.mutate({ id: current.id, is_active })
+                  }
+                />
+                <Button
+                  variant="outline"
+                  className="border-admin-line h-9 rounded-lg"
+                  onClick={() => setServiceDraft(current)}
+                >
+                  Настройки услуги
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="text-destructive h-9 rounded-lg"
+                  onClick={() => removeService.mutate(current.id)}
+                >
+                  <Trash2 className="size-4" />
+                </Button>
+                <Button
+                  className="bg-admin-blue hover:bg-admin-blue/90 h-9 rounded-lg font-semibold text-white"
+                  onClick={() => setBlockDraft({ service_id: current.id, is_active: true })}
+                >
+                  <Plus className="mr-1.5 size-4" /> Блок
+                </Button>
+              </div>
               <ul className="grid gap-3">
+
                 {(blocks ?? []).map((item, index) => (
                   <li
                     key={item.id}
