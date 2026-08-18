@@ -19,10 +19,13 @@ export type Database = {
           badge: string | null
           body: string | null
           created_at: string
+          icon: string | null
           id: string
           image_url: string | null
+          includes: string | null
           is_active: boolean
           price: string | null
+          price_note: string | null
           slug: string
           sort_order: number
           subtitle: string | null
@@ -33,10 +36,13 @@ export type Database = {
           badge?: string | null
           body?: string | null
           created_at?: string
+          icon?: string | null
           id?: string
           image_url?: string | null
+          includes?: string | null
           is_active?: boolean
           price?: string | null
+          price_note?: string | null
           slug: string
           sort_order?: number
           subtitle?: string | null
@@ -47,13 +53,55 @@ export type Database = {
           badge?: string | null
           body?: string | null
           created_at?: string
+          icon?: string | null
           id?: string
           image_url?: string | null
+          includes?: string | null
           is_active?: boolean
           price?: string | null
+          price_note?: string | null
           slug?: string
           sort_order?: number
           subtitle?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      checkup_extras: {
+        Row: {
+          created_at: string
+          group_key: string
+          icon: string | null
+          id: string
+          is_active: boolean
+          note: string | null
+          price: string | null
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          group_key: string
+          icon?: string | null
+          id?: string
+          is_active?: boolean
+          note?: string | null
+          price?: string | null
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          group_key?: string
+          icon?: string | null
+          id?: string
+          is_active?: boolean
+          note?: string | null
+          price?: string | null
+          sort_order?: number
           title?: string
           updated_at?: string
         }
