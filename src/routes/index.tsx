@@ -12,6 +12,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { StatsBand } from "@/components/StatsBand";
 import { WhyUs } from "@/components/WhyUs";
 import { absoluteUrl, medicalClinicJsonLd } from "@/lib/clinic";
+import { activeHeroSlidesQueryOptions } from "@/lib/hero-slides.queries";
 import { useSiteContent } from "@/lib/site-content";
 import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
