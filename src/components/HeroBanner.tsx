@@ -154,7 +154,10 @@ export function HeroBanner({
                     alt={slide.title ?? "Клиника «Авиценна»"}
                     width={1200}
                     height={900}
-                    {...(index === 0 ? {} : { loading: "lazy" as const })}
+                    decoding={index === 0 ? "sync" : "async"}
+                    {...(index === 0
+                      ? { fetchPriority: "high" as const }
+                      : { loading: "lazy" as const })}
                     className="h-[280px] w-full object-cover sm:h-[420px] lg:h-[520px]"
                   />
                 </div>
