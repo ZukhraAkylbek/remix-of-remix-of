@@ -282,7 +282,7 @@ function ProgramCard({
   const items = lines(card.includes);
 
   return (
-    <article className="border-border bg-card relative flex h-full flex-col overflow-hidden rounded-3xl border p-6">
+    <article className="border-border bg-card card-lift relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 hover:border-brand-green">
       <span className="bg-surface-green text-brand-green-dark grid size-12 place-items-center rounded-full">
         <CheckupIcon name={card.icon} className="size-6" />
       </span>
