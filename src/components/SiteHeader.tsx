@@ -11,7 +11,7 @@ import { useSiteContent } from "@/lib/site-content";
 
 export const HEADER_NAV_SLOTS = [
   { label: "Главная", href: "/" },
-  { label: "Травмпункт 24/7", href: "/napravleniya/travmpunkt" },
+  { label: "Травмпункт 24/7", href: "/travmpunkt" },
   { label: "О нас", href: "/about" },
   { label: "Услуги", href: "/#uslugi" },
   { label: "Хирургия", href: "/napravleniya/hirurgiya" },

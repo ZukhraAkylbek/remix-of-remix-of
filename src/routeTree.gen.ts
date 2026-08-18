@@ -14,6 +14,7 @@ import { Route as SplatRouteImport } from './routes/$'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TravmpunktRouteImport } from './routes/travmpunkt'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as CheckupsIndexRouteImport } from './routes/checkups.index'
 import { Route as CheckupsSlugRouteImport } from './routes/checkups.$slug'
@@ -42,6 +43,7 @@ import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedAdminServicesRouteImport } from './routes/_authenticated/admin/services'
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
 import { Route as AuthenticatedAdminSurgeryRouteImport } from './routes/_authenticated/admin/surgery'
+import { Route as AuthenticatedAdminTraumaRouteImport } from './routes/_authenticated/admin/trauma'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -65,6 +67,11 @@ const AuthRoute = AuthRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravmpunktRoute = TravmpunktRouteImport.update({
+  id: '/travmpunkt',
+  path: '/travmpunkt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
@@ -219,12 +226,19 @@ const AuthenticatedAdminSurgeryRoute =
     path: '/surgery',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminTraumaRoute =
+  AuthenticatedAdminTraumaRouteImport.update({
+    id: '/trauma',
+    path: '/trauma',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/travmpunkt': typeof TravmpunktRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
@@ -252,6 +266,7 @@ export interface FileRoutesByFullPath {
   '/admin/services': typeof AuthenticatedAdminServicesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
+  '/admin/trauma': typeof AuthenticatedAdminTraumaRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -259,6 +274,7 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/travmpunkt': typeof TravmpunktRoute
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
@@ -285,6 +301,7 @@ export interface FileRoutesByTo {
   '/admin/services': typeof AuthenticatedAdminServicesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
+  '/admin/trauma': typeof AuthenticatedAdminTraumaRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
@@ -294,6 +311,7 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/travmpunkt': typeof TravmpunktRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
@@ -321,6 +339,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/services': typeof AuthenticatedAdminServicesRoute
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/_authenticated/admin/surgery': typeof AuthenticatedAdminSurgeryRoute
+  '/_authenticated/admin/trauma': typeof AuthenticatedAdminTraumaRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -330,6 +349,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/auth'
     | '/sitemap.xml'
+    | '/travmpunkt'
     | '/admin'
     | '/checkups/$slug'
     | '/chekapy/$slug'
@@ -357,6 +377,7 @@ export interface FileRouteTypes {
     | '/admin/services'
     | '/admin/settings'
     | '/admin/surgery'
+    | '/admin/trauma'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -364,6 +385,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/auth'
     | '/sitemap.xml'
+    | '/travmpunkt'
     | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
@@ -390,6 +412,7 @@ export interface FileRouteTypes {
     | '/admin/services'
     | '/admin/settings'
     | '/admin/surgery'
+    | '/admin/trauma'
     | '/admin'
   id:
     | '__root__'
@@ -398,6 +421,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/auth'
     | '/sitemap.xml'
+    | '/travmpunkt'
     | '/_authenticated/admin'
     | '/checkups/$slug'
     | '/chekapy/$slug'
@@ -425,6 +449,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/services'
     | '/_authenticated/admin/settings'
     | '/_authenticated/admin/surgery'
+    | '/_authenticated/admin/trauma'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -434,6 +459,7 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   AuthRoute: typeof AuthRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TravmpunktRoute: typeof TravmpunktRoute
   CheckupsSlugRoute: typeof CheckupsSlugRoute
   ChekapySlugRoute: typeof ChekapySlugRoute
   DiagnostikaSlugRoute: typeof DiagnostikaSlugRoute
@@ -481,6 +507,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travmpunkt': {
+      id: '/travmpunkt'
+      path: '/travmpunkt'
+      fullPath: '/travmpunkt'
+      preLoaderRoute: typeof TravmpunktRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -679,6 +712,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminSurgeryRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/trauma': {
+      id: '/_authenticated/admin/trauma'
+      path: '/trauma'
+      fullPath: '/admin/trauma'
+      preLoaderRoute: typeof AuthenticatedAdminTraumaRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
@@ -699,6 +739,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminServicesRoute: typeof AuthenticatedAdminServicesRoute
   AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
   AuthenticatedAdminSurgeryRoute: typeof AuthenticatedAdminSurgeryRoute
+  AuthenticatedAdminTraumaRoute: typeof AuthenticatedAdminTraumaRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
@@ -720,6 +761,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminServicesRoute: AuthenticatedAdminServicesRoute,
     AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
     AuthenticatedAdminSurgeryRoute: AuthenticatedAdminSurgeryRoute,
+    AuthenticatedAdminTraumaRoute: AuthenticatedAdminTraumaRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   }
 
@@ -745,6 +787,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   AuthRoute: AuthRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TravmpunktRoute: TravmpunktRoute,
   CheckupsSlugRoute: CheckupsSlugRoute,
   ChekapySlugRoute: ChekapySlugRoute,
   DiagnostikaSlugRoute: DiagnostikaSlugRoute,
