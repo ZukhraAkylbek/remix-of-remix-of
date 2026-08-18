@@ -25,6 +25,8 @@ import { cn } from "@/lib/utils";
 const NAV: { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }[] = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/pages", label: "Страницы", icon: FileText },
+  { to: "/admin/content", label: "Тексты и цифры", icon: Type },
+
   { to: "/admin/napravleniya", label: "Направления", icon: Stethoscope },
   { to: "/admin/checkups", label: "Чекапы", icon: ClipboardList },
   { to: "/admin/doctors", label: "Врачи", icon: UserRound },
