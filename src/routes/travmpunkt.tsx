@@ -6,6 +6,7 @@ import { ConsultCta } from "@/components/ConsultCta";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { parseRows } from "@/lib/surgery.queries";
@@ -35,6 +36,7 @@ export const Route = createFileRoute("/travmpunkt")({
   errorComponent: () => (
     <div className="bg-background min-h-screen">
       <SiteHeader breadcrumb="Травмпункт" />
+      <Breadcrumbs items={[{ label: "Травмпункт 24/7" }]} />
       <main className="mx-auto max-w-3xl px-4 py-20 text-center">
         <h1 className="text-3xl font-extrabold">Не удалось загрузить страницу травмпункта</h1>
         <a
@@ -50,6 +52,7 @@ export const Route = createFileRoute("/travmpunkt")({
   notFoundComponent: () => (
     <div className="bg-background min-h-screen">
       <SiteHeader breadcrumb="Травмпункт" />
+      <Breadcrumbs items={[{ label: "Травмпункт 24/7" }]} />
       <main className="mx-auto max-w-3xl px-4 py-20 text-center">
         <h1 className="text-3xl font-extrabold">Страница не найдена</h1>
       </main>
@@ -80,6 +83,7 @@ function TraumaPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader breadcrumb="Травмпункт 24/7" />
+      <Breadcrumbs items={[{ label: "Травмпункт 24/7" }]} />
 
       {faqItems.length > 0 && (
         <script

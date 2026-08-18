@@ -3,6 +3,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 
 import { SiteFooter } from "@/components/SiteFooter";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/clinic";
 import { specialtiesQueryOptions } from "@/lib/specialties.queries";
@@ -36,6 +37,7 @@ function SpecialtiesPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Направления" }]} />
       <main>
         <section className="border-border border-b">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">

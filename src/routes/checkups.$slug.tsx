@@ -3,6 +3,7 @@ import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { CalendarCheck, ChevronRight } from "lucide-react";
 
 import { SiteFooter } from "@/components/SiteFooter";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/clinic";
 import { checkupCardQueryOptions } from "@/lib/checkups.queries";
@@ -47,6 +48,7 @@ function CheckupFallback({ text }: { text: string }) {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Чекапы" }]} />
       <main className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
         <h1 className="text-foreground text-3xl font-extrabold">{text}</h1>
         <Link to="/checkups" className="text-primary mt-5 inline-block text-[15px] font-bold">
