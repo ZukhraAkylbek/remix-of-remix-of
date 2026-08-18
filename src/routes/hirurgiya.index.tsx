@@ -94,6 +94,48 @@ export function FaqList({ items }: { items: { title: string; text?: string }[] }
   );
 }
 
+export function DoctorsGrid({
+  doctors,
+}: {
+  doctors: {
+    slug: string;
+    full_name: string;
+    job_title: string | null;
+    photo_url: string | null;
+    bio: string | null;
+    experience_years: number | null;
+  }[];
+}) {
+  return (
+    <div className="mt-10 grid gap-px sm:grid-cols-2 lg:grid-cols-3">
+      {doctors.map((doctor) => (
+        <article key={doctor.slug} className="border-border border p-6">
+          {doctor.photo_url && (
+            <img
+              src={doctor.photo_url}
+              alt={doctor.full_name}
+              loading="lazy"
+              className="mb-4 h-48 w-full rounded-lg object-cover"
+            />
+          )}
+          <h3 className="text-foreground text-xl font-bold">{doctor.full_name}</h3>
+          {doctor.job_title && (
+            <p className="text-brand-green mt-1 text-sm font-semibold">{doctor.job_title}</p>
+          )}
+          {doctor.experience_years != null && (
+            <p className="text-muted-foreground mt-3 text-sm">
+              Стаж: {doctor.experience_years} лет
+            </p>
+          )}
+          {doctor.bio && (
+            <p className="text-muted-foreground mt-3 text-base leading-relaxed">{doctor.bio}</p>
+          )}
+        </article>
+      ))}
+    </div>
+  );
+}
+
 function SurgeryPage() {
   const { data } = useSuspenseQuery(surgeryPageQueryOptions());
   const section = (key: string) => data.sections.find((s) => s.key === key);

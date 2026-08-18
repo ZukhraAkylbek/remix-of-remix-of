@@ -10,7 +10,7 @@ import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { specialtyImage } from "@/lib/specialty-images";
 import { parseRows, surgeryDirectionQueryOptions } from "@/lib/surgery.queries";
-import { FaqList } from "./hirurgiya.index";
+import { DoctorsGrid, FaqList } from "./hirurgiya.index";
 
 const truncate = (value: string, max = 158) =>
   value.length <= max ? value : `${value.slice(0, max - 1).trimEnd()}…`;
@@ -126,6 +126,8 @@ function DirectionPage() {
   if (!data) return null;
 
   const steps = parseRows(data.steps);
+  const advantages = parseRows(data.advantages);
+  const symptoms = parseRows(data.symptoms);
   const faqItems = parseRows(data.faq);
 
   return (
@@ -197,9 +199,9 @@ function DirectionPage() {
         {data.body && (
           <section className="border-border border-b py-14 sm:py-20">
             <div className="mx-auto max-w-3xl px-4 sm:px-6">
-              <p className="eyebrow">О направлении</p>
+              <p className="eyebrow">Направление</p>
               <h2 className="text-foreground mt-3 text-3xl font-extrabold sm:text-4xl">
-                Что мы лечим
+                {data.about_title?.trim() || "О направлении"}
               </h2>
               <p className="text-muted-foreground mt-5 text-lg leading-relaxed whitespace-pre-line">
                 {data.body}
@@ -208,8 +210,66 @@ function DirectionPage() {
           </section>
         )}
 
+        {advantages.length > 0 && (
+          <section className="border-border border-b py-14 sm:py-20">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6">
+              <SectionHeading eyebrow="Преимущества" title="Почему выбирают Авиценну" />
+              <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                {advantages.map((item, index) => (
+                  <div key={item.title} className="border-border border-t pt-6">
+                    <p className="text-muted-foreground text-sm font-semibold">0{index + 1}</p>
+                    <h3 className="text-foreground mt-3 text-xl font-bold">{item.title}</h3>
+                    {item.text && (
+                      <p className="text-muted-foreground mt-3 text-base leading-relaxed">
+                        {item.text}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {symptoms.length > 0 && (
+          <section className="border-border bg-surface-soft border-b py-14 sm:py-20">
+            <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
+              <div>
+                <SectionHeading eyebrow="Симптомы" title="Когда обратиться" />
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-accent text-accent-foreground mt-8 inline-flex rounded-md px-7 py-4 text-base font-semibold transition-opacity hover:opacity-90"
+                >
+                  Записаться на консультацию
+                </a>
+              </div>
+              <ul className="space-y-4 self-center">
+                {symptoms.map((item) => (
+                  <li key={item.title} className="flex items-start gap-3">
+                    <span className="bg-surface-green text-brand-green mt-0.5 grid size-6 shrink-0 place-items-center rounded-full">
+                      <Check className="size-3.5" aria-hidden="true" />
+                    </span>
+                    <span className="text-foreground text-base sm:text-lg">{item.title}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
+
         <ListBlock eyebrow="Заболевания" title="Какие заболевания лечим" value={data.diseases} />
         <ListBlock eyebrow="Услуги" title="Операции и процедуры" value={data.procedures} />
+        {data.doctors.length > 0 && (
+          <section className="border-border border-b py-14 sm:py-20">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6">
+              <SectionHeading eyebrow="Специалисты" title={`Наши врачи — ${data.title.toLowerCase()}`} />
+              <DoctorsGrid doctors={data.doctors} />
+            </div>
+          </section>
+        )}
+
         <ListBlock
           eyebrow="Подготовка"
           title="Диагностика перед операцией"
