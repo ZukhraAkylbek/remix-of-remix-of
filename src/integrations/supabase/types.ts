@@ -433,6 +433,47 @@ export type Database = {
         }
         Relationships: []
       }
+      leads: {
+        Row: {
+          comment: string | null
+          created_at: string
+          id: string
+          is_processed: boolean
+          name: string
+          phone: string
+          popup_id: string | null
+          source: string | null
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          is_processed?: boolean
+          name: string
+          phone: string
+          popup_id?: string | null
+          source?: string | null
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          is_processed?: boolean
+          name?: string
+          phone?: string
+          popup_id?: string | null
+          source?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_popup_id_fkey"
+            columns: ["popup_id"]
+            isOneToOne: false
+            referencedRelation: "popups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       pages: {
         Row: {
           blocks: Json
@@ -498,10 +539,14 @@ export type Database = {
           button_text: string | null
           button_url: string | null
           created_at: string
+          delay_seconds: number
           id: string
           image_url: string | null
           is_active: boolean
+          offer_note: string | null
+          show_form: boolean
           sort_order: number
+          success_text: string | null
           title: string
           updated_at: string
         }
@@ -510,10 +555,14 @@ export type Database = {
           button_text?: string | null
           button_url?: string | null
           created_at?: string
+          delay_seconds?: number
           id?: string
           image_url?: string | null
           is_active?: boolean
+          offer_note?: string | null
+          show_form?: boolean
           sort_order?: number
+          success_text?: string | null
           title: string
           updated_at?: string
         }
@@ -522,10 +571,14 @@ export type Database = {
           button_text?: string | null
           button_url?: string | null
           created_at?: string
+          delay_seconds?: number
           id?: string
           image_url?: string | null
           is_active?: boolean
+          offer_note?: string | null
+          show_form?: boolean
           sort_order?: number
+          success_text?: string | null
           title?: string
           updated_at?: string
         }
