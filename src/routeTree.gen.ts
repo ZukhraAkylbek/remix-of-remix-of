@@ -22,6 +22,7 @@ import { Route as ChekapySlugRouteImport } from './routes/chekapy.$slug'
 import { Route as DiagnostikaIndexRouteImport } from './routes/diagnostika.index'
 import { Route as DiagnostikaSlugRouteImport } from './routes/diagnostika.$slug'
 import { Route as HirurgiyaIndexRouteImport } from './routes/hirurgiya.index'
+import { Route as HirurgiyaSlugRouteImport } from './routes/hirurgiya.$slug'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
@@ -103,6 +104,11 @@ const DiagnostikaSlugRoute = DiagnostikaSlugRouteImport.update({
 const HirurgiyaIndexRoute = HirurgiyaIndexRouteImport.update({
   id: '/hirurgiya/',
   path: '/hirurgiya/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HirurgiyaSlugRoute = HirurgiyaSlugRouteImport.update({
+  id: '/hirurgiya/$slug',
+  path: '/hirurgiya/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NapravleniyaIndexRoute = NapravleniyaIndexRouteImport.update({
@@ -216,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
+  '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
@@ -247,6 +254,7 @@ export interface FileRoutesByTo {
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
+  '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups': typeof CheckupsIndexRoute
   '/chekapy': typeof ChekapyIndexRoute
@@ -281,6 +289,7 @@ export interface FileRoutesById {
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
+  '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
@@ -315,6 +324,7 @@ export interface FileRouteTypes {
     | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
+    | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/checkups/'
     | '/chekapy/'
@@ -346,6 +356,7 @@ export interface FileRouteTypes {
     | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
+    | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/checkups'
     | '/chekapy'
@@ -379,6 +390,7 @@ export interface FileRouteTypes {
     | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
+    | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/checkups/'
     | '/chekapy/'
@@ -412,6 +424,7 @@ export interface RootRouteChildren {
   CheckupsSlugRoute: typeof CheckupsSlugRoute
   ChekapySlugRoute: typeof ChekapySlugRoute
   DiagnostikaSlugRoute: typeof DiagnostikaSlugRoute
+  HirurgiyaSlugRoute: typeof HirurgiyaSlugRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
   CheckupsIndexRoute: typeof CheckupsIndexRoute
   ChekapyIndexRoute: typeof ChekapyIndexRoute
@@ -511,6 +524,13 @@ declare module '@tanstack/react-router' {
       path: '/hirurgiya'
       fullPath: '/hirurgiya/'
       preLoaderRoute: typeof HirurgiyaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hirurgiya/$slug': {
+      id: '/hirurgiya/$slug'
+      path: '/hirurgiya/$slug'
+      fullPath: '/hirurgiya/$slug'
+      preLoaderRoute: typeof HirurgiyaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/napravleniya/': {
@@ -706,6 +726,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckupsSlugRoute: CheckupsSlugRoute,
   ChekapySlugRoute: ChekapySlugRoute,
   DiagnostikaSlugRoute: DiagnostikaSlugRoute,
+  HirurgiyaSlugRoute: HirurgiyaSlugRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
   CheckupsIndexRoute: CheckupsIndexRoute,
   ChekapyIndexRoute: ChekapyIndexRoute,
