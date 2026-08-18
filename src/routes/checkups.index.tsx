@@ -228,35 +228,11 @@ function CheckupsPage() {
           </section>
         )}
 
-        {/* Остальные разделы — аккордеон */}
-        {rest.length > 0 && (
-          <section>
-            <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:py-16">
-              <div className="divide-border border-border divide-y border-y">
-                {rest.map((item) => (
-                  <details key={item.id} id={item.key} className="group py-5">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
-                      <h2 className="text-foreground text-[20px] font-extrabold sm:text-[22px]">
-                        {item.title}
-                      </h2>
-                      <ChevronRight className="text-muted-foreground size-5 shrink-0 transition-transform group-open:rotate-90" />
-                    </summary>
-                    {item.subtitle && (
-                      <p className="text-muted-foreground mt-3 text-[16px] leading-relaxed">
-                        {item.subtitle}
-                      </p>
-                    )}
-                    {item.body && (
-                      <p className="text-muted-foreground mt-3 text-[16px] leading-relaxed whitespace-pre-line">
-                        {item.body}
-                      </p>
-                    )}
-                  </details>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+        {/* Остальные разделы из админки */}
+        {rest.map((item, sectionIndex) => (
+          <ExtraSection key={item.id} item={item} tinted={sectionIndex % 2 === 1} />
+        ))}
+
       </main>
       <SiteFooter />
     </div>
