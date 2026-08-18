@@ -208,8 +208,10 @@ function AdminServices() {
 
   const saveBlock = useMutation({
     mutationFn: async (values: Partial<BlockRow>) => {
+      const serviceId = values.service_id ?? current?.id;
+      if (!serviceId) throw new Error("Сначала выберите услугу");
       const payload = {
-        service_id: values.service_id ?? current?.id,
+        service_id: serviceId,
         key: values.key?.trim() || slugify(values.title ?? "") || `block-${Date.now()}`,
         title: (values.title ?? "").trim(),
         subtitle: values.subtitle ?? null,
@@ -222,8 +224,8 @@ function AdminServices() {
         sort_order: values.sort_order ?? ((blocks?.length ?? 0) + 1) * 10,
         is_active: values.is_active ?? true,
       };
-      if (!payload.service_id) throw new Error("Сначала выберите услугу");
       if (!payload.title) throw new Error("Укажите заголовок блока");
+
 
       if (values.id) {
         const { error } = await supabase.from("service_blocks").update(payload).eq("id", values.id);
