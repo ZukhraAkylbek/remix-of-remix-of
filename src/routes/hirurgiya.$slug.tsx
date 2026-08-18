@@ -5,6 +5,7 @@ import { ArrowRight, Check, Phone } from "lucide-react";
 import { ConsultCta } from "@/components/ConsultCta";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
@@ -70,6 +71,7 @@ export const Route = createFileRoute("/hirurgiya/$slug")({
   notFoundComponent: () => (
     <div className="bg-background min-h-screen">
       <SiteHeader breadcrumb="Хирургия" />
+      <Breadcrumbs items={[{ label: "Хирургия" }]} />
       <main className="mx-auto max-w-3xl px-4 py-20 text-center">
         <h1 className="text-foreground text-4xl font-extrabold">Направление не найдено</h1>
         <Link
@@ -133,6 +135,7 @@ function DirectionPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader breadcrumb={data.title} />
+      <Breadcrumbs items={[{ label: "Хирургия", href: "/hirurgiya" }, { label: data.title }]} />
 
       {faqItems.length > 0 && (
         <script

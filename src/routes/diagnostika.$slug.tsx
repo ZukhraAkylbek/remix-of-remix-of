@@ -15,6 +15,7 @@ import {
 
 import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl } from "@/lib/clinic";
 import { diagnosticsItemQueryOptions } from "@/lib/diagnostics.queries";
@@ -63,6 +64,7 @@ function Fallback({ title }: { title: string }) {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Диагностика" }]} />
       <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
         <h1 className="text-foreground text-4xl font-extrabold">{title}</h1>
         <Link to="/diagnostika" className="text-primary mt-6 inline-block font-semibold">
@@ -138,6 +140,7 @@ function DiagnosticsItemPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Диагностика" }]} />
       <main>
         {/* Hero */}
         <section className="border-border border-b">

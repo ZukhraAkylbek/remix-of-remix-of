@@ -7,6 +7,7 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WhyUs } from "@/components/WhyUs";
 import { CLINIC, absoluteUrl, faqPageJsonLd, physicianJsonLd } from "@/lib/clinic";
@@ -94,6 +95,7 @@ export const Route = createFileRoute("/napravleniya/$slug")({
   notFoundComponent: () => (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Направления" }]} />
       <main className="mx-auto max-w-3xl px-4 py-20 text-center">
         <h1 className="text-foreground text-4xl font-extrabold">Направление не найдено</h1>
         <p className="text-muted-foreground mt-4 text-lg">
@@ -119,6 +121,7 @@ function SpecialtyPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Направления" }]} />
       <main>
         <section className="border-border border-b">
           <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.3fr_1fr] lg:py-16">
