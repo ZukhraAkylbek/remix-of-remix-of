@@ -21,7 +21,22 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/napravleniya", changefreq: "weekly", priority: "0.9" },
           { path: "/checkups", changefreq: "weekly", priority: "0.9" },
+          { path: "/uslugi", changefreq: "weekly", priority: "0.9" },
         ];
+
+        try {
+          const { listServicePages } = await import("@/lib/services.server");
+          const services = await listServicePages();
+          for (const service of services) {
+            entries.push({
+              path: `/uslugi/${service.slug}`,
+              changefreq: "monthly",
+              priority: "0.8",
+            });
+          }
+        } catch (error) {
+          console.error(error);
+        }
 
         try {
           const specialties = await listActiveSpecialties();
@@ -39,6 +54,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         } catch (error) {
           console.error(error);
         }
+
 
         try {
           const { listPublishedPages } = await import("@/lib/pages.server");
