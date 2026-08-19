@@ -180,18 +180,22 @@ function HomeV2() {
                 <Link
                   key={offer.title}
                   to={offer.href as "/"}
-                  className={`${offer.tone} group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-0.5`}
+                  className="banner-brand group relative flex items-center gap-4 overflow-hidden rounded-2xl p-5 transition-all hover:-translate-y-0.5"
                 >
-                  <span className="bg-background/60 text-foreground grid size-11 shrink-0 place-items-center rounded-xl">
+                  <span
+                    aria-hidden="true"
+                    className="banner-glow pointer-events-none absolute -top-10 -right-10 size-32 rounded-full opacity-60"
+                  />
+                  <span className="bg-brand-white/15 text-brand-white relative grid size-11 shrink-0 place-items-center rounded-xl">
                     <Icon className="size-5" />
                   </span>
-                  <div className="min-w-0">
-                    <p className="text-foreground text-[15px] font-extrabold leading-tight">
+                  <div className="relative min-w-0">
+                    <p className="text-brand-white text-[15px] font-extrabold leading-tight">
                       {offer.title}
                     </p>
-                    <p className="text-muted-foreground mt-0.5 text-[13px]">{offer.text}</p>
+                    <p className="text-brand-white/80 mt-0.5 text-[13px]">{offer.text}</p>
                   </div>
-                  <ArrowRight className="text-foreground/40 group-hover:text-foreground ml-auto size-4 shrink-0 transition-colors" />
+                  <ArrowRight className="text-brand-white/60 group-hover:text-brand-white relative ml-auto size-4 shrink-0 transition-colors" />
                 </Link>
               );
             })}
