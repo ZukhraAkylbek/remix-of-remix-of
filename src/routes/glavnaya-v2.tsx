@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ArrowRight, Clock, MapPin, Phone, Search, Star } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Phone, Star } from "lucide-react";
+
 
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -99,8 +99,8 @@ const REVIEWS = [
 
 function HomeV2() {
   const { data: specialties } = useSuspenseQuery(specialtiesQueryOptions());
-  const [query, setQuery] = useState("");
   const top = specialties.slice(0, 5);
+
 
   return (
     <div className="bg-background min-h-screen">
@@ -133,27 +133,6 @@ function HomeV2() {
                 </Link>
               </div>
 
-              <form
-                className="border-border mt-6 flex max-w-xl gap-2 rounded-2xl border p-2"
-                onSubmit={(e) => e.preventDefault()}
-              >
-                <span className="text-muted-foreground grid place-items-center pl-2">
-                  <Search className="size-4" />
-                </span>
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Например: УЗИ, кардиолог, КТ"
-                  aria-label="Поиск по услугам"
-                  className="text-foreground placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent text-[15px] outline-none"
-                />
-                <Link
-                  to="/uslugi"
-                  className="bg-surface-green text-brand-green-dark rounded-xl px-5 py-2.5 text-[15px] font-extrabold"
-                >
-                  Найти
-                </Link>
-              </form>
             </div>
 
             <div className="bg-surface-soft border-border text-muted-foreground grid min-h-[260px] place-items-center rounded-3xl border p-8 text-center text-[15px]">
