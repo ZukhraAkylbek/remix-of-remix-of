@@ -176,7 +176,31 @@ function HomeV2() {
             </div>
           </div>
 
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {HERO_OFFERS.map((offer) => {
+              const Icon = offer.icon;
+              return (
+                <Link
+                  key={offer.title}
+                  to={offer.href as "/"}
+                  className={`${offer.tone} group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-0.5`}
+                >
+                  <span className="bg-background/60 text-foreground grid size-11 shrink-0 place-items-center rounded-xl">
+                    <Icon className="size-5" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-foreground text-[15px] font-extrabold leading-tight">
+                      {offer.title}
+                    </p>
+                    <p className="text-muted-foreground mt-0.5 text-[13px]">{offer.text}</p>
+                  </div>
+                  <ArrowRight className="text-foreground/40 group-hover:text-foreground ml-auto size-4 shrink-0 transition-colors" />
+                </Link>
+              );
+            })}
+          </div>
         </section>
+
 
 
         {/* Быстрый маршрут */}
