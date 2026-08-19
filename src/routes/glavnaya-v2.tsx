@@ -99,8 +99,8 @@ const REVIEWS = [
 
 function HomeV2() {
   const { data: specialties } = useSuspenseQuery(specialtiesQueryOptions());
-  const [query, setQuery] = useState("");
   const top = specialties.slice(0, 5);
+
 
   return (
     <div className="bg-background min-h-screen">
