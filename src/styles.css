@@ -262,6 +262,33 @@
   );
 }
 
+@utility banner-red {
+  background-image: linear-gradient(
+    120deg,
+    oklch(0.55 0.18 25) 0%,
+    oklch(0.65 0.2 32) 45%,
+    oklch(0.75 0.16 45) 100%
+  );
+}
+
+@utility banner-sky {
+  background-image: linear-gradient(
+    120deg,
+    oklch(0.55 0.14 245) 0%,
+    oklch(0.65 0.16 230) 45%,
+    oklch(0.78 0.12 210) 100%
+  );
+}
+
+@utility banner-sand {
+  background-image: linear-gradient(
+    120deg,
+    oklch(0.55 0.12 75) 0%,
+    oklch(0.7 0.14 80) 45%,
+    oklch(0.8 0.12 85) 100%
+  );
+}
+
 @utility banner-glow {
   background-image: radial-gradient(
     circle,
