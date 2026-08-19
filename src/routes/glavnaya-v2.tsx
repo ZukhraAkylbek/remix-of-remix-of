@@ -243,7 +243,7 @@ function HomeV2() {
               Травмпункт 24/7
             </Link>
           </GradientBanner>
-          <div className="mt-8 className="grid auto-rows-fr gap-4 lg:grid-cols-3">
+          <div className="mt-8 grid auto-rows-fr gap-4 lg:grid-cols-3">
             {URGENT.map((item) => (
               <Link
                 key={item.title}
