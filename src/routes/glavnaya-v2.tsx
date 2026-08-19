@@ -120,10 +120,10 @@ function HomeV2() {
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
-                  to="/napravleniya"
-                  className="bg-brand-green text-brand-white hover:bg-brand-green-dark inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[16px] font-extrabold transition-colors"
+                  to="/checkups"
+                  className="gradient-accent text-accent-foreground hover:brightness-105 inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[16px] font-extrabold transition-all hover:-translate-y-0.5"
                 >
-                  Записаться к врачу
+                  Пройти чекап
                 </Link>
                 <Link
                   to="/uslugi"
