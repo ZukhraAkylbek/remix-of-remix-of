@@ -4,6 +4,7 @@ import { ArrowRight, CalendarCheck, Clock, Home, MapPin, MessageCircle, Phone, S
 
 
 
+import { GradientBanner } from "@/components/GradientBanner";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl } from "@/lib/clinic";
@@ -223,8 +224,26 @@ function HomeV2() {
         </Section>
 
         {/* Безотлагательно */}
-        <Section tone="green" eyebrow="Безотлагательно" title="Срочно нужна помощь?">
-          <div className="grid auto-rows-fr gap-4 lg:grid-cols-3">
+        <Section tone="plain">
+          <GradientBanner
+            eyebrow="Забота 24/7"
+            title="Срочно нужна помощь?"
+            text="Травмпункт, дежурные врачи и ночная диагностика работают круглосуточно — приезжайте или позвоните."
+          >
+            <a
+              href={`tel:${CLINIC.phones[0].replace(/[^+\d]/g, "")}`}
+              className="gradient-accent text-accent-foreground inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[15px] font-extrabold transition-all hover:-translate-y-0.5 hover:brightness-105"
+            >
+              <Phone className="size-4" /> Позвонить
+            </a>
+            <Link
+              to="/travmpunkt"
+              className="border-brand-white/50 text-brand-white hover:bg-brand-white/10 inline-flex items-center gap-2 rounded-2xl border px-6 py-3.5 text-[15px] font-extrabold transition-colors"
+            >
+              Травмпункт 24/7
+            </Link>
+          </GradientBanner>
+          <div className="mt-8 grid auto-rows-fr gap-4 lg:grid-cols-3">
             {URGENT.map((item) => (
               <Link
                 key={item.title}
@@ -265,26 +284,19 @@ function HomeV2() {
               </Link>
             </div>
 
-            <div className="bg-surface-green rounded-3xl p-7">
-              <Eyebrow>Чекапы</Eyebrow>
-              <p className="text-foreground mt-3 text-2xl font-extrabold">
-                Проверьте здоровье вовремя
-              </p>
-              <p className="text-muted-foreground mt-3 text-[15px] leading-relaxed">
-                Готовые программы для женщин, мужчин, детей и сердца. Понятный состав, сроки и цена.
-              </p>
-              <p className="bg-background/80 text-foreground mt-5 inline-block rounded-xl px-4 py-2 text-[14px] font-bold">
-                От 1 дня
-              </p>
-              <div className="mt-6">
-                <Link
-                  to="/checkups"
-                  className="bg-brand-green text-brand-white hover:bg-brand-green-dark inline-flex rounded-2xl px-6 py-3 text-[15px] font-extrabold transition-colors"
-                >
-                  Подобрать чекап
-                </Link>
-              </div>
-            </div>
+            <GradientBanner
+              eyebrow="Чекапы"
+              title="Проверьте здоровье вовремя"
+              text="Готовые программы для женщин, мужчин, детей и сердца. Понятный состав, сроки и цена — от 1 дня."
+              className="p-7 sm:p-8"
+            >
+              <Link
+                to="/checkups"
+                className="gradient-accent text-accent-foreground inline-flex rounded-2xl px-6 py-3 text-[15px] font-extrabold transition-all hover:-translate-y-0.5 hover:brightness-105"
+              >
+                Подобрать чекап
+              </Link>
+            </GradientBanner>
           </div>
         </Section>
 
