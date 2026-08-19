@@ -85,28 +85,24 @@ const HERO_OFFERS = [
     title: "Травмпункт 24/7",
     text: "Круглосуточная помощь",
     href: "/travmpunkt",
-    tone: "bg-surface-red",
     icon: Clock,
   },
   {
     title: "Пройти чекап",
     text: "Обследование за 1–4 дня",
     href: "/checkups",
-    tone: "bg-surface-green",
     icon: CalendarCheck,
   },
   {
     title: "Вызвать врача на дом",
     text: "По предварительной записи",
     href: "/uslugi/vyzov-vracha-na-dom",
-    tone: "bg-surface-sand",
     icon: Home,
   },
   {
     title: "Онлайн-консультация",
     text: "Запись удалённо",
     href: "/uslugi/online-konsultacii-vrachej",
-    tone: "bg-surface-sky",
     icon: MessageCircle,
   },
 ];
