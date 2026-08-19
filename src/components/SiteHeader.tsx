@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import logo from "@/assets/logo-avicenna.png.asset.json";
 import { BOOKING_URL } from "@/lib/site-config";
