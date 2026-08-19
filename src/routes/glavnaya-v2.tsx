@@ -84,31 +84,32 @@ const HERO_OFFERS = [
     title: "Травмпункт 24/7",
     text: "Круглосуточная помощь",
     href: "/travmpunkt",
-    tone: "bg-surface-red",
+    tone: "bg-surface-red/40",
     icon: Clock,
   },
   {
     title: "Пройти чекап",
     text: "Обследование за 1–4 дня",
     href: "/checkups",
-    tone: "bg-surface-green",
+    tone: "bg-surface-green/40",
     icon: CalendarCheck,
   },
   {
     title: "Вызвать врача на дом",
     text: "По предварительной записи",
     href: "/uslugi/vyzov-vracha-na-dom",
-    tone: "bg-surface-sand",
+    tone: "bg-surface-sand/40",
     icon: Home,
   },
   {
     title: "Онлайн-консультация",
     text: "Запись удалённо",
     href: "/uslugi/online-konsultacii-vrachej",
-    tone: "bg-surface-sky",
+    tone: "bg-surface-sky/40",
     icon: MessageCircle,
   },
 ];
+
 
 const URGENT = [
 
