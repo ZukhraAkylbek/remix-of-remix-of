@@ -85,24 +85,28 @@ const HERO_OFFERS = [
     title: "Травмпункт 24/7",
     text: "Круглосуточная помощь",
     href: "/travmpunkt",
+    tone: "banner-red",
     icon: Clock,
   },
   {
     title: "Пройти чекап",
     text: "Обследование за 1–4 дня",
     href: "/checkups",
+    tone: "banner-brand",
     icon: CalendarCheck,
   },
   {
     title: "Вызвать врача на дом",
     text: "По предварительной записи",
     href: "/uslugi/vyzov-vracha-na-dom",
+    tone: "banner-sand",
     icon: Home,
   },
   {
     title: "Онлайн-консультация",
     text: "Запись удалённо",
     href: "/uslugi/online-konsultacii-vrachej",
+    tone: "banner-sky",
     icon: MessageCircle,
   },
 ];
@@ -180,7 +184,7 @@ function HomeV2() {
                 <Link
                   key={offer.title}
                   to={offer.href as "/"}
-                  className="banner-brand group relative flex items-center gap-4 overflow-hidden rounded-2xl p-5 transition-all hover:-translate-y-0.5"
+                  className={`${offer.tone} group relative flex items-center gap-4 overflow-hidden rounded-2xl p-5 transition-all hover:-translate-y-0.5`}
                 >
                   <span
                     aria-hidden="true"
