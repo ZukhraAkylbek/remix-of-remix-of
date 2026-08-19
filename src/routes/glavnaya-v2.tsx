@@ -72,12 +72,12 @@ function Section({
 }
 
 const ROUTE_CARDS = [
-  { title: "Записаться к врачу", text: "Выбрать специальность и время", href: "/napravleniya" },
-  { title: "Пройти чекап", text: "Обследование за 1–4 дня", href: "/checkups" },
-  { title: "Сдать анализы", text: "Лаборатория и результаты", href: "/uslugi/analizy" },
-  { title: "Сделать диагностику", text: "КТ, УЗИ, рентген, ЭКГ", href: "/diagnostika" },
-  { title: "Вызвать врача на дом", text: "По предварительной записи", href: "/uslugi/vyzov-vracha-na-dom" },
-  { title: "Нужна срочная помощь", text: "Круглосуточные направления", href: "/travmpunkt" },
+  { title: "Записаться к врачу", text: "Выбрать специальность и время", href: "/napravleniya", tone: "pastel-mint" },
+  { title: "Пройти чекап", text: "Обследование за 1–4 дня", href: "/checkups", tone: "pastel-coral" },
+  { title: "Сдать анализы", text: "Лаборатория и результаты", href: "/uslugi/analizy", tone: "pastel-sky" },
+  { title: "Сделать диагностику", text: "КТ, УЗИ, рентген, ЭКГ", href: "/diagnostika", tone: "pastel-lavender" },
+  { title: "Вызвать врача на дом", text: "По предварительной записи", href: "/uslugi/vyzov-vracha-na-dom", tone: "pastel-sand" },
+  { title: "Нужна срочная помощь", text: "Круглосуточные направления", href: "/travmpunkt", tone: "pastel-rose" },
 ];
 
 const HERO_OFFERS = [
@@ -215,7 +215,7 @@ function HomeV2() {
               <Link
                 key={card.title}
                 to={card.href as "/"}
-                className="card-lift border-border hover:border-brand-green group flex h-full flex-col rounded-2xl border p-6 transition-colors"
+                className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex h-full flex-col rounded-2xl border p-6 transition-all`}
               >
                 <p className="text-foreground text-[17px] font-extrabold">{card.title}</p>
                 <p className="text-muted-foreground mt-2 text-[15px]">{card.text}</p>
