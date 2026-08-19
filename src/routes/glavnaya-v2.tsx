@@ -72,12 +72,12 @@ function Section({
 }
 
 const ROUTE_CARDS = [
-  { title: "Записаться к врачу", text: "Выбрать специальность и время", href: "/napravleniya" },
-  { title: "Пройти чекап", text: "Обследование за 1–4 дня", href: "/checkups" },
-  { title: "Сдать анализы", text: "Лаборатория и результаты", href: "/uslugi/analizy" },
-  { title: "Сделать диагностику", text: "КТ, УЗИ, рентген, ЭКГ", href: "/diagnostika" },
-  { title: "Вызвать врача на дом", text: "По предварительной записи", href: "/uslugi/vyzov-vracha-na-dom" },
-  { title: "Нужна срочная помощь", text: "Круглосуточные направления", href: "/travmpunkt" },
+  { title: "Записаться к врачу", text: "Выбрать специальность и время", href: "/napravleniya", tone: "pastel-mint" },
+  { title: "Пройти чекап", text: "Обследование за 1–4 дня", href: "/checkups", tone: "pastel-coral" },
+  { title: "Сдать анализы", text: "Лаборатория и результаты", href: "/uslugi/analizy", tone: "pastel-sky" },
+  { title: "Сделать диагностику", text: "КТ, УЗИ, рентген, ЭКГ", href: "/diagnostika", tone: "pastel-lavender" },
+  { title: "Вызвать врача на дом", text: "По предварительной записи", href: "/uslugi/vyzov-vracha-na-dom", tone: "pastel-sand" },
+  { title: "Нужна срочная помощь", text: "Круглосуточные направления", href: "/travmpunkt", tone: "pastel-rose" },
 ];
 
 const HERO_OFFERS = [
