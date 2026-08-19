@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
 import { useState } from "react";
 
@@ -26,6 +26,9 @@ const isExternal = (href: string) => /^(https?:|tel:|mailto:)/i.test(href);
 export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
   const [open, setOpen] = useState(false);
   const { t } = useSiteContent();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   const ctaLabel = t("header.cta");
   const phone = t("header.phone");
   const phoneNote = t("header.phone_note", "Круглосуточная запись по телефону:");
@@ -44,9 +47,9 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
 
   return (
     <header className="bg-background/95 border-border sticky top-0 z-50 border-b backdrop-blur">
-      {/* Верхняя строка: логотип, телефон, действия */}
+      {/* Верхняя строка: логотип, поиск, телефон, действия */}
       <div className="border-border/70 border-b">
-        <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:gap-8">
+        <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:gap-6">
           <Link to="/" className="flex shrink-0 items-center" aria-label="Авиценна — на главную">
             <img
               src={logo.url}
@@ -56,6 +59,8 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               className="h-12 w-auto sm:h-14 lg:h-16"
             />
           </Link>
+
+          <SiteSearch className="hidden w-[260px] shrink-0 lg:flex xl:w-[300px]" />
 
           <a
             href={`tel:${phone.replace(/[^+\d]/g, "")}`}
@@ -97,16 +102,24 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
             type="button"
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
             onClick={() => setOpen((v) => !v)}
-            className="border-border text-foreground ml-auto grid size-10 shrink-0 place-items-center rounded-md border lg:hidden"
+            className="border-border text-foreground grid size-10 shrink-0 place-items-center rounded-md border lg:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
       </div>
 
-      {/* Нижняя строка: поиск и меню */}
-      <div className="mx-auto hidden max-w-7xl items-center gap-6 px-4 py-2.5 sm:px-6 lg:flex">
-        <SiteSearch className="w-[280px] shrink-0" />
+      {/* Мобильный поиск на главной — не в меню */}
+      {isHome && (
+        <div className="border-border/70 border-b lg:hidden">
+          <div className="mx-auto max-w-7xl px-4 py-2.5 sm:px-6">
+            <SiteSearch className="w-full" />
+          </div>
+        </div>
+      )}
+
+      {/* Нижняя строка: меню */}
+      <div className="mx-auto hidden max-w-7xl items-center px-4 py-2.5 sm:px-6 lg:flex">
         <nav
           aria-label="Главное меню"
           className="flex flex-1 flex-wrap items-center justify-between gap-x-5 gap-y-2 xl:gap-x-7"
@@ -133,7 +146,6 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
       {open && (
         <div className="border-border bg-background border-t lg:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col px-4 py-2 sm:px-6">
-            <SiteSearch className="my-3 w-full" />
             {navItems.map((item) => (
               <a
                 key={`${item.label}-${item.href}`}
