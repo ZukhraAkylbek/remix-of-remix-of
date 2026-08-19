@@ -63,7 +63,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-brand-green text-brand-white hover:bg-brand-green-dark inline-flex items-center gap-2 whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-bold transition-colors sm:px-4"
+              className="inline-flex items-center gap-2 whitespace-nowrap rounded-xl border border-brand-green bg-brand-white/80 px-3 py-2.5 text-sm font-bold text-brand-green backdrop-blur-sm transition-colors hover:bg-brand-green hover:text-brand-white sm:px-4"
             >
               <MessageCircle className="size-4" />
               <span className="hidden sm:inline">Написать WhatsApp</span>
