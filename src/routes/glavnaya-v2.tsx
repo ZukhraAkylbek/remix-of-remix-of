@@ -143,19 +143,8 @@ function HomeV2() {
             </div>
           </div>
 
-          <div className="border-border mt-12 grid gap-6 border-t pt-8 sm:grid-cols-3">
-            {[
-              { title: "100+ специалистов", text: "для взрослых и детей" },
-              { title: "Диагностика и лаборатория", text: "в одном маршруте" },
-              { title: "Отдельные услуги 24/7", text: "когда помощь нужна сейчас" },
-            ].map((item) => (
-              <div key={item.title}>
-                <p className="text-foreground text-[17px] font-extrabold">{item.title}</p>
-                <p className="text-muted-foreground mt-1 text-[15px]">{item.text}</p>
-              </div>
-            ))}
-          </div>
         </section>
+
 
         {/* Быстрый маршрут */}
         <Section eyebrow="Быстрый маршрут" title="С чего начнём?">
