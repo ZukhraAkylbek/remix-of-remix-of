@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ArrowRight, Clock, MapPin, Phone, Search, Star } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Phone, Star } from "lucide-react";
+
 
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
