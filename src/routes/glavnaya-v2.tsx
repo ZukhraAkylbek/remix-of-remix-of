@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ArrowRight, Clock, MapPin, Phone, Star } from "lucide-react";
+import { ArrowRight, CalendarCheck, Clock, Home, MapPin, MessageCircle, Phone, Star } from "lucide-react";
+
 
 
 import { SiteFooter } from "@/components/SiteFooter";
@@ -78,7 +79,39 @@ const ROUTE_CARDS = [
   { title: "Нужна срочная помощь", text: "Круглосуточные направления", href: "/travmpunkt" },
 ];
 
+const HERO_OFFERS = [
+  {
+    title: "Травмпункт 24/7",
+    text: "Круглосуточная помощь",
+    href: "/travmpunkt",
+    tone: "bg-surface-red",
+    icon: Clock,
+  },
+  {
+    title: "Пройти чекап",
+    text: "Обследование за 1–4 дня",
+    href: "/checkups",
+    tone: "bg-surface-green",
+    icon: CalendarCheck,
+  },
+  {
+    title: "Вызвать врача на дом",
+    text: "По предварительной записи",
+    href: "/uslugi/vyzov-vracha-na-dom",
+    tone: "bg-surface-sand",
+    icon: Home,
+  },
+  {
+    title: "Онлайн-консультация",
+    text: "Запись удалённо",
+    href: "/uslugi/online-konsultacii-vrachej",
+    tone: "bg-surface-sky",
+    icon: MessageCircle,
+  },
+];
+
 const URGENT = [
+
   { title: "Травмпункт 24/7", text: "Жукеева-Пудовкина, 124 — маршрут / гипс, ПХО", href: "/travmpunkt" },
   { title: "Терапевт и семейный врач", text: "Джунусалиева, 83 — круглосуточно", href: "/uslugi/konsultacii-specialistov" },
   { title: "Ночные анализы и КТ", text: "Условия и режим работы", href: "/diagnostika" },
@@ -143,7 +176,31 @@ function HomeV2() {
             </div>
           </div>
 
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {HERO_OFFERS.map((offer) => {
+              const Icon = offer.icon;
+              return (
+                <Link
+                  key={offer.title}
+                  to={offer.href as "/"}
+                  className={`${offer.tone} group flex items-center gap-4 rounded-2xl p-5 transition-all hover:-translate-y-0.5`}
+                >
+                  <span className="bg-background/60 text-foreground grid size-11 shrink-0 place-items-center rounded-xl">
+                    <Icon className="size-5" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-foreground text-[15px] font-extrabold leading-tight">
+                      {offer.title}
+                    </p>
+                    <p className="text-muted-foreground mt-0.5 text-[13px]">{offer.text}</p>
+                  </div>
+                  <ArrowRight className="text-foreground/40 group-hover:text-foreground ml-auto size-4 shrink-0 transition-colors" />
+                </Link>
+              );
+            })}
+          </div>
         </section>
+
 
 
         {/* Быстрый маршрут */}
