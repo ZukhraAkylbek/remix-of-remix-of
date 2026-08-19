@@ -82,6 +82,10 @@
   --color-surface-soft: var(--surface-soft);
   --color-surface-green: var(--surface-green);
   --color-surface-red: var(--surface-red);
+  --color-surface-sand: var(--surface-sand);
+  --color-surface-sky: var(--surface-sky);
+  --color-surface-mint: var(--surface-mint);
+
 
   /* Админка — premium healthcare SaaS палитра */
   --color-admin-blue: var(--admin-blue);
@@ -113,6 +117,10 @@
   --surface-soft: oklch(0.968 0.003 250);
   --surface-green: oklch(0.94 0.075 152);
   --surface-red: oklch(0.94 0.065 32);
+  --surface-sand: oklch(0.96 0.02 80);
+  --surface-sky: oklch(0.95 0.02 230);
+  --surface-mint: oklch(0.95 0.03 160);
+
 
   /* Админка */
   --admin-blue: oklch(0.55 0.15 245);
