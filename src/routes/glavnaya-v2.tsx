@@ -2,7 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowRight, CalendarCheck, Clock, Home, MapPin, MessageCircle, Phone, Star } from "lucide-react";
 
-
+import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
+import image2Asset from "@/assets/image-2.png.asset.json";
+import imageAsset from "@/assets/image.png.asset.json";
+import imageWebpAsset from "@/assets/image.webp.asset.json";
 
 import { GradientBanner } from "@/components/GradientBanner";
 import { SiteFooter } from "@/components/SiteFooter";
