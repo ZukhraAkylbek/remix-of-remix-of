@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, MessageCircle, Phone, X } from "lucide-react";
 import { useState } from "react";
 
-import logo from "@/assets/logo-avicenna.png.asset.json";
+import logo from "@/assets/logo-avicenna-kg.jpg.asset.json";
 import { CLINIC } from "@/lib/clinic";
 import { useSiteContent } from "@/lib/site-content";
 
@@ -43,8 +43,8 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               <img
                 src={logo.url}
                 alt="Клинико-диагностический центр «Авиценна»"
-                width={840}
-                height={393}
+                width={440}
+                height={95}
                 className="h-12 w-auto sm:h-14 lg:h-16"
               />
             </Link>
