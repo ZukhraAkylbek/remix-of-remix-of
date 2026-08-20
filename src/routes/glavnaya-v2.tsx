@@ -279,9 +279,9 @@ function HomeV2() {
                   key={item.slug}
                   to="/napravleniya/$slug"
                   params={{ slug: item.slug }}
-                  className="group card-lift bg-surface-soft hover:bg-surface-green flex h-full flex-col justify-between gap-4 overflow-hidden rounded-2xl p-5 sm:p-6"
+                  className="group card-lift bg-surface-soft hover:bg-surface-green flex h-full flex-col gap-4 overflow-hidden rounded-2xl p-5 sm:p-6"
                 >
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-center justify-between gap-4">
                     <span className="text-foreground group-hover:text-brand-green block max-w-[60%] text-xl leading-tight font-extrabold transition-colors sm:text-[22px]">
                       {item.name}
                     </span>
@@ -294,12 +294,10 @@ function HomeV2() {
                       className="size-20 shrink-0 rounded-xl object-contain transition-transform duration-500 group-hover:scale-105 sm:size-24"
                     />
                   </div>
-                  <div>
-                    {item.intro && (
-                      <span className="text-muted-foreground line-clamp-2 block text-sm">
-                        {item.intro}
-                      </span>
-                    )}
+                  <div className="mt-auto flex flex-col">
+                    <span className="text-muted-foreground line-clamp-3 text-sm">
+                      {item.intro || "\u00A0"}
+                    </span>
                     <span className="text-brand-green mt-3 inline-flex items-center gap-1 text-sm font-bold">
                       Подробнее
                       <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
@@ -309,9 +307,9 @@ function HomeV2() {
               ))}
               <Link
                 to="/uslugi"
-                className="group card-lift bg-surface-green hover:bg-surface-green/80 flex h-full flex-col justify-between gap-4 overflow-hidden rounded-2xl p-5 sm:p-6"
+                className="group card-lift bg-surface-green hover:bg-surface-green/80 flex h-full flex-col gap-4 overflow-hidden rounded-2xl p-5 sm:p-6"
               >
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center justify-between gap-4">
                   <span className="text-foreground block max-w-[60%] text-xl leading-tight font-extrabold sm:text-[22px]">
                     Все услуги
                   </span>
@@ -319,8 +317,8 @@ function HomeV2() {
                     <ArrowRight className="size-7 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
                 </div>
-                <div>
-                  <span className="text-muted-foreground line-clamp-2 block text-sm">
+                <div className="mt-auto flex flex-col">
+                  <span className="text-muted-foreground line-clamp-3 text-sm">
                     Полный каталог услуг клиники: диагностика, консультации, анализы и стационар.
                   </span>
                   <span className="text-brand-green mt-3 inline-flex items-center gap-1 text-sm font-bold">
