@@ -74,6 +74,7 @@
   --color-brand-green-dark: var(--brand-green-dark);
   --color-brand-green-light: var(--brand-green-light);
   --color-brand-terracotta: var(--brand-terracotta);
+  --color-brand-red: var(--brand-red);
   --color-brand-black: var(--brand-black);
   --color-brand-white: var(--brand-white);
   --color-brand-gray: var(--brand-gray);
@@ -109,6 +110,7 @@
   --brand-green-dark: oklch(0.45 0.13 152);
   --brand-green-light: oklch(0.79 0.19 150);
   --brand-terracotta: oklch(0.62 0.21 30);
+  --brand-red: oklch(0.58 0.24 25);
   --brand-black: oklch(0 0 0);
   --brand-white: oklch(1 0 0);
   --brand-gray: oklch(0.551 0.023 264.366);
