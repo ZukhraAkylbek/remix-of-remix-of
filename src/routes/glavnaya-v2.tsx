@@ -215,9 +215,9 @@ function HomeV2() {
               <Link
                 key={card.title}
                 to={card.href as "/"}
-                className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex flex-col justify-center rounded-2xl border p-4 transition-all`}
+                className={`${card.tone} card-lift border-border/40 group flex flex-col justify-center rounded-2xl border p-4 transition-all`}
               >
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center justify-between gap-3">
                   <p className="text-foreground text-[16px] font-extrabold leading-tight">
                     {card.title}
                   </p>
@@ -225,9 +225,6 @@ function HomeV2() {
                     <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
-                <p className="text-muted-foreground mt-1.5 text-[14px] leading-snug">
-                  {card.text}
-                </p>
               </Link>
             ))}
           </div>
