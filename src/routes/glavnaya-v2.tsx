@@ -279,7 +279,7 @@ function HomeV2() {
                   key={item.slug}
                   to="/napravleniya/$slug"
                   params={{ slug: item.slug }}
-                  className="group card-lift bg-surface-soft hover:bg-surface-green flex h-full flex-col gap-3 overflow-hidden rounded-2xl p-5 sm:p-6"
+                  className="group card-lift bg-surface-soft hover:bg-surface-green flex h-full snap-start flex-col gap-3 overflow-hidden rounded-2xl p-5 sm:p-6"
                 >
                   <div className="flex items-center justify-between gap-4">
                     <span className="text-foreground group-hover:text-brand-green block max-w-[60%] text-xl leading-tight font-extrabold transition-colors sm:text-[22px]">
@@ -307,7 +307,7 @@ function HomeV2() {
               ))}
               <Link
                 to="/uslugi"
-                className="group card-lift bg-surface-green hover:bg-surface-green/80 flex h-full flex-col gap-3 overflow-hidden rounded-2xl p-5 sm:p-6"
+                className="group card-lift bg-surface-green hover:bg-surface-green/80 flex h-full snap-start flex-col gap-3 overflow-hidden rounded-2xl p-5 sm:p-6"
               >
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-foreground block max-w-[60%] text-xl leading-tight font-extrabold sm:text-[22px]">
