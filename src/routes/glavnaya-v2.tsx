@@ -329,7 +329,7 @@ function HomeV2() {
 
         {/* Врачи */}
         <Section tone="soft" eyebrow="Команда" title="Врачи, которым доверяют">
-          <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="flex snap-x gap-4 overflow-x-auto pb-3 -mx-4 px-4 sm:-mx-6 sm:px-6">
             {[
               {
                 name: "Айбек Токтосунов",
@@ -349,7 +349,7 @@ function HomeV2() {
             ].map((doctor) => (
               <div
                 key={doctor.name}
-                className="bg-background border-border flex h-full flex-col overflow-hidden rounded-2xl border"
+                className="bg-background border-border flex w-[260px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border"
               >
                 <img
                   src={doctor.image}
@@ -368,7 +368,7 @@ function HomeV2() {
             ))}
             <Link
               to="/napravleniya"
-              className="bg-surface-green hover:bg-surface-green/80 flex h-full flex-col overflow-hidden rounded-2xl transition-colors"
+              className="bg-surface-green hover:bg-surface-green/80 flex w-[260px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl transition-colors"
             >
               <img
                 src={aboutHeroAsset.url}
