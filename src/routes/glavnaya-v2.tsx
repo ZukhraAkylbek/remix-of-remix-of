@@ -294,7 +294,7 @@ function HomeV2() {
                       className="size-14 shrink-0 rounded-xl object-contain transition-transform duration-500 group-hover:scale-105 sm:size-16"
                     />
                   </div>
-                  <div className="mt-auto flex flex-col">
+                  <div className="flex flex-col">
                     <span className="text-muted-foreground line-clamp-3 text-sm">
                       {item.intro || "\u00A0"}
                     </span>
