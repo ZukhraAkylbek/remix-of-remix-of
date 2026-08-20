@@ -318,7 +318,7 @@ function HomeV2() {
                   </span>
                 </div>
                 <div className="mt-auto flex flex-col">
-                  <span className="text-muted-foreground line-clamp-3 block text-sm">
+                  <span className="text-muted-foreground line-clamp-3 text-sm">
                     Полный каталог услуг клиники: диагностика, консультации, анализы и стационар.
                   </span>
                   <span className="text-brand-green mt-3 inline-flex items-center gap-1 text-sm font-bold">
