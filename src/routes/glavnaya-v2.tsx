@@ -330,29 +330,46 @@ function HomeV2() {
         {/* Врачи */}
         <Section tone="soft" eyebrow="Команда" title="Врачи, которым доверяют">
           <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {specialties.slice(0, 3).map((item) => (
+            {specialties.slice(0, 3).map((item, index) => (
               <div
                 key={item.slug}
-                className="bg-background border-border flex h-full flex-col rounded-2xl border p-6"
+                className="bg-background border-border flex h-full flex-col overflow-hidden rounded-2xl border"
               >
-                <p className="text-foreground text-[17px] font-extrabold">{item.name}</p>
-                <p className="text-muted-foreground mt-2 text-[14px]">Приём взрослых и детей</p>
-                <p className="text-brand-green mt-auto pt-4 text-[14px] font-bold">
-                  Ближайшее окно: сегодня
-                </p>
+                <img
+                  src={[imageAsset.url, imageWebpAsset.url, image2Asset.url][index % 3]}
+                  alt={`Врач направления «${item.name}» в клинике Авиценна`}
+                  loading="lazy"
+                  className="h-44 w-full object-cover"
+                />
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="text-foreground text-[17px] font-extrabold">{item.name}</p>
+                  <p className="text-muted-foreground mt-2 text-[14px]">Приём взрослых и детей</p>
+                  <p className="text-brand-green mt-auto pt-4 text-[14px] font-bold">
+                    Ближайшее окно: сегодня
+                  </p>
+                </div>
               </div>
             ))}
             <Link
               to="/napravleniya"
-              className="bg-surface-green hover:bg-surface-green/80 flex h-full flex-col justify-between rounded-2xl p-6 transition-colors"
+              className="bg-surface-green hover:bg-surface-green/80 flex h-full flex-col overflow-hidden rounded-2xl transition-colors"
             >
-              <p className="text-foreground text-[17px] font-extrabold">Все врачи</p>
-              <p className="text-brand-green-dark text-[14px] font-bold">
-                Фильтр по специальности →
-              </p>
+              <img
+                src={aboutHeroAsset.url}
+                alt="Команда врачей клиники Авиценна"
+                loading="lazy"
+                className="h-44 w-full object-cover"
+              />
+              <div className="flex flex-1 flex-col justify-between p-6">
+                <p className="text-foreground text-[17px] font-extrabold">Все врачи</p>
+                <p className="text-brand-green-dark text-[14px] font-bold">
+                  Фильтр по специальности →
+                </p>
+              </div>
             </Link>
           </div>
         </Section>
+
 
         {/* Диагностика и филиалы */}
         <Section eyebrow="Диагностика и лаборатория" title="Пройти обследование в одном месте">
