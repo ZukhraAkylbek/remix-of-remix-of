@@ -321,7 +321,7 @@ function HomeV2() {
                   <span className="text-muted-foreground line-clamp-3 text-sm">
                     Полный каталог услуг клиники: диагностика, консультации, анализы и стационар.
                   </span>
-                  <span className="text-brand-green mt-3 inline-flex items-center gap-1 text-sm font-bold">
+                  <span className="text-brand-green mt-auto inline-flex items-center gap-1 text-sm font-bold">
                     Перейти
                     <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                   </span>
