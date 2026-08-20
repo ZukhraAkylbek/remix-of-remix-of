@@ -100,9 +100,10 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
       {/* Зелёная навигационная панель */}
       <nav
         aria-label="Главное меню"
-        className="bg-brand-green text-brand-white hidden shadow-sm lg:block"
+        className="bg-brand-green text-brand-white hidden shadow-sm md:block"
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-center gap-1 px-4 py-2 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-4 py-2 sm:px-6 lg:justify-center lg:overflow-visible [-ms-overflow-style:none] [scrollbar-width:none]">
+
           {navItems.map((item) => (
             <a
               key={`${item.label}-${item.href}`}
