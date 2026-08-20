@@ -215,19 +215,13 @@ function HomeV2() {
               <Link
                 key={card.title}
                 to={card.href as "/"}
-                className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex h-full flex-col justify-center rounded-2xl border p-4 transition-all`}
+                className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex h-full flex-col rounded-2xl border p-6 transition-all`}
               >
-                <div className="flex items-start justify-between gap-3">
-                  <p className="text-foreground text-[16px] font-extrabold leading-tight">
-                    {card.title}
-                  </p>
-                  <span className="text-brand-green shrink-0">
-                    <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-                <p className="text-muted-foreground mt-1.5 text-[14px] leading-snug">
-                  {card.text}
-                </p>
+                <p className="text-foreground text-[17px] font-extrabold">{card.title}</p>
+                <p className="text-muted-foreground mt-2 text-[15px]">{card.text}</p>
+                <span className="text-brand-green mt-auto pt-4">
+                  <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
+                </span>
               </Link>
             ))}
           </div>
