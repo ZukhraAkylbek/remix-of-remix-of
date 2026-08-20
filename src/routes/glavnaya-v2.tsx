@@ -216,7 +216,7 @@ function HomeV2() {
 
         {/* Быстрый маршрут */}
         <Section eyebrow="Быстрый маршрут" title="С чего начнём?">
-          <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-flow-col grid-rows-3 gap-4 overflow-x-auto pb-2 auto-cols-[minmax(170px,1fr)] snap-x sm:grid-flow-row sm:grid-rows-none sm:auto-rows-fr sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
             {ROUTE_CARDS.map((card) => (
               <Link
                 key={card.title}
