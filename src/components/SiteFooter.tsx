@@ -11,8 +11,8 @@ export function SiteFooter() {
           <img
             src={logo.url}
             alt="Клинико-диагностический центр «Авиценна»"
-            width={840}
-            height={393}
+            width={440}
+            height={95}
             loading="lazy"
             className="h-11 w-auto"
           />

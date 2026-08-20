@@ -43,8 +43,8 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               <img
                 src={logo.url}
                 alt="Клинико-диагностический центр «Авиценна»"
-                width={840}
-                height={393}
+                width={440}
+                height={95}
                 className="h-12 w-auto sm:h-14 lg:h-16"
               />
             </Link>
