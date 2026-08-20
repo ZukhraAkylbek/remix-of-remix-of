@@ -295,7 +295,7 @@ function HomeV2() {
                     />
                   </div>
                   <div className="mt-auto flex flex-col">
-                    <span className="text-muted-foreground line-clamp-3 block h-20 text-sm">
+                    <span className="text-muted-foreground line-clamp-3 block text-sm">
                       {item.intro || "\u00A0"}
                     </span>
                     <span className="text-brand-green mt-3 inline-flex items-center gap-1 text-sm font-bold">
