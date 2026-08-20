@@ -291,7 +291,7 @@ function HomeV2() {
                       width={768}
                       height={768}
                       loading="lazy"
-                      className="size-20 shrink-0 rounded-xl object-contain transition-transform duration-500 group-hover:scale-105 sm:size-24"
+                      className="size-14 shrink-0 rounded-xl object-contain transition-transform duration-500 group-hover:scale-105 sm:size-16"
                     />
                   </div>
                   <div className="mt-auto flex flex-col">
