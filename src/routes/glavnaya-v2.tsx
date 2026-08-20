@@ -273,13 +273,13 @@ function HomeV2() {
         {/* Направления + чекапы */}
         <Section eyebrow="Основные направления" title="Выберите нужную помощь">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)]">
-            <div className="grid auto-rows-fr gap-4 sm:grid-cols-2">
+            <div className="grid snap-x grid-flow-col grid-rows-[minmax(0,1fr)_minmax(0,1fr)] gap-4 overflow-x-auto pb-2 auto-cols-[minmax(260px,1fr)] sm:snap-none sm:auto-rows-fr sm:grid-flow-row sm:grid-cols-2 sm:overflow-visible">
               {top.map((item, index) => (
                 <Link
                   key={item.slug}
                   to="/napravleniya/$slug"
                   params={{ slug: item.slug }}
-                  className="group card-lift bg-surface-soft hover:bg-surface-green flex h-full flex-col gap-3 overflow-hidden rounded-2xl p-5 sm:p-6"
+                  className="group card-lift bg-surface-soft hover:bg-surface-green flex h-full snap-start flex-col gap-3 overflow-hidden rounded-2xl p-5 sm:p-6"
                 >
                   <div className="flex items-center justify-between gap-4">
                     <span className="text-foreground group-hover:text-brand-green block max-w-[60%] text-xl leading-tight font-extrabold transition-colors sm:text-[22px]">
@@ -307,7 +307,7 @@ function HomeV2() {
               ))}
               <Link
                 to="/uslugi"
-                className="group card-lift bg-surface-green hover:bg-surface-green/80 flex h-full flex-col gap-3 overflow-hidden rounded-2xl p-5 sm:p-6"
+                className="group card-lift bg-surface-green hover:bg-surface-green/80 flex h-full snap-start flex-col gap-3 overflow-hidden rounded-2xl p-5 sm:p-6"
               >
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-foreground block max-w-[60%] text-xl leading-tight font-extrabold sm:text-[22px]">
