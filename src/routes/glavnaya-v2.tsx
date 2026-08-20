@@ -115,12 +115,6 @@ const HERO_OFFERS = [
   },
 ];
 
-const URGENT = [
-
-  { title: "Травмпункт 24/7", text: "Жукеева-Пудовкина, 124 — маршрут / гипс, ПХО", href: "/travmpunkt" },
-  { title: "Терапевт и семейный врач", text: "Джунусалиева, 83 — круглосуточно", href: "/uslugi/konsultacii-specialistov" },
-  { title: "Ночные анализы и КТ", text: "Условия и режим работы", href: "/diagnostika" },
-];
 
 const DIAGNOSTICS = [
   { title: "КТ", text: "Режим / запись" },
@@ -253,18 +247,6 @@ function HomeV2() {
               Травмпункт 24/7
             </Link>
           </GradientBanner>
-          <div className="mt-8 grid auto-rows-fr gap-4 lg:grid-cols-3">
-            {URGENT.map((item) => (
-              <Link
-                key={item.title}
-                to={item.href as "/"}
-                className="bg-background/70 border-border hover:border-brand-green flex h-full flex-col rounded-2xl border p-5 transition-colors"
-              >
-                <p className="text-foreground text-[16px] font-extrabold">{item.title}</p>
-                <p className="text-muted-foreground mt-2 text-[14px] leading-relaxed">{item.text}</p>
-              </Link>
-            ))}
-          </div>
           <p className="text-muted-foreground mt-6 text-[14px]">
             Скорую помощь клиника не оказывает. В экстренной ситуации — 103.
           </p>
