@@ -37,7 +37,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
     <div className="sticky top-0 z-50">
       {/* Верхняя панель: логотип, поиск, контакты */}
       <header className="bg-background/95 border-border border-b backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:gap-6">
+        <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6 lg:gap-6">
           <div className="flex min-w-0 shrink-0 items-center gap-3">
             <Link to="/" className="flex shrink-0 items-center" aria-label="Авиценна — на главную">
               <img
@@ -45,7 +45,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                 alt="Клинико-диагностический центр «Авиценна»"
                 width={440}
                 height={95}
-                className="h-12 w-auto sm:h-14 lg:h-16"
+                className="h-10 w-auto sm:h-12 lg:h-16"
               />
             </Link>
 
@@ -56,27 +56,27 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
             )}
           </div>
 
-          <SiteSearch className="hidden min-w-0 flex-1 sm:block lg:max-w-md" />
+          <SiteSearch className="hidden min-w-0 flex-1 md:block lg:max-w-md" />
 
           <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
             <a
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 whitespace-nowrap rounded-xl border border-brand-green bg-brand-white/80 px-3 py-2.5 text-sm font-bold text-brand-green backdrop-blur-sm transition-colors hover:bg-brand-green hover:text-brand-white sm:px-4"
+              aria-label="Написать в WhatsApp"
+              className="inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-brand-green bg-brand-white/80 text-sm font-bold text-brand-green backdrop-blur-sm transition-colors hover:bg-brand-green hover:text-brand-white sm:size-auto sm:px-4 sm:py-2.5"
             >
-              <MessageCircle className="size-4" />
-              <span className="hidden sm:inline">Написать WhatsApp</span>
-              <span className="sm:hidden">WhatsApp</span>
+              <MessageCircle className="size-4 shrink-0" />
+              <span className="hidden lg:inline">Написать WhatsApp</span>
             </a>
 
             <a
               href={`tel:${phone}`}
-              className="bg-brand-terracotta text-brand-white hover:brightness-105 inline-flex items-center gap-2 whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-bold transition-all sm:px-4"
+              aria-label="Позвонить"
+              className="bg-brand-terracotta text-brand-white hover:brightness-105 inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-bold transition-all sm:size-auto sm:px-4 sm:py-2.5"
             >
-              <Phone className="size-4" />
-              <span className="hidden sm:inline">Позвонить</span>
-              <span className="sm:hidden">Звонок</span>
+              <Phone className="size-4 shrink-0" />
+              <span className="hidden lg:inline">Позвонить</span>
             </a>
 
             <button
@@ -91,17 +91,19 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
         </div>
 
         {/* Поиск на мобильных — под основной строкой */}
-        <div className="border-border border-t px-4 py-2 sm:hidden">
+        <div className="border-border border-t px-4 py-2 md:hidden">
           <SiteSearch className="w-full" />
         </div>
       </header>
 
+
       {/* Зелёная навигационная панель */}
       <nav
         aria-label="Главное меню"
-        className="bg-brand-green text-brand-white hidden shadow-sm lg:block"
+        className="bg-brand-green text-brand-white hidden shadow-sm md:block"
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-center gap-1 px-4 py-2 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-4 py-2 sm:px-6 lg:justify-center lg:overflow-visible [-ms-overflow-style:none] [scrollbar-width:none]">
+
           {navItems.map((item) => (
             <a
               key={`${item.label}-${item.href}`}

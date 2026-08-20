@@ -35,8 +35,8 @@ export function ServiceTiles() {
                 params={{ slug: tile.slug }}
                 className="group card-lift bg-surface-soft hover:bg-surface-green flex h-full flex-col justify-between gap-4 overflow-hidden rounded-2xl p-6 sm:p-7"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <span className="text-foreground group-hover:text-brand-green block max-w-[60%] text-2xl leading-tight font-extrabold transition-colors sm:text-[26px]">
+                <div className="flex items-start justify-between gap-3 sm:gap-4">
+                  <span className="text-foreground group-hover:text-brand-green block min-w-0 max-w-[60%] text-xl leading-tight font-extrabold break-words hyphens-auto transition-colors sm:text-[26px]">
                     {tile.name}
                   </span>
                   <img
@@ -45,8 +45,9 @@ export function ServiceTiles() {
                     width={768}
                     height={768}
                     loading="lazy"
-                    className="size-24 shrink-0 rounded-xl object-contain transition-transform duration-500 group-hover:scale-105 sm:size-28"
+                    className="size-16 shrink-0 rounded-xl object-contain transition-transform duration-500 group-hover:scale-105 sm:size-24 lg:size-28"
                   />
+
                 </div>
                 <div>
                   {tile.intro && (
