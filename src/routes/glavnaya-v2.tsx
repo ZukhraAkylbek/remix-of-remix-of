@@ -181,7 +181,7 @@ function HomeV2() {
             </div>
           </div>
 
-          <div className="mt-10 grid snap-x grid-flow-col grid-rows-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] gap-4 overflow-x-auto pb-2 auto-cols-[minmax(170px,1fr)] sm:grid-flow-row sm:grid-cols-2 sm:grid-rows-1 sm:auto-rows-fr sm:overflow-visible lg:grid-cols-4">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {HERO_OFFERS.map((offer) => (
               <Link
                 key={offer.title}
