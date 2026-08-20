@@ -313,8 +313,8 @@ function HomeV2() {
                   <span className="text-foreground block max-w-[60%] text-xl leading-tight font-extrabold sm:text-[22px]">
                     Все услуги
                   </span>
-                  <span className="bg-brand-green/10 text-brand-green flex size-20 shrink-0 items-center justify-center rounded-xl sm:size-24">
-                    <ArrowRight className="size-7 transition-transform duration-300 group-hover:translate-x-1" />
+                  <span className="bg-brand-green/10 text-brand-green flex size-14 shrink-0 items-center justify-center rounded-xl sm:size-16">
+                    <ArrowRight className="size-6 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
                 </div>
                 <div className="mt-auto flex flex-col">
