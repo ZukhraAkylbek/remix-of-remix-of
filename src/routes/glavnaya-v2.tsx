@@ -2,7 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowRight, CalendarCheck, Clock, Home, MapPin, MessageCircle, Phone, Star } from "lucide-react";
 
-
+import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
+import image2Asset from "@/assets/image-2.png.asset.json";
+import imageAsset from "@/assets/image.png.asset.json";
+import imageWebpAsset from "@/assets/image.webp.asset.json";
 
 import { GradientBanner } from "@/components/GradientBanner";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -86,28 +89,28 @@ const HERO_OFFERS = [
     text: "Круглосуточная помощь",
     href: "/travmpunkt",
     tone: "banner-red",
-    icon: Clock,
+    image: aboutHeroAsset.url,
   },
   {
     title: "Пройти чекап",
     text: "Обследование за 1–4 дня",
     href: "/checkups",
     tone: "banner-brand",
-    icon: CalendarCheck,
+    image: imageWebpAsset.url,
   },
   {
     title: "Вызвать врача на дом",
     text: "По предварительной записи",
     href: "/uslugi/vyzov-vracha-na-dom",
     tone: "banner-sand",
-    icon: Home,
+    image: image2Asset.url,
   },
   {
     title: "Онлайн-консультация",
     text: "Запись удалённо",
     href: "/uslugi/online-konsultacii-vrachej",
     tone: "banner-sky",
-    icon: MessageCircle,
+    image: imageAsset.url,
   },
 ];
 
@@ -178,31 +181,33 @@ function HomeV2() {
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {HERO_OFFERS.map((offer) => {
-              const Icon = offer.icon;
-              return (
-                <Link
-                  key={offer.title}
-                  to={offer.href as "/"}
-                  className={`${offer.tone} group relative flex items-center gap-4 overflow-hidden rounded-2xl p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
-                >
-                  <span
-                    aria-hidden="true"
-                    className="banner-glow pointer-events-none absolute -top-10 -right-10 size-32 rounded-full opacity-60 transition-all duration-500 group-hover:opacity-95 group-hover:scale-125"
+            {HERO_OFFERS.map((offer) => (
+              <Link
+                key={offer.title}
+                to={offer.href as "/"}
+                className={`${offer.tone} group relative flex items-center gap-4 overflow-hidden rounded-2xl p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
+              >
+                <span
+                  aria-hidden="true"
+                  className="banner-glow pointer-events-none absolute -top-10 -right-10 size-32 rounded-full opacity-60 transition-all duration-500 group-hover:opacity-95 group-hover:scale-125"
+                />
+                <span className="bg-brand-white/15 relative size-11 shrink-0 overflow-hidden rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                  <img
+                    src={offer.image}
+                    alt=""
+                    className="h-full w-full object-cover"
+                    loading="lazy"
                   />
-                  <span className="bg-brand-white/15 text-brand-white relative grid size-11 shrink-0 place-items-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                    <Icon className="size-5" />
-                  </span>
-                  <div className="relative min-w-0">
-                    <p className="text-brand-white text-[15px] font-extrabold leading-tight">
-                      {offer.title}
-                    </p>
-                    <p className="text-brand-white/80 mt-0.5 text-[13px]">{offer.text}</p>
-                  </div>
-                  <ArrowRight className="text-brand-white/60 group-hover:text-brand-white relative ml-auto size-4 shrink-0 transition-all duration-300 group-hover:translate-x-1" />
-                </Link>
-              );
-            })}
+                </span>
+                <div className="relative min-w-0">
+                  <p className="text-brand-white text-[15px] font-extrabold leading-tight">
+                    {offer.title}
+                  </p>
+                  <p className="text-brand-white/80 mt-0.5 text-[13px]">{offer.text}</p>
+                </div>
+                <ArrowRight className="text-brand-white/60 group-hover:text-brand-white relative ml-auto size-4 shrink-0 transition-all duration-300 group-hover:translate-x-1" />
+              </Link>
+            ))}
           </div>
         </section>
 
