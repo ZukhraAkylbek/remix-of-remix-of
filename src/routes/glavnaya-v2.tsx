@@ -317,7 +317,7 @@ function HomeV2() {
                     <ArrowRight className="size-6 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
                 </div>
-                <div className="mt-auto flex flex-col">
+                <div className="flex flex-col">
                   <span className="text-muted-foreground line-clamp-3 text-sm">
                     Полный каталог услуг клиники: диагностика, консультации, анализы и стационар.
                   </span>
