@@ -307,7 +307,7 @@ function HomeV2() {
               ))}
               <Link
                 to="/uslugi"
-                className="group card-lift bg-surface-green hover:bg-surface-green/80 flex h-full flex-col gap-4 overflow-hidden rounded-2xl p-5 sm:p-6"
+                className="group card-lift bg-surface-green hover:bg-surface-green/80 flex h-full flex-col gap-3 overflow-hidden rounded-2xl p-5 sm:p-6"
               >
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-foreground block max-w-[60%] text-xl leading-tight font-extrabold sm:text-[22px]">
