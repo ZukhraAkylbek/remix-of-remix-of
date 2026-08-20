@@ -330,20 +330,36 @@ function HomeV2() {
         {/* Врачи */}
         <Section tone="soft" eyebrow="Команда" title="Врачи, которым доверяют">
           <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {specialties.slice(0, 3).map((item, index) => (
+            {[
+              {
+                name: "Айбек Токтосунов",
+                profile: "Хирург общей практики, маммолог",
+                image: imageAsset.url,
+              },
+              {
+                name: "Гульнара Сатыбалдиева",
+                profile: "Гинеколог, ведение беременности",
+                image: imageWebpAsset.url,
+              },
+              {
+                name: "Нурлан Жетигенов",
+                profile: "Кардиолог, функциональная диагностика",
+                image: image2Asset.url,
+              },
+            ].map((doctor) => (
               <div
-                key={item.slug}
+                key={doctor.name}
                 className="bg-background border-border flex h-full flex-col overflow-hidden rounded-2xl border"
               >
                 <img
-                  src={[imageAsset.url, imageWebpAsset.url, image2Asset.url][index % 3]}
-                  alt={`Врач направления «${item.name}» в клинике Авиценна`}
+                  src={doctor.image}
+                  alt={`${doctor.name} — ${doctor.profile} в клинике Авиценна`}
                   loading="lazy"
                   className="h-44 w-full object-cover"
                 />
                 <div className="flex flex-1 flex-col p-6">
-                  <p className="text-foreground text-[17px] font-extrabold">{item.name}</p>
-                  <p className="text-muted-foreground mt-2 text-[14px]">Приём взрослых и детей</p>
+                  <p className="text-foreground text-[17px] font-extrabold">{doctor.name}</p>
+                  <p className="text-muted-foreground mt-2 text-[14px]">{doctor.profile}</p>
                   <p className="text-brand-green mt-auto pt-4 text-[14px] font-bold">
                     Ближайшее окно: сегодня
                   </p>
