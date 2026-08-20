@@ -215,7 +215,7 @@ function HomeV2() {
               <Link
                 key={card.title}
                 to={card.href as "/"}
-                className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex h-full flex-col items-center justify-center rounded-2xl border p-6 text-center transition-all`}
+                className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex h-full flex-col items-start justify-center rounded-2xl border p-6 transition-all`}
               >
                 <p className="text-foreground text-[17px] font-extrabold">{card.title}</p>
                 <div className="text-muted-foreground mt-2 flex items-center gap-2 text-[15px]">
