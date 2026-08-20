@@ -273,7 +273,7 @@ function HomeV2() {
         {/* Направления + чекапы */}
         <Section eyebrow="Основные направления" title="Выберите нужную помощь">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)]">
-            <div className="grid auto-rows-fr gap-4 sm:grid-cols-2">
+            <div className="grid snap-x grid-flow-col grid-rows-[minmax(0,1fr)_minmax(0,1fr)] gap-4 overflow-x-auto pb-2 auto-cols-[minmax(260px,1fr)] sm:snap-none sm:auto-rows-fr sm:grid-flow-row sm:grid-cols-2 sm:overflow-visible">
               {top.map((item, index) => (
                 <Link
                   key={item.slug}
