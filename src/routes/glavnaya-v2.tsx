@@ -298,7 +298,7 @@ function HomeV2() {
                     <span className="text-muted-foreground line-clamp-3 text-sm">
                       {item.intro || "\u00A0"}
                     </span>
-                    <span className="text-brand-green mt-3 inline-flex items-center gap-1 text-sm font-bold">
+                    <span className="text-brand-green mt-auto inline-flex items-center gap-1 text-sm font-bold">
                       Подробнее
                       <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                     </span>
