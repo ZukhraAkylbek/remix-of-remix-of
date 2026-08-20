@@ -115,12 +115,6 @@ const HERO_OFFERS = [
   },
 ];
 
-const URGENT = [
-
-  { title: "Травмпункт 24/7", text: "Жукеева-Пудовкина, 124 — маршрут / гипс, ПХО", href: "/travmpunkt" },
-  { title: "Терапевт и семейный врач", text: "Джунусалиева, 83 — круглосуточно", href: "/uslugi/konsultacii-specialistov" },
-  { title: "Ночные анализы и КТ", text: "Условия и режим работы", href: "/diagnostika" },
-];
 
 const DIAGNOSTICS = [
   { title: "КТ", text: "Режим / запись" },
