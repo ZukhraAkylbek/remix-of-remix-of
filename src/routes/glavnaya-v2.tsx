@@ -294,7 +294,7 @@ function HomeV2() {
                       className="size-14 shrink-0 rounded-xl object-contain transition-transform duration-500 group-hover:scale-105 sm:size-16"
                     />
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col gap-2">
                     <span className="text-muted-foreground line-clamp-3 text-sm">
                       {item.intro || "\u00A0"}
                     </span>
@@ -317,7 +317,7 @@ function HomeV2() {
                     <ArrowRight className="size-6 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-2">
                   <span className="text-muted-foreground line-clamp-3 text-sm">
                     Полный каталог услуг клиники: диагностика, консультации, анализы и стационар.
                   </span>
