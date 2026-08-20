@@ -39,7 +39,7 @@ export const Route = createFileRoute("/glavnaya-v2")({
 
 function Eyebrow({ children }: { children: string }) {
   return (
-    <p className="text-muted-foreground text-[11px] font-bold tracking-[0.18em] uppercase">
+    <p className="text-brand-red text-[11px] font-bold tracking-[0.18em] uppercase">
       {children}
     </p>
   );
