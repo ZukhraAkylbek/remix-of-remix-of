@@ -216,12 +216,12 @@ function HomeV2() {
 
         {/* Быстрый маршрут */}
         <Section eyebrow="Быстрый маршрут" title="С чего начнём?">
-          <div className="grid grid-flow-col grid-rows-3 gap-4 overflow-x-auto pb-2 auto-cols-[minmax(195px,1fr)] snap-x snap-mandatory scroll-smooth sm:grid-flow-row sm:grid-rows-none sm:auto-rows-fr sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
+          <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {ROUTE_CARDS.map((card) => (
               <Link
                 key={card.title}
                 to={card.href as "/"}
-                className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex h-full snap-start flex-col items-start justify-center rounded-2xl border p-6 transition-all`}
+                className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex h-full flex-col items-start justify-center rounded-2xl border p-6 transition-all`}
               >
                 <p className="text-foreground text-[17px] font-extrabold">{card.title}</p>
                 <div className="text-muted-foreground mt-2 flex w-full items-center justify-between text-[15px]">
