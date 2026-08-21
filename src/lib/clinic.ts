@@ -172,9 +172,11 @@ export function googleMapsUrl(latitude: number, longitude: number, label?: strin
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
-export function googleMapsDirectionsUrl(latitude: number, longitude: number) {
-  return `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+export function googleMapsDirectionsUrl(latitude: number, longitude: number, label?: string) {
+  const destination = label ? `${label}` : `${latitude},${longitude}`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`;
 }
+
 
 export function doubleGisSearchUrl(address: string) {
   return `https://2gis.kg/bishkek/search/${encodeURIComponent(address)}`;
