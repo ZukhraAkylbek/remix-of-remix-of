@@ -173,15 +173,14 @@ export function faqPageJsonLd(faqs: { question: string; answer: string }[]) {
   };
 }
 
-export function googleMapsUrl(latitude: number, longitude: number, label?: string) {
-  const query = label ? `${label}, ${latitude}, ${longitude}` : `${latitude},${longitude}`;
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+export function googleMapsUrl(latitude: number, longitude: number, _label?: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
 }
 
-export function googleMapsDirectionsUrl(latitude: number, longitude: number, label?: string) {
-  const destination = label ? `${label}` : `${latitude},${longitude}`;
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`;
+export function googleMapsDirectionsUrl(latitude: number, longitude: number, _label?: string) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
 }
+
 
 
 export function doubleGisSearchUrl(address: string) {
