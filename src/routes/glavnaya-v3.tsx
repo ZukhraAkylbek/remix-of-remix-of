@@ -76,12 +76,15 @@ function Section({
 }
 
 const ROUTE_CARDS = [
-  { title: "Записаться к врачу", text: "Выбрать специальность и время", href: "/napravleniya", tone: "pastel-mint" },
-  { title: "Пройти чекап", text: "Обследование за 1–4 дня", href: "/checkups", tone: "pastel-coral" },
-  { title: "Сдать анализы", text: "Лаборатория и результаты", href: "/uslugi/analizy", tone: "pastel-sky" },
-  { title: "Сделать диагностику", text: "КТ, УЗИ, рентген, ЭКГ", href: "/diagnostika", tone: "pastel-lavender" },
-  { title: "Вызвать врача на дом", text: "По предварительной записи", href: "/uslugi/vyzov-vracha-na-dom", tone: "pastel-sand" },
-  { title: "Нужна срочная помощь", text: "Круглосуточные направления", href: "/travmpunkt", tone: "pastel-rose" },
+  { title: "Поликлиника", href: "/napravleniya", tone: "pastel-mint" },
+  { title: "Травмпункт 24/7", href: "/travmpunkt", tone: "pastel-coral" },
+  { title: "Диагностика", href: "/diagnostika", tone: "pastel-sky" },
+  { title: "Стационар", href: "/uslugi/uslugi-stacionara", tone: "pastel-lavender" },
+  { title: "Урология", href: "/hirurgiya/urologiya", tone: "pastel-sand" },
+  { title: "Услуги на дому", href: "/uslugi/uslugi-na-domu", tone: "pastel-rose" },
+  { title: "Хирургия", href: "/hirurgiya", tone: "pastel-lime" },
+  { title: "Лаборатория", href: "/uslugi/analizy", tone: "pastel-azure" },
+  { title: "Чекапы", href: "/checkups", tone: "pastel-peach" },
 ];
 
 const HERO_OFFERS = [
@@ -165,7 +168,32 @@ function HomeV3() {
             </div>
           </div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Быстрый маршрут */}
+          <div className="mt-12">
+            <Eyebrow>Быстрый маршрут</Eyebrow>
+            <h2 className="text-foreground mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">
+              С чего начнём?
+            </h2>
+            <div className="mt-8 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {ROUTE_CARDS.map((card) => (
+                <Link
+                  key={card.title}
+                  to={card.href as "/"}
+                  className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex h-full items-center justify-between rounded-2xl border p-5 transition-all`}
+                >
+                  <p className="text-foreground text-[16px] font-extrabold">{card.title}</p>
+                  <span className="bg-brand-green text-brand-white flex size-8 shrink-0 items-center justify-center rounded-full transition-transform group-hover:translate-x-0.5">
+                    <ArrowRight className="size-4" />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Мини-офферы */}
+        <Section eyebrow="Актуально" title="Что вам нужно?">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {HERO_OFFERS.map((offer) => (
               <Link
                 key={offer.title}
@@ -191,25 +219,6 @@ function HomeV3() {
                   <p className="text-brand-white/80 mt-0.5 text-[13px]">{offer.text}</p>
                 </div>
                 <ArrowRight className="text-brand-white/60 group-hover:text-brand-white relative ml-auto size-4 shrink-0 transition-all duration-300 group-hover:translate-x-1" />
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* Быстрый маршрут */}
-        <Section eyebrow="Быстрый маршрут" title="С чего начнём?">
-          <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {ROUTE_CARDS.map((card) => (
-              <Link
-                key={card.title}
-                to={card.href as "/"}
-                className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex h-full flex-col items-start justify-center rounded-2xl border p-6 transition-all`}
-              >
-                <p className="text-foreground text-[17px] font-extrabold">{card.title}</p>
-                <div className="text-muted-foreground mt-2 flex w-full items-center justify-between text-[15px]">
-                  <span>{card.text}</span>
-                  <ArrowRight className="text-brand-green size-5 transition-transform group-hover:translate-x-1" />
-                </div>
               </Link>
             ))}
           </div>
