@@ -12,6 +12,7 @@ export const CLINIC = {
     {
       name: "Авиценна — ул. Бакаева, 106",
       street: "ул. Бакаева, 106",
+      subtitle: "Главный филиал",
       city: "Бишкек",
       region: "Чуйская область",
       postalCode: "720000",
@@ -22,6 +23,7 @@ export const CLINIC = {
     {
       name: "Авиценна — ул. Джунусалиева, 83",
       street: "ул. Джунусалиева, 83",
+      subtitle: "Поликлиника",
       city: "Бишкек",
       region: "Чуйская область",
       postalCode: "720000",
@@ -32,6 +34,7 @@ export const CLINIC = {
     {
       name: "Авиценна — ул. Жукеева-Пудовкина, 124",
       street: "ул. Жукеева-Пудовкина, 124",
+      subtitle: "Поликлиника",
       city: "Бишкек",
       region: "Чуйская область",
       postalCode: "720000",
@@ -42,6 +45,7 @@ export const CLINIC = {
     {
       name: "Авиценна — ул. Московская, 136",
       street: "ул. Московская, 136",
+      subtitle: "Поликлиника",
       city: "Бишкек",
       region: "Чуйская область",
       postalCode: "720000",
@@ -52,6 +56,7 @@ export const CLINIC = {
     {
       name: "Авиценна — ул. Юнусалиева, 173А, блок А",
       street: "ул. Юнусалиева, 173А, блок А",
+      subtitle: "Хирургический центр",
       city: "Бишкек",
       region: "Чуйская область",
       postalCode: "720000",
@@ -62,6 +67,7 @@ export const CLINIC = {
     {
       name: "Авиценна — пр. Жибек-Жолу, 213",
       street: "пр. Жибек-Жолу, 213",
+      subtitle: "Поликлиника",
       city: "Бишкек",
       region: "Чуйская область",
       postalCode: "720000",
