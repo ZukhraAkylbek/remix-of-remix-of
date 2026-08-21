@@ -14,6 +14,7 @@ import { Route as SplatRouteImport } from './routes/$'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as GlavnayaV2RouteImport } from './routes/glavnaya-v2'
+import { Route as GlavnayaV3RouteImport } from './routes/glavnaya-v3'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TravmpunktRouteImport } from './routes/travmpunkt'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
@@ -70,6 +71,11 @@ const AuthRoute = AuthRouteImport.update({
 const GlavnayaV2Route = GlavnayaV2RouteImport.update({
   id: '/glavnaya-v2',
   path: '/glavnaya-v2',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlavnayaV3Route = GlavnayaV3RouteImport.update({
+  id: '/glavnaya-v3',
+  path: '/glavnaya-v3',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -256,6 +262,7 @@ export interface FileRoutesByFullPath {
   '/$': typeof SplatRoute
   '/auth': typeof AuthRoute
   '/glavnaya-v2': typeof GlavnayaV2Route
+  '/glavnaya-v3': typeof GlavnayaV3Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
@@ -295,6 +302,7 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/auth': typeof AuthRoute
   '/glavnaya-v2': typeof GlavnayaV2Route
+  '/glavnaya-v3': typeof GlavnayaV3Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
   '/checkups/$slug': typeof CheckupsSlugRoute
@@ -335,6 +343,7 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/auth': typeof AuthRoute
   '/glavnaya-v2': typeof GlavnayaV2Route
+  '/glavnaya-v3': typeof GlavnayaV3Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
@@ -376,6 +385,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/auth'
     | '/glavnaya-v2'
+    | '/glavnaya-v3'
     | '/sitemap.xml'
     | '/travmpunkt'
     | '/admin'
@@ -415,6 +425,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/auth'
     | '/glavnaya-v2'
+    | '/glavnaya-v3'
     | '/sitemap.xml'
     | '/travmpunkt'
     | '/checkups/$slug'
@@ -454,6 +465,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/auth'
     | '/glavnaya-v2'
+    | '/glavnaya-v3'
     | '/sitemap.xml'
     | '/travmpunkt'
     | '/_authenticated/admin'
@@ -495,6 +507,7 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   AuthRoute: typeof AuthRoute
   GlavnayaV2Route: typeof GlavnayaV2Route
+  GlavnayaV3Route: typeof GlavnayaV3Route
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TravmpunktRoute: typeof TravmpunktRoute
   CheckupsSlugRoute: typeof CheckupsSlugRoute
@@ -546,6 +559,13 @@ declare module '@tanstack/react-router' {
       path: '/glavnaya-v2'
       fullPath: '/glavnaya-v2'
       preLoaderRoute: typeof GlavnayaV2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/glavnaya-v3': {
+      id: '/glavnaya-v3'
+      path: '/glavnaya-v3'
+      fullPath: '/glavnaya-v3'
+      preLoaderRoute: typeof GlavnayaV3RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -847,6 +867,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   AuthRoute: AuthRoute,
   GlavnayaV2Route: GlavnayaV2Route,
+  GlavnayaV3Route: GlavnayaV3Route,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TravmpunktRoute: TravmpunktRoute,
   CheckupsSlugRoute: CheckupsSlugRoute,
