@@ -123,6 +123,7 @@ export function BranchesWithMap() {
       infoRef.current.setContent(
         `<div style="font-family:inherit;max-width:220px">
            <div style="font-weight:700;font-size:14px;color:#111">${escape(b.street)}</div>
+           <div style="font-size:12px;color:#16a34a;font-weight:600;margin-top:2px">${escape(b.subtitle)}</div>
            <div style="font-size:12px;color:#555;margin-top:2px">${escape(b.city)}, Кыргызстан</div>
            <a href="${googleMapsDirectionsUrl(b.latitude, b.longitude, `${b.street}, ${b.city}`)}" target="_blank" rel="noopener noreferrer"
               style="display:inline-block;margin-top:6px;font-size:12px;font-weight:700;color:#16a34a">Маршрут →</a>
@@ -166,8 +167,8 @@ export function BranchesWithMap() {
                       <MapPin className="text-brand-green mt-0.5 size-4 shrink-0" />
                       <span className="min-w-0">{b.street}</span>
                     </p>
-                    <p className="text-muted-foreground mt-1 pl-6 text-[12px]">
-                      {b.city}, Кыргызстан
+                    <p className="text-brand-green mt-1 pl-6 text-[12px] font-semibold">
+                      {b.subtitle}
                     </p>
                   </button>
                 </li>
