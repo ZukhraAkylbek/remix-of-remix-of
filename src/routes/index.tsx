@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { BranchesMap } from "@/components/BranchesMap";
+import { BranchesWithMap } from "@/components/BranchesWithMap";
 import { ConsultCta } from "@/components/ConsultCta";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { HeroBanner } from "@/components/HeroBanner";
@@ -81,7 +81,7 @@ function Index() {
         <ServiceTiles />
         <WhyUs />
         <ProcessSteps />
-        <BranchesMap />
+        <BranchesWithMap />
         <FaqAccordion />
         <ConsultCta />
 

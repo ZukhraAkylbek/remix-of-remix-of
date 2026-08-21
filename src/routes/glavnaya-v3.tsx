@@ -9,6 +9,7 @@ import imageAsset from "@/assets/image.png.asset.json";
 import imageWebpAsset from "@/assets/image.webp.asset.json";
 
 import { GradientBanner } from "@/components/GradientBanner";
+import { BranchesWithMap } from "@/components/BranchesWithMap";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl } from "@/lib/clinic";
@@ -407,6 +408,8 @@ function HomeV3() {
         </Section>
 
         {/* Запись */}
+        <BranchesWithMap />
+
         <Section tone="green" eyebrow="Запись" title="Оставьте номер — поможем выбрать врача">
           <p className="text-muted-foreground -mt-4 text-[15px]">
             Перезвоним и подберём специалиста, филиал и время приёма.
