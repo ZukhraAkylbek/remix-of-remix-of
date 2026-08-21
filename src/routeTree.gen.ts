@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as GlavnayaV2RouteImport } from './routes/glavnaya-v2'
 import { Route as GlavnayaV3RouteImport } from './routes/glavnaya-v3'
@@ -61,6 +62,11 @@ const SplatRoute = SplatRouteImport.update({
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -260,6 +266,7 @@ const AuthenticatedAdminTraumaRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/glavnaya-v2': typeof GlavnayaV2Route
   '/glavnaya-v3': typeof GlavnayaV3Route
@@ -300,6 +307,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/glavnaya-v2': typeof GlavnayaV2Route
   '/glavnaya-v3': typeof GlavnayaV3Route
@@ -341,6 +349,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/glavnaya-v2': typeof GlavnayaV2Route
   '/glavnaya-v3': typeof GlavnayaV3Route
@@ -383,6 +392,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$'
+    | '/about'
     | '/auth'
     | '/glavnaya-v2'
     | '/glavnaya-v3'
@@ -423,6 +433,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/$'
+    | '/about'
     | '/auth'
     | '/glavnaya-v2'
     | '/glavnaya-v3'
@@ -463,6 +474,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/$'
+    | '/about'
     | '/auth'
     | '/glavnaya-v2'
     | '/glavnaya-v3'
@@ -505,6 +517,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   SplatRoute: typeof SplatRoute
+  AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
   GlavnayaV2Route: typeof GlavnayaV2Route
   GlavnayaV3Route: typeof GlavnayaV3Route
@@ -545,6 +558,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -865,6 +885,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   SplatRoute: SplatRoute,
+  AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
   GlavnayaV2Route: GlavnayaV2Route,
   GlavnayaV3Route: GlavnayaV3Route,

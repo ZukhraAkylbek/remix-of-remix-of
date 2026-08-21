@@ -6,8 +6,8 @@ import { useSiteContent } from "@/lib/site-content";
 const ICONS = [Hospital, Users, SquarePen, Stethoscope, MapPin];
 
 export const MOBILE_NAV_SLOTS = [
-  { label: "О нас", href: "/#faq" },
-  { label: "Врачи", href: "/#vrachi" },
+  { label: "О нас", href: "/about" },
+  { label: "Врачи", href: "/glavnaya-v3" },
   { label: "Записаться", href: "https://alteg.io/" },
   { label: "Услуги", href: "/#uslugi" },
   { label: "Контакты", href: "/#filialy" },
