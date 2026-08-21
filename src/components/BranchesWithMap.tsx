@@ -193,13 +193,18 @@ export function BranchesWithMap() {
             )}
             <div className="bg-card flex flex-wrap items-center gap-2 p-3">
               <a
-                href={googleMapsDirectionsUrl(branch.latitude, branch.longitude)}
+                href={googleMapsDirectionsUrl(
+                  branch.latitude,
+                  branch.longitude,
+                  `${branch.street}, ${branch.city}`,
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-brand-green text-brand-white hover:bg-brand-green-dark inline-flex items-center gap-2 rounded-xl px-4 py-2 text-[13px] font-bold transition-colors"
               >
-                <Navigation className="size-4" /> Маршрут
+                <Navigation className="size-4" /> Маршрут — {branch.street}
               </a>
+
               <a
                 href={doubleGisSearchUrl(branch.street)}
                 target="_blank"
