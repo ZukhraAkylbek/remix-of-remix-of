@@ -1,7 +1,6 @@
 /**
- * Внешняя ссылка на онлайн-запись (Алтеджио / Altegio).
- * Замените на реальный адрес виджета клиники.
+ * Внешняя ссылка на онлайн-запись (Altegio).
  */
-export const BOOKING_URL = "https://alteg.io/";
+export const BOOKING_URL = "https://avicenna.altegio.me";
 
 export const SITE_NAME = "Avicenna";
