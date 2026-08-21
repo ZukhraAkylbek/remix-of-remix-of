@@ -169,17 +169,13 @@ function HomeV3() {
           </div>
 
           {/* Быстрый маршрут */}
-          <div className="mt-12">
-            <Eyebrow>Быстрый маршрут</Eyebrow>
-            <h2 className="text-foreground mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">
-              С чего начнём?
-            </h2>
-            <div className="mt-8 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10">
+            <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {ROUTE_CARDS.map((card) => (
                 <Link
                   key={card.title}
                   to={card.href as "/"}
-                  className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex h-full items-center justify-between rounded-2xl border p-5 transition-all`}
+                  className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex min-h-[88px] items-center justify-between rounded-2xl border px-5 py-6 transition-all`}
                 >
                   <p className="text-foreground text-[16px] font-extrabold">{card.title}</p>
                   <span className="bg-brand-green text-brand-white flex size-8 shrink-0 items-center justify-center rounded-full transition-transform group-hover:translate-x-0.5">
