@@ -167,8 +167,8 @@ export function BranchesWithMap() {
                       <MapPin className="text-brand-green mt-0.5 size-4 shrink-0" />
                       <span className="min-w-0">{b.street}</span>
                     </p>
-                    <p className="text-muted-foreground mt-1 pl-6 text-[12px]">
-                      {b.city}, Кыргызстан
+                    <p className="text-brand-green mt-1 pl-6 text-[12px] font-semibold">
+                      {b.subtitle}
                     </p>
                   </button>
                 </li>
