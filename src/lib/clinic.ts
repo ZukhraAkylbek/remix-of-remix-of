@@ -17,8 +17,8 @@ export const CLINIC = {
       region: "Чуйская область",
       postalCode: "720000",
       country: "KG",
-      latitude: 42.844_4,
-      longitude: 74.621_6,
+      latitude: 42.8389341,
+      longitude: 74.5765294,
     },
     {
       name: "Авиценна — ул. Джунусалиева, 83",
@@ -28,8 +28,8 @@ export const CLINIC = {
       region: "Чуйская область",
       postalCode: "720000",
       country: "KG",
-      latitude: 42.856_7,
-      longitude: 74.607_3,
+      latitude: 42.8525108,
+      longitude: 74.5812276,
     },
     {
       name: "Авиценна — ул. Жукеева-Пудовкина, 124",
@@ -39,8 +39,8 @@ export const CLINIC = {
       region: "Чуйская область",
       postalCode: "720000",
       country: "KG",
-      latitude: 42.852_1,
-      longitude: 74.585_4,
+      latitude: 42.8417063,
+      longitude: 74.6154185,
     },
     {
       name: "Авиценна — ул. Московская, 136",
@@ -50,8 +50,8 @@ export const CLINIC = {
       region: "Чуйская область",
       postalCode: "720000",
       country: "KG",
-      latitude: 42.858_9,
-      longitude: 74.599_8,
+      latitude: 42.869544,
+      longitude: 74.5974921,
     },
     {
       name: "Авиценна — ул. Юнусалиева, 173А, блок А",
@@ -61,8 +61,8 @@ export const CLINIC = {
       region: "Чуйская область",
       postalCode: "720000",
       country: "KG",
-      latitude: 42.865_3,
-      longitude: 74.617_5,
+      latitude: 42.8277156,
+      longitude: 74.6209791,
     },
     {
       name: "Авиценна — пр. Жибек-Жолу, 213",
@@ -72,8 +72,8 @@ export const CLINIC = {
       region: "Чуйская область",
       postalCode: "720000",
       country: "KG",
-      latitude: 42.871_2,
-      longitude: 74.615_1,
+      latitude: 42.8881142,
+      longitude: 74.6399519,
     },
   ],
   /** Травмпункт круглосуточно, поликлиника 08:00–20:00. */
@@ -173,15 +173,14 @@ export function faqPageJsonLd(faqs: { question: string; answer: string }[]) {
   };
 }
 
-export function googleMapsUrl(latitude: number, longitude: number, label?: string) {
-  const query = label ? `${label}, ${latitude}, ${longitude}` : `${latitude},${longitude}`;
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+export function googleMapsUrl(latitude: number, longitude: number, _label?: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
 }
 
-export function googleMapsDirectionsUrl(latitude: number, longitude: number, label?: string) {
-  const destination = label ? `${label}` : `${latitude},${longitude}`;
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`;
+export function googleMapsDirectionsUrl(latitude: number, longitude: number, _label?: string) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
 }
+
 
 
 export function doubleGisSearchUrl(address: string) {
