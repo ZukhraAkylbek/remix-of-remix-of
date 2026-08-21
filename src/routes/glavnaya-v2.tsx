@@ -116,12 +116,6 @@ const HERO_OFFERS = [
 ];
 
 
-const DIAGNOSTICS = [
-  { title: "КТ", text: "Режим / запись" },
-  { title: "УЗИ", text: "Режим / запись" },
-  { title: "Анализы", text: "Сроки результатов" },
-  { title: "ЭКГ и ЭХОКГ", text: "Выбрать филиал" },
-];
 
 const REVIEWS = [
   { text: "Быстро приняли в травмпункте ночью, всё объяснили и сделали снимок за 15 минут.", src: "2GIS" },
@@ -386,44 +380,6 @@ function HomeV2() {
           </div>
         </Section>
 
-
-        {/* Диагностика и филиалы */}
-        <Section eyebrow="Диагностика и лаборатория" title="Пройти обследование в одном месте">
-          <div className="grid gap-8 lg:grid-cols-2">
-            <div className="grid auto-rows-fr gap-3 sm:grid-cols-2">
-              {DIAGNOSTICS.map((item) => (
-                <Link
-                  key={item.title}
-                  to="/diagnostika"
-                  className="border-border hover:border-brand-green flex h-full flex-col rounded-2xl border p-5 transition-colors"
-                >
-                  <p className="text-foreground text-[16px] font-extrabold">{item.title}</p>
-                  <p className="text-muted-foreground mt-1 text-[14px]">{item.text}</p>
-                </Link>
-              ))}
-            </div>
-            <div>
-              <Eyebrow>Филиалы</Eyebrow>
-              <p className="text-foreground mt-3 text-2xl font-extrabold">Найдите ближайший</p>
-              <ul className="mt-6 grid gap-3">
-                {CLINIC.branches.map((branch) => (
-                  <li
-                    key={branch.name}
-                    className="border-border text-foreground flex items-start gap-3 rounded-2xl border p-4 text-[15px]"
-                  >
-                    <MapPin className="text-brand-green mt-0.5 size-4 shrink-0" />
-                    <span>
-                      {branch.street}
-                      <span className="text-muted-foreground block text-[13px]">
-                        {branch.city}
-                      </span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </Section>
 
         {/* Отзывы */}
         <Section tone="soft" eyebrow="Доверие" title="Отзывы пациентов">
