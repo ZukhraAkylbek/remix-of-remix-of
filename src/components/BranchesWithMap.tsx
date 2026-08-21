@@ -59,6 +59,7 @@ export function BranchesWithMap() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
+  const infoRef = useRef<any>(null);
 
   const branches = CLINIC.branches;
   const branch = branches[active] ?? branches[0]!;
@@ -78,6 +79,7 @@ export function BranchesWithMap() {
           fullscreenControl: false,
         });
         mapRef.current = map;
+        infoRef.current = new g.maps.InfoWindow();
 
         const bounds = new g.maps.LatLngBounds();
         markersRef.current = branches.map((b, i) => {
@@ -102,7 +104,7 @@ export function BranchesWithMap() {
     };
   }, [branches]);
 
-  // Подсветка активной метки и центрирование
+  // Подсветка активной метки, центрирование и всплывающая подсказка с адресом
   useEffect(() => {
     const g = (window as any).google;
     if (!g?.maps || !mapRef.current || markersRef.current.length === 0) return;
@@ -115,8 +117,22 @@ export function BranchesWithMap() {
       marker.setZIndex(isActive ? 10 : 1);
     });
     const b = branches[active];
-    if (b) mapRef.current.panTo({ lat: b.latitude, lng: b.longitude });
+    const marker = markersRef.current[active];
+    if (b && marker && infoRef.current) {
+      const escape = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+      infoRef.current.setContent(
+        `<div style="font-family:inherit;max-width:220px">
+           <div style="font-weight:700;font-size:14px;color:#111">${escape(b.street)}</div>
+           <div style="font-size:12px;color:#555;margin-top:2px">${escape(b.city)}, Кыргызстан</div>
+           <a href="${googleMapsDirectionsUrl(b.latitude, b.longitude, `${b.street}, ${b.city}`)}" target="_blank" rel="noopener noreferrer"
+              style="display:inline-block;margin-top:6px;font-size:12px;font-weight:700;color:#16a34a">Маршрут →</a>
+         </div>`,
+      );
+      infoRef.current.open({ map: mapRef.current, anchor: marker });
+      mapRef.current.panTo({ lat: b.latitude, lng: b.longitude });
+    }
   }, [active, branches]);
+
 
   return (
     <section id="filialy" className="border-border border-t py-12 sm:py-16">
@@ -177,13 +193,18 @@ export function BranchesWithMap() {
             )}
             <div className="bg-card flex flex-wrap items-center gap-2 p-3">
               <a
-                href={googleMapsDirectionsUrl(branch.latitude, branch.longitude)}
+                href={googleMapsDirectionsUrl(
+                  branch.latitude,
+                  branch.longitude,
+                  `${branch.street}, ${branch.city}`,
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-brand-green text-brand-white hover:bg-brand-green-dark inline-flex items-center gap-2 rounded-xl px-4 py-2 text-[13px] font-bold transition-colors"
               >
-                <Navigation className="size-4" /> Маршрут
+                <Navigation className="size-4" /> Маршрут — {branch.street}
               </a>
+
               <a
                 href={doubleGisSearchUrl(branch.street)}
                 target="_blank"
