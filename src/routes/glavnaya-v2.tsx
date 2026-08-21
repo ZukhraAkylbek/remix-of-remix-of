@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ArrowRight, ArrowUpRight, CalendarCheck, Clock, Home, MapPin, MessageCircle, Phone, Star } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CalendarCheck, Clock, Home, MessageCircle, Phone, Star } from "lucide-react";
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
 import image2Asset from "@/assets/image-2.png.asset.json";
