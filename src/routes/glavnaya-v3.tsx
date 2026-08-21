@@ -3,6 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowRight, ArrowUpRight, CalendarCheck, Clock, Home, MessageCircle, Phone, Star } from "lucide-react";
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
+import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
 import image2Asset from "@/assets/image-2.png.asset.json";
 import imageAsset from "@/assets/image.png.asset.json";
 import imageWebpAsset from "@/assets/image.webp.asset.json";
@@ -160,11 +161,13 @@ function HomeV3() {
               </div>
             </div>
 
-            <div className="bg-surface-soft border-border text-muted-foreground grid min-h-[260px] place-items-center rounded-3xl border p-8 text-center text-[15px]">
-              <div>
-                <p className="text-foreground font-extrabold">Врач и пациент</p>
-                <p className="mt-2">Тёплый доверительный кадр клиники «Авиценна»</p>
-              </div>
+            <div className="border-border relative min-h-[260px] overflow-hidden rounded-3xl border">
+              <img
+                src={doctorPatientHeroAsset.url}
+                alt="Врач клиники Авиценна измеряет давление пациентке"
+                className="h-full w-full object-cover"
+                loading="eager"
+              />
             </div>
           </div>
 
