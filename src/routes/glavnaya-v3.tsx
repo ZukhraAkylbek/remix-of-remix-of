@@ -89,34 +89,35 @@ const ROUTE_CARDS = [
   { title: "Чекапы", href: "/checkups", tone: "pastel-peach" },
 ];
 
-const HERO_OFFERS = [
+const FEATURED_OFFER = {
+  title: "Сомнография",
+  text: "консультация + диагностика на сомнографе",
+  price: "3700",
+  oldPrice: "4900",
+  href: "/diagnostika",
+  image: aboutHeroAsset.url,
+};
+
+const RIGHT_OFFERS = [
   {
-    title: "Травмпункт 24/7",
-    text: "Круглосуточная помощь",
+    title: "Процедурные 24/7",
     href: "/travmpunkt",
-    tone: "banner-red",
-    image: aboutHeroAsset.url,
-  },
-  {
-    title: "Пройти чекап",
-    text: "Обследование за 1–4 дня",
-    href: "/checkups",
-    tone: "banner-brand",
     image: imageWebpAsset.url,
   },
   {
-    title: "Вызвать врача на дом",
-    text: "По предварительной записи",
-    href: "/uslugi/vyzov-vracha-na-dom",
-    tone: "banner-sand",
+    title: "Бесплатная консультация хирурга по операции",
+    href: "/hirurgiya",
+    image: imageAsset.url,
+  },
+  {
+    title: "Проверь магний и фосфор с 50% скидкой",
+    href: "/uslugi/analizy",
     image: image2Asset.url,
   },
   {
-    title: "Онлайн-консультация",
-    text: "Запись удалённо",
-    href: "/uslugi/online-konsultacii-vrachej",
-    tone: "banner-sky",
-    image: imageAsset.url,
+    title: "Счастливые часы",
+    href: "/checkups",
+    image: doctorPatientHeroAsset.url,
   },
 ];
 
