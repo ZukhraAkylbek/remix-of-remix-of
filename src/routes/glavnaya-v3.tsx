@@ -89,34 +89,35 @@ const ROUTE_CARDS = [
   { title: "Чекапы", href: "/checkups", tone: "pastel-peach" },
 ];
 
-const HERO_OFFERS = [
+const FEATURED_OFFER = {
+  title: "Сомнография",
+  text: "консультация + диагностика на сомнографе",
+  price: "3700",
+  oldPrice: "4900",
+  href: "/diagnostika",
+  image: aboutHeroAsset.url,
+};
+
+const RIGHT_OFFERS = [
   {
-    title: "Травмпункт 24/7",
-    text: "Круглосуточная помощь",
+    title: "Процедурные 24/7",
     href: "/travmpunkt",
-    tone: "banner-red",
-    image: aboutHeroAsset.url,
-  },
-  {
-    title: "Пройти чекап",
-    text: "Обследование за 1–4 дня",
-    href: "/checkups",
-    tone: "banner-brand",
     image: imageWebpAsset.url,
   },
   {
-    title: "Вызвать врача на дом",
-    text: "По предварительной записи",
-    href: "/uslugi/vyzov-vracha-na-dom",
-    tone: "banner-sand",
+    title: "Бесплатная консультация хирурга по операции",
+    href: "/hirurgiya",
+    image: imageAsset.url,
+  },
+  {
+    title: "Проверь магний и фосфор с 50% скидкой",
+    href: "/uslugi/analizy",
     image: image2Asset.url,
   },
   {
-    title: "Онлайн-консультация",
-    text: "Запись удалённо",
-    href: "/uslugi/online-konsultacii-vrachej",
-    tone: "banner-sky",
-    image: imageAsset.url,
+    title: "Счастливые часы",
+    href: "/checkups",
+    image: doctorPatientHeroAsset.url,
   },
 ];
 
@@ -193,32 +194,71 @@ function HomeV3() {
 
         {/* Мини-офферы */}
         <Section eyebrow="Актуально" title="Что вам нужно?">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {HERO_OFFERS.map((offer) => (
+          <div className="grid gap-4 lg:grid-cols-[1.35fr_1fr] lg:grid-rows-2">
+            {/* Левый большой баннер */}
+            <Link
+              to={FEATURED_OFFER.href as "/"}
+              className="group relative row-span-2 flex min-h-[300px] flex-col overflow-hidden rounded-3xl sm:min-h-[360px] lg:min-h-0"
+            >
+              <img
+                src={FEATURED_OFFER.image}
+                alt={FEATURED_OFFER.title}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-green/80 via-brand-green/50 to-transparent" />
+              <div className="relative flex flex-1 flex-col justify-between p-6 sm:p-8">
+                <div className="space-y-3">
+                  <span className="bg-brand-green text-brand-white inline-block rounded-xl px-4 py-2 text-lg font-extrabold shadow-lg sm:text-xl">
+                    {FEATURED_OFFER.title}
+                  </span>
+                  <div className="bg-brand-green/95 text-brand-white max-w-[280px] rounded-xl px-4 py-3 shadow-lg backdrop-blur-sm sm:max-w-[320px]">
+                    <p className="text-sm font-bold leading-snug sm:text-base">
+                      {FEATURED_OFFER.text}
+                    </p>
+                    <div className="mt-2 flex items-baseline gap-2">
+                      <span className="text-2xl font-extrabold sm:text-3xl">
+                        {FEATURED_OFFER.price}
+                      </span>
+                      <span className="text-brand-white/70 text-sm line-through">
+                        {FEATURED_OFFER.oldPrice}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <span className="bg-brand-white text-brand-green hover:bg-brand-white/90 inline-flex w-fit items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-extrabold transition-colors shadow-md">
+                  Подробнее
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
+            </Link>
+
+            {/* Правая 2×2 сетка */}
+            {RIGHT_OFFERS.map((offer) => (
               <Link
                 key={offer.title}
                 to={offer.href as "/"}
-                className={`${offer.tone} group relative flex items-center gap-4 overflow-hidden rounded-2xl p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
+                className="banner-brand group relative flex min-h-[140px] items-center justify-between overflow-hidden rounded-2xl p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 <span
                   aria-hidden="true"
                   className="banner-glow pointer-events-none absolute -top-10 -right-10 size-32 rounded-full opacity-60 transition-all duration-500 group-hover:opacity-95 group-hover:scale-125"
                 />
-                <span className="bg-brand-white/15 relative size-11 shrink-0 overflow-hidden rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                  <img
-                    src={offer.image}
-                    alt=""
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </span>
-                <div className="relative min-w-0">
-                  <p className="text-brand-white text-[15px] font-extrabold leading-tight">
+                <div className="relative z-10 flex flex-col gap-3">
+                  <p className="text-brand-white max-w-[65%] text-[15px] font-extrabold leading-tight sm:text-[16px]">
                     {offer.title}
                   </p>
-                  <p className="text-brand-white/80 mt-0.5 text-[13px]">{offer.text}</p>
+                  <span className="bg-brand-white text-brand-green inline-flex w-fit items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-extrabold transition-colors hover:bg-brand-white/90">
+                    Подробнее
+                    <ArrowRight className="size-3.5" />
+                  </span>
                 </div>
-                <ArrowRight className="text-brand-white/60 group-hover:text-brand-white relative ml-auto size-4 shrink-0 transition-all duration-300 group-hover:translate-x-1" />
+                <img
+                  src={offer.image}
+                  alt=""
+                  className="absolute right-2 bottom-0 h-[90%] w-auto rounded-lg object-contain transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
               </Link>
             ))}
           </div>
