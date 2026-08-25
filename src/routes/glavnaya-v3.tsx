@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Calendar, Clock, MapPin, Phone, Sparkles, Star, Stethoscope, TrendingUp } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Phone, Sparkles, Star, Stethoscope, TrendingUp } from "lucide-react";
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
 import aboutMissionAsset from "@/assets/about-mission.jpg.asset.json";
