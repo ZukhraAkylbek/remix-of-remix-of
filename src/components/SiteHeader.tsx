@@ -102,7 +102,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               aria-label="Выбор языка"
               className="border-border bg-background hidden shrink-0 items-center rounded-xl border p-0.5 sm:flex"
             >
-              {(["ru", "kg"] as const).map((code) => (
+              {(["ru", "ky"] as const).map((code) => (
                 <button
                   key={code}
                   type="button"
