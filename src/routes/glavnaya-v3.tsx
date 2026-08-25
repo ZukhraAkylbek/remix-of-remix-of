@@ -228,7 +228,7 @@ function HomeV3() {
 
         {/* О клинике */}
         <Section id="o-klinike" eyebrow="О клинике" title="Авиценна с 2000 года">
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-center">
             <Reveal className="order-2 lg:order-1">
               <div className="relative overflow-hidden rounded-3xl border border-border shadow-lg">
                 <img
@@ -240,7 +240,7 @@ function HomeV3() {
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-green/20 to-transparent" />
               </div>
             </Reveal>
-            <div className="order-1 flex flex-col gap-6 lg:order-2">
+            <div className="order-1 flex flex-col gap-4 lg:order-2">
               <Reveal delay={80}>
                 <p className="text-muted-foreground text-[15px] leading-relaxed sm:text-[16px]">
                   Сеть клиник «Авиценна» ведет свою историю с 2000 года, когда врач-дерматовенеролог,
