@@ -18,9 +18,6 @@ const DESCRIPTION =
   "Врачи, анализы, диагностика, хирургия и стационар в Бишкеке. Запишитесь онлайн за минуту — круглосуточные направления работают 24/7.";
 
 export const Route = createFileRoute("/glavnaya-v3")({
-  loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData(specialtiesQueryOptions());
-  },
   head: () => ({
     meta: [
       { title: TITLE },
@@ -125,9 +122,6 @@ const REVIEWS = [
 ];
 
 function HomeV3() {
-  const { data: specialties } = useSuspenseQuery(specialtiesQueryOptions());
-  const top = specialties.slice(0, 5);
-
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
@@ -261,83 +255,6 @@ function HomeV3() {
                 />
               </Link>
             ))}
-          </div>
-        </Section>
-
-
-
-        {/* Направления + чекапы */}
-        <Section eyebrow="Основные направления" title="Выберите нужную помощь">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)]">
-            <div className="grid snap-x grid-flow-col grid-rows-[minmax(0,1fr)_minmax(0,1fr)] gap-4 overflow-x-auto pb-2 auto-cols-[minmax(260px,1fr)] sm:snap-none sm:auto-rows-fr sm:grid-flow-row sm:grid-cols-2 sm:overflow-visible">
-              {top.map((item, index) => (
-                <Link
-                  key={item.slug}
-                  to="/napravleniya/$slug"
-                  params={{ slug: item.slug }}
-                  className="group card-lift bg-surface-soft hover:bg-surface-green flex h-full snap-start flex-col gap-3 overflow-hidden rounded-2xl p-5 sm:p-6"
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-foreground group-hover:text-brand-green block max-w-[60%] text-xl leading-tight font-extrabold transition-colors sm:text-[22px]">
-                      {item.name}
-                    </span>
-                    <img
-                      src={specialtyImage(item.slug, index)}
-                      alt={item.name}
-                      width={768}
-                      height={768}
-                      loading="lazy"
-                      className="size-14 shrink-0 rounded-xl object-contain transition-transform duration-500 group-hover:scale-105 sm:size-16"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <span className="text-muted-foreground line-clamp-3 text-sm">
-                      {item.intro || "\u00A0"}
-                    </span>
-                    <span className="text-brand-green mt-auto inline-flex items-center gap-1 text-sm font-bold">
-                      Подробнее
-                      <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-                    </span>
-                  </div>
-                </Link>
-              ))}
-              <Link
-                to="/uslugi"
-                className="group card-lift bg-surface-green hover:bg-surface-green/80 flex h-full snap-start flex-col gap-3 overflow-hidden rounded-2xl p-5 sm:p-6"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-foreground block max-w-[60%] text-xl leading-tight font-extrabold sm:text-[22px]">
-                    Все услуги
-                  </span>
-                  <span className="bg-brand-green/10 text-brand-green flex size-14 shrink-0 items-center justify-center rounded-xl sm:size-16">
-                    <ArrowRight className="size-6 transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <span className="text-muted-foreground line-clamp-3 text-sm">
-                    Полный каталог услуг клиники: диагностика, консультации, анализы и стационар.
-                  </span>
-                  <span className="text-brand-green mt-auto inline-flex items-center gap-1 text-sm font-bold">
-                    Перейти
-                    <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-                  </span>
-                </div>
-              </Link>
-            </div>
-
-            <GradientBanner
-              eyebrow="Чекапы"
-              title="Проверьте здоровье вовремя"
-              text="Готовые программы для женщин, мужчин, детей и сердца. Понятный состав, сроки и цена — от 1 дня."
-              className="p-7 sm:p-8"
-            >
-              <Link
-                to="/checkups"
-                className="gradient-accent text-accent-foreground inline-flex rounded-2xl px-6 py-3 text-[15px] font-extrabold transition-all hover:-translate-y-0.5 hover:brightness-105"
-              >
-                Подобрать чекап
-              </Link>
-            </GradientBanner>
           </div>
         </Section>
 
