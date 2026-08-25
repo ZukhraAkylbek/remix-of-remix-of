@@ -145,14 +145,16 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SiteTypography />
-      <LiveEditProvider>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <div className="pb-[76px] lg:pb-0">
-          <Outlet />
-        </div>
-        <MobileNavBar />
-        <LeadPopup />
-      </LiveEditProvider>
+      <LanguageProvider>
+        <LiveEditProvider>
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <div className="pb-[76px] lg:pb-0">
+            <Outlet />
+          </div>
+          <MobileNavBar />
+          <LeadPopup />
+        </LiveEditProvider>
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }
