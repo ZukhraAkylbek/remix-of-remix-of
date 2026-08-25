@@ -11,13 +11,9 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { CLINIC, absoluteUrl } from "@/lib/clinic";
+import { CLINIC } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
-
-const TITLE = "Авиценна — забота о здоровье всей семьи в одной клинике";
-const DESCRIPTION =
-  "Врачи, анализы, диагностика, хирургия и стационар в Бишкеке. Запишитесь онлайн за минуту — круглосуточные направления работают 24/7.";
-
+export const HOME_HERO_IMAGE = asianFamilyHeroAsset.url;
 import { Link } from "@tanstack/react-router";
 
 function Eyebrow({ children }: { children: string }) {
