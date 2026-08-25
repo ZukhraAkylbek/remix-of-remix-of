@@ -423,7 +423,7 @@ function HomeV3() {
             loading="lazy"
           />
           <div className="from-background/95 via-background/80 to-background/40 absolute inset-0 bg-gradient-to-r" />
-          <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
+          <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
             <div className="max-w-2xl">
               <p className="text-brand-red text-[13px] font-bold uppercase tracking-wider">
                 Онлайн-консультации
