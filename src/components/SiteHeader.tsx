@@ -25,7 +25,7 @@ const isExternal = (href: string) => /^(https?:|tel:|mailto:)/i.test(href);
 
 export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
   const [open, setOpen] = useState(false);
-  const [lang, setLang] = useState<"ru" | "kg">("ru");
+  const { lang, setLang } = useLanguage();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { t } = useSiteContent();
   const navItems = HEADER_NAV_SLOTS.map((slot, i) => ({
