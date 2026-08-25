@@ -33,6 +33,9 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
     href: t(`header.nav.${i + 1}.href`, slot.href),
   })).filter((item) => item.label.trim() && item.href.trim());
 
+  const isActive = (href: string) =>
+    !isExternal(href) && (href === "/" ? pathname === "/" : pathname.startsWith(href));
+
   const phone = CLINIC.phones[0] ?? "";
   const whatsappHref = phone ? `https://wa.me/${phone.replace(/\D/g, "")}` : "#";
 
