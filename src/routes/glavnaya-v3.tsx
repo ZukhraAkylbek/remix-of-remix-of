@@ -30,7 +30,15 @@ export const Route = createFileRoute("/glavnaya-v3")({
       { property: "og:url", content: absoluteUrl("/glavnaya-v3") || "/glavnaya-v3" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: absoluteUrl("/glavnaya-v3") || "/glavnaya-v3" }],
+    links: [
+      { rel: "canonical", href: absoluteUrl("/glavnaya-v3") || "/glavnaya-v3" },
+      {
+        rel: "preload",
+        as: "image",
+        href: asianFamilyHeroAsset.url,
+        fetchpriority: "high",
+      },
+    ],
   }),
   component: HomeV3,
 });
