@@ -180,7 +180,7 @@ function HomeV3() {
                 <Link
                   key={card.title}
                   to={card.href as "/"}
-                  className="bg-surface-soft card-lift border-border/40 hover:border-brand-green group flex min-h-[104px] flex-col justify-between rounded-2xl border p-4 transition-all"
+                  className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex min-h-[104px] flex-col justify-between rounded-2xl border p-4 transition-all`}
                 >
                   <p className="text-foreground text-[14px] leading-snug font-extrabold">
                     {card.title}
