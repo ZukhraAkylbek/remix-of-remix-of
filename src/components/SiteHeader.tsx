@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import { Calendar, Menu, MessageCircle, Phone, X } from "lucide-react";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { Calendar, Menu, MessageCircle, Phone, User, X } from "lucide-react";
 import { useState } from "react";
 
 import logo from "@/assets/logo-avicenna-kg.jpg.asset.json";
