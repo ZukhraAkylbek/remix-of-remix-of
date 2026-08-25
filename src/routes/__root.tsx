@@ -13,6 +13,7 @@ import { LeadPopup } from "@/components/LeadPopup";
 import { LiveEditProvider } from "@/components/live-edit/LiveEdit";
 import { MobileNavBar } from "@/components/MobileNavBar";
 import { SiteTypography } from "@/components/SiteTypography";
+import { LanguageProvider } from "@/lib/i18n";
 import { fetchSiteContent } from "@/lib/site-content";
 import appCss from "../styles.css?url";
 
@@ -144,14 +145,16 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SiteTypography />
-      <LiveEditProvider>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <div className="pb-[76px] lg:pb-0">
-          <Outlet />
-        </div>
-        <MobileNavBar />
-        <LeadPopup />
-      </LiveEditProvider>
+      <LanguageProvider>
+        <LiveEditProvider>
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <div className="pb-[76px] lg:pb-0">
+            <Outlet />
+          </div>
+          <MobileNavBar />
+          <LeadPopup />
+        </LiveEditProvider>
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }

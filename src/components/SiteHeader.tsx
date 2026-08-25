@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import logo from "@/assets/logo-avicenna-kg.jpg.asset.json";
 import { CLINIC } from "@/lib/clinic";
+import { useLanguage } from "@/lib/i18n";
 import { BOOKING_URL } from "@/lib/site-config";
 import { useSiteContent } from "@/lib/site-content";
 
@@ -25,7 +26,7 @@ const isExternal = (href: string) => /^(https?:|tel:|mailto:)/i.test(href);
 
 export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
   const [open, setOpen] = useState(false);
-  const [lang, setLang] = useState<"ru" | "kg">("ru");
+  const { lang, setLang } = useLanguage();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { t } = useSiteContent();
   const navItems = HEADER_NAV_SLOTS.map((slot, i) => ({
@@ -102,7 +103,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               aria-label="Выбор языка"
               className="border-border bg-background hidden shrink-0 items-center rounded-xl border p-0.5 sm:flex"
             >
-              {(["ru", "kg"] as const).map((code) => (
+              {(["ru", "ky"] as const).map((code) => (
                 <button
                   key={code}
                   type="button"
