@@ -13,8 +13,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
-export const HOME_HERO_IMAGE = asianFamilyHeroAsset.url;
 import { Link } from "@tanstack/react-router";
+
+export const HOME_HERO_IMAGE = asianFamilyHeroAsset.url;
 
 function Eyebrow({ children }: { children: string }) {
   return (
