@@ -136,61 +136,64 @@ function HomeV3() {
       <SiteHeader />
       <main>
         {/* Оффер */}
-        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
-          <Eyebrow>Здоровье без лишней сложности</Eyebrow>
-          <div className="mt-4 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:items-center">
-            <div>
-              <h1 className="text-foreground text-3xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl">
-                Забота о здоровье всей семьи — в одной клинике
-              </h1>
-              <p className="text-muted-foreground mt-5 max-w-xl text-[17px] leading-relaxed">
-                Врачи, анализы, диагностика, хирургия и стационар в Бишкеке. Поможем выбрать
-                специалиста и удобное время.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link
-                  to="/checkups"
-                  className="gradient-accent text-accent-foreground hover:brightness-105 inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[16px] font-extrabold transition-all hover:-translate-y-0.5"
-                >
-                  Пройти чекап
-                </Link>
-                <Link
-                  to="/uslugi"
-                  className="border-border text-foreground hover:border-brand-green inline-flex items-center gap-2 rounded-2xl border px-6 py-3.5 text-[16px] font-extrabold transition-colors"
-                >
-                  Найти услугу
-                </Link>
+        <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12">
+          <div className="grid gap-5 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
+            {/* Большой баннер с фото на всю область */}
+            <div className="border-border relative min-h-[340px] overflow-hidden rounded-3xl border sm:min-h-[420px]">
+              <img
+                src={doctorPatientHeroAsset.url}
+                alt="Семья на приёме в клинике Авиценна"
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="eager"
+                fetchPriority="high"
+              />
+              <div className="from-brand-white/95 via-brand-white/70 absolute inset-0 bg-gradient-to-r to-transparent" />
+              <div className="relative flex h-full max-w-[560px] flex-col justify-center p-6 sm:p-10">
+                <Eyebrow>Здоровье без лишней сложности</Eyebrow>
+                <h1 className="text-foreground mt-3 text-3xl leading-[1.08] font-extrabold tracking-tight sm:text-[42px]">
+                  Забота о здоровье всей семьи — в одной клинике
+                </h1>
+                <p className="text-muted-foreground mt-4 max-w-md text-[16px] leading-relaxed">
+                  Врачи, анализы, диагностика, хирургия и стационар в Бишкеке. Поможем выбрать
+                  специалиста и удобное время.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    to="/checkups"
+                    className="gradient-accent text-accent-foreground inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[16px] font-extrabold transition-all hover:-translate-y-0.5 hover:brightness-105"
+                  >
+                    Пройти чекап
+                  </Link>
+                  <Link
+                    to="/uslugi"
+                    className="border-border bg-background/80 text-foreground hover:border-brand-green inline-flex items-center gap-2 rounded-2xl border px-6 py-3.5 text-[16px] font-extrabold transition-colors"
+                  >
+                    Найти услугу
+                  </Link>
+                </div>
               </div>
             </div>
 
-            <div className="border-border relative min-h-[260px] overflow-hidden rounded-3xl border">
-              <img
-                src={doctorPatientHeroAsset.url}
-                alt="Врач клиники Авиценна измеряет давление пациентке"
-                className="h-full w-full object-cover"
-                loading="eager"
-              />
-            </div>
-          </div>
-
-          {/* Быстрый маршрут */}
-          <div className="mt-10">
-            <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Быстрый маршрут — сетка 3×3 справа */}
+            <div className="grid auto-rows-fr grid-cols-2 gap-3 sm:grid-cols-3">
               {ROUTE_CARDS.map((card) => (
                 <Link
                   key={card.title}
                   to={card.href as "/"}
-                  className={`${card.tone} card-lift border-border/40 hover:border-brand-green group flex min-h-[88px] items-center justify-between rounded-2xl border px-5 py-6 transition-all`}
+                  className="bg-surface-soft card-lift border-border/40 hover:border-brand-green group flex min-h-[104px] flex-col justify-between rounded-2xl border p-4 transition-all"
                 >
-                  <p className="text-foreground text-[16px] font-extrabold">{card.title}</p>
-                  <span className="bg-brand-green text-brand-white flex size-8 shrink-0 items-center justify-center rounded-full transition-transform group-hover:translate-x-0.5">
-                    <ArrowRight className="size-4" />
+                  <p className="text-foreground text-[14px] leading-snug font-extrabold">
+                    {card.title}
+                  </p>
+                  <span className="bg-brand-green text-brand-white ml-auto flex size-7 shrink-0 items-center justify-center rounded-full transition-transform group-hover:translate-x-0.5">
+                    <ArrowRight className="size-3.5" />
                   </span>
                 </Link>
               ))}
             </div>
           </div>
         </section>
+
 
         {/* Мини-офферы */}
         <Section eyebrow="Актуально" title="Что вам нужно?">
