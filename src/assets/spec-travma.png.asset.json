@@ -1,11 +1,11 @@
 {
   "asset_id": "31e83462-12e5-4ba5-a019-5517cccf1eca",
-  "content_type": "image/png",
+  "content_type": "image/webp",
   "created_at": "2026-08-12T05:48:02Z",
   "original_filename": "spec-travma.png",
   "project_id": "8a47584d-7207-4a19-bf59-39d4c4770967",
   "r2_key": "a/v1/8a47584d-7207-4a19-bf59-39d4c4770967/31e83462-12e5-4ba5-a019-5517cccf1eca/spec-travma.png",
   "size": 60502,
-  "url": "/assets/spec-travma.png",
+  "url": "/assets/spec-travma.webp",
   "version": 1
 }
