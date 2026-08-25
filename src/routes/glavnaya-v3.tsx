@@ -4,9 +4,6 @@ import { ArrowRight, Clock, MapPin, Phone, Star, Stethoscope, TrendingUp } from 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
 import aboutMissionAsset from "@/assets/about-mission.jpg.asset.json";
 import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
-import image2Asset from "@/assets/image-2.png.asset.json";
-import imageAsset from "@/assets/image.png.asset.json";
-import imageWebpAsset from "@/assets/image.webp.asset.json";
 
 import { BranchesWithMap } from "@/components/BranchesWithMap";
 import { FaqAccordion } from "@/components/FaqAccordion";
@@ -86,37 +83,6 @@ const ROUTE_CARDS = [
   { title: "Чекапы", href: "/checkups", tone: "pastel-peach" },
 ];
 
-const FEATURED_OFFER = {
-  title: "Сомнография",
-  text: "консультация + диагностика на сомнографе",
-  price: "3700",
-  oldPrice: "4900",
-  href: "/diagnostika",
-  image: aboutHeroAsset.url,
-};
-
-const RIGHT_OFFERS = [
-  {
-    title: "Процедурные 24/7",
-    href: "/travmpunkt",
-    image: imageWebpAsset.url,
-  },
-  {
-    title: "Бесплатная консультация хирурга по операции",
-    href: "/hirurgiya",
-    image: imageAsset.url,
-  },
-  {
-    title: "Проверь магний и фосфор с 50% скидкой",
-    href: "/uslugi/analizy",
-    image: image2Asset.url,
-  },
-  {
-    title: "Счастливые часы",
-    href: "/checkups",
-    image: doctorPatientHeroAsset.url,
-  },
-];
 
 const REVIEWS = [
   { text: "Быстро приняли в травмпункте ночью, всё объяснили и сделали снимок за 15 минут.", src: "2GIS" },
@@ -258,77 +224,6 @@ function HomeV3() {
           </div>
         </Section>
 
-        {/* Мини-офферы */}
-        <Section eyebrow="Актуально" title="Новости и специальные предложения">
-          <div className="grid gap-4 lg:grid-cols-[1.35fr_1fr] lg:grid-rows-2">
-            {/* Левый большой баннер */}
-            <Link
-              to={FEATURED_OFFER.href as "/"}
-              className="group relative row-span-2 flex min-h-[300px] flex-col overflow-hidden rounded-3xl sm:min-h-[360px] lg:min-h-0"
-            >
-              <img
-                src={FEATURED_OFFER.image}
-                alt={FEATURED_OFFER.title}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                loading="eager"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-brand-green/80 via-brand-green/50 to-transparent" />
-              <div className="relative flex flex-1 flex-col justify-between p-6 sm:p-8">
-                <div className="space-y-3">
-                  <span className="bg-brand-green text-brand-white inline-block rounded-xl px-4 py-2 text-lg font-extrabold shadow-lg sm:text-xl">
-                    {FEATURED_OFFER.title}
-                  </span>
-                  <div className="bg-brand-green/95 text-brand-white max-w-[280px] rounded-xl px-4 py-3 shadow-lg backdrop-blur-sm sm:max-w-[320px]">
-                    <p className="text-sm font-bold leading-snug sm:text-base">
-                      {FEATURED_OFFER.text}
-                    </p>
-                    <div className="mt-2 flex items-baseline gap-2">
-                      <span className="text-2xl font-extrabold sm:text-3xl">
-                        {FEATURED_OFFER.price}
-                      </span>
-                      <span className="text-brand-white/70 text-sm line-through">
-                        {FEATURED_OFFER.oldPrice}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <span className="bg-brand-white text-brand-green hover:bg-brand-white/90 inline-flex w-fit items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-extrabold transition-colors shadow-md">
-                  Подробнее
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                </span>
-              </div>
-            </Link>
-
-            {/* Правая 2×2 сетка */}
-            {RIGHT_OFFERS.map((offer) => (
-              <Link
-                key={offer.title}
-                to={offer.href as "/"}
-                className="banner-brand group relative flex min-h-[140px] items-center justify-between overflow-hidden rounded-2xl p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-              >
-                <span
-                  aria-hidden="true"
-                  className="banner-glow pointer-events-none absolute -top-10 -right-10 size-32 rounded-full opacity-60 transition-all duration-500 group-hover:opacity-95 group-hover:scale-125"
-                />
-                <div className="relative z-10 flex flex-col gap-3">
-                  <p className="text-brand-white max-w-[65%] text-[15px] font-extrabold leading-tight sm:text-[16px]">
-                    {offer.title}
-                  </p>
-                  <span className="bg-brand-white text-brand-green inline-flex w-fit items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-extrabold transition-colors hover:bg-brand-white/90">
-                    Подробнее
-                    <ArrowRight className="size-3.5" />
-                  </span>
-                </div>
-                <img
-                  src={offer.image}
-                  alt=""
-                  className="absolute right-2 bottom-0 h-[90%] w-auto rounded-lg object-contain transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </Link>
-            ))}
-          </div>
-        </Section>
 
 
         {/* Баннер перед картой */}
