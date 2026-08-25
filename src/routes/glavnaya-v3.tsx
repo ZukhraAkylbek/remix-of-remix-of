@@ -258,6 +258,37 @@ function HomeV3() {
           </div>
         </Section>
 
+        {/* Баннер перед картой */}
+        <section className="relative overflow-hidden">
+          <img
+            src={aboutHeroAsset.url}
+            alt="Колл-центр клиники Авиценна"
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+          <div className="from-brand-green/90 via-brand-green/70 absolute inset-0 bg-gradient-to-r to-brand-green/40" />
+          <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
+            <div className="max-w-2xl">
+              <p className="text-brand-white/80 text-[13px] font-bold uppercase tracking-wider">
+                Колл-центр
+              </p>
+              <h2 className="text-brand-white mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">
+                Поможем выбрать врача и запишем на приём
+              </h2>
+              <p className="text-brand-white/90 mt-4 text-[15px] leading-relaxed">
+                Операторы ответят на вопросы, подберут филиал и удобное время. Звонок бесплатный.
+              </p>
+              <a
+                href={`tel:${CLINIC.phones[0]}`}
+                className="bg-brand-white text-brand-green hover:bg-brand-white/90 mt-6 inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[15px] font-extrabold transition-colors shadow-lg"
+              >
+                <Phone className="size-5" />
+                Позвонить через колл-центр
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* Филиалы на карте */}
         <BranchesWithMap />
 
