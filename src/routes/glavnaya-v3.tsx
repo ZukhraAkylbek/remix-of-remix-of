@@ -313,18 +313,21 @@ function HomeV3() {
 
             {/* Правые карточки */}
             {SIDE_OFFERS.map((item, index) => (
-              <Reveal key={item.title} delay={index * 60}>
+              <Reveal key={item.title} delay={index * 60} className="h-full">
                 <Link
                   to={item.href as "/"}
-                  className="bg-brand-green text-brand-white group flex h-full min-h-[150px] items-stretch justify-between gap-4 overflow-hidden rounded-3xl p-5 transition-all hover:brightness-105"
+                  className="bg-brand-green text-brand-white group flex h-full min-h-[170px] items-stretch justify-between gap-4 overflow-hidden rounded-3xl p-5 transition-all hover:brightness-105"
                 >
-                  <div className="flex flex-col justify-between">
-                    <h3 className="max-w-[16ch] text-xl leading-snug font-extrabold">{item.title}</h3>
-                    <span className="bg-brand-white text-brand-green mt-4 inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[14px] font-extrabold transition-transform group-hover:translate-x-1">
+                  <div className="flex flex-1 flex-col">
+                    <h3 className="line-clamp-3 min-h-[4.5rem] max-w-[16ch] text-xl leading-snug font-extrabold">
+                      {item.title}
+                    </h3>
+                    <span className="bg-brand-white text-brand-green mt-auto inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[14px] font-extrabold transition-transform group-hover:translate-x-1">
                       Подробнее
                       <ArrowRight className="size-3.5" />
                     </span>
                   </div>
+
                   <img
                     src={item.image}
                     alt={item.title}
