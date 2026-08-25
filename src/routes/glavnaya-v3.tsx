@@ -107,36 +107,24 @@ const CLINIC_STATS = [
   { value: "410+", label: "медицинских услуг", icon: TrendingUp },
 ];
 
-const NEWS_OFFERS = [
+const FEATURED_OFFER = {
+  title: "Сомнография",
+  description: "консультация + диагностика на сомнографе",
+  price: "3700",
+  oldPrice: "4900",
+  href: "/diagnostika",
+  image: aboutHeroAsset.url,
+};
+
+const SIDE_OFFERS = [
+  { title: "Процедурные 24/7", href: "/travmpunkt", image: doctorPatientHeroAsset.url },
   {
-    title: "Сомнография",
-    description: "Консультация + диагностика на сомнографе со скидкой",
-    price: "3 700",
-    oldPrice: "4 900",
-    href: "/diagnostika",
-    image: aboutHeroAsset.url,
-    tag: "Акция",
-    tone: "pastel-coral",
-    tagTone: "bg-brand-terracotta/90 text-brand-white",
+    title: "Бесплатная консультация хирурга по операции",
+    href: "/hirurgiya",
+    image: aboutMissionAsset.url,
   },
-  {
-    title: "Счастливые часы",
-    description: "Пройдите чекап утром и получите дополнительную скидку 10%",
-    href: "/checkups",
-    image: doctorPatientHeroAsset.url,
-    tag: "Спецпредложение",
-    tone: "pastel-mint",
-    tagTone: "bg-brand-green/90 text-brand-white",
-  },
-  {
-    title: "Услуги на дому",
-    description: "Врач, анализы и процедуры без выезда в клинику",
-    href: "/uslugi/uslugi-na-domu",
-    image: image2Asset.url,
-    tag: "Новость",
-    tone: "pastel-sky",
-    tagTone: "bg-brand-gray/90 text-brand-white",
-  },
+  { title: "Проверь магний и фосфор с 50% скидкой", href: "/uslugi/analizy", image: image2Asset.url },
+  { title: "Счастливые часы", href: "/checkups", image: doctorPatientHeroAsset.url },
 ];
 
 function HomeV3() {
