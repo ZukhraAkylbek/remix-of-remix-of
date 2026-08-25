@@ -4,9 +4,6 @@ import { ArrowRight, Clock, MapPin, Phone, Star, Stethoscope, TrendingUp } from 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
 import aboutMissionAsset from "@/assets/about-mission.jpg.asset.json";
 import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
-import image2Asset from "@/assets/image-2.png.asset.json";
-import imageAsset from "@/assets/image.png.asset.json";
-import imageWebpAsset from "@/assets/image.webp.asset.json";
 
 import { BranchesWithMap } from "@/components/BranchesWithMap";
 import { FaqAccordion } from "@/components/FaqAccordion";
