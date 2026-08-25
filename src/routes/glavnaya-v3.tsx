@@ -344,6 +344,9 @@ function HomeV3() {
           </div>
         </Section>
 
+        {/* Филиалы на карте */}
+        <BranchesWithMap />
+
         {/* Врачи */}
         <Section id="vrachi" tone="soft" eyebrow="Команда" title="Врачи, которым доверяют">
           <div className="flex snap-x gap-4 overflow-x-auto pb-3 -mx-4 px-4 sm:-mx-6 sm:px-6">
