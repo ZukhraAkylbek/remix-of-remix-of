@@ -267,30 +267,7 @@ function HomeV3() {
           </div>
         </Section>
 
-        {/* Безотлагательно */}
-        <Section tone="plain">
-          <GradientBanner
-            eyebrow="Забота 24/7"
-            title="Срочно нужна помощь?"
-            text="Травмпункт, дежурные врачи и ночная диагностика работают круглосуточно — приезжайте или позвоните."
-          >
-            <a
-              href={`tel:${CLINIC.phones[0].replace(/[^+\d]/g, "")}`}
-              className="gradient-accent text-accent-foreground inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[15px] font-extrabold transition-all hover:-translate-y-0.5 hover:brightness-105"
-            >
-              <Phone className="size-4" /> Позвонить
-            </a>
-            <Link
-              to="/travmpunkt"
-              className="border-brand-white/50 text-brand-white hover:bg-brand-white/10 inline-flex items-center gap-2 rounded-2xl border px-6 py-3.5 text-[15px] font-extrabold transition-colors"
-            >
-              Травмпункт 24/7
-            </Link>
-          </GradientBanner>
-          <p className="text-muted-foreground mt-6 text-[14px]">
-            Скорую помощь клиника не оказывает. В экстренной ситуации — 103.
-          </p>
-        </Section>
+
 
         {/* Направления + чекапы */}
         <Section eyebrow="Основные направления" title="Выберите нужную помощь">
