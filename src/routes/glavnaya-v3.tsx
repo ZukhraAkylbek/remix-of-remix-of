@@ -286,7 +286,58 @@ function HomeV3() {
           </div>
         </Section>
 
-
+        {/* Новости и специальные предложения */}
+        <Section tone="soft" eyebrow="Новости и акции" title="Специальные предложения">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {NEWS_OFFERS.map((item, index) => (
+              <Reveal key={item.title} delay={index * 80}>
+                <Link
+                  to={item.href as "/"}
+                  className={`${item.tone} card-lift group flex h-full flex-col overflow-hidden rounded-3xl border border-border/40 transition-all`}
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <span
+                      className={`${item.tagTone} absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider shadow-sm`}
+                    >
+                      <Sparkles className="size-3" />
+                      {item.tag}
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col gap-2 p-5">
+                    <h3 className="text-foreground text-lg font-extrabold tracking-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground flex-1 text-[14px] leading-relaxed">
+                      {item.description}
+                    </p>
+                    {item.price && (
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-brand-green text-xl font-extrabold">
+                          {item.price} с
+                        </span>
+                        {item.oldPrice && (
+                          <span className="text-muted-foreground text-sm line-through">
+                            {item.oldPrice} с
+                          </span>
+                        )}
+                      </div>
+                    )}
+                    <span className="text-brand-green inline-flex items-center gap-1.5 text-[13px] font-extrabold transition-transform group-hover:translate-x-1">
+                      Подробнее
+                      <ArrowRight className="size-3.5" />
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </Section>
 
         {/* Баннер перед картой */}
         <section className="relative overflow-hidden">
