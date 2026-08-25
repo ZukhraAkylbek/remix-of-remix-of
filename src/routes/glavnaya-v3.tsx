@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, CalendarCheck, Clock, Home, MessageCircle, Phone, Star } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Clock, Phone, Star } from "lucide-react";
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
 import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
@@ -7,7 +7,6 @@ import image2Asset from "@/assets/image-2.png.asset.json";
 import imageAsset from "@/assets/image.png.asset.json";
 import imageWebpAsset from "@/assets/image.webp.asset.json";
 
-import { GradientBanner } from "@/components/GradientBanner";
 import { BranchesWithMap } from "@/components/BranchesWithMap";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
