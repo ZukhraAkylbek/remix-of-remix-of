@@ -138,8 +138,6 @@ export function HomeV3() {
                   </span>
                 </h1>
                 <p className="text-muted-foreground mt-4 max-w-md text-[16px] leading-relaxed">
-                  Врачи, анализы, диагностика, хирургия и стационар в Бишкеке. Поможем выбрать
-                  специалиста и удобное время.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
