@@ -97,7 +97,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   // Переводим уже отрисованный DOM и всё, что появляется позже.
   useEffect(() => {
     document.documentElement.lang = lang === "ky" ? "ky" : "ru";
-    console.log("[i18n] apply", lang);
+    
     walk(document, lang);
 
     const observer = new MutationObserver((records) => {
