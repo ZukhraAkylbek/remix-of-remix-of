@@ -125,8 +125,12 @@ export function BranchesWithMap() {
            <div style="font-weight:700;font-size:14px;color:#111">${escape(b.street)}</div>
            <div style="font-size:12px;color:#16a34a;font-weight:600;margin-top:2px">${escape(b.subtitle)}</div>
            <div style="font-size:12px;color:#555;margin-top:2px">${escape(b.city)}, Кыргызстан</div>
-           <a href="${googleMapsDirectionsUrl(b.latitude, b.longitude, `${b.street}, ${b.city}`)}" target="_blank" rel="noopener noreferrer"
-              style="display:inline-block;margin-top:6px;font-size:12px;font-weight:700;color:#16a34a">Маршрут →</a>
+           <div style="display:flex;gap:10px;margin-top:8px">
+             <a href="${googleMapsDirectionsUrl(b.latitude, b.longitude, `${b.street}, ${b.city}`)}" target="_blank" rel="noopener noreferrer"
+                style="font-size:12px;font-weight:700;color:#16a34a">Маршрут →</a>
+             <a href="${doubleGisSearchUrl(b.street)}" target="_blank" rel="noopener noreferrer"
+                style="font-size:12px;font-weight:700;color:#16a34a">2ГИС</a>
+           </div>
          </div>`,
       );
       infoRef.current.open({ map: mapRef.current, anchor: marker });
@@ -163,10 +167,22 @@ export function BranchesWithMap() {
                         : "border-border bg-card hover:border-brand-green/40"
                     }`}
                   >
-                    <p className="text-foreground flex items-start gap-2 text-[14px] font-bold leading-snug">
-                      <MapPin className="text-brand-green mt-0.5 size-4 shrink-0" />
-                      <span className="min-w-0">{b.street}</span>
-                    </p>
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-foreground flex items-start gap-2 text-[14px] font-bold leading-snug">
+                        <MapPin className="text-brand-green mt-0.5 size-4 shrink-0" />
+                        <span className="min-w-0">{b.street}</span>
+                      </p>
+                      <a
+                        href={doubleGisSearchUrl(b.street)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-brand-green hover:text-brand-green-dark shrink-0 text-[11px] font-extrabold uppercase tracking-wide"
+                        aria-label={`Открыть ${b.street} в 2ГИС`}
+                      >
+                        2ГИС
+                      </a>
+                    </div>
                     <p className="text-brand-green mt-1 pl-6 text-[12px] font-semibold">
                       {b.subtitle}
                     </p>
