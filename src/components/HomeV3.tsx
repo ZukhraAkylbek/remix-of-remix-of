@@ -134,7 +134,7 @@ export function HomeV3() {
                 <h1 className="text-foreground mt-3 text-3xl leading-[1.08] font-extrabold tracking-tight sm:text-[42px]">
                   Проверьте здоровье сегодня — предотвратите{" "}
                   <span className="bg-brand-green text-brand-white rounded-lg px-2 py-0.5">
-                    проблемы завтра
+                    {"\n"}проблемы завтра
                   </span>
                 </h1>
                 <p className="text-muted-foreground mt-4 max-w-md text-[16px] leading-relaxed">
