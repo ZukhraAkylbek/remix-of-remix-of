@@ -431,8 +431,6 @@ function HomeV3() {
         </Section>
 
         {/* Запись */}
-        <BranchesWithMap />
-
         <Section tone="green" eyebrow="Запись" title="Оставьте номер — поможем выбрать врача">
           <p className="text-muted-foreground -mt-4 text-[15px]">
             Перезвоним и подберём специалиста, филиал и время приёма.
