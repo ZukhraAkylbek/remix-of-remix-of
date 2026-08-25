@@ -8,6 +8,7 @@ import imageAsset from "@/assets/image.png.asset.json";
 import imageWebpAsset from "@/assets/image.webp.asset.json";
 
 import { BranchesWithMap } from "@/components/BranchesWithMap";
+import { FaqAccordion } from "@/components/FaqAccordion";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl } from "@/lib/clinic";
@@ -284,64 +285,8 @@ function HomeV3() {
           </div>
         </Section>
 
-        {/* Врачи */}
-        <Section id="vrachi" tone="soft" eyebrow="Команда" title="Врачи, которым доверяют">
-          <div className="flex snap-x gap-4 overflow-x-auto pb-3 -mx-4 px-4 sm:-mx-6 sm:px-6">
-            {[
-              {
-                name: "Айбек Токтосунов",
-                profile: "Хирург общей практики, маммолог",
-                image: imageAsset.url,
-              },
-              {
-                name: "Гульнара Сатыбалдиева",
-                profile: "Гинеколог, ведение беременности",
-                image: imageWebpAsset.url,
-              },
-              {
-                name: "Нурлан Жетигенов",
-                profile: "Кардиолог, функциональная диагностика",
-                image: image2Asset.url,
-              },
-            ].map((doctor) => (
-              <div
-                key={doctor.name}
-                className="bg-background border-border flex w-[260px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border"
-              >
-                <img
-                  src={doctor.image}
-                  alt={`${doctor.name} — ${doctor.profile} в клинике Авиценна`}
-                  loading="lazy"
-                  className="h-44 w-full object-cover"
-                />
-                <div className="flex flex-1 flex-col p-6">
-                  <p className="text-foreground text-[17px] font-extrabold">{doctor.name}</p>
-                  <p className="text-muted-foreground mt-2 text-[14px]">{doctor.profile}</p>
-                  <p className="text-brand-green mt-auto pt-4 text-[14px] font-bold">
-                    Ближайшее окно: сегодня
-                  </p>
-                </div>
-              </div>
-            ))}
-            <Link
-              to="/napravleniya"
-              className="bg-surface-green hover:bg-surface-green/80 flex w-[260px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl transition-colors"
-            >
-              <img
-                src={aboutHeroAsset.url}
-                alt="Команда врачей клиники Авиценна"
-                loading="lazy"
-                className="h-44 w-full object-cover"
-              />
-              <div className="flex flex-1 flex-col justify-between p-6">
-                <p className="text-foreground text-[17px] font-extrabold">Все врачи</p>
-                <p className="text-brand-green-dark text-[14px] font-bold">
-                  Фильтр по специальности →
-                </p>
-              </div>
-            </Link>
-          </div>
-        </Section>
+        {/* Часто задаваемые вопросы */}
+        <FaqAccordion />
 
 
         {/* Запись */}
