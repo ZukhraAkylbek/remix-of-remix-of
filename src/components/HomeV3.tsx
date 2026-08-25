@@ -25,6 +25,24 @@ function Eyebrow({ children }: { children: string }) {
   );
 }
 
+function ReviewCard({ review }: { review: { text: string; src: string } }) {
+  return (
+    <figure className="bg-background border-border flex h-[200px] w-[320px] flex-col rounded-2xl border p-5 lg:w-[360px]">
+      <div className="text-brand-green flex gap-1">
+        {[0, 1, 2, 3, 4].map((i) => (
+          <Star key={i} className="size-4 fill-current" />
+        ))}
+      </div>
+      <blockquote className="text-foreground mt-3 line-clamp-4 text-[15px] leading-relaxed">
+        {review.text}
+      </blockquote>
+      <figcaption className="text-muted-foreground mt-auto pt-3 text-[13px]">
+        Источник: {review.src}
+      </figcaption>
+    </figure>
+  );
+}
+
 function Section({
   id,
   eyebrow,
@@ -365,25 +383,24 @@ export function HomeV3() {
 
         {/* Отзывы */}
         <Section tone="soft" eyebrow="Доверие" title="Отзывы пациентов">
-          <div className="grid auto-rows-fr gap-4 lg:grid-cols-3">
+          {/* Mobile: stacked cards */}
+          <div className="grid auto-rows-fr gap-4 md:hidden lg:grid-cols-3">
             {REVIEWS.map((review) => (
-              <figure
-                key={review.text}
-                className="bg-background border-border flex h-full flex-col rounded-2xl border p-6"
-              >
-                <div className="text-brand-green flex gap-1">
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <Star key={i} className="size-4 fill-current" />
+              <ReviewCard review={review} key={review.text} />
+            ))}
+          </div>
+
+          {/* Desktop: scrolling marquee */}
+          <div className="group marquee-mask relative hidden overflow-hidden md:block">
+            <div className="marquee-track flex w-max gap-4">
+              {[0, 1].map((copy) => (
+                <div key={copy} className="flex shrink-0 gap-4" aria-hidden={copy === 1}>
+                  {REVIEWS.map((review) => (
+                    <ReviewCard review={review} key={`${copy}-${review.text}`} />
                   ))}
                 </div>
-                <blockquote className="text-foreground mt-4 text-[15px] leading-relaxed">
-                  {review.text}
-                </blockquote>
-                <figcaption className="text-muted-foreground mt-auto pt-4 text-[13px]">
-                  Источник: {review.src}
-                </figcaption>
-              </figure>
-            ))}
+              ))}
+            </div>
           </div>
         </Section>
 
