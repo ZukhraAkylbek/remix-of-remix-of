@@ -3,7 +3,7 @@ import { ArrowRight, Clock, MapPin, Phone, Star, Stethoscope, TrendingUp } from 
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
 import aboutMissionAsset from "@/assets/about-mission.jpg.asset.json";
-import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
+import asianFamilyHeroAsset from "@/assets/asian-family-hero.png.asset.json";
 
 import { BranchesWithMap } from "@/components/BranchesWithMap";
 import { FaqAccordion } from "@/components/FaqAccordion";

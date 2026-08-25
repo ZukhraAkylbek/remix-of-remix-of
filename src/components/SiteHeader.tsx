@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, MessageCircle, Phone, X } from "lucide-react";
+import { Calendar, Menu, MessageCircle, Phone, X } from "lucide-react";
 import { useState } from "react";
 
 import logo from "@/assets/logo-avicenna-kg.jpg.asset.json";
 import { CLINIC } from "@/lib/clinic";
+import { BOOKING_URL } from "@/lib/site-config";
 import { useSiteContent } from "@/lib/site-content";
 
 import { SiteSearch } from "@/components/SiteSearch";
