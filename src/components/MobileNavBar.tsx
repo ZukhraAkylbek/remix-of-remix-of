@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Hospital, MapPin, SquarePen, Stethoscope, Users } from "lucide-react";
 import { useRouterState } from "@tanstack/react-router";
 
@@ -19,6 +20,29 @@ const isExternal = (href: string) => /^(https?:|tel:|mailto:)/i.test(href);
 export function MobileNavBar() {
   const { t } = useSiteContent();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  // iOS Safari: адресная строка меняет visual viewport — прижимаем панель к его низу
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const vv = typeof window !== "undefined" ? window.visualViewport : null;
+    if (!vv) return;
+    let raf = 0;
+    const update = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const delta = window.innerHeight - (vv.height + vv.offsetTop);
+        setOffset(delta > 0 ? delta : 0);
+      });
+    };
+    update();
+    vv.addEventListener("resize", update);
+    vv.addEventListener("scroll", update);
+    return () => {
+      cancelAnimationFrame(raf);
+      vv.removeEventListener("resize", update);
+      vv.removeEventListener("scroll", update);
+    };
+  }, []);
 
   if (pathname.startsWith("/admin") || pathname.startsWith("/auth")) return null;
 
@@ -33,7 +57,11 @@ export function MobileNavBar() {
     <nav
       aria-label="Мобильное меню"
       className="border-border bg-background/95 fixed inset-x-0 bottom-0 z-50 border-t shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur lg:hidden"
-      style={{ paddingBottom: "max(env(safe-area-inset-bottom), 6px)" }}
+      style={{
+        paddingBottom: "max(env(safe-area-inset-bottom), 6px)",
+        transform: `translate3d(0, ${-offset}px, 0)`,
+        willChange: "transform",
+      }}
     >
       <ul className="mx-auto grid max-w-lg grid-cols-5 items-end px-1">
         {items.map(({ label, href, Icon, center }) => {
