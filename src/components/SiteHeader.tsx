@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import logo from "@/assets/logo-avicenna-kg.jpg.asset.json";
 import { CLINIC } from "@/lib/clinic";
+import { useLanguage } from "@/lib/i18n";
 import { BOOKING_URL } from "@/lib/site-config";
 import { useSiteContent } from "@/lib/site-content";
 
