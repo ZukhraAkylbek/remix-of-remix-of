@@ -170,6 +170,21 @@ function HomeV3() {
           </div>
         </section>
 
+        {/* Зелёные блоки специальностей */}
+        <section className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6">
+          <div className="flex flex-nowrap items-center gap-3 overflow-x-auto pb-1">
+            {SPECIALTY_PILLS.map((name) => (
+              <Link
+                key={name}
+                to="/napravleniya"
+                className="bg-brand-green text-brand-white hover:bg-brand-green/90 inline-flex shrink-0 items-center rounded-full px-5 py-2.5 text-sm font-extrabold transition-colors"
+              >
+                {name}
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* О клинике */}
         <Section id="o-klinike" eyebrow="О клинике" title="Авиценна с 2000 года">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-center">
