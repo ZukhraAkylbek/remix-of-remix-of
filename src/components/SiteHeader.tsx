@@ -68,7 +68,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               className="inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-brand-green bg-brand-white/80 text-sm font-bold text-brand-green backdrop-blur-sm transition-colors hover:bg-brand-green hover:text-brand-white sm:size-auto sm:px-4 sm:py-2.5"
             >
               <MessageCircle className="size-4 shrink-0" />
-              <span className="hidden lg:inline">Написать WhatsApp</span>
+              <span className="hidden lg:inline">Написать на WhatsApp</span>
             </a>
 
             <a
