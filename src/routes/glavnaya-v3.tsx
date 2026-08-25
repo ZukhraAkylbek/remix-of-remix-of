@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowRight, ArrowUpRight, CalendarCheck, Clock, Home, MessageCircle, Phone, Star } from "lucide-react";
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
@@ -13,8 +12,6 @@ import { BranchesWithMap } from "@/components/BranchesWithMap";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl } from "@/lib/clinic";
-import { specialtyImage } from "@/lib/specialty-images";
-import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
 const TITLE = "Авиценна — забота о здоровье всей семьи в одной клинике";
 const DESCRIPTION =
