@@ -61,14 +61,14 @@ function Section({
     tone === "soft" ? "bg-surface-soft" : tone === "green" ? "bg-surface-green" : "bg-background";
   return (
     <section id={id} className={`${bg} border-border border-t`}>
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         {title && (
-          <h2 className="text-foreground mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">
+          <h2 className="text-foreground mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">
             {title}
           </h2>
         )}
-        <div className={eyebrow || title ? "mt-8" : ""}>{children}</div>
+        <div className={eyebrow || title ? "mt-5" : ""}>{children}</div>
       </div>
     </section>
   );
