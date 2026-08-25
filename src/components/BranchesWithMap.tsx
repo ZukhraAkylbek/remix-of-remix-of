@@ -167,10 +167,22 @@ export function BranchesWithMap() {
                         : "border-border bg-card hover:border-brand-green/40"
                     }`}
                   >
-                    <p className="text-foreground flex items-start gap-2 text-[14px] font-bold leading-snug">
-                      <MapPin className="text-brand-green mt-0.5 size-4 shrink-0" />
-                      <span className="min-w-0">{b.street}</span>
-                    </p>
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-foreground flex items-start gap-2 text-[14px] font-bold leading-snug">
+                        <MapPin className="text-brand-green mt-0.5 size-4 shrink-0" />
+                        <span className="min-w-0">{b.street}</span>
+                      </p>
+                      <a
+                        href={doubleGisSearchUrl(b.street)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-brand-green hover:text-brand-green-dark shrink-0 text-[11px] font-extrabold uppercase tracking-wide"
+                        aria-label={`Открыть ${b.street} в 2ГИС`}
+                      >
+                        2ГИС
+                      </a>
+                    </div>
                     <p className="text-brand-green mt-1 pl-6 text-[12px] font-semibold">
                       {b.subtitle}
                     </p>
