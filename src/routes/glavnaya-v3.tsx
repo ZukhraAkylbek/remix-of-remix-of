@@ -124,6 +124,44 @@ const REVIEWS = [
   { text: "Хирург подробно разобрал анализы и предложил план без лишних процедур.", src: "2GIS" },
 ];
 
+const CLINIC_STATS = [
+  { value: "6", label: "филиалов в Бишкеке", icon: MapPin },
+  { value: "60+", label: "врачебных специальностей", icon: Stethoscope },
+  { value: "410+", label: "медицинских услуг", icon: TrendingUp },
+];
+
+const NEWS_OFFERS = [
+  {
+    title: "Сомнография",
+    description: "Консультация + диагностика на сомнографе со скидкой",
+    price: "3 700",
+    oldPrice: "4 900",
+    href: "/diagnostika",
+    image: aboutHeroAsset.url,
+    tag: "Акция",
+    tone: "pastel-coral",
+    tagTone: "bg-brand-terracotta/90 text-brand-white",
+  },
+  {
+    title: "Счастливые часы",
+    description: "Пройдите чекап утром и получите дополнительную скидку 10%",
+    href: "/checkups",
+    image: doctorPatientHeroAsset.url,
+    tag: "Спецпредложение",
+    tone: "pastel-mint",
+    tagTone: "bg-brand-green/90 text-brand-white",
+  },
+  {
+    title: "Услуги на дому",
+    description: "Врач, анализы и процедуры без выезда в клинику",
+    href: "/uslugi/uslugi-na-domu",
+    image: image2Asset.url,
+    tag: "Новость",
+    tone: "pastel-sky",
+    tagTone: "bg-brand-gray/90 text-brand-white",
+  },
+];
+
 function HomeV3() {
   return (
     <div className="bg-background min-h-screen">
