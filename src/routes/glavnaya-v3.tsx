@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Clock, Phone, Star } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Calendar, Clock, MapPin, Phone, Sparkles, Star, Stethoscope, TrendingUp } from "lucide-react";
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
+import aboutMissionAsset from "@/assets/about-mission.jpg.asset.json";
 import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
 import image2Asset from "@/assets/image-2.png.asset.json";
 import imageAsset from "@/assets/image.png.asset.json";
@@ -9,6 +10,7 @@ import imageWebpAsset from "@/assets/image.webp.asset.json";
 
 import { BranchesWithMap } from "@/components/BranchesWithMap";
 import { FaqAccordion } from "@/components/FaqAccordion";
+import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl } from "@/lib/clinic";
