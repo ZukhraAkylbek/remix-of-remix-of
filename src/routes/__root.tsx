@@ -13,6 +13,7 @@ import { LeadPopup } from "@/components/LeadPopup";
 import { LiveEditProvider } from "@/components/live-edit/LiveEdit";
 import { MobileNavBar } from "@/components/MobileNavBar";
 import { SiteTypography } from "@/components/SiteTypography";
+import { LanguageProvider } from "@/lib/i18n";
 import { fetchSiteContent } from "@/lib/site-content";
 import appCss from "../styles.css?url";
 
