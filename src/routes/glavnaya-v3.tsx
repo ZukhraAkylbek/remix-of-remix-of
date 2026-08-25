@@ -61,14 +61,14 @@ function Section({
     tone === "soft" ? "bg-surface-soft" : tone === "green" ? "bg-surface-green" : "bg-background";
   return (
     <section id={id} className={`${bg} border-border border-t`}>
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         {title && (
-          <h2 className="text-foreground mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">
+          <h2 className="text-foreground mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">
             {title}
           </h2>
         )}
-        <div className={eyebrow || title ? "mt-8" : ""}>{children}</div>
+        <div className={eyebrow || title ? "mt-5" : ""}>{children}</div>
       </div>
     </section>
   );
@@ -168,7 +168,7 @@ function HomeV3() {
       <SiteHeader />
       <main>
         {/* Оффер */}
-        <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12">
+        <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
           <div className="grid gap-5 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
             {/* Большой баннер с фото на всю область */}
             <div className="border-border relative min-h-[340px] overflow-hidden rounded-3xl border sm:min-h-[420px]">
@@ -228,7 +228,7 @@ function HomeV3() {
 
         {/* О клинике */}
         <Section id="o-klinike" eyebrow="О клинике" title="Авиценна с 2000 года">
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-center">
             <Reveal className="order-2 lg:order-1">
               <div className="relative overflow-hidden rounded-3xl border border-border shadow-lg">
                 <img
@@ -240,7 +240,7 @@ function HomeV3() {
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-green/20 to-transparent" />
               </div>
             </Reveal>
-            <div className="order-1 flex flex-col gap-6 lg:order-2">
+            <div className="order-1 flex flex-col gap-4 lg:order-2">
               <Reveal delay={80}>
                 <p className="text-muted-foreground text-[15px] leading-relaxed sm:text-[16px]">
                   Сеть клиник «Авиценна» ведет свою историю с 2000 года, когда врач-дерматовенеролог,
@@ -423,7 +423,7 @@ function HomeV3() {
             loading="lazy"
           />
           <div className="from-background/95 via-background/80 to-background/40 absolute inset-0 bg-gradient-to-r" />
-          <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
+          <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
             <div className="max-w-2xl">
               <p className="text-brand-red text-[13px] font-bold uppercase tracking-wider">
                 Онлайн-консультации
