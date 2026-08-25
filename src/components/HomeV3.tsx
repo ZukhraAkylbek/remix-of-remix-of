@@ -25,7 +25,7 @@ function Eyebrow({ children }: { children: string }) {
   );
 }
 
-function ReviewCard({ review }: { review: (typeof REVIEWS)[number] }) {
+function ReviewCard({ review }: { review: { text: string; src: string } }) {
   return (
     <figure className="bg-background border-border flex h-[200px] w-[320px] flex-col rounded-2xl border p-5 lg:w-[360px]">
       <div className="text-brand-green flex gap-1">
