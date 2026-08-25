@@ -3,7 +3,7 @@ import { ArrowRight, Clock, MapPin, Phone, Star, Stethoscope, TrendingUp } from 
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
 import aboutMissionAsset from "@/assets/about-mission.jpg.asset.json";
-import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
+import asianFamilyHeroAsset from "@/assets/asian-family-hero.png.asset.json";
 
 import { BranchesWithMap } from "@/components/BranchesWithMap";
 import { FaqAccordion } from "@/components/FaqAccordion";
@@ -117,17 +117,22 @@ function HomeV3() {
             {/* Большой баннер с фото на всю область */}
             <div className="border-border relative min-h-[340px] overflow-hidden rounded-3xl border sm:min-h-[420px]">
               <img
-                src={doctorPatientHeroAsset.url}
-                alt="Семья на приёме в клинике Авиценна"
+                src={asianFamilyHeroAsset.url}
+                alt="Счастливая семья на фоне голубого неба"
                 className="absolute inset-0 h-full w-full object-cover"
                 loading="eager"
                 fetchPriority="high"
+                width={1344}
+                height={768}
               />
               <div className="from-brand-white/95 via-brand-white/70 absolute inset-0 bg-gradient-to-r to-transparent" />
               <div className="relative flex h-full max-w-[560px] flex-col justify-center p-6 sm:p-10">
                 <Eyebrow>Здоровье без лишней сложности</Eyebrow>
                 <h1 className="text-foreground mt-3 text-3xl leading-[1.08] font-extrabold tracking-tight sm:text-[42px]">
-                  Доверьте здоровье сегодня - предотвратите проблемы завтра
+                  Проверьте здоровье сегодня — предотвратите{" "}
+                  <span className="bg-brand-green text-brand-white rounded-lg px-2 py-0.5">
+                    проблемы завтра
+                  </span>
                 </h1>
                 <p className="text-muted-foreground mt-4 max-w-md text-[16px] leading-relaxed">
                   Врачи, анализы, диагностика, хирургия и стационар в Бишкеке. Поможем выбрать
