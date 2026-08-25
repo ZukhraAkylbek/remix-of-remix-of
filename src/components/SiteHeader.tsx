@@ -97,7 +97,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               <span className="hidden lg:inline">Записаться онлайн</span>
             </a>
 
-            {/* Переключатель языка */}
+            {/* Переключатель языка — десктоп / планшет */}
             <div
               role="group"
               aria-label="Выбор языка"
@@ -116,6 +116,29 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                   }`}
                 >
                   {code === "ru" ? "Рус" : "Кыр"}
+                </button>
+              ))}
+            </div>
+
+            {/* Переключатель языка — мобильный */}
+            <div
+              role="group"
+              aria-label="Выбор языка"
+              className="border-border bg-background flex shrink-0 items-center rounded-lg border p-0.5 sm:hidden"
+            >
+              {(["ru", "ky"] as const).map((code) => (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={() => setLang(code)}
+                  aria-pressed={lang === code}
+                  className={`rounded-md px-1.5 py-1 text-xs font-bold uppercase transition-colors ${
+                    lang === code
+                      ? "bg-brand-green text-brand-white"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {code === "ru" ? "РУ" : "КЫ"}
                 </button>
               ))}
             </div>
