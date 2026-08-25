@@ -12,6 +12,7 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl } from "@/lib/clinic";
+import { BOOKING_URL } from "@/lib/site-config";
 
 const TITLE = "Авиценна — забота о здоровье всей семьи в одной клинике";
 const DESCRIPTION =
@@ -262,28 +263,30 @@ function HomeV3() {
         <section className="relative overflow-hidden">
           <img
             src={aboutHeroAsset.url}
-            alt="Колл-центр клиники Авиценна"
+            alt="Врач проводит онлайн-консультацию"
             className="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
           />
-          <div className="from-brand-green/90 via-brand-green/70 absolute inset-0 bg-gradient-to-r to-brand-green/40" />
+          <div className="from-background/95 via-background/80 to-background/40 absolute inset-0 bg-gradient-to-r" />
           <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
             <div className="max-w-2xl">
-              <p className="text-brand-white/80 text-[13px] font-bold uppercase tracking-wider">
-                Колл-центр
+              <p className="text-brand-red text-[13px] font-bold uppercase tracking-wider">
+                Онлайн-консультации
               </p>
-              <h2 className="text-brand-white mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">
-                Поможем выбрать врача и запишем на приём
+              <h2 className="text-foreground mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">
+                Хотите проконсультироваться не приезжая в клинику?
               </h2>
-              <p className="text-brand-white/90 mt-4 text-[15px] leading-relaxed">
-                Операторы ответят на вопросы, подберут филиал и удобное время. Звонок бесплатный.
+              <p className="text-muted-foreground mt-4 text-[15px] leading-relaxed">
+                Получите консультацию онлайн от специалистов «Авиценны». Удобно, без очередей и
+                лишнего времени в дороге.
               </p>
               <a
-                href={`tel:${CLINIC.phones[0]}`}
-                className="bg-brand-white text-brand-green hover:bg-brand-white/90 mt-6 inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[15px] font-extrabold transition-colors shadow-lg"
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-brand-green text-brand-white hover:bg-brand-green-dark mt-6 inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[15px] font-extrabold transition-colors shadow-lg"
               >
-                <Phone className="size-5" />
-                Позвонить через колл-центр
+                Записаться
               </a>
             </div>
           </div>
