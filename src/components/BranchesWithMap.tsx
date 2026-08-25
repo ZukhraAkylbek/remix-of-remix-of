@@ -161,32 +161,33 @@ export function BranchesWithMap() {
                     type="button"
                     onClick={() => setActive(i)}
                     aria-pressed={isActive}
-                    className={`h-full w-full rounded-xl border p-3 text-left transition-colors ${
+                    className={`flex h-full w-full flex-col rounded-xl border p-3 text-left transition-colors ${
                       isActive
                         ? "border-brand-green bg-surface-green"
                         : "border-border bg-card hover:border-brand-green/40"
                     }`}
                   >
-                    <div className="flex items-start justify-between gap-2">
-                      <p className="text-foreground flex items-start gap-2 text-[14px] font-bold leading-snug">
-                        <MapPin className="text-brand-green mt-0.5 size-4 shrink-0" />
-                        <span className="min-w-0">{b.street}</span>
-                      </p>
+                    <p className="text-foreground flex items-start gap-2 text-[14px] leading-snug font-bold">
+                      <MapPin className="text-brand-green mt-0.5 size-4 shrink-0" />
+                      <span className="min-w-0">{b.street}</span>
+                    </p>
+                    <div className="mt-auto flex items-end justify-between gap-2 pt-2 pl-6">
+                      <span className="text-brand-green text-[12px] font-semibold">
+                        {b.subtitle}
+                      </span>
                       <a
                         href={doubleGisSearchUrl(b.street)}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="text-brand-green hover:text-brand-green-dark shrink-0 text-[11px] font-extrabold uppercase tracking-wide"
+                        className="text-brand-green hover:text-brand-green-dark shrink-0 text-[11px] font-extrabold tracking-wide uppercase"
                         aria-label={`Открыть ${b.street} в 2ГИС`}
                       >
                         2ГИС
                       </a>
                     </div>
-                    <p className="text-brand-green mt-1 pl-6 text-[12px] font-semibold">
-                      {b.subtitle}
-                    </p>
                   </button>
+
                 </li>
               );
             })}
