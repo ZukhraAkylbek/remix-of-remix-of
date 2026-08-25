@@ -118,18 +118,18 @@ export function HomeV3() {
         <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
           <div className="grid gap-5 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
             {/* Большой баннер с фото на всю область */}
-            <div className="border-border relative min-h-[340px] overflow-hidden rounded-3xl border sm:min-h-[420px]">
+            <div className="border-border relative min-h-[460px] overflow-hidden rounded-3xl border sm:min-h-[420px]">
               <img
                 src={asianFamilyHeroAsset.url}
                 alt="Счастливая семья на фоне голубого неба"
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full scale-110 object-cover object-[72%_bottom] sm:scale-100 sm:object-[right_center]"
                 loading="eager"
                 fetchPriority="high"
                 width={1344}
                 height={768}
               />
-              <div className="from-brand-white/95 via-brand-white/70 absolute inset-0 bg-gradient-to-r to-transparent" />
-              <div className="relative flex h-full max-w-[560px] flex-col justify-center p-6 sm:p-10">
+              <div className="from-brand-white/97 via-brand-white/80 absolute inset-0 bg-gradient-to-b to-transparent sm:bg-gradient-to-r sm:via-brand-white/70" />
+              <div className="relative flex h-full max-w-[560px] flex-col justify-start p-6 sm:justify-center sm:p-10">
                 <Eyebrow>Здоровье без лишней сложности</Eyebrow>
                 <h1 className="text-foreground mt-3 text-3xl leading-[1.08] font-extrabold tracking-tight sm:text-[42px]">
                   Проверьте здоровье сегодня — предотвратите{" "}
