@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "00c2643d-d849-4cec-9d17-518e855ec8cb",
-  "project_id": "46d3ec9c-a2c4-4bab-bb7f-b2b7a4158214",
-  "url": "/__l5e/assets-v1/00c2643d-d849-4cec-9d17-518e855ec8cb/logo-avicenna-kg.jpg",
-  "r2_key": "a/v1/46d3ec9c-a2c4-4bab-bb7f-b2b7a4158214/00c2643d-d849-4cec-9d17-518e855ec8cb/logo-avicenna-kg.jpg",
-  "original_filename": "logo-avicenna-kg.jpg",
-  "size": 33254,
   "content_type": "image/jpeg",
-  "created_at": "2026-08-20T14:48:52Z"
+  "created_at": "2026-08-20T14:48:52Z",
+  "original_filename": "logo-avicenna-kg.jpg",
+  "project_id": "8a47584d-7207-4a19-bf59-39d4c4770967",
+  "r2_key": "a/v1/8a47584d-7207-4a19-bf59-39d4c4770967/00c2643d-d849-4cec-9d17-518e855ec8cb/logo-avicenna-kg.jpg",
+  "size": 33254,
+  "url": "/__l5e/assets-v1/00c2643d-d849-4cec-9d17-518e855ec8cb/logo-avicenna-kg.jpg",
+  "version": 1
 }
