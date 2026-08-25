@@ -80,6 +80,17 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               <span className="hidden lg:inline">Позвонить</span>
             </a>
 
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Записаться онлайн"
+              className="gradient-accent text-accent-foreground hover:brightness-105 inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-bold transition-all sm:size-auto sm:px-4 sm:py-2.5"
+            >
+              <Calendar className="size-4 shrink-0" />
+              <span className="hidden lg:inline">Записаться</span>
+            </a>
+
             <button
               type="button"
               aria-label={open ? "Закрыть меню" : "Открыть меню"}
