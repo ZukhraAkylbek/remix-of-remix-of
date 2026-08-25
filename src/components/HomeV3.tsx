@@ -131,9 +131,9 @@ export function HomeV3() {
               <div className="from-brand-white/97 via-brand-white/80 absolute inset-0 bg-gradient-to-b to-transparent sm:bg-gradient-to-r sm:via-brand-white/70" />
               <div className="relative flex h-full max-w-[560px] flex-col justify-start p-6 sm:justify-center sm:p-10">
                 <Eyebrow>Здоровье без лишней сложности</Eyebrow>
-                <h1 className="text-foreground mt-3 text-3xl leading-[1.08] font-extrabold tracking-tight sm:text-[42px]">
+                <h1 className="text-foreground mt-4 text-3xl leading-[1.22] font-extrabold tracking-tight sm:text-[42px] sm:leading-[1.18]">
                   Проверьте здоровье сегодня — предотвратите{" "}
-                  <span className="bg-brand-green text-brand-white rounded-lg px-2 py-0.5">
+                  <span className="bg-brand-green text-brand-white rounded-lg px-2 py-1">
                     {"\n"}проблемы завтра
                   </span>
                 </h1>
