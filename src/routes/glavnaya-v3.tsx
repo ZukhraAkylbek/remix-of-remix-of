@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Clock, MapPin, Phone, Sparkles, Star, Stethoscope, TrendingUp } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Phone, Star, Stethoscope, TrendingUp } from "lucide-react";
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
 import aboutMissionAsset from "@/assets/about-mission.jpg.asset.json";
@@ -107,36 +107,24 @@ const CLINIC_STATS = [
   { value: "410+", label: "медицинских услуг", icon: TrendingUp },
 ];
 
-const NEWS_OFFERS = [
+const FEATURED_OFFER = {
+  title: "Сомнография",
+  description: "консультация + диагностика на сомнографе",
+  price: "3700",
+  oldPrice: "4900",
+  href: "/diagnostika",
+  image: aboutHeroAsset.url,
+};
+
+const SIDE_OFFERS = [
+  { title: "Процедурные 24/7", href: "/travmpunkt", image: doctorPatientHeroAsset.url },
   {
-    title: "Сомнография",
-    description: "Консультация + диагностика на сомнографе со скидкой",
-    price: "3 700",
-    oldPrice: "4 900",
-    href: "/diagnostika",
-    image: aboutHeroAsset.url,
-    tag: "Акция",
-    tone: "pastel-coral",
-    tagTone: "bg-brand-terracotta/90 text-brand-white",
+    title: "Бесплатная консультация хирурга по операции",
+    href: "/hirurgiya",
+    image: aboutMissionAsset.url,
   },
-  {
-    title: "Счастливые часы",
-    description: "Пройдите чекап утром и получите дополнительную скидку 10%",
-    href: "/checkups",
-    image: doctorPatientHeroAsset.url,
-    tag: "Спецпредложение",
-    tone: "pastel-mint",
-    tagTone: "bg-brand-green/90 text-brand-white",
-  },
-  {
-    title: "Услуги на дому",
-    description: "Врач, анализы и процедуры без выезда в клинику",
-    href: "/uslugi/uslugi-na-domu",
-    image: image2Asset.url,
-    tag: "Новость",
-    tone: "pastel-sky",
-    tagTone: "bg-brand-gray/90 text-brand-white",
-  },
+  { title: "Проверь магний и фосфор с 50% скидкой", href: "/uslugi/analizy", image: image2Asset.url },
+  { title: "Счастливые часы", href: "/checkups", image: doctorPatientHeroAsset.url },
 ];
 
 function HomeV3() {
@@ -287,52 +275,62 @@ function HomeV3() {
         </Section>
 
         {/* Новости и специальные предложения */}
-        <Section tone="soft" eyebrow="Новости и акции" title="Специальные предложения">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {NEWS_OFFERS.map((item, index) => (
-              <Reveal key={item.title} delay={index * 80}>
+        <Section tone="soft" eyebrow="Актуально" title="Новости и специальные предложения">
+          <div className="grid gap-4 lg:grid-cols-2">
+            {/* Большая карточка — Сомнография */}
+            <Reveal className="lg:row-span-2">
+              <Link
+                to={FEATURED_OFFER.href as "/"}
+                className="group relative flex h-full min-h-[320px] flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-7"
+              >
+                <img
+                  src={FEATURED_OFFER.image}
+                  alt={FEATURED_OFFER.title}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="from-brand-green via-brand-green/85 absolute inset-0 bg-gradient-to-r to-transparent" />
+                <div className="relative">
+                  <span className="bg-brand-white/20 text-brand-white inline-block rounded-2xl px-5 py-2.5 text-2xl font-extrabold sm:text-3xl">
+                    {FEATURED_OFFER.title}
+                  </span>
+                  <div className="bg-brand-white/15 text-brand-white mt-5 max-w-sm rounded-2xl p-5">
+                    <p className="text-[17px] leading-snug font-bold">{FEATURED_OFFER.description}</p>
+                    <p className="mt-3 flex items-baseline gap-3">
+                      <span className="text-4xl font-extrabold">{FEATURED_OFFER.price}</span>
+                      <span className="text-brand-white/70 text-lg line-through">
+                        {FEATURED_OFFER.oldPrice}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <span className="bg-brand-white text-brand-green relative mt-6 inline-flex w-fit items-center gap-2 rounded-full px-5 py-3 text-[15px] font-extrabold transition-transform group-hover:translate-x-1">
+                  Подробнее
+                  <ArrowRight className="size-4" />
+                </span>
+              </Link>
+            </Reveal>
+
+            {/* Правые карточки */}
+            {SIDE_OFFERS.map((item, index) => (
+              <Reveal key={item.title} delay={index * 60}>
                 <Link
                   to={item.href as "/"}
-                  className={`${item.tone} card-lift group flex h-full flex-col overflow-hidden rounded-3xl border border-border/40 transition-all`}
+                  className="bg-brand-green text-brand-white group flex h-full min-h-[150px] items-stretch justify-between gap-4 overflow-hidden rounded-3xl p-5 transition-all hover:brightness-105"
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <span
-                      className={`${item.tagTone} absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider shadow-sm`}
-                    >
-                      <Sparkles className="size-3" />
-                      {item.tag}
-                    </span>
-                  </div>
-                  <div className="flex flex-1 flex-col gap-2 p-5">
-                    <h3 className="text-foreground text-lg font-extrabold tracking-tight">
-                      {item.title}
-                    </h3>
-                    <p className="text-muted-foreground flex-1 text-[14px] leading-relaxed">
-                      {item.description}
-                    </p>
-                    {item.price && (
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-brand-green text-xl font-extrabold">
-                          {item.price} с
-                        </span>
-                        {item.oldPrice && (
-                          <span className="text-muted-foreground text-sm line-through">
-                            {item.oldPrice} с
-                          </span>
-                        )}
-                      </div>
-                    )}
-                    <span className="text-brand-green inline-flex items-center gap-1.5 text-[13px] font-extrabold transition-transform group-hover:translate-x-1">
+                  <div className="flex flex-col justify-between">
+                    <h3 className="max-w-[16ch] text-xl leading-snug font-extrabold">{item.title}</h3>
+                    <span className="bg-brand-white text-brand-green mt-4 inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[14px] font-extrabold transition-transform group-hover:translate-x-1">
                       Подробнее
                       <ArrowRight className="size-3.5" />
                     </span>
                   </div>
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-28 shrink-0 rounded-2xl object-cover sm:w-32"
+                    loading="lazy"
+                  />
                 </Link>
               </Reveal>
             ))}

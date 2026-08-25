@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import { Calendar, Menu, MessageCircle, Phone, X } from "lucide-react";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { Calendar, Menu, MessageCircle, Phone, User, X } from "lucide-react";
 import { useState } from "react";
 
 import logo from "@/assets/logo-avicenna-kg.jpg.asset.json";
@@ -11,11 +11,11 @@ import { SiteSearch } from "@/components/SiteSearch";
 
 export const HEADER_NAV_SLOTS = [
   { label: "Главная", href: "/" },
-  { label: "Травмпункт 24/7", href: "/travmpunkt" },
   { label: "О нас", href: "/about" },
   { label: "Услуги", href: "/uslugi" },
-  { label: "Хирургия", href: "/hirurgiya" },
   { label: "Врачи", href: "/glavnaya-v3" },
+  { label: "Травмпункт 24/7", href: "/travmpunkt" },
+  { label: "Хирургия", href: "/hirurgiya" },
   { label: "Чекапы", href: "/checkups" },
   { label: "Стационар", href: "/napravleniya/statsionar" },
   { label: "Диагностика", href: "/diagnostika" },
@@ -25,11 +25,16 @@ const isExternal = (href: string) => /^(https?:|tel:|mailto:)/i.test(href);
 
 export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
   const [open, setOpen] = useState(false);
+  const [lang, setLang] = useState<"ru" | "kg">("ru");
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { t } = useSiteContent();
   const navItems = HEADER_NAV_SLOTS.map((slot, i) => ({
     label: t(`header.nav.${i + 1}.label`, slot.label),
     href: t(`header.nav.${i + 1}.href`, slot.href),
   })).filter((item) => item.label.trim() && item.href.trim());
+
+  const isActive = (href: string) =>
+    !isExternal(href) && (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   const phone = CLINIC.phones[0] ?? "";
   const whatsappHref = phone ? `https://wa.me/${phone.replace(/\D/g, "")}` : "#";
@@ -91,6 +96,29 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               <span className="hidden lg:inline">Записаться онлайн</span>
             </a>
 
+            {/* Переключатель языка */}
+            <div
+              role="group"
+              aria-label="Выбор языка"
+              className="border-border bg-background hidden shrink-0 items-center rounded-xl border p-0.5 sm:flex"
+            >
+              {(["ru", "kg"] as const).map((code) => (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={() => setLang(code)}
+                  aria-pressed={lang === code}
+                  className={`rounded-lg px-2.5 py-1.5 text-sm font-bold uppercase transition-colors ${
+                    lang === code
+                      ? "bg-brand-green text-brand-white"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {code === "ru" ? "Рус" : "Кыр"}
+                </button>
+              ))}
+            </div>
+
             <button
               type="button"
               aria-label={open ? "Закрыть меню" : "Открыть меню"}
@@ -114,18 +142,31 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
         aria-label="Главное меню"
         className="bg-brand-green text-brand-white hidden shadow-sm md:block"
       >
-        <div className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-4 py-2 sm:px-6 lg:justify-center lg:overflow-visible [-ms-overflow-style:none] [scrollbar-width:none]">
-
+        <div className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-4 py-1.5 sm:px-6 lg:overflow-visible [-ms-overflow-style:none] [scrollbar-width:none]">
           {navItems.map((item) => (
             <a
               key={`${item.label}-${item.href}`}
               href={item.href}
+              title={item.label}
+              aria-current={isActive(item.href) ? "page" : undefined}
               {...(isExternal(item.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="hover:bg-brand-white/10 shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-[15px] font-semibold transition-colors"
+              className={`shrink-0 whitespace-nowrap rounded-lg px-3 py-2.5 text-[17px] font-bold transition-colors ${
+                isActive(item.href)
+                  ? "bg-brand-white/20 underline decoration-2 underline-offset-8"
+                  : "hover:bg-brand-white/15 hover:underline hover:decoration-2 hover:underline-offset-8"
+              }`}
             >
               {item.label}
             </a>
           ))}
+
+          <a
+            href="/auth"
+            className="border-brand-white/60 text-brand-white hover:bg-brand-white hover:text-brand-green ml-auto inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border px-3.5 py-2 text-[16px] font-bold transition-colors"
+          >
+            <User className="size-4" />
+            Личный кабинет
+          </a>
         </div>
       </nav>
 
