@@ -224,7 +224,7 @@ function HomeV3() {
         </section>
 
         {/* О клинике */}
-        <Section id="o-klinike" eyebrow="О клинике" title="Авиценна с 2000 года">
+        <Section id="o-klinike" eyebrow="О НАШЕЙ СЕТИ КЛИНИК" title="Авиценна">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-center">
             <Reveal className="order-2 lg:order-1">
               <div className="relative overflow-hidden rounded-3xl border border-border shadow-lg">
