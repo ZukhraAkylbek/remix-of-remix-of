@@ -349,6 +349,27 @@ function HomeV3() {
 
         {/* Отзывы */}
         <Section tone="soft" eyebrow="Доверие" title="Отзывы пациентов">
+          <div className="grid auto-rows-fr gap-4 lg:grid-cols-3">
+            {REVIEWS.map((review) => (
+              <figure
+                key={review.text}
+                className="bg-background border-border flex h-full flex-col rounded-2xl border p-6"
+              >
+                <div className="text-brand-green flex gap-1">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} className="size-4 fill-current" />
+                  ))}
+                </div>
+                <blockquote className="text-foreground mt-4 text-[15px] leading-relaxed">
+                  {review.text}
+                </blockquote>
+                <figcaption className="text-muted-foreground mt-auto pt-4 text-[13px]">
+                  Источник: {review.src}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </Section>
 
         {/* Врачи */}
         <Section id="vrachi" tone="soft" eyebrow="Команда" title="Врачи, которым доверяют">
@@ -409,29 +430,6 @@ function HomeV3() {
           </div>
         </Section>
 
-        {/* Отзывы */}
-        <Section tone="soft" eyebrow="Доверие" title="Отзывы пациентов">
-          <div className="grid auto-rows-fr gap-4 lg:grid-cols-3">
-            {REVIEWS.map((review) => (
-              <figure
-                key={review.text}
-                className="bg-background border-border flex h-full flex-col rounded-2xl border p-6"
-              >
-                <div className="text-brand-green flex gap-1">
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <Star key={i} className="size-4 fill-current" />
-                  ))}
-                </div>
-                <blockquote className="text-foreground mt-4 text-[15px] leading-relaxed">
-                  {review.text}
-                </blockquote>
-                <figcaption className="text-muted-foreground mt-auto pt-4 text-[13px]">
-                  Источник: {review.src}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </Section>
 
         {/* Запись */}
         <Section tone="green" eyebrow="Запись" title="Оставьте номер — поможем выбрать врача">
