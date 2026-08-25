@@ -83,37 +83,6 @@ const ROUTE_CARDS = [
   { title: "Чекапы", href: "/checkups", tone: "pastel-peach" },
 ];
 
-const FEATURED_OFFER = {
-  title: "Сомнография",
-  text: "консультация + диагностика на сомнографе",
-  price: "3700",
-  oldPrice: "4900",
-  href: "/diagnostika",
-  image: aboutHeroAsset.url,
-};
-
-const RIGHT_OFFERS = [
-  {
-    title: "Процедурные 24/7",
-    href: "/travmpunkt",
-    image: imageWebpAsset.url,
-  },
-  {
-    title: "Бесплатная консультация хирурга по операции",
-    href: "/hirurgiya",
-    image: imageAsset.url,
-  },
-  {
-    title: "Проверь магний и фосфор с 50% скидкой",
-    href: "/uslugi/analizy",
-    image: image2Asset.url,
-  },
-  {
-    title: "Счастливые часы",
-    href: "/checkups",
-    image: doctorPatientHeroAsset.url,
-  },
-];
 
 const REVIEWS = [
   { text: "Быстро приняли в травмпункте ночью, всё объяснили и сделали снимок за 15 минут.", src: "2GIS" },
