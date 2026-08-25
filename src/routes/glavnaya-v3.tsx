@@ -168,7 +168,7 @@ function HomeV3() {
       <SiteHeader />
       <main>
         {/* Оффер */}
-        <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12">
+        <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
           <div className="grid gap-5 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
             {/* Большой баннер с фото на всю область */}
             <div className="border-border relative min-h-[340px] overflow-hidden rounded-3xl border sm:min-h-[420px]">
