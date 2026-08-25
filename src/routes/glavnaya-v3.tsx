@@ -12,6 +12,7 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl } from "@/lib/clinic";
+import { BOOKING_URL } from "@/lib/site-config";
 
 const TITLE = "Авиценна — забота о здоровье всей семьи в одной клинике";
 const DESCRIPTION =
