@@ -226,6 +226,68 @@ function HomeV3() {
           </div>
         </section>
 
+        {/* О клинике */}
+        <Section id="o-klinike" eyebrow="О клинике" title="Авиценна с 2000 года">
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+            <Reveal className="order-2 lg:order-1">
+              <div className="relative overflow-hidden rounded-3xl border border-border shadow-lg">
+                <img
+                  src={aboutMissionAsset.url}
+                  alt="Сеть клиник Авиценна в Бишкеке"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-green/20 to-transparent" />
+              </div>
+            </Reveal>
+            <div className="order-1 flex flex-col gap-6 lg:order-2">
+              <Reveal delay={80}>
+                <p className="text-muted-foreground text-[15px] leading-relaxed sm:text-[16px]">
+                  Сеть клиник «Авиценна» ведет свою историю с 2000 года, когда врач-дерматовенеролог,
+                  кандидат медицинских наук Жыпар Абдыказиевна Керималиева открыла первый медицинский
+                  центр в небольшом кабинете на улице Суеркулова.
+                </p>
+              </Reveal>
+              <Reveal delay={120}>
+                <p className="text-muted-foreground text-[15px] leading-relaxed sm:text-[16px]">
+                  Сегодня «Авиценна» — это 6 филиалов в Бишкеке, более 60 врачебных специальностей и
+                  более 410 медицинских услуг для взрослых и детей. Мы объединяем специалистов,
+                  современную диагностику и собственную лабораторию, чтобы пациент мог получить
+                  необходимую качественную медицинскую помощь в одном клинике.
+                </p>
+              </Reveal>
+              <Reveal delay={160}>
+                <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                  {CLINIC_STATS.map((stat) => (
+                    <div
+                      key={stat.label}
+                      className="bg-surface-soft border-border flex flex-col items-center gap-2 rounded-2xl border p-3 text-center sm:p-4"
+                    >
+                      <stat.icon className="text-brand-green size-5 sm:size-6" />
+                      <div>
+                        <p className="text-foreground text-xl font-extrabold sm:text-2xl">
+                          {stat.value}
+                        </p>
+                        <p className="text-muted-foreground mt-0.5 text-[11px] leading-tight sm:text-xs">
+                          {stat.label}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+              <Reveal delay={200}>
+                <Link
+                  to="/about"
+                  className="text-brand-green hover:text-brand-green-dark inline-flex w-fit items-center gap-2 text-[15px] font-extrabold transition-colors"
+                >
+                  Подробнее о клинике
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Reveal>
+            </div>
+          </div>
+        </Section>
 
         {/* Мини-офферы */}
         <Section eyebrow="Актуально" title="Что вам нужно?">
@@ -295,6 +357,59 @@ function HomeV3() {
                   loading="lazy"
                 />
               </Link>
+            ))}
+          </div>
+        </Section>
+
+        {/* Новости и специальные предложения */}
+        <Section tone="soft" eyebrow="Новости и акции" title="Специальные предложения">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {NEWS_OFFERS.map((item, index) => (
+              <Reveal key={item.title} delay={index * 80}>
+                <Link
+                  to={item.href as "/"}
+                  className={`${item.tone} card-lift group flex h-full flex-col overflow-hidden rounded-3xl border border-border/40 transition-all`}
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <span
+                      className={`${item.tagTone} absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider shadow-sm`}
+                    >
+                      <Sparkles className="size-3" />
+                      {item.tag}
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col gap-2 p-5">
+                    <h3 className="text-foreground text-lg font-extrabold tracking-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground flex-1 text-[14px] leading-relaxed">
+                      {item.description}
+                    </p>
+                    {item.price && (
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-brand-green text-xl font-extrabold">
+                          {item.price} с
+                        </span>
+                        {item.oldPrice && (
+                          <span className="text-muted-foreground text-sm line-through">
+                            {item.oldPrice} с
+                          </span>
+                        )}
+                      </div>
+                    )}
+                    <span className="text-brand-green inline-flex items-center gap-1.5 text-[13px] font-extrabold transition-transform group-hover:translate-x-1">
+                      Подробнее
+                      <ArrowRight className="size-3.5" />
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </Section>
