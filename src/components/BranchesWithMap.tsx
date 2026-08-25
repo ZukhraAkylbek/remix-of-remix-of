@@ -1,65 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import { MapPin, Navigation, Phone } from "lucide-react";
+import "leaflet/dist/leaflet.css";
 
 import { CLINIC, doubleGisSearchUrl, googleMapsDirectionsUrl } from "@/lib/clinic";
 
-const MAPS_KEY = import.meta.env["VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY"] as
-  | string
-  | undefined;
-const TRACKING_ID = import.meta.env["VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID"] as
-  | string
-  | undefined;
+const pinSvg = (active: boolean) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" width="${active ? 38 : 32}" height="${active ? 49 : 42}" viewBox="0 0 40 52">
+      <path d="M20 1C10.6 1 3 8.6 3 18c0 12 17 33 17 33s17-21 17-33C37 8.6 29.4 1 20 1z" fill="${active ? "#0f7a37" : "#16a34a"}" stroke="#ffffff" stroke-width="${active ? 3 : 2.5}"/>
+      <circle cx="20" cy="18" r="6.5" fill="${active ? "#bbf7d0" : "#ffffff"}"/>
+    </svg>`;
 
-const GREEN_PIN =
-  "data:image/svg+xml;charset=UTF-8," +
-  encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="52" viewBox="0 0 40 52">
-      <path d="M20 1C10.6 1 3 8.6 3 18c0 12 17 33 17 33s17-21 17-33C37 8.6 29.4 1 20 1z" fill="#16a34a" stroke="#ffffff" stroke-width="2.5"/>
-      <circle cx="20" cy="18" r="6.5" fill="#ffffff"/>
-    </svg>`,
-  );
+const escapeHtml = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
 
-const ACTIVE_PIN =
-  "data:image/svg+xml;charset=UTF-8," +
-  encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="62" viewBox="0 0 40 52">
-      <path d="M20 1C10.6 1 3 8.6 3 18c0 12 17 33 17 33s17-21 17-33C37 8.6 29.4 1 20 1z" fill="#0f7a37" stroke="#ffffff" stroke-width="3"/>
-      <circle cx="20" cy="18" r="6.5" fill="#bbf7d0"/>
-    </svg>`,
-  );
-
-let mapsLoader: Promise<void> | null = null;
-
-function loadMaps(): Promise<void> {
-  if (typeof window === "undefined") return Promise.resolve();
-  if ((window as any).google?.maps) return Promise.resolve();
-  if (mapsLoader) return mapsLoader;
-
-  mapsLoader = new Promise<void>((resolve, reject) => {
-    if (!MAPS_KEY) {
-      reject(new Error("no-key"));
-      return;
-    }
-    const cbName = "__initAvicennaMap";
-    (window as any)[cbName] = () => resolve();
-    const script = document.createElement("script");
-    const channel = TRACKING_ID ? `&channel=${TRACKING_ID}` : "";
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${MAPS_KEY}&loading=async&callback=${cbName}&language=ru${channel}`;
-    script.async = true;
-    script.onerror = () => reject(new Error("maps-load-failed"));
-    document.head.appendChild(script);
-  });
-  return mapsLoader;
-}
-
-/** Карта филиалов с зелёными интерактивными метками. */
+/** Карта филиалов с зелёными интерактивными метками (Leaflet + OpenStreetMap, без API-ключей). */
 export function BranchesWithMap() {
   const [active, setActive] = useState(0);
   const [failed, setFailed] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
-  const infoRef = useRef<any>(null);
+  const leafletRef = useRef<any>(null);
 
   const branches = CLINIC.branches;
   const branch = branches[active] ?? branches[0]!;
@@ -67,76 +27,97 @@ export function BranchesWithMap() {
 
   useEffect(() => {
     let cancelled = false;
-    loadMaps()
-      .then(() => {
-        if (cancelled || !containerRef.current) return;
-        const g = (window as any).google;
-        const map = new g.maps.Map(containerRef.current, {
-          center: { lat: branches[0]!.latitude, lng: branches[0]!.longitude },
-          zoom: 12,
-          mapTypeControl: false,
-          streetViewControl: false,
-          fullscreenControl: false,
-        });
-        mapRef.current = map;
-        infoRef.current = new g.maps.InfoWindow();
+    import("leaflet")
+      .then((mod) => {
+        const L = (mod as any).default ?? mod;
+        if (cancelled || !containerRef.current || mapRef.current) return;
+        leafletRef.current = L;
 
-        const bounds = new g.maps.LatLngBounds();
+        const map = L.map(containerRef.current, {
+          scrollWheelZoom: false,
+          attributionControl: true,
+        }).setView([branches[0]!.latitude, branches[0]!.longitude], 12);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: "&copy; OpenStreetMap",
+        }).addTo(map);
+
+        mapRef.current = map;
+
         markersRef.current = branches.map((b, i) => {
-          const position = { lat: b.latitude, lng: b.longitude };
-          bounds.extend(position);
-          const marker = new g.maps.Marker({
-            position,
-            map,
+          const marker = L.marker([b.latitude, b.longitude], {
             title: b.street,
-            icon: { url: GREEN_PIN, scaledSize: new g.maps.Size(32, 42) },
-          });
-          marker.addListener("click", () => setActive(i));
+            icon: L.divIcon({
+              html: pinSvg(false),
+              className: "avicenna-pin",
+              iconSize: [32, 42],
+              iconAnchor: [16, 42],
+              popupAnchor: [0, -38],
+            }),
+          }).addTo(map);
+          marker.bindPopup(
+            `<div style="font-family:inherit;max-width:220px">
+               <div style="font-weight:700;font-size:14px;color:#111">${escapeHtml(b.street)}</div>
+               <div style="font-size:12px;color:#16a34a;font-weight:600;margin-top:2px">${escapeHtml(b.subtitle)}</div>
+               <div style="font-size:12px;color:#555;margin-top:2px">${escapeHtml(b.city)}, Кыргызстан</div>
+               <div style="display:flex;gap:10px;margin-top:8px">
+                 <a href="${googleMapsDirectionsUrl(b.latitude, b.longitude, `${b.street}, ${b.city}`)}" target="_blank" rel="noopener noreferrer"
+                    style="font-size:12px;font-weight:700;color:#16a34a">Маршрут →</a>
+                 <a href="${doubleGisSearchUrl(b.street)}" target="_blank" rel="noopener noreferrer"
+                    style="font-size:12px;font-weight:700;color:#16a34a">2ГИС</a>
+               </div>
+             </div>`,
+          );
+          marker.on("click", () => setActive(i));
           return marker;
         });
-        map.fitBounds(bounds, 48);
+
+        map.fitBounds(
+          branches.map((b) => [b.latitude, b.longitude]) as any,
+          { padding: [40, 40] },
+        );
+        setTimeout(() => map.invalidateSize(), 200);
       })
       .catch(() => {
         if (!cancelled) setFailed(true);
       });
+
     return () => {
       cancelled = true;
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+        markersRef.current = [];
+      }
     };
   }, [branches]);
 
-  // Подсветка активной метки, центрирование и всплывающая подсказка с адресом
+  // Подсветка активной метки, центрирование и подсказка с адресом
   useEffect(() => {
-    const g = (window as any).google;
-    if (!g?.maps || !mapRef.current || markersRef.current.length === 0) return;
+    const L = leafletRef.current;
+    if (!L || !mapRef.current || markersRef.current.length === 0) return;
     markersRef.current.forEach((marker, i) => {
       const isActive = i === active;
-      marker.setIcon({
-        url: isActive ? ACTIVE_PIN : GREEN_PIN,
-        scaledSize: new g.maps.Size(isActive ? 38 : 32, isActive ? 49 : 42),
-      });
-      marker.setZIndex(isActive ? 10 : 1);
+      marker.setIcon(
+        L.divIcon({
+          html: pinSvg(isActive),
+          className: "avicenna-pin",
+          iconSize: isActive ? [38, 49] : [32, 42],
+          iconAnchor: isActive ? [19, 49] : [16, 42],
+          popupAnchor: [0, isActive ? -45 : -38],
+        }),
+      );
+      marker.setZIndexOffset(isActive ? 1000 : 0);
     });
     const b = branches[active];
     const marker = markersRef.current[active];
-    if (b && marker && infoRef.current) {
-      const escape = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
-      infoRef.current.setContent(
-        `<div style="font-family:inherit;max-width:220px">
-           <div style="font-weight:700;font-size:14px;color:#111">${escape(b.street)}</div>
-           <div style="font-size:12px;color:#16a34a;font-weight:600;margin-top:2px">${escape(b.subtitle)}</div>
-           <div style="font-size:12px;color:#555;margin-top:2px">${escape(b.city)}, Кыргызстан</div>
-           <div style="display:flex;gap:10px;margin-top:8px">
-             <a href="${googleMapsDirectionsUrl(b.latitude, b.longitude, `${b.street}, ${b.city}`)}" target="_blank" rel="noopener noreferrer"
-                style="font-size:12px;font-weight:700;color:#16a34a">Маршрут →</a>
-             <a href="${doubleGisSearchUrl(b.street)}" target="_blank" rel="noopener noreferrer"
-                style="font-size:12px;font-weight:700;color:#16a34a">2ГИС</a>
-           </div>
-         </div>`,
-      );
-      infoRef.current.open({ map: mapRef.current, anchor: marker });
-      mapRef.current.panTo({ lat: b.latitude, lng: b.longitude });
+    if (b && marker) {
+      mapRef.current.panTo([b.latitude, b.longitude]);
+      marker.openPopup();
     }
   }, [active, branches]);
+
 
 
   return (
