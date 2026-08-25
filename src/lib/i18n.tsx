@@ -60,15 +60,16 @@ function walk(root: Node, lang: Lang) {
       (["placeholder", "title", "aria-label"] as const).forEach((attr) => {
         const value = el.getAttribute(attr);
         if (!value) return;
-        const key = `__orig_${attr}`;
-        const original = el.dataset[key] ?? value;
+        const key = `data-orig-${attr}`;
+        const stored = el.getAttribute(key);
+        const original = stored ?? value;
         if (lang === "ru") {
-          if (el.dataset[key]) el.setAttribute(attr, original);
+          if (stored) el.setAttribute(attr, original);
           return;
         }
         const next = translate(original);
         if (next && next !== value) {
-          el.dataset[key] = original;
+          el.setAttribute(key, original);
           el.setAttribute(attr, next);
         }
       });
