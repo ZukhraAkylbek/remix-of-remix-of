@@ -1,6 +1,7 @@
 import logo from "@/assets/logo-avicenna-kg.jpg.asset.json";
 import { Editable } from "@/components/live-edit/LiveEdit";
 import { CLINIC } from "@/lib/clinic";
+import { doubleGisSearchUrl } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 
 export function SiteFooter() {
