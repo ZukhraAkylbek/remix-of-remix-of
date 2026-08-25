@@ -107,6 +107,37 @@ const CLINIC_STATS = [
   { value: "410+", label: "медицинских услуг", icon: TrendingUp },
 ];
 
+const NEWS_OFFERS = [
+  {
+    title: "Сомнография",
+    description: "Консультация + диагностика на сомнографе со скидкой",
+    price: "3 700",
+    oldPrice: "4 900",
+    href: "/diagnostika",
+    image: aboutHeroAsset.url,
+    tag: "Акция",
+    tone: "pastel-coral",
+    tagTone: "bg-brand-terracotta/90 text-brand-white",
+  },
+  {
+    title: "Счастливые часы",
+    description: "Пройдите чекап утром и получите дополнительную скидку 10%",
+    href: "/checkups",
+    image: doctorPatientHeroAsset.url,
+    tag: "Спецпредложение",
+    tone: "pastel-mint",
+    tagTone: "bg-brand-green/90 text-brand-white",
+  },
+  {
+    title: "Услуги на дому",
+    description: "Врач, анализы и процедуры без выезда в клинику",
+    href: "/uslugi/uslugi-na-domu",
+    image: image2Asset.url,
+    tag: "Новость",
+    tone: "pastel-sky",
+    tagTone: "bg-brand-gray/90 text-brand-white",
+  },
+];
 
 function HomeV3() {
   return (
