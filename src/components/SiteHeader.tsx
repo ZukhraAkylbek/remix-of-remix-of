@@ -182,13 +182,13 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
         <>
           {/* Overlay */}
           <div
-            className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-[60] bg-black/30 backdrop-blur-sm lg:hidden"
             onClick={() => setOpen(false)}
             aria-hidden="true"
           />
 
           {/* Панель */}
-          <div className="bg-brand-green text-brand-white fixed inset-y-0 right-0 z-50 flex w-[85vw] max-w-sm flex-col shadow-2xl lg:hidden">
+          <div className="bg-brand-green text-brand-white fixed inset-y-0 right-0 z-[70] flex w-[85vw] max-w-sm flex-col shadow-2xl lg:hidden">
             {/* Шапка панели */}
             <div className="border-b border-brand-white/20 px-4 py-3">
               <div className="flex items-center justify-between">
