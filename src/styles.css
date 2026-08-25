@@ -456,3 +456,8 @@
     animation: none;
   }
 }
+
+.avicenna-pin {
+  background: transparent;
+  border: 0;
+}
