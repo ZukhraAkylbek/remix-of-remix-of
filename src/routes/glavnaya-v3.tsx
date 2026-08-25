@@ -259,7 +259,7 @@ function HomeV3() {
         </Section>
 
         {/* Мини-офферы */}
-        <Section eyebrow="Актуально" title="Что вам нужно?">
+        <Section eyebrow="Актуально" title="Новости и специальные предложения">
           <div className="grid gap-4 lg:grid-cols-[1.35fr_1fr] lg:grid-rows-2">
             {/* Левый большой баннер */}
             <Link
