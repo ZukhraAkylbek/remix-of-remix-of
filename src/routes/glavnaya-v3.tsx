@@ -127,7 +127,7 @@ function HomeV3() {
               <div className="relative flex h-full max-w-[560px] flex-col justify-center p-6 sm:p-10">
                 <Eyebrow>Здоровье без лишней сложности</Eyebrow>
                 <h1 className="text-foreground mt-3 text-3xl leading-[1.08] font-extrabold tracking-tight sm:text-[42px]">
-                  Забота о здоровье всей семьи — в одной клинике
+                  Доверьте здоровье сегодня - предотвратите проблеы завтра 
                 </h1>
                 <p className="text-muted-foreground mt-4 max-w-md text-[16px] leading-relaxed">
                   Врачи, анализы, диагностика, хирургия и стационар в Бишкеке. Поможем выбрать
