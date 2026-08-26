@@ -325,7 +325,7 @@ export function HomeV3() {
                   className={`${item.tone} text-foreground group flex h-full min-h-[170px] items-stretch justify-between gap-4 overflow-hidden rounded-3xl border border-border/40 p-5 transition-all hover:-translate-y-1 hover:shadow-lg`}
                 >
                   <div className="flex flex-1 flex-col">
-                    <h3 className="line-clamp-3 min-h-[4.5rem] max-w-[16ch] text-xl leading-snug font-extrabold">
+                    <h3 className="line-clamp-3 min-h-[4.5rem] w-full text-xl leading-snug font-extrabold">
                       {item.title}
                     </h3>
                     <span className="bg-brand-white text-foreground mt-auto inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[14px] font-extrabold transition-transform group-hover:translate-x-1 shadow-sm">
