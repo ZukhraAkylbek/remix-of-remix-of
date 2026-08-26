@@ -21,7 +21,7 @@ export function SiteFooter() {
           <Editable
             ekey="footer.tagline"
             label="Текст в подвале"
-            fallback="\n"
+            fallback=""
             multiline
             as="p"
             className="text-muted-foreground mt-4 max-w-sm text-base"
