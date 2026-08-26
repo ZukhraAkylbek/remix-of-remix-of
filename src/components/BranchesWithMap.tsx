@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MapPin, Navigation, Phone } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin, Navigation, Phone } from "lucide-react";
 import "leaflet/dist/leaflet.css";
 
 import { CLINIC, doubleGisSearchUrl, googleMapsDirectionsUrl } from "@/lib/clinic";
