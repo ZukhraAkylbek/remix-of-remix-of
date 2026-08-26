@@ -117,14 +117,15 @@ const FEATURED_OFFER = {
 };
 
 const SIDE_OFFERS = [
-  { title: "Процедурные 24/7", href: "/travmpunkt", image: doctorPatientHeroAsset.url },
+  { title: "Процедурные 24/7", href: "/travmpunkt", image: doctorPatientHeroAsset.url, tone: "pastel-coral" },
   {
     title: "Бесплатная консультация хирурга по операции",
     href: "/hirurgiya",
     image: aboutMissionAsset.url,
+    tone: "pastel-sky",
   },
-  { title: "Проверь магний и фосфор с 50% скидкой", href: "/uslugi/analizy", image: image2Asset.url },
-  { title: "Счастливые часы", href: "/checkups", image: doctorPatientHeroAsset.url },
+  { title: "Проверь магний и фосфор с 50% скидкой", href: "/uslugi/analizy", image: image2Asset.url, tone: "pastel-sand" },
+  { title: "Счастливые часы", href: "/checkups", image: doctorPatientHeroAsset.url, tone: "pastel-lavender" },
 ];
 
 export function HomeV3() {
@@ -321,13 +322,13 @@ export function HomeV3() {
               <Reveal key={item.title} delay={index * 60} className="h-full">
                 <Link
                   to={item.href as "/"}
-                  className="bg-brand-green text-brand-white group flex h-full min-h-[170px] items-stretch justify-between gap-4 overflow-hidden rounded-3xl p-5 transition-all hover:brightness-105"
+                  className={`${item.tone} text-foreground group flex h-full min-h-[170px] items-stretch justify-between gap-4 overflow-hidden rounded-3xl border border-border/40 p-5 transition-all hover:-translate-y-1 hover:shadow-lg`}
                 >
                   <div className="flex flex-1 flex-col">
                     <h3 className="line-clamp-3 min-h-[4.5rem] max-w-[16ch] text-xl leading-snug font-extrabold">
                       {item.title}
                     </h3>
-                    <span className="bg-brand-white text-brand-green mt-auto inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[14px] font-extrabold transition-transform group-hover:translate-x-1">
+                    <span className="bg-brand-white text-foreground mt-auto inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[14px] font-extrabold transition-transform group-hover:translate-x-1 shadow-sm">
                       Подробнее
                       <ArrowRight className="size-3.5" />
                     </span>
