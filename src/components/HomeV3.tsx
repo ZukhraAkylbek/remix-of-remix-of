@@ -182,26 +182,139 @@ const CLINIC_STATS = [
   { value: "410+", label: "медицинских услуг", icon: TrendingUp },
 ];
 
-const FEATURED_OFFER = {
-  title: "Сомнография",
-  description: "консультация + диагностика на сомнографе",
-  price: "3700",
-  oldPrice: "4900",
-  href: "/diagnostika",
-  image: aboutHeroAsset.url,
-};
-
-const SIDE_OFFERS = [
-  { title: "Процедурные 24/7", href: "/travmpunkt", image: doctorPatientHeroAsset.url, tone: "pastel-coral" },
+const OFFER_CARDS = [
   {
-    title: "Бесплатная консультация хирурга по операции",
-    href: "/hirurgiya",
-    image: aboutMissionAsset.url,
+    tag: "Акция",
+    tagTone: "bg-brand-red",
+    title: "Сомнография",
+    description: "Консультация + диагностика на сомнографе со скидкой",
+    price: "3 700 с",
+    oldPrice: "4 900 с",
+    href: "/diagnostika",
+    image: aboutHeroAsset.url,
+    tone: "pastel-peach",
+  },
+  {
+    tag: "Спецпредложение",
+    tagTone: "bg-brand-green",
+    title: "Счастливые часы",
+    description: "Пройдите чекап утром и получите дополнительную скидку 10%",
+    href: "/checkups",
+    image: doctorPatientHeroAsset.url,
+    tone: "pastel-mint",
+  },
+  {
+    tag: "Новость",
+    tagTone: "bg-foreground/60",
+    title: "Услуги на дому",
+    description: "Врач, анализы и процедуры без выезда в клинику",
+    href: "/uslugi/analizy",
+    image: image2Asset.url,
     tone: "pastel-sky",
   },
-  { title: "Проверь магний и фосфор с 50% скидкой", href: "/uslugi/analizy", image: image2Asset.url, tone: "pastel-sand" },
-  { title: "Счастливые часы", href: "/checkups", image: doctorPatientHeroAsset.url, tone: "pastel-lavender" },
+  {
+    tag: "Спецпредложение",
+    tagTone: "bg-brand-green",
+    title: "Бесплатная консультация хирурга",
+    description: "Разбор анализов и плана операции без оплаты приёма",
+    href: "/hirurgiya",
+    image: aboutMissionAsset.url,
+    tone: "pastel-lavender",
+  },
 ];
+
+function OffersMarquee() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [manual, setManual] = useState(false);
+
+  const scrollBy = (dir: -1 | 1) => {
+    setManual(true);
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * Math.max(300, el.clientWidth * 0.8), behavior: "smooth" });
+  };
+
+  return (
+    <div className="relative">
+      <button
+        type="button"
+        aria-label="Прокрутить предложения влево"
+        onClick={() => scrollBy(-1)}
+        className="bg-brand-white/90 border-brand-green text-brand-green hover:bg-brand-green hover:text-brand-white absolute top-1/2 left-1 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-colors"
+      >
+        <ChevronLeft className="size-5" />
+      </button>
+      <button
+        type="button"
+        aria-label="Прокрутить предложения вправо"
+        onClick={() => scrollBy(1)}
+        className="bg-brand-white/90 border-brand-green text-brand-green hover:bg-brand-green hover:text-brand-white absolute top-1/2 right-1 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-colors"
+      >
+        <ChevronRight className="size-5" />
+      </button>
+
+      <div
+        ref={scrollerRef}
+        className="group marquee-mask no-scrollbar relative overflow-x-auto scroll-smooth px-12 py-1"
+      >
+        <div className={`${manual ? "" : "marquee-track"} flex w-max gap-4 pr-4`}>
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy === 1}>
+              {OFFER_CARDS.map((item) => (
+                <OfferCard key={`${copy}-${item.title}`} item={item} className="w-[300px]" />
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function OfferCard({
+  item,
+  className,
+}: {
+  item: (typeof OFFER_CARDS)[number];
+  className?: string;
+}) {
+  return (
+    <Link
+      to={item.href as "/"}
+      className={`${item.tone} group border-border/40 flex shrink-0 flex-col overflow-hidden rounded-3xl border transition-all hover:-translate-y-1 hover:shadow-lg ${className ?? ""}`}
+    >
+      <div className="relative h-[190px] w-full shrink-0 overflow-hidden">
+        <img
+          src={item.image}
+          alt={item.title}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+        />
+        <span
+          className={`${item.tagTone} text-brand-white absolute top-4 left-4 rounded-full px-3.5 py-1.5 text-[11px] font-extrabold tracking-[0.12em] uppercase`}
+        >
+          {item.tag}
+        </span>
+      </div>
+
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="text-foreground text-lg font-extrabold">{item.title}</h3>
+        <p className="text-muted-foreground mt-2 text-[14px] leading-snug">{item.description}</p>
+        {item.price ? (
+          <p className="mt-3 flex items-baseline gap-2">
+            <span className="text-brand-green text-2xl font-extrabold">{item.price}</span>
+            <span className="text-muted-foreground text-sm line-through">{item.oldPrice}</span>
+          </p>
+        ) : null}
+        <span className="text-brand-green mt-auto inline-flex items-center gap-2 pt-4 text-[14px] font-extrabold transition-transform group-hover:translate-x-1">
+          Подробнее
+          <ArrowRight className="size-4" />
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 
 export function HomeV3() {
   return (
