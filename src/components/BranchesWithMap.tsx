@@ -142,46 +142,69 @@ export function BranchesWithMap() {
 
         <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]">
           {/* Список адресов: горизонтальный скролл на мобильном */}
-          <ul className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-1 lg:mx-0 lg:grid lg:gap-2 lg:overflow-visible lg:px-0">
-            {branches.map((b, i) => {
-              const isActive = i === active;
-              return (
-                <li key={b.name} className="w-[220px] shrink-0 snap-start lg:w-auto">
-                  <button
-                    type="button"
-                    onClick={() => setActive(i)}
-                    aria-pressed={isActive}
-                    className={`flex h-full w-full flex-col rounded-xl border p-3 text-left transition-colors ${
-                      isActive
-                        ? "border-brand-green bg-surface-green"
-                        : "border-border bg-card hover:border-brand-green/40"
-                    }`}
-                  >
-                    <p className="text-foreground flex items-start gap-2 text-[14px] leading-snug font-bold">
-                      <MapPin className="text-brand-green mt-0.5 size-4 shrink-0" />
-                      <span className="min-w-0">{b.street}</span>
-                    </p>
-                    <div className="mt-auto flex items-end justify-between gap-2 pt-2 pl-6">
-                      <span className="text-brand-green text-[12px] font-semibold">
-                        {b.subtitle}
-                      </span>
-                      <a
-                        href={doubleGisSearchUrl(b.street)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="text-brand-green hover:text-brand-green-dark shrink-0 text-[11px] font-extrabold tracking-wide uppercase"
-                        aria-label={`Открыть ${b.street} в 2ГИС`}
-                      >
-                        2ГИС
-                      </a>
-                    </div>
-                  </button>
+          <div className="flex items-stretch gap-2 lg:block lg:gap-0">
+            <button
+              type="button"
+              onClick={() => scrollList("left")}
+              aria-label="Прокрутить филиалы влево"
+              className="bg-brand-white/80 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex shrink-0 items-center justify-center rounded-xl border backdrop-blur-sm transition-all active:scale-95 lg:hidden size-10"
+            >
+              <ChevronLeft className="size-5" />
+            </button>
 
-                </li>
-              );
-            })}
-          </ul>
+            <ul
+              ref={listRef}
+              className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-1 lg:mx-0 lg:grid lg:gap-2 lg:overflow-visible lg:px-0 min-w-0 flex-1"
+            >
+              {branches.map((b, i) => {
+                const isActive = i === active;
+                return (
+                  <li key={b.name} className="w-[220px] shrink-0 snap-start lg:w-auto">
+                    <button
+                      type="button"
+                      onClick={() => setActive(i)}
+                      aria-pressed={isActive}
+                      className={`flex h-full w-full flex-col rounded-xl border p-3 text-left transition-colors ${
+                        isActive
+                          ? "border-brand-green bg-surface-green"
+                          : "border-border bg-card hover:border-brand-green/40"
+                      }`}
+                    >
+                      <p className="text-foreground flex items-start gap-2 text-[14px] leading-snug font-bold">
+                        <MapPin className="text-brand-green mt-0.5 size-4 shrink-0" />
+                        <span className="min-w-0">{b.street}</span>
+                      </p>
+                      <div className="mt-auto flex items-end justify-between gap-2 pt-2 pl-6">
+                        <span className="text-brand-green text-[12px] font-semibold">
+                          {b.subtitle}
+                        </span>
+                        <a
+                          href={doubleGisSearchUrl(b.street)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-brand-green hover:text-brand-green-dark shrink-0 text-[11px] font-extrabold tracking-wide uppercase"
+                          aria-label={`Открыть ${b.street} в 2ГИС`}
+                        >
+                          2ГИС
+                        </a>
+                      </div>
+                    </button>
+
+                  </li>
+                );
+              })}
+            </ul>
+
+            <button
+              type="button"
+              onClick={() => scrollList("right")}
+              aria-label="Прокрутить филиалы вправо"
+              className="bg-brand-white/80 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex shrink-0 items-center justify-center rounded-xl border backdrop-blur-sm transition-all active:scale-95 lg:hidden size-10"
+            >
+              <ChevronRight className="size-5" />
+            </button>
+          </div>
 
           <div className="border-border overflow-hidden rounded-2xl border">
             {failed ? (
