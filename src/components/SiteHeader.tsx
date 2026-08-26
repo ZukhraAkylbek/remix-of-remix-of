@@ -159,7 +159,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
         aria-label={t("Главное меню", "Главное меню")}
         className="bg-brand-green text-brand-white hidden shadow-sm md:block"
       >
-        <div className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-4 py-1.5 sm:px-6 lg:overflow-visible [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-4 py-1.5 sm:px-6 xl:overflow-visible [-ms-overflow-style:none] [scrollbar-width:none]">
           {navItems.map((item) => (
             <a
               key={`${item.label}-${item.href}`}
@@ -167,7 +167,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               title={item.label}
               aria-current={isActive(item.href) ? "page" : undefined}
               {...(isExternal(item.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className={`shrink-0 whitespace-nowrap rounded-lg px-3 py-2.5 text-[17px] font-bold transition-colors ${
+              className={`shrink-0 whitespace-nowrap rounded-lg px-2.5 py-2.5 text-[15px] font-bold transition-colors xl:px-3 xl:text-[17px] ${
                 isActive(item.href)
                   ? "bg-brand-white/20 underline decoration-2 underline-offset-8"
                   : "hover:bg-brand-white/15 hover:underline hover:decoration-2 hover:underline-offset-8"
@@ -179,8 +179,9 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
 
           <a
             href="/auth"
-            className="border-brand-white/60 text-brand-white hover:bg-brand-white hover:text-brand-green ml-auto inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border px-3.5 py-2 text-[16px] font-bold transition-colors"
+            className="border-brand-white/60 text-brand-white hover:bg-brand-white hover:text-brand-green ml-auto inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border px-3 py-2 text-[14px] font-bold transition-colors xl:px-3.5 xl:text-[16px]"
           >
+
             <User className="size-4" />
             {t("Личный кабинет", "Личный кабинет")}
           </a>
