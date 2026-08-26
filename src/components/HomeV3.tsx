@@ -300,7 +300,7 @@ export function HomeV3() {
                   <span className="badge-gradient text-brand-white inline-block rounded-2xl px-5 py-2.5 text-2xl font-extrabold sm:text-3xl">
                     {FEATURED_OFFER.title}
                   </span>
-                  <div className="badge-gradient-solid text-brand-white mt-5 max-w-sm rounded-2xl p-5">
+                  <div className="badge-gradient-solid text-brand-white mt-5 w-full rounded-2xl p-5">
                     <p className="text-[17px] leading-snug font-bold">{FEATURED_OFFER.description}</p>
                     <p className="mt-3 flex items-baseline gap-3">
                       <span className="text-4xl font-extrabold">{FEATURED_OFFER.price}</span>
@@ -325,7 +325,7 @@ export function HomeV3() {
                   className={`${item.tone} text-foreground group flex h-full min-h-[170px] items-stretch justify-between gap-4 overflow-hidden rounded-3xl border border-border/40 p-5 transition-all hover:-translate-y-1 hover:shadow-lg`}
                 >
                   <div className="flex flex-1 flex-col">
-                    <h3 className="line-clamp-3 min-h-[4.5rem] max-w-[16ch] text-xl leading-snug font-extrabold">
+                    <h3 className="line-clamp-3 min-h-[4.5rem] w-full text-xl leading-snug font-extrabold">
                       {item.title}
                     </h3>
                     <span className="bg-brand-white text-foreground mt-auto inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[14px] font-extrabold transition-transform group-hover:translate-x-1 shadow-sm">
