@@ -61,7 +61,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                 alt="Клинико-диагностический центр «Авиценна»"
                 width={440}
                 height={95}
-                className="h-9 w-auto sm:h-11 lg:h-16"
+                className="h-9 w-auto sm:h-11 lg:h-16 [mix-blend-mode:multiply]"
               />
             </Link>
 
