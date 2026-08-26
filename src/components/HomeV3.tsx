@@ -1,4 +1,4 @@
-import { ArrowRight, Clock, MapPin, Phone, Star, Stethoscope, TrendingUp } from "lucide-react";
+import { ArrowRight, MapPin, Star, Stethoscope, TrendingUp } from "lucide-react";
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
 import aboutMissionAsset from "@/assets/about-mission.jpg.asset.json";
