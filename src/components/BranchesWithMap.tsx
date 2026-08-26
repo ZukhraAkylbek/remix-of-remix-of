@@ -140,7 +140,49 @@ export function BranchesWithMap() {
           Нажмите на адрес или зелёную метку — карта покажет нужный филиал.
         </p>
 
-        <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]">
+        {/* Переключатель филиалов кнопками */}
+        <div className="mt-5 flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setActive((prev) => (prev === 0 ? branches.length - 1 : prev - 1))}
+            aria-label="Предыдущий филиал"
+            className="bg-brand-white/90 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex size-10 shrink-0 items-center justify-center rounded-full border shadow-sm backdrop-blur-sm transition-all active:scale-95"
+          >
+            <ChevronLeft className="size-5" />
+          </button>
+
+          <div className="no-scrollbar flex flex-1 gap-2 overflow-x-auto pb-1">
+            {branches.map((b, i) => {
+              const isActive = i === active;
+              return (
+                <button
+                  key={b.name}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  aria-pressed={isActive}
+                  className={`shrink-0 rounded-full border px-4 py-2 text-[13px] font-bold whitespace-nowrap transition-all ${
+                    isActive
+                      ? "border-brand-green bg-brand-green text-brand-white shadow-md"
+                      : "border-border bg-card text-foreground hover:border-brand-green/40 hover:bg-surface-green"
+                  }`}
+                >
+                  {b.street}
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setActive((prev) => (prev === branches.length - 1 ? 0 : prev + 1))}
+            aria-label="Следующий филиал"
+            className="bg-brand-white/90 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex size-10 shrink-0 items-center justify-center rounded-full border shadow-sm backdrop-blur-sm transition-all active:scale-95"
+          >
+            <ChevronRight className="size-5" />
+          </button>
+        </div>
+
+        <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]">
           {/* Список адресов: горизонтальный скролл на мобильном */}
           <div className="min-w-0">
             <div className="mb-2 flex justify-end gap-2 lg:hidden">
