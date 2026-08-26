@@ -97,7 +97,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t("Записаться онлайн", "Записаться онлайн")}
-              className="gradient-accent text-accent-foreground hover:brightness-105 inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-bold transition-all sm:size-11 2xl:size-auto 2xl:px-4 2xl:py-2.5"
+              className="inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl gradient-accent text-accent-foreground text-xs font-bold transition-all hover:brightness-105 sm:size-11 2xl:size-auto 2xl:px-3 2xl:py-2"
             >
               <Calendar className="size-[18px] shrink-0 2xl:size-4" strokeWidth={2} />
               <span className="hidden 2xl:inline">{t("Записаться онлайн", "Записаться онлайн")}</span>
