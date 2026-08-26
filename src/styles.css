@@ -123,6 +123,30 @@
   --surface-sky: oklch(0.95 0.02 230);
   --surface-mint: oklch(0.95 0.03 160);
 
+  /* Пастельные тона для карточек и бейджей */
+  --pastel-mint-start: oklch(0.9 0.1 155);
+  --pastel-mint-end: oklch(0.95 0.07 160);
+  --pastel-coral-start: oklch(0.88 0.11 45);
+  --pastel-coral-end: oklch(0.95 0.08 50);
+  --pastel-sky-start: oklch(0.88 0.1 240);
+  --pastel-sky-end: oklch(0.95 0.07 230);
+  --pastel-lavender-start: oklch(0.86 0.11 300);
+  --pastel-lavender-end: oklch(0.94 0.08 290);
+  --pastel-sand-start: oklch(0.9 0.09 85);
+  --pastel-sand-end: oklch(0.96 0.06 90);
+  --pastel-rose-start: oklch(0.86 0.12 25);
+  --pastel-rose-end: oklch(0.94 0.09 35);
+  --pastel-lime-start: oklch(0.9 0.09 130);
+  --pastel-lime-end: oklch(0.96 0.06 135);
+  --pastel-azure-start: oklch(0.88 0.09 200);
+  --pastel-azure-end: oklch(0.95 0.06 210);
+  --pastel-peach-start: oklch(0.9 0.1 65);
+  --pastel-peach-end: oklch(0.96 0.07 70);
+
+  /* Бейджи / плашки на карточках */
+  --badge-overlay: oklch(1 0 0 / 0.2);
+  --badge-overlay-solid: oklch(1 0 0 / 0.15);
+
 
   /* Админка */
   --admin-blue: oklch(0.55 0.15 245);
