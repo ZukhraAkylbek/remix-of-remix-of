@@ -441,11 +441,21 @@ export function HomeV3() {
 
         {/* Отзывы */}
         <Section tone="soft" eyebrow="Доверие" title="Отзывы пациентов">
-          {/* Mobile: stacked cards */}
-          <div className="grid auto-rows-fr gap-4 md:hidden lg:grid-cols-3">
-            {REVIEWS.map((review) => (
-              <ReviewCard review={review} key={review.text} />
-            ))}
+          {/* Mobile: scrolling marquee */}
+          <div className="group marquee-mask relative overflow-hidden md:hidden">
+            <div className="marquee-track flex w-max gap-4">
+              {[0, 1].map((copy) => (
+                <div key={copy} className="flex shrink-0 gap-4" aria-hidden={copy === 1}>
+                  {REVIEWS.map((review) => (
+                    <ReviewCard
+                      review={review}
+                      key={`mobile-${copy}-${review.text}`}
+                      className="w-[280px]"
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Desktop: scrolling marquee */}
