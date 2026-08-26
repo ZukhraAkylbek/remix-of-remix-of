@@ -295,7 +295,7 @@ export function HomeV3() {
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="from-brand-green via-brand-green/85 absolute inset-0 bg-gradient-to-r to-transparent" />
+                <div className="from-brand-green/90 via-brand-green/70 absolute inset-0 bg-gradient-to-r to-transparent" />
                 <div className="relative">
                   <span className="badge-gradient text-brand-white inline-block rounded-2xl px-5 py-2.5 text-2xl font-extrabold sm:text-3xl">
                     {FEATURED_OFFER.title}
