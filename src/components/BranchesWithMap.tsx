@@ -142,19 +142,29 @@ export function BranchesWithMap() {
 
         <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]">
           {/* Список адресов: горизонтальный скролл на мобильном */}
-          <div className="flex items-center gap-2 lg:block lg:gap-0">
-            <button
-              type="button"
-              onClick={() => scrollList("left")}
-              aria-label="Прокрутить филиалы влево"
-              className="bg-brand-white/90 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex shrink-0 items-center justify-center rounded-xl border shadow-sm backdrop-blur-sm transition-all active:scale-95 lg:hidden size-11"
-            >
-              <ChevronLeft className="size-5" />
-            </button>
+          <div className="min-w-0">
+            <div className="mb-2 flex justify-end gap-2 lg:hidden">
+              <button
+                type="button"
+                onClick={() => scrollList("left")}
+                aria-label="Прокрутить филиалы влево"
+                className="bg-brand-white/90 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex size-10 shrink-0 items-center justify-center rounded-xl border shadow-sm backdrop-blur-sm transition-all active:scale-95"
+              >
+                <ChevronLeft className="size-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollList("right")}
+                aria-label="Прокрутить филиалы вправо"
+                className="bg-brand-white/90 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex size-10 shrink-0 items-center justify-center rounded-xl border shadow-sm backdrop-blur-sm transition-all active:scale-95"
+              >
+                <ChevronRight className="size-5" />
+              </button>
+            </div>
 
             <ul
               ref={listRef}
-              className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-1 lg:mx-0 lg:grid lg:gap-2 lg:overflow-visible lg:px-0 min-w-0 flex-1"
+              className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-1 lg:mx-0 lg:grid lg:gap-2 lg:overflow-visible lg:px-0"
             >
               {branches.map((b, i) => {
                 const isActive = i === active;
@@ -195,18 +205,9 @@ export function BranchesWithMap() {
                 );
               })}
             </ul>
-
-            <button
-              type="button"
-              onClick={() => scrollList("right")}
-              aria-label="Прокрутить филиалы вправо"
-              className="bg-brand-white/90 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex shrink-0 items-center justify-center rounded-xl border shadow-sm backdrop-blur-sm transition-all active:scale-95 lg:hidden size-11"
-            >
-              <ChevronRight className="size-5" />
-            </button>
           </div>
 
-          <div className="border-border overflow-hidden rounded-2xl border">
+          <div className="border-border relative isolate z-0 overflow-hidden rounded-2xl border">
             {failed ? (
               <iframe
                 title={`Карта: ${branch.name}`}
