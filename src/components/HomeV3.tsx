@@ -117,14 +117,15 @@ const FEATURED_OFFER = {
 };
 
 const SIDE_OFFERS = [
-  { title: "Процедурные 24/7", href: "/travmpunkt", image: doctorPatientHeroAsset.url },
+  { title: "Процедурные 24/7", href: "/travmpunkt", image: doctorPatientHeroAsset.url, tone: "pastel-coral" },
   {
     title: "Бесплатная консультация хирурга по операции",
     href: "/hirurgiya",
     image: aboutMissionAsset.url,
+    tone: "pastel-sky",
   },
-  { title: "Проверь магний и фосфор с 50% скидкой", href: "/uslugi/analizy", image: image2Asset.url },
-  { title: "Счастливые часы", href: "/checkups", image: doctorPatientHeroAsset.url },
+  { title: "Проверь магний и фосфор с 50% скидкой", href: "/uslugi/analizy", image: image2Asset.url, tone: "pastel-sand" },
+  { title: "Счастливые часы", href: "/checkups", image: doctorPatientHeroAsset.url, tone: "pastel-lavender" },
 ];
 
 export function HomeV3() {
