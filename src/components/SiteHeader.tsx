@@ -75,6 +75,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t("Написать на WhatsApp", "Написать на WhatsApp")}
+              title={t("Написать на WhatsApp", "Написать на WhatsApp")}
               className="inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-brand-green bg-brand-white/80 text-brand-green backdrop-blur-sm transition-colors hover:bg-brand-green hover:text-brand-white sm:size-11 2xl:size-auto 2xl:px-3 2xl:py-2 text-xs 2xl:text-xs"
             >
               <MessageCircle className="size-[18px] shrink-0 2xl:size-4" strokeWidth={2} />
