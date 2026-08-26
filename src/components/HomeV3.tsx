@@ -91,9 +91,17 @@ function SpecialtyMarquee() {
 }
 
 
-function ReviewCard({ review }: { review: { text: string; src: string } }) {
+function ReviewCard({
+  review,
+  className,
+}: {
+  review: { text: string; src: string };
+  className?: string;
+}) {
   return (
-    <figure className="bg-background border-border flex h-[200px] w-[320px] flex-col rounded-2xl border p-5 lg:w-[360px]">
+    <figure
+      className={`bg-background border-border flex h-[200px] w-[320px] flex-col rounded-2xl border p-5 lg:w-[360px] ${className ?? ""}`}
+    >
       <div className="text-brand-green flex gap-1">
         {[0, 1, 2, 3, 4].map((i) => (
           <Star key={i} className="size-4 fill-current" />
@@ -433,11 +441,21 @@ export function HomeV3() {
 
         {/* Отзывы */}
         <Section tone="soft" eyebrow="Доверие" title="Отзывы пациентов">
-          {/* Mobile: stacked cards */}
-          <div className="grid auto-rows-fr gap-4 md:hidden lg:grid-cols-3">
-            {REVIEWS.map((review) => (
-              <ReviewCard review={review} key={review.text} />
-            ))}
+          {/* Mobile: scrolling marquee */}
+          <div className="group marquee-mask relative overflow-hidden md:hidden">
+            <div className="marquee-track flex w-max gap-4">
+              {[0, 1].map((copy) => (
+                <div key={copy} className="flex shrink-0 gap-4" aria-hidden={copy === 1}>
+                  {REVIEWS.map((review) => (
+                    <ReviewCard
+                      review={review}
+                      key={`mobile-${copy}-${review.text}`}
+                      className="w-[280px]"
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Desktop: scrolling marquee */}
