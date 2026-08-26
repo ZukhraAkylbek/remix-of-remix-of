@@ -142,7 +142,7 @@ export function BranchesWithMap() {
 
         <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]">
           {/* Список адресов: горизонтальный скролл на мобильном */}
-          <div className="flex items-stretch gap-2 lg:block lg:gap-0">
+          <div className="flex items-center gap-2 lg:block lg:gap-0">
             <button
               type="button"
               onClick={() => scrollList("left")}
