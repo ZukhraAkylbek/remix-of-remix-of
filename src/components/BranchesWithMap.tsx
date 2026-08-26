@@ -17,9 +17,18 @@ export function BranchesWithMap() {
   const [active, setActive] = useState(0);
   const [failed, setFailed] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const listRef = useRef<HTMLUListElement | null>(null);
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
   const leafletRef = useRef<any>(null);
+
+  const scrollList = (direction: "left" | "right") => {
+    const list = listRef.current;
+    if (!list) return;
+    const cardWidth = 220 + 8; // ширина карточки + gap
+    const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
+    list.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  };
 
   const branches = CLINIC.branches;
   const branch = branches[active] ?? branches[0]!;
