@@ -100,8 +100,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               className="inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl gradient-accent text-accent-foreground text-xs font-bold transition-all hover:brightness-105 sm:size-11 2xl:size-auto 2xl:px-3 2xl:py-2"
             >
               <Calendar className="size-[18px] shrink-0 2xl:size-4" strokeWidth={2} />
-              <span className="hidden 2xl:inline min-[1600px]:hidden">{t("Запись", "Запись")}</span>
-              <span className="hidden min-[1600px]:inline">{t("Записаться онлайн", "Записаться онлайн")}</span>
+              <span className="hidden 2xl:inline">{t("Записаться", "Записаться")}</span>
             </a>
 
             {/* Переключатель языка — десктоп / планшет (не на мобильном) */}
