@@ -196,25 +196,8 @@ export function HomeV3() {
         </section>
 
         {/* Зелёные блоки специальностей — бегущая строка */}
-        <section className="py-5 sm:py-6">
-          <div className="group marquee-mask relative overflow-hidden">
-            <div className="marquee-track flex w-max gap-3 pr-3">
-              {[0, 1].map((copy) => (
-                <div key={copy} className="flex shrink-0 gap-3 pr-3" aria-hidden={copy === 1}>
-                  {SPECIALTY_PILLS.map((name) => (
-                    <Link
-                      key={`${copy}-${name}`}
-                      to="/napravleniya"
-                      className="bg-brand-green text-brand-white hover:bg-brand-green-dark flex shrink-0 items-center justify-center rounded-full px-8 py-3.5 text-base font-extrabold whitespace-nowrap transition-colors"
-                    >
-                      {name}
-                    </Link>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <SpecialtyMarquee />
+
 
 
         {/* О клинике */}
