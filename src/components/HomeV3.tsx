@@ -12,6 +12,7 @@ import { useRef, useState } from "react";
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
 import aboutMissionAsset from "@/assets/about-mission.jpg.asset.json";
 import asianFamilyHeroAsset from "@/assets/asian-family-hero.png.asset.json";
+import clinicVideoAsset from "@/assets/clinic-video.mp4.asset.json";
 import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
 import image2Asset from "@/assets/image-2.png.asset.json";
 
