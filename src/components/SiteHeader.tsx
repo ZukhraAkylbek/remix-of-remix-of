@@ -65,7 +65,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
           </div>
 
           {/* Поиск — десктоп / планшет */}
-          <SiteSearch className="hidden min-w-0 flex-1 md:block lg:max-w-md" />
+          <SiteSearch className="hidden min-w-0 w-full md:block lg:max-w-lg" />
 
           {/* Действия справа */}
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:gap-3">
