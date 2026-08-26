@@ -337,7 +337,7 @@ export function HomeV3() {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-28 shrink-0 rounded-2xl object-cover sm:w-32"
+                    className="w-24 shrink-0 rounded-2xl object-cover sm:w-28"
                     loading="lazy"
                   />
                 </Link>
