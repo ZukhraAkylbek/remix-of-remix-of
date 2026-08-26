@@ -47,9 +47,7 @@ export function FaqAccordion({ faqs }: { faqs?: Faq[] }) {
             >
               +996 779 909 009
             </a>
-            <p className="text-muted-foreground mt-1 text-sm">
-              Пн–Пт: 8:00–20:00 · Сб–Вс: 9:00–18:00
-            </p>
+            <p className="text-muted-foreground mt-1 text-sm">График: круглосуточно</p>
           </div>
         </div>
 
