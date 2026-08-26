@@ -44,7 +44,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
     <div className="sticky top-0 z-50">
       {/* Верхняя панель */}
       <header className="bg-background/95 border-border border-b backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center gap-2 px-3 py-2.5 sm:px-4 sm:py-3 lg:px-6 lg:gap-6 lg:py-3">
+        <div className="mx-auto grid max-w-7xl grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-3 py-2.5 sm:px-4 sm:py-3 lg:gap-6 lg:px-6 lg:py-3">
           {/* Логотип */}
           <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
             <Link to="/" className="flex shrink-0 items-center" aria-label="Авиценна — на главную">
@@ -65,30 +65,31 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
           </div>
 
           {/* Поиск — десктоп / планшет */}
-          <SiteSearch className="hidden min-w-0 flex-1 md:block lg:max-w-md" />
+          <SiteSearch className="hidden min-w-0 w-full md:block lg:max-w-xl" />
 
           {/* Действия справа */}
-          <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2 lg:gap-3">
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:gap-3 2xl:gap-2">
             {/* WhatsApp */}
             <a
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t("Написать на WhatsApp", "Написать на WhatsApp")}
-              className="inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-brand-green bg-brand-white/80 text-brand-green backdrop-blur-sm transition-colors hover:bg-brand-green hover:text-brand-white sm:size-11 lg:size-auto lg:px-4 lg:py-2.5"
+              title={t("Написать на WhatsApp", "Написать на WhatsApp")}
+              className="inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-brand-green bg-brand-white/80 text-brand-green backdrop-blur-sm transition-colors hover:bg-brand-green hover:text-brand-white sm:size-11 2xl:size-auto 2xl:px-3 2xl:py-2 text-xs 2xl:text-xs"
             >
-              <MessageCircle className="size-[18px] shrink-0 lg:size-4" strokeWidth={2} />
-              <span className="hidden lg:inline">{t("Написать на WhatsApp", "Написать на WhatsApp")}</span>
+              <MessageCircle className="size-[18px] shrink-0 2xl:size-4" strokeWidth={2} />
+              <span className="hidden 2xl:inline">{t("WhatsApp", "WhatsApp")}</span>
             </a>
 
             {/* Телефон */}
             <a
               href={`tel:${phone}`}
               aria-label={t("Позвонить", "Позвонить")}
-              className="bg-brand-terracotta text-brand-white hover:brightness-105 inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-bold transition-all sm:size-11 lg:size-auto lg:px-4 lg:py-2.5"
+              className="inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-brand-terracotta text-brand-white text-xs font-bold transition-all hover:brightness-105 sm:size-11 2xl:size-auto 2xl:px-3 2xl:py-2"
             >
-              <Phone className="size-[18px] shrink-0 lg:size-4" strokeWidth={2} />
-              <span className="hidden lg:inline">{t("Позвонить", "Позвонить")}</span>
+              <Phone className="size-[18px] shrink-0 2xl:size-4" strokeWidth={2} />
+              <span className="hidden 2xl:inline">{t("Позвонить", "Позвонить")}</span>
             </a>
 
             {/* Запись */}
@@ -97,10 +98,11 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t("Записаться онлайн", "Записаться онлайн")}
-              className="gradient-accent text-accent-foreground hover:brightness-105 inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-bold transition-all sm:size-11 lg:size-auto lg:px-4 lg:py-2.5"
+              title={t("Записаться онлайн", "Записаться онлайн")}
+              className="inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl gradient-accent text-accent-foreground text-xs font-bold transition-all hover:brightness-105 sm:size-11 2xl:size-auto 2xl:px-3 2xl:py-2"
             >
-              <Calendar className="size-[18px] shrink-0 lg:size-4" strokeWidth={2} />
-              <span className="hidden lg:inline">{t("Записаться онлайн", "Записаться онлайн")}</span>
+              <Calendar className="size-[18px] shrink-0 2xl:size-4" strokeWidth={2} />
+              <span className="hidden 2xl:inline">{t("Записаться", "Записаться")}</span>
             </a>
 
             {/* Переключатель языка — десктоп / планшет (не на мобильном) */}
