@@ -281,7 +281,7 @@ export function HomeV3() {
         </Section>
 
         {/* Новости и специальные предложения */}
-        <Section tone="soft" eyebrow="Актуально" title="Новости и специальные предложения">
+        <Section tone="soft" eyebrow="\n" title="Новости и специальные предложения">
           <div className="grid gap-4 lg:grid-cols-2">
             {/* Большая карточка — Сомнография */}
             <Reveal className="lg:row-span-2">
