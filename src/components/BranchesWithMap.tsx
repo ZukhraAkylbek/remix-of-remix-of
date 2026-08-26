@@ -206,7 +206,7 @@ export function BranchesWithMap() {
             </button>
           </div>
 
-          <div className="border-border overflow-hidden rounded-2xl border">
+          <div className="border-border relative isolate z-0 overflow-hidden rounded-2xl border">
             {failed ? (
               <iframe
                 title={`Карта: ${branch.name}`}
