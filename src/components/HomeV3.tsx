@@ -91,9 +91,17 @@ function SpecialtyMarquee() {
 }
 
 
-function ReviewCard({ review }: { review: { text: string; src: string } }) {
+function ReviewCard({
+  review,
+  className,
+}: {
+  review: { text: string; src: string };
+  className?: string;
+}) {
   return (
-    <figure className="bg-background border-border flex h-[200px] w-[320px] flex-col rounded-2xl border p-5 lg:w-[360px]">
+    <figure
+      className={`bg-background border-border flex h-[200px] w-[320px] flex-col rounded-2xl border p-5 lg:w-[360px] ${className ?? ""}`}
+    >
       <div className="text-brand-green flex gap-1">
         {[0, 1, 2, 3, 4].map((i) => (
           <Star key={i} className="size-4 fill-current" />
