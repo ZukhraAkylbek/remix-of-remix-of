@@ -274,7 +274,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand-white/40 bg-brand-white/10 px-3 py-3 text-sm font-bold"
                 >
-                  <MessageCircle className="size-4 shrink-0" />
+                  <WhatsAppIcon className="size-4 shrink-0" />
                   WhatsApp
                 </a>
                 <a
