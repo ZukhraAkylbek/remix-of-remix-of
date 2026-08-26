@@ -272,7 +272,7 @@ export function HomeV3() {
                   to="/about"
                   className="text-brand-green hover:text-brand-green-dark inline-flex w-fit items-center gap-2 text-[15px] font-extrabold transition-colors"
                 >
-                  Подробнее о клинике
+                  Подробнее о Авиценне{"\n"}
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Reveal>
