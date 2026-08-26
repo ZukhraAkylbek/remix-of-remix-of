@@ -200,7 +200,7 @@ export function BranchesWithMap() {
               type="button"
               onClick={() => scrollList("right")}
               aria-label="Прокрутить филиалы вправо"
-              className="bg-brand-white/80 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex shrink-0 items-center justify-center rounded-xl border backdrop-blur-sm transition-all active:scale-95 lg:hidden size-10"
+              className="bg-brand-white/90 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex shrink-0 items-center justify-center rounded-xl border shadow-sm backdrop-blur-sm transition-all active:scale-95 lg:hidden size-11"
             >
               <ChevronRight className="size-5" />
             </button>
