@@ -24,6 +24,10 @@ bun run dev
    - Dashboard Vercel → **Add New Project** → выберите репозиторий GitHub.
    - Framework Preset оставьте на **Other** (контролируется `vercel.json`).
    - Build Command: `vite build` (уже задано в `vercel.json`).
+   - **Output Directory оставьте пустым.** Nitro собирает в `.vercel/output`
+     (Build Output API v3), Vercel находит его сам. Если явно указать
+     `.vercel/output` как Output Directory, Vercel посчитает его статической
+     папкой и все страницы вернут 404.
 
 3. **Добавьте переменные окружения** в Vercel (Project Settings → Environment Variables):
    - `VITE_SUPABASE_URL`
