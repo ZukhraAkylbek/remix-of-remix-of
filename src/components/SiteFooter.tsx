@@ -47,7 +47,7 @@ export function SiteFooter() {
               </a>
             </li>
             <li className="text-muted-foreground">{CLINIC.email}</li>
-            <li className="text-muted-foreground">График: круглосуточно</li>
+            <li className="text-muted-foreground"></li>
           </ul>
         </div>
 
