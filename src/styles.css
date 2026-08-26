@@ -144,8 +144,8 @@
   --pastel-peach-end: oklch(0.96 0.07 70);
 
   /* Бейджи / плашки на карточках */
-  --badge-overlay: oklch(1 0 0 / 0.2);
-  --badge-overlay-solid: oklch(1 0 0 / 0.15);
+  --badge-overlay: oklch(1 0 0 / 0.12);
+  --badge-overlay-solid: oklch(1 0 0 / 0.08);
 
 
   /* Админка */
