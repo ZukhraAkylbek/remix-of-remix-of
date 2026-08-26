@@ -123,6 +123,30 @@
   --surface-sky: oklch(0.95 0.02 230);
   --surface-mint: oklch(0.95 0.03 160);
 
+  /* Пастельные тона для карточек и бейджей */
+  --pastel-mint-start: oklch(0.9 0.1 155);
+  --pastel-mint-end: oklch(0.95 0.07 160);
+  --pastel-coral-start: oklch(0.88 0.11 45);
+  --pastel-coral-end: oklch(0.95 0.08 50);
+  --pastel-sky-start: oklch(0.88 0.1 240);
+  --pastel-sky-end: oklch(0.95 0.07 230);
+  --pastel-lavender-start: oklch(0.86 0.11 300);
+  --pastel-lavender-end: oklch(0.94 0.08 290);
+  --pastel-sand-start: oklch(0.9 0.09 85);
+  --pastel-sand-end: oklch(0.96 0.06 90);
+  --pastel-rose-start: oklch(0.86 0.12 25);
+  --pastel-rose-end: oklch(0.94 0.09 35);
+  --pastel-lime-start: oklch(0.9 0.09 130);
+  --pastel-lime-end: oklch(0.96 0.06 135);
+  --pastel-azure-start: oklch(0.88 0.09 200);
+  --pastel-azure-end: oklch(0.95 0.06 210);
+  --pastel-peach-start: oklch(0.9 0.1 65);
+  --pastel-peach-end: oklch(0.96 0.07 70);
+
+  /* Бейджи / плашки на карточках */
+  --badge-overlay: oklch(1 0 0 / 0.2);
+  --badge-overlay-solid: oklch(1 0 0 / 0.15);
+
 
   /* Админка */
   --admin-blue: oklch(0.55 0.15 245);
@@ -295,72 +319,72 @@
 @utility pastel-mint {
   background-image: linear-gradient(
     135deg,
-    oklch(0.9 0.1 155) 0%,
-    oklch(0.95 0.07 160) 100%
+    var(--pastel-mint-start) 0%,
+    var(--pastel-mint-end) 100%
   );
 }
 
 @utility pastel-coral {
   background-image: linear-gradient(
     135deg,
-    oklch(0.88 0.11 45) 0%,
-    oklch(0.95 0.08 50) 100%
+    var(--pastel-coral-start) 0%,
+    var(--pastel-coral-end) 100%
   );
 }
 
 @utility pastel-sky {
   background-image: linear-gradient(
     135deg,
-    oklch(0.88 0.1 240) 0%,
-    oklch(0.95 0.07 230) 100%
+    var(--pastel-sky-start) 0%,
+    var(--pastel-sky-end) 100%
   );
 }
 
 @utility pastel-lavender {
   background-image: linear-gradient(
     135deg,
-    oklch(0.86 0.11 300) 0%,
-    oklch(0.94 0.08 290) 100%
+    var(--pastel-lavender-start) 0%,
+    var(--pastel-lavender-end) 100%
   );
 }
 
 @utility pastel-sand {
   background-image: linear-gradient(
     135deg,
-    oklch(0.9 0.09 85) 0%,
-    oklch(0.96 0.06 90) 100%
+    var(--pastel-sand-start) 0%,
+    var(--pastel-sand-end) 100%
   );
 }
 
 @utility pastel-rose {
   background-image: linear-gradient(
     135deg,
-    oklch(0.86 0.12 25) 0%,
-    oklch(0.94 0.09 35) 100%
+    var(--pastel-rose-start) 0%,
+    var(--pastel-rose-end) 100%
   );
 }
 
 @utility pastel-lime {
   background-image: linear-gradient(
     135deg,
-    oklch(0.9 0.09 130) 0%,
-    oklch(0.96 0.06 135) 100%
+    var(--pastel-lime-start) 0%,
+    var(--pastel-lime-end) 100%
   );
 }
 
 @utility pastel-azure {
   background-image: linear-gradient(
     135deg,
-    oklch(0.88 0.09 200) 0%,
-    oklch(0.95 0.06 210) 100%
+    var(--pastel-azure-start) 0%,
+    var(--pastel-azure-end) 100%
   );
 }
 
 @utility pastel-peach {
   background-image: linear-gradient(
     135deg,
-    oklch(0.9 0.1 65) 0%,
-    oklch(0.96 0.07 70) 100%
+    var(--pastel-peach-start) 0%,
+    var(--pastel-peach-end) 100%
   );
 }
 

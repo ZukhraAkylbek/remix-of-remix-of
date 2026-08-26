@@ -297,10 +297,10 @@ export function HomeV3() {
                 />
                 <div className="from-brand-green via-brand-green/85 absolute inset-0 bg-gradient-to-r to-transparent" />
                 <div className="relative">
-                  <span className="bg-brand-white/20 text-brand-white inline-block rounded-2xl px-5 py-2.5 text-2xl font-extrabold sm:text-3xl">
+                  <span className="bg-[var(--badge-overlay)] text-brand-white inline-block rounded-2xl px-5 py-2.5 text-2xl font-extrabold sm:text-3xl">
                     {FEATURED_OFFER.title}
                   </span>
-                  <div className="bg-brand-white/15 text-brand-white mt-5 max-w-sm rounded-2xl p-5">
+                  <div className="bg-[var(--badge-overlay-solid)] text-brand-white mt-5 max-w-sm rounded-2xl p-5">
                     <p className="text-[17px] leading-snug font-bold">{FEATURED_OFFER.description}</p>
                     <p className="mt-3 flex items-baseline gap-3">
                       <span className="text-4xl font-extrabold">{FEATURED_OFFER.price}</span>
