@@ -68,7 +68,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
           <SiteSearch className="hidden min-w-0 w-full md:block lg:max-w-xl" />
 
           {/* Действия справа */}
-          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:gap-3">
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:gap-3 2xl:gap-2">
             {/* WhatsApp */}
             <a
               href={whatsappHref}
