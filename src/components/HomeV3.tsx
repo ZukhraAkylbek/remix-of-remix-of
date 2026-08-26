@@ -218,7 +218,7 @@ export function HomeV3() {
 
 
         {/* О клинике */}
-        <Section id="o-klinike" eyebrow="О НАШЕЙ СЕТИ КЛИНИК" title="Авиценна">
+        <Section id="o-klinike" eyebrow="\n" title="\n">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-center">
             <Reveal className="order-2 lg:order-1">
               <div className="relative overflow-hidden rounded-3xl border border-border shadow-lg">
