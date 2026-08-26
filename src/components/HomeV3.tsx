@@ -340,7 +340,7 @@ export function HomeV3() {
                 <Eyebrow>Здоровье без лишней сложности</Eyebrow>
                 <h1 className="text-foreground mt-4 text-3xl leading-[1.22] font-extrabold tracking-tight sm:text-[42px] sm:leading-[1.18]">
                   Проверьте здоровье сегодня — предотвратите{" "}
-                  <span className="bg-brand-green text-brand-white rounded-lg px-2 py-1">
+                  <span className="bg-brand-green text-brand-white rounded-md px-2 py-0.5 align-middle text-[0.92em] leading-none">
                     {"\n"}проблемы завтра
                   </span>
                 </h1>
