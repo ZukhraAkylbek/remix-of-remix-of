@@ -47,7 +47,7 @@ export function SiteFooter() {
               </a>
             </li>
             <li className="text-muted-foreground">{CLINIC.email}</li>
-            <li className="text-muted-foreground">Пн–Пт: 8:00–20:00 · Сб–Вс: 9:00–18:00</li>
+            <li className="text-muted-foreground">График: кр</li>
           </ul>
         </div>
 
