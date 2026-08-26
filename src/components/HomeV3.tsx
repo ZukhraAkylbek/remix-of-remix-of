@@ -1,4 +1,4 @@
-import { ArrowRight, Clock, MapPin, Phone, Star, Stethoscope, TrendingUp } from "lucide-react";
+import { ArrowRight, MapPin, Star, Stethoscope, TrendingUp } from "lucide-react";
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
 import aboutMissionAsset from "@/assets/about-mission.jpg.asset.json";
@@ -409,46 +409,6 @@ export function HomeV3() {
         <FaqAccordion />
 
 
-        {/* Запись */}
-        <Section tone="green" eyebrow="Запись" title="Оставьте номер — поможем выбрать врача">
-          <p className="text-muted-foreground -mt-4 text-[15px]">
-            Перезвоним и подберём специалиста, филиал и время приёма.
-          </p>
-          <form
-            className="mt-7 grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <label className="grid gap-2">
-              <span className="text-muted-foreground text-[13px] font-bold">Ваше имя</span>
-              <input
-                placeholder="Имя"
-                className="bg-background border-border text-foreground rounded-xl border px-4 py-3 text-[15px] outline-none"
-              />
-            </label>
-            <label className="grid gap-2">
-              <span className="text-muted-foreground text-[13px] font-bold">Телефон</span>
-              <input
-                inputMode="tel"
-                placeholder="+996 ___ ___ ___"
-                className="bg-background border-border text-foreground rounded-xl border px-4 py-3 text-[15px] outline-none"
-              />
-            </label>
-            <button
-              type="submit"
-              className="bg-brand-green text-brand-white hover:bg-brand-green-dark self-end rounded-xl px-7 py-3 text-[15px] font-extrabold transition-colors"
-            >
-              Жду звонка
-            </button>
-          </form>
-          <p className="text-muted-foreground mt-5 flex flex-wrap items-center gap-4 text-[14px]">
-            <span className="inline-flex items-center gap-2">
-              <Phone className="size-4" /> {CLINIC.phones[0]}
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <Clock className="size-4" /> Круглосуточные направления
-            </span>
-          </p>
-        </Section>
       </main>
       <SiteFooter />
     </div>
