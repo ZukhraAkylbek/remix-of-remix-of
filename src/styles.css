@@ -515,3 +515,11 @@
 .leaflet-popup {
   z-index: 2;
 }
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
