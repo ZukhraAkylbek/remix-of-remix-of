@@ -87,6 +87,89 @@ export function SiteFooter() {
         </div>
       </div>
 
+      <div className="bg-brand-green text-brand-white">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+          <p className="text-sm font-semibold tracking-wide uppercase">НАШИ ПАРТНЕРЫ</p>
+          <ul className="mt-4 space-y-3 text-lg">
+            <li>
+              <a
+                href="https://expresslab.kg/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-brand-green-light inline-flex items-center gap-1.5 transition-colors"
+              >
+                Экспресс плюс
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 7h10v10" />
+                  <path d="M7 17 17 7" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://kokomeren.kg/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-brand-green-light inline-flex items-center gap-1.5 transition-colors"
+              >
+                Кокомерен
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 7h10v10" />
+                  <path d="M7 17 17 7" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href="http://corpus.kg/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-brand-green-light inline-flex items-center gap-1.5 transition-colors"
+              >
+                Corpus.kg
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 7h10v10" />
+                  <path d="M7 17 17 7" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
       <div className="border-border border-t">
         <div className="text-muted-foreground mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-sm sm:px-6">
           <span>© {new Date().getFullYear()} Медицинская клиника «Авиценна», Бишкек</span>
