@@ -34,6 +34,63 @@ function Eyebrow({ children }: { children: string }) {
   );
 }
 
+function SpecialtyMarquee() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [manual, setManual] = useState(false);
+
+  const scrollBy = (dir: -1 | 1) => {
+    setManual(true);
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * Math.max(240, el.clientWidth * 0.7), behavior: "smooth" });
+  };
+
+  return (
+    <section className="py-5 sm:py-6">
+      <div className="relative">
+        <button
+          type="button"
+          aria-label="Прокрутить направления влево"
+          onClick={() => scrollBy(-1)}
+          className="bg-brand-white/90 border-brand-green text-brand-green hover:bg-brand-green hover:text-brand-white absolute top-1/2 left-1 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-colors"
+        >
+          <ChevronLeft className="size-5" />
+        </button>
+        <button
+          type="button"
+          aria-label="Прокрутить направления вправо"
+          onClick={() => scrollBy(1)}
+          className="bg-brand-white/90 border-brand-green text-brand-green hover:bg-brand-green hover:text-brand-white absolute top-1/2 right-1 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-colors"
+        >
+          <ChevronRight className="size-5" />
+        </button>
+
+        <div
+          ref={scrollerRef}
+          className="group marquee-mask no-scrollbar relative overflow-x-auto px-12 scroll-smooth"
+        >
+          <div className={`${manual ? "" : "marquee-track"} flex w-max gap-3 pr-3`}>
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex shrink-0 gap-3 pr-3" aria-hidden={copy === 1}>
+                {SPECIALTY_PILLS.map((name) => (
+                  <Link
+                    key={`${copy}-${name}`}
+                    to="/napravleniya"
+                    className="bg-brand-green text-brand-white hover:bg-brand-green-dark flex shrink-0 items-center justify-center rounded-full px-8 py-3.5 text-base font-extrabold whitespace-nowrap transition-colors"
+                  >
+                    {name}
+                  </Link>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 function ReviewCard({ review }: { review: { text: string; src: string } }) {
   return (
     <figure className="bg-background border-border flex h-[200px] w-[320px] flex-col rounded-2xl border p-5 lg:w-[360px]">
