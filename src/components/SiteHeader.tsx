@@ -85,7 +85,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
             <a
               href={`tel:${phone}`}
               aria-label={t("Позвонить", "Позвонить")}
-              className="bg-brand-terracotta text-brand-white hover:brightness-105 inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-bold transition-all sm:size-11 2xl:size-auto 2xl:px-4 2xl:py-2.5"
+              className="inline-flex size-10 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-brand-terracotta text-brand-white text-xs font-bold transition-all hover:brightness-105 sm:size-11 2xl:size-auto 2xl:px-3 2xl:py-2"
             >
               <Phone className="size-[18px] shrink-0 2xl:size-4" strokeWidth={2} />
               <span className="hidden 2xl:inline">{t("Позвонить", "Позвонить")}</span>
