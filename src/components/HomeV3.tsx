@@ -453,69 +453,18 @@ export function HomeV3() {
 
         {/* Новости и специальные предложения */}
         <Section tone="soft" eyebrow="" title="Новости и специальные предложения">
-          <div className="grid gap-4 lg:grid-cols-2">
-            {/* Большая карточка — Сомнография */}
-            <Reveal className="lg:row-span-2">
-              <Link
-                to={FEATURED_OFFER.href as "/"}
-                className="group relative flex h-full min-h-[320px] flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-7"
-              >
-                <img
-                  src={FEATURED_OFFER.image}
-                  alt={FEATURED_OFFER.title}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="from-brand-green/90 via-brand-green/70 absolute inset-0 bg-gradient-to-r to-transparent" />
-                <div className="relative">
-                  <span className="badge-gradient text-brand-white inline-block rounded-2xl px-5 py-2.5 text-2xl font-extrabold sm:text-3xl">
-                    {FEATURED_OFFER.title}
-                  </span>
-                  <div className="badge-gradient-solid text-brand-white mt-5 w-full rounded-2xl p-5">
-                    <p className="text-[17px] leading-snug font-bold">{FEATURED_OFFER.description}</p>
-                    <p className="mt-3 flex items-baseline gap-3">
-                      <span className="text-4xl font-extrabold">{FEATURED_OFFER.price}</span>
-                      <span className="text-brand-white/70 text-lg line-through">
-                        {FEATURED_OFFER.oldPrice}
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                <span className="bg-brand-white text-brand-green relative mt-6 inline-flex w-fit items-center gap-2 rounded-full px-5 py-3 text-[15px] font-extrabold transition-transform group-hover:translate-x-1">
-                  Подробнее
-                  <ArrowRight className="size-4" />
-                </span>
-              </Link>
-            </Reveal>
-
-            {/* Правые карточки */}
-            {SIDE_OFFERS.map((item, index) => (
+          <div className="hidden gap-4 lg:grid lg:grid-cols-3">
+            {OFFER_CARDS.slice(0, 3).map((item, index) => (
               <Reveal key={item.title} delay={index * 60} className="h-full">
-                <Link
-                  to={item.href as "/"}
-                  className={`${item.tone} text-foreground group flex h-full min-h-[170px] items-stretch justify-between gap-4 overflow-hidden rounded-3xl border border-border/40 p-5 transition-all hover:-translate-y-1 hover:shadow-lg`}
-                >
-                  <div className="flex flex-1 flex-col">
-                    <h3 className="w-full text-[17px] leading-snug font-extrabold sm:text-lg">
-                      {item.title}
-                    </h3>
-                    <span className="bg-brand-white text-foreground mt-auto inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[14px] font-extrabold transition-transform group-hover:translate-x-1 shadow-sm">
-                      Подробнее
-                      <ArrowRight className="size-3.5" />
-                    </span>
-                  </div>
-
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-24 shrink-0 rounded-2xl object-cover sm:w-28"
-                    loading="lazy"
-                  />
-                </Link>
+                <OfferCard item={item} className="h-full w-full" />
               </Reveal>
             ))}
           </div>
+          <div className="lg:hidden">
+            <OffersMarquee />
+          </div>
         </Section>
+
 
         {/* Баннер перед картой */}
         <section className="relative overflow-hidden">
