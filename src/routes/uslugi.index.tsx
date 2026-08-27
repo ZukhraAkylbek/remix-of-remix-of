@@ -311,19 +311,17 @@ function ServicesIndex() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <h2 className="text-foreground text-xl font-extrabold sm:text-2xl">Популярные услуги</h2>
 
-            <div className="mt-6 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-              <div>
-                <div className="hidden gap-4 lg:grid lg:grid-cols-2 xl:grid-cols-4">
-                  {POPULAR.map((item, index) => (
-                    <Reveal key={item.title} delay={index * 60}>
-                      <PopularCard item={item} />
-                    </Reveal>
-                  ))}
-                </div>
-                <PopularMarquee />
+            <div className="mt-6">
+              <div className="hidden gap-4 lg:grid lg:grid-cols-2 xl:grid-cols-4">
+                {POPULAR.map((item, index) => (
+                  <Reveal key={item.title} delay={index * 60}>
+                    <PopularCard item={item} />
+                  </Reveal>
+                ))}
               </div>
+              <PopularMarquee />
 
-              <div className="grid gap-4 sm:grid-cols-3">
+              <div className="mt-6 grid gap-4 sm:grid-cols-3">
                 {PROMOS.map((promo, index) => (
                   <Reveal key={promo.title} delay={index * 70}>
                     <article
