@@ -18,7 +18,7 @@ export const MOBILE_NAV_SLOTS = [
   { label: "О нас", href: "/about" },
   { label: "Врачи", href: "/glavnaya-v3" },
   { label: "Whatsapp", href: "https://wa.me/996555123456" },
-  { label: "Услуги", href: "/#uslugi" },
+  { label: "Услуги", href: "/uslugi" },
   { label: "Контакты", href: "/#filialy" },
 ];
 
