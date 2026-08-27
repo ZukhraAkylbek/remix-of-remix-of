@@ -394,13 +394,16 @@ export function HomeV3() {
           <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-center">
             <Reveal className="order-2 lg:order-1">
               <div className="relative overflow-hidden rounded-3xl border border-border shadow-lg">
-                <img
-                  src={aboutMissionAsset.url}
-                  alt="Сеть клиник Авиценна в Бишкеке"
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-green/20 to-transparent" />
+                <div className="relative aspect-video w-full bg-black">
+                  <iframe
+                    className="absolute inset-0 h-full w-full"
+                    src="https://www.youtube-nocookie.com/embed/BrQHjVEWcUE?rel=0"
+                    title="Видео о клинике «Авиценна»"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             </Reveal>
             <div className="order-1 flex flex-col gap-4 lg:order-2">
