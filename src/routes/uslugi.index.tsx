@@ -215,7 +215,7 @@ function PopularMarquee() {
           {[0, 1].map((copy) => (
             <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy === 1}>
               {POPULAR.map((item) => (
-                <PopularCard key={`${copy}-${item.title}`} item={item} className="w-[260px]" />
+                <PhotoCard key={`${copy}-${item.title}`} item={item} className="w-[260px]" />
               ))}
             </div>
           ))}
