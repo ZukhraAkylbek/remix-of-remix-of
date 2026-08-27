@@ -348,22 +348,7 @@ function ServicesIndex() {
               <div className="mt-6 grid gap-4 sm:grid-cols-3">
                 {PROMOS.map((promo, index) => (
                   <Reveal key={promo.title} delay={index * 70}>
-                    <article
-                      className={`${promo.tone} group flex h-full flex-col overflow-hidden rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
-                    >
-                      <h3 className="text-foreground text-lg leading-tight font-extrabold">
-                        {promo.title}
-                      </h3>
-                      <p className="text-foreground/70 mt-1 text-xs leading-relaxed">{promo.text}</p>
-                      <img
-                        src={promo.image}
-                        alt={promo.title}
-                        width={600}
-                        height={400}
-                        loading="lazy"
-                        className="mt-4 h-20 w-full max-w-[180px] self-center rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </article>
+                    <PhotoCard item={promo} large />
                   </Reveal>
                 ))}
               </div>
