@@ -118,36 +118,60 @@ const SHORTCUTS = [
   { icon: MapPin, title: "Адреса филиалов", text: "6 филиалов в Бишкеке", href: "/#filialy" },
 ];
 
-function PopularCard({
+/** Карточка-фото «Вариант 1»: текст и зелёная стрелка сверху, фото во всю нижнюю часть с мягким градиентом цвета карточки. */
+const TONE_START: Record<string, string> = {
+  "pastel-mint": "var(--pastel-mint-start)",
+  "pastel-sky": "var(--pastel-sky-start)",
+  "pastel-sand": "var(--pastel-sand-start)",
+  "pastel-peach": "var(--pastel-peach-start)",
+  "pastel-coral": "var(--pastel-coral-start)",
+  "pastel-lavender": "var(--pastel-lavender-start)",
+};
+
+function PhotoCard({
   item,
+  large = false,
   className,
 }: {
-  item: (typeof POPULAR)[number];
+  item: { title: string; text: string; image: string; tone: string };
+  large?: boolean;
   className?: string;
 }) {
   return (
     <article
-      className={`${item.tone} group flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${className ?? ""}`}
+      className={`${item.tone} group relative flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${className ?? ""}`}
     >
-      <div className="p-4 pb-0">
-        <h3 className="text-foreground text-[15px] font-bold">{item.title}</h3>
-        <p className="text-foreground/70 mt-1 text-xs leading-relaxed">{item.text}</p>
-        <span className="text-brand-green mt-3 inline-flex items-center gap-1 text-xs font-semibold">
-          Подробнее
-          <ArrowRight
-            className="size-3.5 transition-transform group-hover:translate-x-1"
-            aria-hidden="true"
-          />
-        </span>
+      <div className="relative z-10 p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <h3
+              className={`text-foreground font-extrabold leading-tight ${large ? "text-3xl sm:text-4xl" : "text-[15px]"}`}
+            >
+              {item.title}
+            </h3>
+            <p className="text-foreground/70 mt-1 text-xs leading-relaxed">{item.text}</p>
+          </div>
+          <span className="bg-brand-green text-brand-white grid size-9 shrink-0 place-items-center rounded-full transition-transform duration-300 group-hover:scale-110">
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </span>
+        </div>
       </div>
-      <img
-        src={item.image}
-        alt={item.title}
-        width={1024}
-        height={640}
-        loading="lazy"
-        className="mt-4 h-24 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-      />
+      <div className="relative mt-auto">
+        <img
+          src={item.image}
+          alt={item.title}
+          width={1024}
+          height={640}
+          loading="lazy"
+          className="h-28 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-32"
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-20"
+          style={{
+            backgroundImage: `linear-gradient(to bottom, ${TONE_START[item.tone] ?? "white"}, transparent)`,
+          }}
+        />
+      </div>
     </article>
   );
 }
