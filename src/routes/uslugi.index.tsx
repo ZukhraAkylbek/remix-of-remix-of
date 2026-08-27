@@ -251,7 +251,7 @@ function ServicesIndex() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <h2 className="text-foreground text-xl font-extrabold sm:text-2xl">Весь спектр услуг</h2>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {hasServices
                 ? services.map((service, index) => (
                     <Reveal key={service.slug} delay={index * 30}>
