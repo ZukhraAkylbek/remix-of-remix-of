@@ -214,7 +214,7 @@ function ServicesIndex() {
         {/* Хиро с фотографией на фоне */}
         <section className="relative overflow-hidden">
           <img
-            src="/assets/doctor-patient-hero.webp"
+            src="/assets/uslugi-hero.jpg"
             alt="Врач и пациент в клинике «Авиценна»"
             className="absolute inset-0 h-full w-full object-cover object-center"
             width={1600}
