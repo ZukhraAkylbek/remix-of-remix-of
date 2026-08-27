@@ -107,7 +107,7 @@ const PROMOS = [
     tone: "pastel-sky",
     title: "Для всей семьи",
     text: "Забота о здоровье каждого члена семьи",
-    image: "/assets/doctor-patient-hero.webp",
+    image: "/assets/promo-family-all.jpg",
   },
 ];
 
