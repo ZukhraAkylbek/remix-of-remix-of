@@ -266,7 +266,7 @@ function ServicesIndex() {
                           className="size-9 shrink-0 transition-transform duration-300 group-hover:scale-110 sm:size-11"
                         />
                         <span className="min-w-0">
-                          <span className="text-foreground block text-[13px] leading-snug font-bold break-words sm:text-[15px]">
+                          <span className="text-foreground block text-[13px] leading-snug font-bold hyphens-auto sm:text-[15px] sm:hyphens-none">
                             {service.title}
                           </span>
                           {service.summary && (
@@ -292,7 +292,7 @@ function ServicesIndex() {
                           className="size-9 shrink-0 transition-transform duration-300 group-hover:scale-110 sm:size-11"
                         />
                         <span className="min-w-0">
-                          <span className="text-foreground block text-[13px] leading-snug font-bold break-words sm:text-[15px]">
+                          <span className="text-foreground block text-[13px] leading-snug font-bold hyphens-auto sm:text-[15px] sm:hyphens-none">
                             {service.title}
                           </span>
                           <span className="text-muted-foreground mt-1 block text-xs leading-relaxed">
