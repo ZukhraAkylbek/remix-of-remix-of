@@ -258,15 +258,15 @@ function ServicesIndex() {
                       <Link
                         to="/uslugi/$slug"
                         params={{ slug: service.slug }}
-                        className="border-border hover:border-brand-green group flex h-full items-start gap-3 rounded-2xl border bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                        className="border-border hover:border-brand-green group flex h-full items-start gap-2.5 rounded-2xl border bg-white p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:p-4"
                       >
                         <DiagnosticsIcon
                           icon={service.icon}
                           title={service.title}
-                          className="size-11 transition-transform duration-300 group-hover:scale-110"
+                          className="size-9 shrink-0 transition-transform duration-300 group-hover:scale-110 sm:size-11"
                         />
                         <span className="min-w-0">
-                          <span className="text-foreground block text-[15px] leading-snug font-bold">
+                          <span className="text-foreground block text-[13px] leading-snug font-bold hyphens-auto break-words sm:text-[15px] sm:hyphens-none">
                             {service.title}
                           </span>
                           {service.summary && (
@@ -284,15 +284,15 @@ function ServicesIndex() {
                         href={BOOKING_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="border-border hover:border-brand-green group flex h-full items-start gap-3 rounded-2xl border bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                        className="border-border hover:border-brand-green group flex h-full items-start gap-2.5 rounded-2xl border bg-white p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:p-4"
                       >
                         <DiagnosticsIcon
                           icon={service.icon}
                           title={service.title}
-                          className="size-11 transition-transform duration-300 group-hover:scale-110"
+                          className="size-9 shrink-0 transition-transform duration-300 group-hover:scale-110 sm:size-11"
                         />
                         <span className="min-w-0">
-                          <span className="text-foreground block text-[15px] leading-snug font-bold">
+                          <span className="text-foreground block text-[13px] leading-snug font-bold hyphens-auto break-words sm:text-[15px] sm:hyphens-none">
                             {service.title}
                           </span>
                           <span className="text-muted-foreground mt-1 block text-xs leading-relaxed">
