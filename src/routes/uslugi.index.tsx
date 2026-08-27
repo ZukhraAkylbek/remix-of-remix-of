@@ -86,7 +86,7 @@ const POPULAR = [
     title: "Приём врача",
     text: "Консультации специалистов по всем направлениям",
     image: "/assets/svc-priem.jpg",
-    tone: "pastel-lavender",
+    tone: "pastel-peach",
   },
 ];
 
@@ -98,7 +98,7 @@ const PROMOS = [
     image: "/assets/asian-family-hero.webp",
   },
   {
-    tone: "pastel-rose",
+    tone: "pastel-peach",
     title: "Беременность",
     text: "Ведение беременности на всех этапах",
     image: "/assets/svc-pregnancy.jpg",
@@ -144,9 +144,9 @@ function PopularCard({
         src={item.image}
         alt={item.title}
         width={1024}
-        height={768}
+        height={640}
         loading="lazy"
-        className="mt-4 h-32 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        className="mt-4 h-24 w-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
     </article>
   );
@@ -336,10 +336,10 @@ function ServicesIndex() {
                       <img
                         src={promo.image}
                         alt={promo.title}
-                        width={900}
-                        height={1024}
+                        width={600}
+                        height={400}
                         loading="lazy"
-                        className="mt-4 h-32 w-full rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="mt-4 h-20 w-full max-w-[180px] self-center rounded-xl object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </article>
                   </Reveal>
