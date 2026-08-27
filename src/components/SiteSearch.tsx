@@ -12,7 +12,7 @@ type Hit = { title: string; subtitle?: string | undefined; group: string; to: st
 const STATIC_HITS: Hit[] = [
   { title: "Направления", group: "Разделы", to: "/napravleniya" },
   { title: "Чекапы", group: "Разделы", to: "/checkups" },
-  { title: "Услуги", group: "Разделы", to: "/#uslugi" },
+  { title: "Услуги", group: "Разделы", to: "/uslugi" },
   { title: "Диагностика", group: "Разделы", to: "/#preimushchestva" },
   { title: "Врачи", group: "Разделы", to: "/#vrachi" },
   { title: "Филиалы и контакты", group: "Разделы", to: "/#filialy" },
