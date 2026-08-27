@@ -339,7 +339,7 @@ function ServicesIndex() {
               <div className="hidden gap-4 lg:grid lg:grid-cols-2 xl:grid-cols-4">
                 {POPULAR.map((item, index) => (
                   <Reveal key={item.title} delay={index * 60}>
-                    <PopularCard item={item} />
+                    <PhotoCard item={item} />
                   </Reveal>
                 ))}
               </div>
