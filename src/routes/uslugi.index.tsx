@@ -107,7 +107,7 @@ const PROMOS = [
 const SHORTCUTS = [
   { icon: CalendarCheck, title: "Записаться на приём", text: "Онлайн запись 24/7", href: BOOKING_URL },
   { icon: MessageCircle, title: "Получить консультацию", text: "Ответим на ваши вопросы", href: BOOKING_URL },
-  { icon: FlaskConical, title: "Результаты анализов", text: "Смотрите онлайн", href: BOOKING_URL },
+  { icon: FlaskConical, title: "Результаты анализов и диагностики", text: "Смотрите онлайн", href: BOOKING_URL },
   { icon: MapPin, title: "Адреса филиалов", text: "6 филиалов в Бишкеке", href: "/#filialy" },
 ];
 
