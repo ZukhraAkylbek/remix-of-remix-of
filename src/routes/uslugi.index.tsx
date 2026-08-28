@@ -41,7 +41,7 @@ const FALLBACK_SERVICES: { title: string; summary: string; icon: string }[] = [
   { title: "Приём специалистов", summary: "Консультации врачей 20+ направлений", icon: "Stethoscope" },
   { title: "Лабораторные анализы", summary: "Более 1000 видов исследований", icon: "FlaskConical" },
   { title: "УЗИ диагностика", summary: "Экспертный класс оборудования", icon: "ScanLine" },
-  { title: "МРТ и КТ", summary: "Высокоточная лучевая диагностика", icon: "Brain" },
+  { title: "КТ", summary: "Высокоточная лучевая диагностика", icon: "Brain" },
   { title: "Рентген", summary: "Цифровой рентген без очередей", icon: "Bone" },
   { title: "ЭКГ и холтер", summary: "Функциональная диагностика сердца", icon: "HeartPulse" },
   { title: "Хирургия", summary: "Плановые и малоинвазивные операции", icon: "Scissors" },
