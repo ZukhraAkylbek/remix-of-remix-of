@@ -17,7 +17,7 @@ const ICONS = [Hospital, Users, WhatsAppIcon, Stethoscope, MapPin];
 export const MOBILE_NAV_SLOTS = [
   { label: "О нас", href: "/about" },
   { label: "Врачи", href: "/glavnaya-v3" },
-  { label: "Whatsapp", href: "https://wa.me/996555123456" },
+  { label: "Whatsapp", href: "https://api.whatsapp.com/send/?phone=996707909001&text=&type=phone_number&app_absent=0" },
   { label: "Услуги", href: "/uslugi" },
   { label: "Контакты", href: "/#filialy" },
 ];
