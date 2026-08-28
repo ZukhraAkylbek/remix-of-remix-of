@@ -46,28 +46,25 @@ function SpecialtyMarquee() {
     el.scrollBy({ left: dir * Math.max(240, el.clientWidth * 0.7), behavior: "smooth" });
   };
 
+  // Бесконечная лента: контент продублирован ×2, при достижении
+  // середины/края незаметно переносим скролл на эквивалентное место.
+  const handleLoop = () => {
+    const el = scrollerRef.current;
+    if (!el || !manual) return;
+    const half = el.scrollWidth / 2;
+    if (half <= 0) return;
+    if (el.scrollLeft >= half) el.scrollLeft -= half;
+    else if (el.scrollLeft <= 0) el.scrollLeft += half;
+  };
+
   return (
     <section className="py-5 sm:py-6">
       <div className="relative">
-        <button
-          type="button"
-          aria-label="Прокрутить направления влево"
-          onClick={() => scrollBy(-1)}
-          className="bg-brand-white/90 border-brand-green text-brand-green hover:bg-brand-green hover:text-brand-white absolute top-1/2 left-1 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-colors"
-        >
-          <ChevronLeft className="size-5" />
-        </button>
-        <button
-          type="button"
-          aria-label="Прокрутить направления вправо"
-          onClick={() => scrollBy(1)}
-          className="bg-brand-white/90 border-brand-green text-brand-green hover:bg-brand-green hover:text-brand-white absolute top-1/2 right-1 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-colors"
-        >
-          <ChevronRight className="size-5" />
-        </button>
+        <ScrollArrowPair onScroll={scrollBy} label="Прокрутить направления" />
 
         <div
           ref={scrollerRef}
+          onScroll={handleLoop}
           className="group marquee-mask no-scrollbar relative overflow-x-auto px-12 scroll-smooth"
         >
           <div className={`${manual ? "" : "marquee-track"} flex w-max gap-3 pr-3`}>
