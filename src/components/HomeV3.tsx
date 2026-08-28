@@ -17,6 +17,7 @@ import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json"
 import image2Asset from "@/assets/image-2.png.asset.json";
 
 import { BranchesWithMap } from "@/components/BranchesWithMap";
+import { ScrollArrowPair } from "@/components/ScrollArrows";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -234,22 +235,7 @@ function OffersMarquee() {
 
   return (
     <div className="relative">
-      <button
-        type="button"
-        aria-label="Прокрутить предложения влево"
-        onClick={() => scrollBy(-1)}
-        className="bg-brand-white/90 border-brand-green text-brand-green hover:bg-brand-green hover:text-brand-white absolute top-1/2 left-1 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-colors"
-      >
-        <ChevronLeft className="size-5" />
-      </button>
-      <button
-        type="button"
-        aria-label="Прокрутить предложения вправо"
-        onClick={() => scrollBy(1)}
-        className="bg-brand-white/90 border-brand-green text-brand-green hover:bg-brand-green hover:text-brand-white absolute top-1/2 right-1 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-colors"
-      >
-        <ChevronRight className="size-5" />
-      </button>
+      <ScrollArrowPair onScroll={scrollBy} label="Прокрутить предложения" />
 
       <div
         ref={scrollerRef}
