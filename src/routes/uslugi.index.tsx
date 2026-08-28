@@ -106,6 +106,30 @@ const PROMOS = [
   },
 ];
 
+const NEWS = [
+  {
+    tone: "pastel-sky",
+    title: "ДЛТ 24/7 — дробление камней без операции",
+    text: "Самый современный метод лечения камней в почках",
+    cta: "Записаться на ДЛТ",
+    href: BOOKING_URL,
+  },
+  {
+    tone: "pastel-mint",
+    title: "Процедурная 24/7",
+    text: "Капельницы и уколы под наблюдением медицинского специалиста — в любое время суток.",
+    cta: "Узнать подробнее",
+    href: BOOKING_URL,
+  },
+  {
+    tone: "pastel-peach",
+    title: "«Биринчи байлык…» с Керималиевой Жыпар, основателем клиники Авиценна",
+    text: "Смотрите подкаст «Авиценны» на YouTube — о здоровье, профилактике и лечении вместе с врачами и приглашёнными специалистами.",
+    cta: "Смотреть выпуски на YouTube",
+    href: "https://www.youtube.com/@avicenna",
+  },
+];
+
 const SHORTCUTS = [
   { icon: CalendarCheck, title: "Записаться на приём", text: "Онлайн запись 24/7", href: BOOKING_URL },
   { icon: MessageCircle, title: "Получить консультацию", text: "Ответим на ваши вопросы", href: BOOKING_URL },
@@ -352,6 +376,35 @@ function ServicesIndex() {
                       <span className="text-muted-foreground mt-1 block text-xs">{item.text}</span>
                     </span>
                   </a>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Новости и специальные предложения */}
+        <section className="py-6 sm:py-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <h2 className="text-foreground text-xl font-extrabold sm:text-2xl">Новости и специальные предложения</h2>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {NEWS.map((item, index) => (
+                <Reveal key={item.title} delay={index * 60}>
+                  <article
+                    className={`${item.tone} group flex h-full flex-col rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
+                  >
+                    <h3 className="text-foreground text-[15px] font-extrabold leading-snug">{item.title}</h3>
+                    <p className="text-foreground/70 mt-2 text-sm leading-relaxed">{item.text}</p>
+                    <a
+                      href={item.href}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="text-brand-green mt-4 inline-flex items-center gap-1.5 text-sm font-bold transition-colors hover:underline"
+                    >
+                      {item.cta}
+                      <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                    </a>
+                  </article>
                 </Reveal>
               ))}
             </div>
