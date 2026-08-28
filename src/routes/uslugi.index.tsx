@@ -86,19 +86,19 @@ const POPULAR = [
 const PROMOS = [
   {
     tone: "pastel-mint",
-    title: "410+",
+    title: "Для детей",
     text: "медицинских услуг для вас и вашей семьи",
     image: "/assets/asian-family-hero.webp",
   },
   {
     tone: "pastel-peach",
-    title: "Беременность",
+    title: "Для беременных",
     text: "Ведение беременности на всех этапах",
     image: "/assets/svc-pregnancy.jpg",
   },
   {
     tone: "pastel-sky",
-    title: "Для всей семьи",
+    title: "Для пациентов 60+",
     text: "Забота о здоровье каждого члена семьи",
     image: "/assets/promo-family-all.jpg",
   },
