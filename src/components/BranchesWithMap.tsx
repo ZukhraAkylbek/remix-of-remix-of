@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, MapPin, Navigation, Phone } from "lucide-react";
+import { MapPin, Navigation, Phone } from "lucide-react";
+
+import { ScrollArrow } from "@/components/ScrollArrows";
 import "leaflet/dist/leaflet.css";
 
 import { CLINIC, doubleGisSearchUrl, googleMapsDirectionsUrl } from "@/lib/clinic";
@@ -149,22 +151,16 @@ export function BranchesWithMap() {
           {/* Список адресов: горизонтальный скролл на мобильном */}
           <div className="min-w-0">
             <div className="mb-2 flex justify-end gap-2 lg:hidden">
-              <button
-                type="button"
+              <ScrollArrow
+                dir={-1}
+                label="Прокрутить филиалы влево"
                 onClick={() => switchBranch("left")}
-                aria-label="Прокрутить филиалы влево"
-                className="bg-brand-white/90 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex size-10 shrink-0 items-center justify-center rounded-xl border shadow-sm backdrop-blur-sm transition-all active:scale-95"
-              >
-                <ChevronLeft className="size-5" />
-              </button>
-              <button
-                type="button"
+              />
+              <ScrollArrow
+                dir={1}
+                label="Прокрутить филиалы вправо"
                 onClick={() => switchBranch("right")}
-                aria-label="Прокрутить филиалы вправо"
-                className="bg-brand-white/90 text-brand-green border-brand-green hover:bg-brand-green hover:text-brand-white inline-flex size-10 shrink-0 items-center justify-center rounded-xl border shadow-sm backdrop-blur-sm transition-all active:scale-95"
-              >
-                <ChevronRight className="size-5" />
-              </button>
+              />
             </div>
 
             <ul
