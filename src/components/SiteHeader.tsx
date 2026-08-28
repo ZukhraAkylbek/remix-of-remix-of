@@ -52,7 +52,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
     <div className="sticky top-0 z-50">
       {/* Верхняя панель */}
       <header className="bg-background/95 border-border border-b backdrop-blur">
-        <div className="mx-auto grid max-w-7xl grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-3 py-2.5 sm:px-4 sm:py-3 lg:gap-6 lg:px-6 lg:py-3">
+        <div className="mx-auto grid max-w-7xl grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 px-2 py-2.5 sm:px-4 sm:py-3 lg:gap-6 lg:px-6 lg:py-3">
           {/* Логотип */}
           <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
             <Link to="/" className="flex shrink-0 items-center" aria-label="Авиценна — на главную">
@@ -76,7 +76,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
           <SiteSearch className="hidden min-w-0 w-full md:block lg:max-w-xl" />
 
           {/* Действия справа */}
-          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:gap-3 2xl:gap-2">
+          <div className="flex shrink-0 items-center justify-self-end gap-1 sm:gap-2 lg:gap-3 2xl:gap-2">
             {/* WhatsApp */}
             <a
               href={whatsappHref}

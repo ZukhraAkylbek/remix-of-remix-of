@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { MapPin, Navigation, Phone } from "lucide-react";
 
-import { ScrollArrow } from "@/components/ScrollArrows";
+import { ScrollArrowPair } from "@/components/ScrollArrows";
 import "leaflet/dist/leaflet.css";
 
 import { CLINIC, doubleGisSearchUrl, googleMapsDirectionsUrl } from "@/lib/clinic";
@@ -149,23 +149,16 @@ export function BranchesWithMap() {
 
         <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]">
           {/* Список адресов: горизонтальный скролл на мобильном */}
-          <div className="min-w-0">
-            <div className="mb-2 flex justify-end gap-2 lg:hidden">
-              <ScrollArrow
-                dir={-1}
-                label="Прокрутить филиалы влево"
-                onClick={() => switchBranch("left")}
-              />
-              <ScrollArrow
-                dir={1}
-                label="Прокрутить филиалы вправо"
-                onClick={() => switchBranch("right")}
-              />
-            </div>
+          <div className="relative min-w-0">
+            <ScrollArrowPair
+              onScroll={(dir) => switchBranch(dir === -1 ? "left" : "right")}
+              label="Прокрутить филиалы"
+              className="lg:hidden"
+            />
 
             <ul
               ref={listRef}
-              className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-1 lg:mx-0 lg:grid lg:gap-2 lg:overflow-visible lg:px-0"
+              className="no-scrollbar flex snap-x gap-2 overflow-x-auto px-12 pb-1 lg:grid lg:gap-2 lg:overflow-visible lg:px-0"
             >
               {branches.map((b, i) => {
                 const isActive = i === active;
