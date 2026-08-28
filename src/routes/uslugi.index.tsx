@@ -198,6 +198,52 @@ function PhotoCard({
   );
 }
 
+/** Карточка новости с фото: текст и CTA сверху, фото снизу с мягким градиентом. */
+function NewsPhotoCard({
+  item,
+  className,
+}: {
+  item: { title: string; text: string; cta: string; href: string; image: string; tone: string };
+  className?: string;
+}) {
+  const external = item.href.startsWith("http");
+  return (
+    <article
+      className={`${item.tone} group relative flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${className ?? ""}`}
+    >
+      <div className="relative z-10 p-4">
+        <h3 className="text-foreground text-[15px] font-extrabold leading-snug">{item.title}</h3>
+        <p className="text-foreground/70 mt-1.5 text-xs leading-relaxed">{item.text}</p>
+        <a
+          href={item.href}
+          target={external ? "_blank" : undefined}
+          rel={external ? "noopener noreferrer" : undefined}
+          className="text-brand-green mt-3 inline-flex items-center gap-1.5 text-sm font-bold transition-colors hover:underline"
+        >
+          {item.cta}
+          <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+        </a>
+      </div>
+      <div className="relative mt-auto">
+        <img
+          src={item.image}
+          alt={item.title}
+          width={1024}
+          height={640}
+          loading="lazy"
+          className="h-28 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-32"
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-20"
+          style={{
+            backgroundImage: `linear-gradient(to bottom, ${TONE_START[item.tone] ?? "white"}, transparent)`,
+          }}
+        />
+      </div>
+    </article>
+  );
+}
+
 /** Автопрокрутка популярных услуг в адаптиве + ручные стрелки. */
 function PopularMarquee() {
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -210,12 +256,24 @@ function PopularMarquee() {
     el.scrollBy({ left: dir * Math.max(280, el.clientWidth * 0.8), behavior: "smooth" });
   };
 
+  // Бесконечная лента: контент продублирован ×2, при достижении
+  // середины/края незаметно переносим скролл на эквивалентное место.
+  const handleLoop = () => {
+    const el = scrollerRef.current;
+    if (!el || !manual) return;
+    const half = el.scrollWidth / 2;
+    if (half <= 0) return;
+    if (el.scrollLeft >= half) el.scrollLeft -= half;
+    else if (el.scrollLeft <= 0) el.scrollLeft += half;
+  };
+
   return (
     <div className="relative lg:hidden">
       <ScrollArrowPair onScroll={scrollBy} label="Прокрутить популярные услуги" />
 
       <div
         ref={scrollerRef}
+        onScroll={handleLoop}
         className="group marquee-mask no-scrollbar relative overflow-x-auto scroll-smooth px-12 py-1"
       >
         <div className={`${manual ? "" : "marquee-track"} flex w-max gap-4 pr-4`}>
@@ -226,6 +284,62 @@ function PopularMarquee() {
               ))}
             </div>
           ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Бесконечная лента новостей в адаптиве + сетка на десктопе. */
+function NewsMarquee() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [manual, setManual] = useState(false);
+
+  const scrollBy = (dir: -1 | 1) => {
+    setManual(true);
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * Math.max(280, el.clientWidth * 0.8), behavior: "smooth" });
+  };
+
+  const handleLoop = () => {
+    const el = scrollerRef.current;
+    if (!el || !manual) return;
+    const half = el.scrollWidth / 2;
+    if (half <= 0) return;
+    if (el.scrollLeft >= half) el.scrollLeft -= half;
+    else if (el.scrollLeft <= 0) el.scrollLeft += half;
+  };
+
+  return (
+    <div className="mt-6">
+      {/* Десктоп: сетка */}
+      <div className="hidden gap-4 lg:grid lg:grid-cols-3">
+        {NEWS.map((item, index) => (
+          <Reveal key={item.title} delay={index * 60}>
+            <NewsPhotoCard item={item} />
+          </Reveal>
+        ))}
+      </div>
+
+      {/* Адаптив: бесконечная лента со стрелками */}
+      <div className="relative lg:hidden">
+        <ScrollArrowPair onScroll={scrollBy} label="Прокрутить новости" />
+
+        <div
+          ref={scrollerRef}
+          onScroll={handleLoop}
+          className="group marquee-mask no-scrollbar relative overflow-x-auto scroll-smooth px-12 py-1"
+        >
+          <div className={`${manual ? "" : "marquee-track"} flex w-max gap-4 pr-4`}>
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy === 1}>
+                {NEWS.map((item) => (
+                  <NewsPhotoCard key={`${copy}-${item.title}`} item={item} className="w-[260px]" />
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
