@@ -1,18 +1,11 @@
 import { useRef, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  CalendarCheck,
-  ChevronLeft,
-  ChevronRight,
-  FlaskConical,
-  MapPin,
-  MessageCircle,
-} from "lucide-react";
+import { ArrowRight, CalendarCheck, FlaskConical, MapPin, MessageCircle } from "lucide-react";
 
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
+import { ScrollArrowPair } from "@/components/ScrollArrows";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -190,22 +183,7 @@ function PopularMarquee() {
 
   return (
     <div className="relative lg:hidden">
-      <button
-        type="button"
-        aria-label="Прокрутить влево"
-        onClick={() => scrollBy(-1)}
-        className="bg-brand-white/90 border-brand-green text-brand-green absolute top-1/2 left-1 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-transform active:scale-95"
-      >
-        <ChevronLeft className="size-5" aria-hidden="true" />
-      </button>
-      <button
-        type="button"
-        aria-label="Прокрутить вправо"
-        onClick={() => scrollBy(1)}
-        className="bg-brand-white/90 border-brand-green text-brand-green absolute top-1/2 right-1 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full border shadow-sm backdrop-blur transition-transform active:scale-95"
-      >
-        <ChevronRight className="size-5" aria-hidden="true" />
-      </button>
+      <ScrollArrowPair onScroll={scrollBy} label="Прокрутить популярные услуги" />
 
       <div
         ref={scrollerRef}

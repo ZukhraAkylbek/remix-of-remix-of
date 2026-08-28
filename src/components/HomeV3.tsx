@@ -1,12 +1,4 @@
-import {
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-  MapPin,
-  Star,
-  Stethoscope,
-  TrendingUp,
-} from "lucide-react";
+import { ArrowRight, MapPin, Star, Stethoscope, TrendingUp } from "lucide-react";
 import { useRef, useState } from "react";
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
