@@ -410,6 +410,11 @@ function ServicesIndex() {
                     <PhotoCard item={item} />
                   </Reveal>
                 ))}
+                {NEWS.map((item, index) => (
+                  <Reveal key={item.title} delay={(POPULAR.length + index) * 60}>
+                    <NewsPhotoCard item={item} />
+                  </Reveal>
+                ))}
               </div>
               <PopularMarquee />
 
@@ -420,9 +425,6 @@ function ServicesIndex() {
                   </Reveal>
                 ))}
               </div>
-
-              {/* Новости и спецпредложения — фото-карточки с бесконечной лентой */}
-              <NewsMarquee />
             </div>
 
             {/* Быстрые действия */}
