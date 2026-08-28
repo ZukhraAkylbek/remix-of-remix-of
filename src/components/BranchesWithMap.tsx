@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { MapPin, Navigation, Phone } from "lucide-react";
 
-import { ScrollArrow } from "@/components/ScrollArrows";
+import { ScrollArrowPair } from "@/components/ScrollArrows";
 import "leaflet/dist/leaflet.css";
 
 import { CLINIC, doubleGisSearchUrl, googleMapsDirectionsUrl } from "@/lib/clinic";
