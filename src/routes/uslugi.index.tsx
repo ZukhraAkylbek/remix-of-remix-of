@@ -58,7 +58,7 @@ const FALLBACK_SERVICES: { title: string; summary: string; icon: string }[] = [
 
 const POPULAR = [
   {
-    title: "МРТ диагностика",
+    title: "КТ диагностика",
     text: "Высокоточная диагностика на современном оборудовании",
     image: "/assets/svc-mrt.jpg",
     tone: "pastel-sky",
