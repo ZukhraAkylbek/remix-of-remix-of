@@ -113,6 +113,7 @@ const NEWS = [
     text: "Самый современный метод лечения камней в почках",
     cta: "Записаться на ДЛТ",
     href: BOOKING_URL,
+    image: "/assets/news-dlt.jpg",
   },
   {
     tone: "pastel-mint",
@@ -120,6 +121,7 @@ const NEWS = [
     text: "Капельницы и уколы под наблюдением медицинского специалиста — в любое время суток.",
     cta: "Узнать подробнее",
     href: BOOKING_URL,
+    image: "/assets/news-procedurnaya.jpg",
   },
   {
     tone: "pastel-peach",
@@ -127,6 +129,7 @@ const NEWS = [
     text: "Смотрите подкаст «Авиценны» на YouTube — о здоровье, профилактике и лечении вместе с врачами и приглашёнными специалистами.",
     cta: "Смотреть выпуски на YouTube",
     href: "https://www.youtube.com/@avicenna",
+    image: "/assets/news-podcast.jpg",
   },
 ];
 
