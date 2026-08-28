@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin, Star, Stethoscope, TrendingUp } from "lucide-react";
+import { ArrowRight, ClipboardCheck, Award, Waves, MapPin, Star, Stethoscope, TrendingUp } from "lucide-react";
 import { useRef, useState } from "react";
 
 import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
@@ -171,6 +171,9 @@ const CLINIC_STATS = [
   { value: "6", label: "филиалов в Бишкеке", icon: MapPin },
   { value: "60+", label: "врачебных специальностей", icon: Stethoscope },
   { value: "410+", label: "медицинских услуг", icon: TrendingUp },
+  { value: "1000", label: "чекапов в год", icon: ClipboardCheck },
+  { value: "26", label: "лет опыта", icon: Award },
+  { value: "146", label: "видов УЗИ", icon: Waves },
 ];
 
 const OFFER_CARDS = [
@@ -383,14 +386,14 @@ export function HomeV3() {
             </Reveal>
             <div className="order-1 flex flex-col gap-4 lg:order-2">
               <Reveal delay={80}>
-                <p className="text-muted-foreground text-[15px] leading-relaxed sm:text-[16px]">
+                <p className="text-muted-foreground text-justify text-[15px] leading-relaxed sm:text-[16px]">
                   Сеть клиник «Авиценна» ведет свою историю с 2000 года, когда врач-дерматовенеролог,
                   кандидат медицинских наук Жыпар Абдыказиевна Керималиева открыла первый медицинский
                   центр в небольшом кабинете на улице Суеркулова.
                 </p>
               </Reveal>
               <Reveal delay={120}>
-                <p className="text-muted-foreground text-[15px] leading-relaxed sm:text-[16px]">
+                <p className="text-muted-foreground text-justify text-[15px] leading-relaxed sm:text-[16px]">
                   Сегодня «Авиценна» — это 6 филиалов в Бишкеке, более 60 врачебных специальностей и
                   более 410 медицинских услуг для взрослых и детей. Мы объединяем специалистов,
                   современную диагностику и собственную лабораторию, чтобы пациент мог получить
