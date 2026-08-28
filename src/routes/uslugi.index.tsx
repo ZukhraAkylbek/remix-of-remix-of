@@ -280,66 +280,13 @@ function PopularMarquee() {
           {[0, 1].map((copy) => (
             <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy === 1}>
               {POPULAR.map((item) => (
-                <PhotoCard key={`${copy}-${item.title}`} item={item} className="w-[260px]" />
+                <PhotoCard key={`p-${copy}-${item.title}`} item={item} className="w-[260px]" />
+              ))}
+              {NEWS.map((item) => (
+                <NewsPhotoCard key={`n-${copy}-${item.title}`} item={item} className="w-[260px]" />
               ))}
             </div>
           ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/** Бесконечная лента новостей в адаптиве + сетка на десктопе. */
-function NewsMarquee() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const [manual, setManual] = useState(false);
-
-  const scrollBy = (dir: -1 | 1) => {
-    setManual(true);
-    const el = scrollerRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * Math.max(280, el.clientWidth * 0.8), behavior: "smooth" });
-  };
-
-  const handleLoop = () => {
-    const el = scrollerRef.current;
-    if (!el || !manual) return;
-    const half = el.scrollWidth / 2;
-    if (half <= 0) return;
-    if (el.scrollLeft >= half) el.scrollLeft -= half;
-    else if (el.scrollLeft <= 0) el.scrollLeft += half;
-  };
-
-  return (
-    <div className="mt-6">
-      {/* Десктоп: сетка */}
-      <div className="hidden gap-4 lg:grid lg:grid-cols-3">
-        {NEWS.map((item, index) => (
-          <Reveal key={item.title} delay={index * 60}>
-            <NewsPhotoCard item={item} />
-          </Reveal>
-        ))}
-      </div>
-
-      {/* Адаптив: бесконечная лента со стрелками */}
-      <div className="relative lg:hidden">
-        <ScrollArrowPair onScroll={scrollBy} label="Прокрутить новости" />
-
-        <div
-          ref={scrollerRef}
-          onScroll={handleLoop}
-          className="group marquee-mask no-scrollbar relative overflow-x-auto scroll-smooth px-12 py-1"
-        >
-          <div className={`${manual ? "" : "marquee-track"} flex w-max gap-4 pr-4`}>
-            {[0, 1].map((copy) => (
-              <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy === 1}>
-                {NEWS.map((item) => (
-                  <NewsPhotoCard key={`${copy}-${item.title}`} item={item} className="w-[260px]" />
-                ))}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>
@@ -463,6 +410,11 @@ function ServicesIndex() {
                     <PhotoCard item={item} />
                   </Reveal>
                 ))}
+                {NEWS.map((item, index) => (
+                  <Reveal key={item.title} delay={(POPULAR.length + index) * 60}>
+                    <NewsPhotoCard item={item} />
+                  </Reveal>
+                ))}
               </div>
               <PopularMarquee />
 
@@ -473,9 +425,6 @@ function ServicesIndex() {
                   </Reveal>
                 ))}
               </div>
-
-              {/* Новости и спецпредложения — фото-карточки с бесконечной лентой */}
-              <NewsMarquee />
             </div>
 
             {/* Быстрые действия */}
