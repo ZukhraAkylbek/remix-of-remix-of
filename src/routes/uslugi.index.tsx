@@ -106,6 +106,30 @@ const PROMOS = [
   },
 ];
 
+const NEWS = [
+  {
+    tone: "pastel-sky",
+    title: "ДЛТ 24/7 — дробление камней без операции",
+    text: "Самый современный метод лечения камней в почках",
+    cta: "Записаться на ДЛТ",
+    href: BOOKING_URL,
+  },
+  {
+    tone: "pastel-mint",
+    title: "Процедурная 24/7",
+    text: "Капельницы и уколы под наблюдением медицинского специалиста — в любое время суток.",
+    cta: "Узнать подробнее",
+    href: BOOKING_URL,
+  },
+  {
+    tone: "pastel-peach",
+    title: "«Биринчи байлык…» с Керималиевой Жыпар, основателем клиники Авиценна",
+    text: "Смотрите подкаст «Авиценны» на YouTube — о здоровье, профилактике и лечении вместе с врачами и приглашёнными специалистами.",
+    cta: "Смотреть выпуски на YouTube",
+    href: "https://www.youtube.com/@avicenna",
+  },
+];
+
 const SHORTCUTS = [
   { icon: CalendarCheck, title: "Записаться на приём", text: "Онлайн запись 24/7", href: BOOKING_URL },
   { icon: MessageCircle, title: "Получить консультацию", text: "Ответим на ваши вопросы", href: BOOKING_URL },
