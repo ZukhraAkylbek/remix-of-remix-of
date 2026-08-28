@@ -47,6 +47,8 @@ const FALLBACK_SERVICES: { title: string; summary: string; icon: string }[] = [
   { title: "Хирургия", summary: "Плановые и малоинвазивные операции", icon: "Scissors" },
   { title: "Стационар", summary: "Круглосуточное наблюдение и уход", icon: "BedDouble" },
   { title: "Травмпункт", summary: "Помощь при травмах 24/7", icon: "Ambulance" },
+  { title: "ДЛТ Сомнография", summary: "Диагностика нарушений сна", icon: "Moon" },
+  { title: "Диагностика", summary: "Комплексные обследования организма", icon: "Stethoscope" },
   { title: "Ведение беременности", summary: "Сопровождение на всех сроках", icon: "Baby" },
   { title: "Вакцинация", summary: "Детям и взрослым по календарю", icon: "Syringe" },
   { title: "Физиотерапия", summary: "Реабилитация и восстановление", icon: "Activity" },
