@@ -419,12 +419,12 @@ function OptimalCard({ program, slug }: { program: ProgramDef; slug: string | un
     <article
       className={`${program.tone} badge-gradient relative flex h-full flex-col overflow-hidden rounded-3xl p-6`}
     >
-      <h3 className="text-foreground max-w-[55%] text-[19px] leading-tight font-extrabold">
+      <h3 className="text-foreground max-w-[50%] text-[19px] leading-tight font-extrabold">
         {program.title}
       </h3>
       <p className="text-brand-green-dark mt-2 text-[20px] font-extrabold">{program.price}</p>
       <DetailLink slug={slug} />
-      <p className="text-muted-foreground mt-4 max-w-[55%] text-[12px] leading-snug font-semibold">
+      <p className="text-muted-foreground mt-4 max-w-[48%] text-[12px] leading-snug font-semibold">
         Анализы, диагностика и консультации специалистов — всё включено.
       </p>
       <img
@@ -433,7 +433,7 @@ function OptimalCard({ program, slug }: { program: ProgramDef; slug: string | un
         loading="lazy"
         width={768}
         height={768}
-        className="absolute right-0 bottom-0 h-[78%] w-[52%] rounded-tl-[48px] object-cover object-top"
+        className="absolute right-0 bottom-0 h-[78%] w-[48%] rounded-tl-[48px] object-cover object-top"
       />
     </article>
   );
