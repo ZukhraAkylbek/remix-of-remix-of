@@ -414,7 +414,7 @@ function CheckupsPage() {
   );
 }
 
-function OptimalCard({ program, slug }: { program: ProgramDef; slug?: string }) {
+function OptimalCard({ program, slug }: { program: ProgramDef; slug: string | undefined }) {
   return (
     <article
       className={`${program.tone} badge-gradient relative flex h-full flex-col overflow-hidden rounded-3xl p-6`}
@@ -439,7 +439,7 @@ function OptimalCard({ program, slug }: { program: ProgramDef; slug?: string }) 
   );
 }
 
-function ExtendedCard({ program, slug }: { program: ProgramDef; slug?: string }) {
+function ExtendedCard({ program, slug }: { program: ProgramDef; slug: string | undefined }) {
   return (
     <article
       className={`${program.tone} badge-gradient relative flex flex-col overflow-hidden rounded-3xl p-6 sm:flex-row sm:items-center sm:gap-6`}
