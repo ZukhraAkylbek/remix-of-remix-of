@@ -467,7 +467,7 @@ function ExtendedCard({ program, slug }: { program: ProgramDef; slug: string | u
   );
 }
 
-function DetailLink({ slug }: { slug?: string }) {
+function DetailLink({ slug }: { slug: string | undefined }) {
   const className =
     "bg-brand-green-dark text-brand-white hover:bg-brand-green-dark/90 mt-4 inline-flex w-fit items-center gap-1.5 rounded-full px-5 py-2.5 text-[13px] font-extrabold transition-colors";
 
