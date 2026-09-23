@@ -1,9 +1,8 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Check, Phone, Plus } from "lucide-react";
+import { ArrowRight, Check, Plus } from "lucide-react";
 import { useState } from "react";
 
-import { ConsultCta } from "@/components/ConsultCta";
 import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";

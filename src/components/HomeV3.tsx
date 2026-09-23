@@ -39,15 +39,15 @@ function SpecialtyMarquee() {
     el.scrollBy({ left: dir * Math.max(240, el.clientWidth * 0.7), behavior: "smooth" });
   };
 
-  // Бесконечная лента: контент продублирован ×2, при достижении
-  // середины/края незаметно переносим скролл на эквивалентное место.
+  // Четыре одинаковых набора перекрывают даже широкий экран; при ручной
+  // прокрутке переносим позицию ровно на длину одного набора.
   const handleLoop = () => {
     const el = scrollerRef.current;
     if (!el || !manual) return;
-    const half = el.scrollWidth / 2;
-    if (half <= 0) return;
-    if (el.scrollLeft >= half) el.scrollLeft -= half;
-    else if (el.scrollLeft <= 0) el.scrollLeft += half;
+    const setWidth = el.scrollWidth / 4;
+    if (setWidth <= 0) return;
+    if (el.scrollLeft >= setWidth * 2) el.scrollLeft -= setWidth;
+    else if (el.scrollLeft <= 0) el.scrollLeft += setWidth;
   };
 
   return (
