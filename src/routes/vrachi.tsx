@@ -211,12 +211,13 @@ function DoctorsCarousel({
               variant="outline"
               className="border-about-line text-about-ink mt-4 bg-transparent shadow-none"
             >
-              <Link
-                to={doctor.specialty_slug ? "/napravleniya/$slug" : "/poliklinika"}
-                params={doctor.specialty_slug ? { slug: doctor.specialty_slug } : undefined}
-              >
-                Подробнее
-              </Link>
+              {doctor.specialty_slug ? (
+                <Link to="/napravleniya/$slug" params={{ slug: doctor.specialty_slug }}>
+                  Подробнее
+                </Link>
+              ) : (
+                <Link to="/poliklinika">Подробнее</Link>
+              )}
             </Button>
           </article>
         ))}
