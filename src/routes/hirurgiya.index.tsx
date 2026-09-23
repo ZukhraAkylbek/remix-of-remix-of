@@ -19,6 +19,77 @@ const TITLE = "Хирургия в Бишкеке — операции и ста
 const DESCRIPTION =
   "Хирургия в клинике «Авиценна»: лапароскопия, урология, гинекология, проктология, флебология, травматология. Диагностика перед операцией, стационар 24/7, запись онлайн.";
 
+const FALLBACK_SECTIONS = {
+  hero: {
+    title: "Современная хирургия с заботой о пациенте",
+    subtitle: "Диагностика, плановые и малоинвазивные операции, стационар и восстановление в одной клинике.",
+    body: "Опытные хирурги\nСтационар 24/7\nСовременные операционные\nПолное сопровождение",
+    image_url: "/assets/spec-hirurg.webp",
+    primary_label: "Записаться на консультацию",
+    primary_url: BOOKING_URL,
+  },
+  advantages: {
+    title: "Почему выбирают нашу хирургию",
+    subtitle: "Безопасность, точная диагностика и внимательное сопровождение на каждом этапе.",
+    body: "Опытная команда — Врачи хирургических специальностей работают вместе.\nСовременное оснащение — Операционные и диагностика соответствуют актуальным стандартам.\nСтационар 24/7 — Наблюдение медицинской команды круглосуточно.\nБережное восстановление — Индивидуальный план после операции.",
+  },
+  symptoms: {
+    title: "Когда нужна консультация хирурга",
+    subtitle: "Не откладывайте обращение, если боль усиливается или заметно влияет на самочувствие.",
+    body: "Острая или продолжительная боль\nНовообразование или уплотнение\nТравма, отёк или ограничение движения\nДискомфорт после ранее проведённой операции\nНеобходимость планового хирургического лечения\nРекомендация другого специалиста",
+    primary_label: "Записаться на консультацию",
+    primary_url: BOOKING_URL,
+  },
+  diseases: {
+    title: "Какие заболевания лечим",
+    subtitle: "Работаем с распространёнными и сложными хирургическими заболеваниями.",
+    body: "Грыжи — Паховые, пупочные и послеоперационные.\nЖелчнокаменная болезнь — Диагностика и хирургическое лечение.\nЗаболевания вен — Современные методы лечения сосудистых патологий.\nУрологические заболевания — Плановые и малоинвазивные вмешательства.\nГинекологические заболевания — Органосохраняющие хирургические методы.\nПроктологические заболевания — Деликатная диагностика и лечение.",
+  },
+  procedures: {
+    title: "Операции и процедуры",
+    subtitle: "Подбираем метод лечения по показаниям и состоянию пациента.",
+    body: "Лапароскопические операции — Через небольшие проколы с коротким восстановлением.\nОбщая хирургия — Плановые операции различной сложности.\nУрологические операции — Современное лечение заболеваний мочевыделительной системы.\nГинекологические операции — Малоинвазивные и традиционные методики.\nФлебологические процедуры — Лечение варикозной болезни.\nМалая хирургия — Амбулаторные вмешательства и перевязки.",
+  },
+  diagnostics: {
+    title: "Диагностика перед операцией",
+    subtitle: "Все необходимые исследования можно пройти в клинике.",
+    body: "Консультация хирурга — Осмотр и выбор тактики лечения.\nЛабораторные анализы — Комплекс исследований перед вмешательством.\nУЗИ и лучевая диагностика — Уточнение диагноза и объёма операции.\nКонсультация анестезиолога — Оценка состояния и подготовка.\nЭКГ и обследование сердца — Контроль факторов риска.\nПлан госпитализации — Понятные рекомендации и сроки.",
+    primary_url: "/diagnostika",
+    primary_label: "Перейти к диагностике",
+  },
+  stationar: {
+    title: "Комфортный стационар 24/7",
+    subtitle: "Постоянное наблюдение и всё необходимое для спокойного восстановления.",
+    body: "Круглосуточное наблюдение\nПалаты интенсивной терапии\nСовременные комфортные палаты\nКонтроль боли и состояния\nПитание и уход\nСвязь с лечащим врачом",
+    image_url: "/assets/image-2.webp",
+  },
+  steps: {
+    title: "Как проходит лечение",
+    subtitle: "Понятный путь от первой консультации до возвращения к привычной жизни.",
+    body: "Консультация — Хирург изучает жалобы и результаты обследований.\nДиагностика — Проходите необходимые анализы и исследования.\nОперация — Команда проводит вмешательство по согласованному плану.\nВосстановление — Наблюдение, рекомендации и контрольный приём.",
+  },
+  faq: {
+    title: "Часто задаваемые вопросы",
+    subtitle: "Коротко о подготовке, госпитализации и восстановлении.",
+    body: "Как подготовиться к консультации хирурга? — Возьмите результаты предыдущих обследований и список принимаемых препаратов.\nКакие анализы нужны перед операцией? — Точный перечень зависит от операции и определяется врачом после консультации.\nСколько длится госпитализация? — Срок зависит от вида вмешательства и вашего состояния; врач заранее расскажет план.\nКогда можно вернуться к обычной жизни? — Рекомендации индивидуальны и зависят от операции и темпа восстановления.",
+  },
+  final: {
+    title: "Обсудите лечение с хирургом",
+    subtitle: "Врач оценит состояние, объяснит варианты и предложит понятный план действий.",
+    primary_label: "Записаться на приём",
+    primary_url: BOOKING_URL,
+  },
+} as const;
+
+const FALLBACK_DIRECTIONS = [
+  { slug: "obshchaya-hirurgiya", title: "Общая хирургия", subtitle: null, icon: "Scissors", image_url: "/assets/spec-hirurg.webp" },
+  { slug: "urologiya", title: "Урология", subtitle: null, icon: "Stethoscope", image_url: "/assets/spec-urolog.webp" },
+  { slug: "ginekologiya", title: "Гинекология", subtitle: null, icon: "HeartPulse", image_url: "/assets/spec-gineko.webp" },
+  { slug: "travmatologiya", title: "Травматология", subtitle: null, icon: "Activity", image_url: "/assets/spec-travma.webp" },
+  { slug: "proktologiya", title: "Проктология", subtitle: null, icon: "ShieldCheck", image_url: "/assets/doctor-patient-hero.webp" },
+  { slug: "flebologiya", title: "Флебология", subtitle: null, icon: "Heart", image_url: "/assets/uslugi-hero.jpg" },
+];
+
 export const Route = createFileRoute("/hirurgiya/")({
   loader: ({ context }) => {
     void context.queryClient.ensureQueryData(surgeryPageQueryOptions());
@@ -140,7 +211,9 @@ export function DoctorsGrid({
 
 function SurgeryPage() {
   const { data } = useSuspenseQuery(surgeryPageQueryOptions());
-  const section = (key: string) => data.sections.find((item) => item.key === key);
+  const section = (key: keyof typeof FALLBACK_SECTIONS) =>
+    data.sections.find((item) => item.key === key) ?? FALLBACK_SECTIONS[key];
+  const directions = data.directions.length > 0 ? data.directions : FALLBACK_DIRECTIONS;
 
   const hero = section("hero");
   const advantages = section("advantages");
@@ -155,8 +228,8 @@ function SurgeryPage() {
   const faqItems = parseRows(faq?.body);
   const heroImage =
     hero?.image_url ||
-    data.directions[0]?.image_url ||
-    (data.directions[0] ? specialtyImage(data.directions[0].slug, 0) : specialtyImage("hirurgiya", 0));
+    directions[0]?.image_url ||
+    (directions[0] ? specialtyImage(directions[0].slug, 0) : specialtyImage("hirurgiya", 0));
 
   return (
     <div className="bg-background min-h-screen">
@@ -230,7 +303,7 @@ function SurgeryPage() {
           </section>
         )}
 
-        {data.directions.length > 0 && (
+        {directions.length > 0 && (
           <section className="py-14 sm:py-20">
             <div className="mx-auto max-w-7xl px-4 sm:px-6">
               <SectionHeading
@@ -239,7 +312,7 @@ function SurgeryPage() {
                 description="Современные методы лечения и опытные хирурги для вашего здоровья и быстрого восстановления"
               />
               <div className="no-scrollbar -mx-4 mt-9 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
-                {data.directions.map((direction, index) => (
+                {directions.map((direction, index) => (
                   <Reveal key={direction.slug} delay={index * 40} className="min-w-[78vw] snap-start sm:min-w-0">
                     <Link
                       to="/hirurgiya/$slug"
