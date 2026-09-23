@@ -1,24 +1,14 @@
-# Rebuild the About page
+# Страница «Хирургия» в структуре референса
 
-## Goal
-Rebuild `/about` as a calm, editorial clinic story page while keeping the current site header, breadcrumbs, footer, and route metadata.
+## Что изменится
+- Сохраним шапку, подвал, текущую фирменную зелёную палитру и весь существующий контент хирургии из панели управления.
+- Перестроим верх страницы в широкий фотобаннер: заголовок, описание, преимущества и запись на консультацию.
+- Оформим направления хирургии ровными карточками, как блок истории на референсе: светлый фон, тонкая рамка, иконка, фото и переход на подробную страницу.
+- Соберём преимущества, симптомы, заболевания, операции, врачей, диагностику, стационар и этапы лечения в последовательные светлые секции с одинаковыми карточками.
+- Оформим FAQ и финальную запись внизу страницы, не удаляя существующие данные и ссылки.
+- Адаптируем страницу для телефона: двухколоночные компактные карточки там, где текст помещается, и горизонтальная прокрутка для широких подборок.
 
-## Layout
-- Create a full-width split hero with the supplied two-line serif italic statement, supporting paragraph, soft mint-to-photo transition, generated clinic exterior, and a subtle leaf ornament.
-- Add the six-item Avicenna history row using equal bordered cards and circular mint icon treatments. On smaller screens, use a comfortable two-column layout with horizontal scrolling where needed.
-- Build the founder feature with a placeholder portrait in a curved image frame, italic quote, founder details, divider, message, and understated signature/logo detail.
-- Add the five requested advantage cards in a responsive three-column grid.
-- Add the mission feature with the supplied copy, ornament divider, and generated bright reception image with a curved inner edge.
-
-## Visual system
-- Extend the existing semantic palette with About-page mint, teal, border, and ornament tokens so page components contain no hardcoded colors.
-- Load a Cyrillic serif family through the document head and use it only for the hero and founder quote headings.
-- Use approximately 16px corners, thin borders, no card shadows, restrained reveal motion, and fully responsive spacing and typography.
-
-## Images
-- Generate a cohesive clinic exterior, founder placeholder portrait, and bright clinic reception image.
-- Store and import these images as project assets with meaningful alternative text.
-
-## Validation
-- Confirm `/about` builds without errors.
-- Check the full page at desktop and mobile widths for text wrapping, image cropping, card alignment, and header/footer continuity.
+## Технические детали
+- Основная работа будет в существующей странице `/hirurgiya`; адреса подробных направлений останутся без изменений.
+- Используем уже подключённые изображения направлений и текущие цвета сайта; новые цвета и новая база данных не нужны.
+- После изменений проверим страницу на компьютере и телефоне, включая переходы, раскрытие вопросов и отсутствие горизонтального переполнения.
