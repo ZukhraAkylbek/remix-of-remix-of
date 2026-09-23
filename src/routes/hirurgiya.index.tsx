@@ -224,7 +224,7 @@ export function DoctorsGrid({
             {doctor.job_title && <p className="text-about-teal mt-1 text-sm font-semibold">{doctor.job_title}</p>}
             {doctor.experience_years != null && <p className="text-about-copy mt-2 text-sm">Стаж: {doctor.experience_years} лет</p>}
             <Button asChild variant="outline" className="border-about-line text-about-ink mt-4 bg-transparent shadow-none">
-              <a href="/glavnaya-v3#vrachi">Подробнее</a>
+              <a href="#vrachi">Подробнее</a>
             </Button>
           </article>
         ))}
