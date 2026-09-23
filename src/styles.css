@@ -503,7 +503,21 @@
   animation: marquee-scroll 28s linear infinite;
 }
 
-.group:hover .marquee-track {
+@keyframes marquee-scroll-quarter {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+@utility marquee-track-quarter {
+  animation: marquee-scroll-quarter 32s linear infinite;
+}
+
+.group:hover .marquee-track,
+.group:hover .marquee-track-quarter {
   animation-play-state: paused;
 }
 
@@ -519,6 +533,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
+    animation: none;
+  }
+
+  .marquee-track-quarter {
     animation: none;
   }
 }

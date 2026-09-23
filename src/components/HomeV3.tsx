@@ -39,15 +39,15 @@ function SpecialtyMarquee() {
     el.scrollBy({ left: dir * Math.max(240, el.clientWidth * 0.7), behavior: "smooth" });
   };
 
-  // Бесконечная лента: контент продублирован ×2, при достижении
-  // середины/края незаметно переносим скролл на эквивалентное место.
+  // Четыре одинаковых набора перекрывают даже широкий экран; при ручной
+  // прокрутке переносим позицию ровно на длину одного набора.
   const handleLoop = () => {
     const el = scrollerRef.current;
     if (!el || !manual) return;
-    const half = el.scrollWidth / 2;
-    if (half <= 0) return;
-    if (el.scrollLeft >= half) el.scrollLeft -= half;
-    else if (el.scrollLeft <= 0) el.scrollLeft += half;
+    const setWidth = el.scrollWidth / 4;
+    if (setWidth <= 0) return;
+    if (el.scrollLeft >= setWidth * 2) el.scrollLeft -= setWidth;
+    else if (el.scrollLeft <= 0) el.scrollLeft += setWidth;
   };
 
   return (
@@ -60,9 +60,9 @@ function SpecialtyMarquee() {
           onScroll={handleLoop}
           className="group marquee-mask no-scrollbar relative overflow-x-auto px-12 scroll-smooth"
         >
-          <div className={`${manual ? "" : "marquee-track"} flex w-max gap-3 pr-3`}>
-            {[0, 1].map((copy) => (
-              <div key={copy} className="flex shrink-0 gap-3 pr-3" aria-hidden={copy === 1}>
+          <div className={`${manual ? "" : "marquee-track-quarter"} flex w-max`}>
+            {[0, 1, 2, 3].map((copy) => (
+              <div key={copy} className="flex shrink-0 gap-3 pr-3" aria-hidden={copy > 0}>
                 {SPECIALTY_PILLS.map((name) => (
                   <Link
                     key={`${copy}-${name}`}
@@ -488,9 +488,9 @@ export function HomeV3() {
         <Section tone="soft" eyebrow="Доверие" title="Отзывы пациентов">
           {/* Mobile: scrolling marquee */}
           <div className="group marquee-mask relative overflow-hidden md:hidden">
-            <div className="marquee-track flex w-max gap-4">
-              {[0, 1].map((copy) => (
-                <div key={copy} className="flex shrink-0 gap-4" aria-hidden={copy === 1}>
+            <div className="marquee-track-quarter flex w-max">
+              {[0, 1, 2, 3].map((copy) => (
+                <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy > 0}>
                   {REVIEWS.map((review) => (
                     <ReviewCard
                       review={review}
@@ -505,9 +505,9 @@ export function HomeV3() {
 
           {/* Desktop: scrolling marquee */}
           <div className="group marquee-mask relative hidden overflow-hidden md:block">
-            <div className="marquee-track flex w-max gap-4">
-              {[0, 1].map((copy) => (
-                <div key={copy} className="flex shrink-0 gap-4" aria-hidden={copy === 1}>
+            <div className="marquee-track-quarter flex w-max">
+              {[0, 1, 2, 3].map((copy) => (
+                <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy > 0}>
                   {REVIEWS.map((review) => (
                     <ReviewCard review={review} key={`${copy}-${review.text}`} />
                   ))}
