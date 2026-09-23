@@ -19,7 +19,16 @@ const TITLE = "Хирургия в Бишкеке — операции и ста
 const DESCRIPTION =
   "Хирургия в клинике «Авиценна»: лапароскопия, урология, гинекология, проктология, флебология, травматология. Диагностика перед операцией, стационар 24/7, запись онлайн.";
 
-const FALLBACK_SECTIONS = {
+type SurgeryContentSection = {
+  title: string;
+  subtitle?: string | null;
+  body?: string | null;
+  image_url?: string | null;
+  primary_label?: string | null;
+  primary_url?: string | null;
+};
+
+const FALLBACK_SECTIONS: Record<string, SurgeryContentSection> = {
   hero: {
     title: "Современная хирургия с заботой о пациенте",
     subtitle: "Диагностика, плановые и малоинвазивные операции, стационар и восстановление в одной клинике.",
@@ -211,7 +220,7 @@ export function DoctorsGrid({
 
 function SurgeryPage() {
   const { data } = useSuspenseQuery(surgeryPageQueryOptions());
-  const section = (key: keyof typeof FALLBACK_SECTIONS) =>
+  const section = (key: string): SurgeryContentSection | undefined =>
     data.sections.find((item) => item.key === key) ?? FALLBACK_SECTIONS[key];
   const directions = data.directions.length > 0 ? data.directions : FALLBACK_DIRECTIONS;
 
@@ -527,12 +536,6 @@ function SurgeryPage() {
     </div>
   );
 }
-
-type SurgeryContentSection = {
-  title: string;
-  subtitle: string | null;
-  body: string | null;
-};
 
 function RowsPanel({
   eyebrow,
