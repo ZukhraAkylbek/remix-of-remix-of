@@ -184,7 +184,9 @@ function AboutPage() {
                     <h3 className="text-about-ink mt-5 text-base leading-snug font-bold break-words">
                       {title}
                     </h3>
-                    <p className="text-about-copy mt-2 text-sm leading-relaxed">{text}</p>
+                    <p className="text-about-copy mt-2 text-sm leading-relaxed break-words hyphens-auto">
+                      {text}
+                    </p>
                   </article>
                 </Reveal>
               ))}
