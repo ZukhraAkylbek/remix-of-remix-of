@@ -95,6 +95,7 @@ const FALLBACK_DIRECTIONS = [
   { slug: "ginekologiya", title: "Гинекология", subtitle: null, icon: "HeartPulse", image_url: "/assets/spec-gineko.webp" },
   { slug: "travmatologiya", title: "Травматология", subtitle: null, icon: "Activity", image_url: "/assets/spec-travma.webp" },
   { slug: "proktologiya", title: "Проктология", subtitle: null, icon: "ShieldCheck", image_url: "/assets/doctor-patient-hero.webp" },
+  { slug: "mammologiya", title: "Маммология", subtitle: null, icon: "HeartPulse", image_url: "/assets/spec-gineko.webp" },
   { slug: "flebologiya", title: "Флебология", subtitle: null, icon: "Heart", image_url: "/assets/uslugi-hero.jpg" },
 ];
 
