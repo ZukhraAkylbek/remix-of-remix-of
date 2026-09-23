@@ -22,7 +22,7 @@ export const HEADER_NAV_SLOTS = [
   { label: "Главная", href: "/" },
   { label: "О нас", href: "/about" },
   { label: "Поликлиника", href: "/poliklinika" },
-  { label: "Врачи", href: "/glavnaya-v3" },
+  { label: "Врачи", href: "/vrachi" },
   { label: "Травмпункт 24/7", href: "/travmpunkt" },
   { label: "Хирургия", href: "/hirurgiya" },
   { label: "Чекапы", href: "/checkups" },
