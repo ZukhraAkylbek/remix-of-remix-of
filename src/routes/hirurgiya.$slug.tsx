@@ -320,7 +320,7 @@ function DirectionPage() {
             <Heading title="Почему пациенты выбирают хирургию «Авиценны»" />
             <div className="mt-7 grid grid-cols-2 gap-3 lg:grid-cols-4">
               {advantages.map((item, index) => {
-                const Icon = ADVANTAGE_ICONS[index % ADVANTAGE_ICONS.length];
+                const Icon = ADVANTAGE_ICONS[index % ADVANTAGE_ICONS.length] ?? UserRound;
                 return (
                   <Reveal key={item.title} delay={index * 35}>
                     <div className="border-about-line bg-about-canvas h-full rounded-2xl border p-4">
