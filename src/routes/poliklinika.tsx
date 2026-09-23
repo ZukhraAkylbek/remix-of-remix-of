@@ -1,6 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
-  Activity,
   ArrowRight,
   Check,
   ClipboardCheck,

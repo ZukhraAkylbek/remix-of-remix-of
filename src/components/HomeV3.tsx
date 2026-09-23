@@ -139,7 +139,7 @@ function Section({
 }
 
 const ROUTE_CARDS = [
-  { title: "Поликлиника", href: "/napravleniya", tone: "pastel-mint" },
+  { title: "Поликлиника", href: "/poliklinika", tone: "pastel-mint" },
   { title: "Травмпункт 24/7", href: "/travmpunkt", tone: "pastel-coral" },
   { title: "Диагностика", href: "/diagnostika", tone: "pastel-sky" },
   { title: "Стационар", href: "/uslugi/uslugi-stacionara", tone: "pastel-lavender" },

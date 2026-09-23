@@ -16,6 +16,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as GlavnayaV2RouteImport } from './routes/glavnaya-v2'
 import { Route as GlavnayaV3RouteImport } from './routes/glavnaya-v3'
+import { Route as PoliklinikaRouteImport } from './routes/poliklinika'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TravmpunktRouteImport } from './routes/travmpunkt'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
@@ -82,6 +83,11 @@ const GlavnayaV2Route = GlavnayaV2RouteImport.update({
 const GlavnayaV3Route = GlavnayaV3RouteImport.update({
   id: '/glavnaya-v3',
   path: '/glavnaya-v3',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliklinikaRoute = PoliklinikaRouteImport.update({
+  id: '/poliklinika',
+  path: '/poliklinika',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -270,6 +276,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/glavnaya-v2': typeof GlavnayaV2Route
   '/glavnaya-v3': typeof GlavnayaV3Route
+  '/poliklinika': typeof PoliklinikaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
@@ -311,6 +318,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/glavnaya-v2': typeof GlavnayaV2Route
   '/glavnaya-v3': typeof GlavnayaV3Route
+  '/poliklinika': typeof PoliklinikaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
   '/checkups/$slug': typeof CheckupsSlugRoute
@@ -353,6 +361,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/glavnaya-v2': typeof GlavnayaV2Route
   '/glavnaya-v3': typeof GlavnayaV3Route
+  '/poliklinika': typeof PoliklinikaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
@@ -396,6 +405,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/glavnaya-v2'
     | '/glavnaya-v3'
+    | '/poliklinika'
     | '/sitemap.xml'
     | '/travmpunkt'
     | '/admin'
@@ -437,6 +447,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/glavnaya-v2'
     | '/glavnaya-v3'
+    | '/poliklinika'
     | '/sitemap.xml'
     | '/travmpunkt'
     | '/checkups/$slug'
@@ -478,6 +489,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/glavnaya-v2'
     | '/glavnaya-v3'
+    | '/poliklinika'
     | '/sitemap.xml'
     | '/travmpunkt'
     | '/_authenticated/admin'
@@ -521,6 +533,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   GlavnayaV2Route: typeof GlavnayaV2Route
   GlavnayaV3Route: typeof GlavnayaV3Route
+  PoliklinikaRoute: typeof PoliklinikaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TravmpunktRoute: typeof TravmpunktRoute
   CheckupsSlugRoute: typeof CheckupsSlugRoute
@@ -586,6 +599,13 @@ declare module '@tanstack/react-router' {
       path: '/glavnaya-v3'
       fullPath: '/glavnaya-v3'
       preLoaderRoute: typeof GlavnayaV3RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/poliklinika': {
+      id: '/poliklinika'
+      path: '/poliklinika'
+      fullPath: '/poliklinika'
+      preLoaderRoute: typeof PoliklinikaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -889,6 +909,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   GlavnayaV2Route: GlavnayaV2Route,
   GlavnayaV3Route: GlavnayaV3Route,
+  PoliklinikaRoute: PoliklinikaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TravmpunktRoute: TravmpunktRoute,
   CheckupsSlugRoute: CheckupsSlugRoute,
