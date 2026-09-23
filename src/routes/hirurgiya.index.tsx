@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 
 import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading } from "@/components/SectionHeading";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -140,6 +139,15 @@ function Shell({ children }: { children: React.ReactNode }) {
   );
 }
 
+function SurgeryHeading({ title, description }: { title: React.ReactNode; description?: string }) {
+  return (
+    <div>
+      <h2 className="text-about-ink text-3xl leading-tight font-extrabold sm:text-4xl">{title}</h2>
+      {description && <p className="text-about-copy mt-3 max-w-2xl text-base">{description}</p>}
+    </div>
+  );
+}
+
 export function FaqList({ items }: { items: { title: string; text?: string }[] }) {
   const [open, setOpen] = useState<number | null>(null);
 
@@ -216,7 +224,7 @@ export function DoctorsGrid({
             {doctor.job_title && <p className="text-about-teal mt-1 text-sm font-semibold">{doctor.job_title}</p>}
             {doctor.experience_years != null && <p className="text-about-copy mt-2 text-sm">Стаж: {doctor.experience_years} лет</p>}
             <Button asChild variant="outline" className="border-about-line text-about-ink mt-4 bg-transparent shadow-none">
-              <Link to="/doctors/$slug" params={{ slug: doctor.slug }}>Подробнее</Link>
+              <a href="/glavnaya-v3#vrachi">Подробнее</a>
             </Button>
           </article>
         ))}
@@ -277,7 +285,7 @@ function SurgeryPage() {
                   <Button asChild variant="outline" className="border-about-line text-about-ink bg-about-canvas shadow-none"><a href="#directions">Выбрать направление</a></Button>
                 </div>
               </Reveal>
-              <div className="relative mt-6 h-60 overflow-hidden rounded-2xl lg:mt-0 lg:h-full">
+              <div className="relative mt-6 hidden h-60 overflow-hidden rounded-2xl lg:mt-0 lg:block lg:h-full">
                 <img src={heroImage} alt="Хирургическое отделение клиники «Авиценна»" className="absolute inset-0 size-full object-cover" />
                 <div className="from-about-mint/30 absolute inset-0 bg-gradient-to-r to-transparent" />
                 <div className="bg-about-canvas/95 absolute right-0 bottom-0 grid grid-cols-2 gap-6 rounded-tl-2xl p-4 backdrop-blur-sm">
@@ -291,7 +299,7 @@ function SurgeryPage() {
 
         <section id="directions" className="bg-about-canvas py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <SectionHeading eyebrow="" title="Направления хирургии" description={`${Math.max(data.doctors.length, 14)} специалистов оперируют по следующим направлениям:`} />
+            <SurgeryHeading title="Направления хирургии" description={`${Math.max(data.doctors.length, 14)} специалистов оперируют по следующим направлениям:`} />
             <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {directions.map((direction, index) => (
                 <Reveal key={direction.slug} delay={index * 35}>
@@ -309,7 +317,7 @@ function SurgeryPage() {
         {stationar && (
           <section className="bg-about-mint py-10 sm:py-12">
             <div className="mx-auto max-w-7xl px-4 sm:px-6">
-              <SectionHeading eyebrow="" title={stationar.title} />
+              <SurgeryHeading title={stationar.title} />
               <div className="mt-7 grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
                  {stationar.image_url && <img src={stationar.image_url} alt={stationar.title} loading="lazy" className="h-60 w-full rounded-2xl object-cover" />}
                 <ul className="grid gap-4 sm:grid-cols-2">
@@ -322,7 +330,7 @@ function SurgeryPage() {
 
         <section className="bg-about-canvas py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <SectionHeading eyebrow="" title={symptoms?.title || "Когда нужна консультация хирурга"} />
+            <SurgeryHeading title={symptoms?.title || "Когда нужна консультация хирурга"} />
             <div className="mt-7 grid grid-cols-2 gap-3 lg:grid-cols-4">
                {consultationItems.map((item) => <div key={item.title} className="border-about-line flex items-center gap-3 rounded-2xl border bg-about-canvas p-4"><span className="bg-about-icon text-about-teal grid size-9 shrink-0 place-items-center rounded-full"><Check className="size-4" /></span><span className="text-about-ink text-sm font-semibold leading-snug">{item.title}</span></div>)}
             </div>
@@ -334,10 +342,10 @@ function SurgeryPage() {
           </div>
         </section>
 
-        {data.doctors.length > 0 && <section className="bg-about-mint py-10 sm:py-12"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SectionHeading eyebrow="" title="Наши специалисты" /><DoctorsGrid doctors={data.doctors} /></div></section>}
+        {data.doctors.length > 0 && <section id="vrachi" className="bg-about-mint py-10 sm:py-12"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SurgeryHeading title="Наши специалисты" /><DoctorsGrid doctors={data.doctors} /></div></section>}
 
         {faq && faqItems.length > 0 && (
-          <section id="faq" className="bg-about-canvas py-10 sm:py-12"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SectionHeading eyebrow="" title={faq.title} /><div className="mt-7"><FaqList items={faqItems} /></div></div></section>
+          <section id="faq" className="bg-about-canvas py-10 sm:py-12"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SurgeryHeading title={faq.title} /><div className="mt-7"><FaqList items={faqItems} /></div></div></section>
         )}
 
         {final && (
