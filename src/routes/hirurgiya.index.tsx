@@ -267,22 +267,22 @@ function SurgeryPage() {
       <main>
         {hero && (
           <section className="bg-about-mint">
-            <div className="mx-auto grid max-w-7xl overflow-hidden px-4 py-6 sm:px-6 sm:py-8 lg:h-[380px] lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
-              <Reveal className="flex flex-col justify-center py-2 lg:pr-10">
+            <div className="mx-auto grid max-w-7xl overflow-hidden px-4 py-4 sm:px-6 sm:py-6 lg:h-[380px] lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch lg:py-8">
+              <Reveal className="flex flex-col justify-center lg:pr-10">
                 <p className="text-about-teal text-sm font-semibold">Хирургия</p>
-                <h1 className="text-about-ink mt-2 max-w-2xl text-4xl leading-[1.08] font-extrabold sm:text-5xl">Комплексное хирургическое лечение</h1>
-                <p className="text-about-copy mt-3 max-w-2xl text-base leading-relaxed">{hero.subtitle}</p>
-                <div className="mt-5 grid max-w-2xl gap-3 sm:grid-cols-3">
+                <h1 className="text-about-ink mt-2 max-w-2xl text-3xl leading-[1.08] font-extrabold sm:text-4xl lg:text-5xl">Комплексное хирургическое лечение</h1>
+                <p className="text-about-copy mt-3 max-w-2xl text-sm leading-relaxed sm:text-base">{hero.subtitle}</p>
+                <div className="mt-4 grid max-w-2xl grid-cols-3 gap-2 sm:gap-3">
                   {parseRows(hero.body).slice(0, 3).map((item) => (
-                    <div key={item.title} className="flex items-center gap-3">
-                      <span className="bg-about-icon text-about-teal grid size-9 shrink-0 place-items-center rounded-full"><Check className="size-4" aria-hidden="true" /></span>
-                      <span className="text-about-ink text-sm font-bold leading-snug">{item.title}</span>
+                    <div key={item.title} className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+                      <span className="bg-about-icon text-about-teal grid size-8 shrink-0 place-items-center rounded-full sm:size-9"><Check className="size-4" aria-hidden="true" /></span>
+                      <span className="text-about-ink text-[11px] font-bold leading-snug sm:text-sm">{item.title}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark shadow-none"><a href={hero.primary_url || BOOKING_URL} target="_blank" rel="noopener noreferrer">{hero.primary_label || "Записаться на консультацию"}</a></Button>
-                  <Button asChild variant="outline" className="border-about-line text-about-ink bg-about-canvas shadow-none"><a href="#directions">Выбрать направление</a></Button>
+                <div className="mt-4 grid grid-cols-2 gap-2 sm:flex sm:gap-3">
+                  <Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark px-2 text-[11px] shadow-none sm:px-4 sm:text-sm"><a href={hero.primary_url || BOOKING_URL} target="_blank" rel="noopener noreferrer">{hero.primary_label || "Записаться на консультацию"}</a></Button>
+                  <Button asChild variant="outline" className="border-about-line text-about-ink bg-about-canvas px-2 text-[11px] shadow-none sm:px-4 sm:text-sm"><a href="#directions">Выбрать направление</a></Button>
                 </div>
               </Reveal>
               <div className="relative mt-6 hidden h-60 overflow-hidden rounded-2xl lg:mt-0 lg:block lg:h-full">
