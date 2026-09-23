@@ -252,7 +252,6 @@ function DirectionPage() {
   return (
     <div className="bg-about-canvas min-h-screen">
       <SiteHeader breadcrumb={name} />
-      <Breadcrumbs items={[{ label: "Хирургия", href: "/hirurgiya" }, { label: name }]} />
 
       <script
         type="application/ld+json"
