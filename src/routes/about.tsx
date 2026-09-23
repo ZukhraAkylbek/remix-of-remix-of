@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 
 import clinicExterior from "@/assets/about-clinic-exterior.jpg";
-import founderPortrait from "@/assets/about-founder-placeholder.jpg";
+import founderPortrait from "@/assets/founder-zhypar.png.asset.json";
 import receptionPhoto from "@/assets/about-reception.jpg";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Reveal } from "@/components/Reveal";
