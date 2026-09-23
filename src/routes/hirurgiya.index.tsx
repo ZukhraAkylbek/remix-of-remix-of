@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Check, Plus } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, Check, ChevronLeft, ChevronRight, Plus, UserRound } from "lucide-react";
+import { useRef, useState } from "react";
 
 import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
 import { Reveal } from "@/components/Reveal";
@@ -9,6 +9,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
+import { Button } from "@/components/ui/button";
 import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { parseRows, surgeryPageQueryOptions } from "@/lib/surgery.queries";
@@ -143,29 +144,29 @@ export function FaqList({ items }: { items: { title: string; text?: string }[] }
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <dl className="space-y-3">
+    <dl className="grid items-start gap-3 lg:grid-cols-2">
       {items.map((item, index) => {
         const isOpen = open === index;
         return (
-          <div key={item.title} className="border-border rounded-lg border">
+          <div key={item.title} className="border-about-line bg-about-canvas rounded-2xl border">
             <dt>
               <button
                 type="button"
                 aria-expanded={isOpen}
                 onClick={() => setOpen(isOpen ? null : index)}
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+                className="flex w-full items-center justify-between gap-4 p-4 text-left"
               >
-                <span className="text-foreground text-base font-semibold sm:text-lg">
+                <span className="text-about-ink text-base font-semibold">
                   {item.title}
                 </span>
                 <Plus
-                  className={`text-muted-foreground size-5 shrink-0 transition-transform ${isOpen ? "rotate-45" : ""}`}
+                  className={`text-about-teal size-5 shrink-0 transition-transform ${isOpen ? "rotate-45" : ""}`}
                   aria-hidden="true"
                 />
               </button>
             </dt>
             {isOpen && item.text && (
-              <dd className="text-muted-foreground border-border border-t px-5 py-4 text-base leading-relaxed">
+              <dd className="text-about-copy border-about-line border-t p-4 text-sm leading-relaxed">
                 {item.text}
               </dd>
             )}
@@ -188,32 +189,38 @@ export function DoctorsGrid({
     experience_years: number | null;
   }[];
 }) {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const scroll = (direction: -1 | 1) => {
+    carouselRef.current?.scrollBy({ left: direction * 320, behavior: "smooth" });
+  };
+
   return (
-    <div className="mt-10 grid gap-px sm:grid-cols-2 lg:grid-cols-3">
-      {doctors.map((doctor) => (
-        <article key={doctor.slug} className="border-border border p-6">
-          {doctor.photo_url && (
-            <img
-              src={doctor.photo_url}
-              alt={doctor.full_name}
-              loading="lazy"
-              className="mb-4 h-48 w-full rounded-lg object-cover"
-            />
-          )}
-          <h3 className="text-foreground text-xl font-bold">{doctor.full_name}</h3>
-          {doctor.job_title && (
-            <p className="text-brand-green mt-1 text-sm font-semibold">{doctor.job_title}</p>
-          )}
-          {doctor.experience_years != null && (
-            <p className="text-muted-foreground mt-3 text-sm">
-              Стаж: {doctor.experience_years} лет
-            </p>
-          )}
-          {doctor.bio && (
-            <p className="text-muted-foreground mt-3 text-base leading-relaxed">{doctor.bio}</p>
-          )}
-        </article>
-      ))}
+    <div className="relative mt-6">
+      <div className="mb-4 flex justify-end gap-2">
+        <Button variant="outline" size="icon" aria-label="Прокрутить врачей влево" onClick={() => scroll(-1)} className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none">
+          <ChevronLeft aria-hidden="true" />
+        </Button>
+        <Button variant="outline" size="icon" aria-label="Прокрутить врачей вправо" onClick={() => scroll(1)} className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none">
+          <ChevronRight aria-hidden="true" />
+        </Button>
+      </div>
+      <div ref={carouselRef} className="scrollbar-hide flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
+        {doctors.map((doctor) => (
+          <article key={doctor.slug} className="border-about-line bg-about-canvas w-[260px] shrink-0 snap-start rounded-2xl border p-4 sm:w-[280px]">
+            {doctor.photo_url ? (
+              <img src={doctor.photo_url} alt={doctor.full_name} loading="lazy" className="size-24 rounded-full object-cover" />
+            ) : (
+              <span className="bg-about-icon text-about-teal grid size-24 place-items-center rounded-full"><UserRound className="size-10" aria-hidden="true" /></span>
+            )}
+            <h3 className="text-about-ink mt-4 text-lg font-bold">{doctor.full_name}</h3>
+            {doctor.job_title && <p className="text-about-teal mt-1 text-sm font-semibold">{doctor.job_title}</p>}
+            {doctor.experience_years != null && <p className="text-about-copy mt-2 text-sm">Стаж: {doctor.experience_years} лет</p>}
+            <Button asChild variant="outline" className="border-about-line text-about-ink mt-4 bg-transparent shadow-none">
+              <Link to="/doctors/$slug" params={{ slug: doctor.slug }}>Подробнее</Link>
+            </Button>
+          </article>
+        ))}
+      </div>
     </div>
   );
 }
@@ -242,7 +249,7 @@ function SurgeryPage() {
   ].filter((item, index, items) => items.findIndex((candidate) => candidate.title === item.title) === index).slice(0, 8);
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="bg-about-canvas min-h-screen">
       <SiteHeader breadcrumb="Хирургия" />
       <Breadcrumbs items={[{ label: "Хирургия" }]} />
       {faqItems.length > 0 && (
@@ -251,47 +258,47 @@ function SurgeryPage() {
 
       <main>
         {hero && (
-          <section className="bg-surface-mint">
-            <div className="mx-auto grid max-w-7xl overflow-hidden px-4 py-8 sm:px-6 sm:py-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
-              <Reveal className="flex flex-col justify-center py-3 lg:pr-12">
-                <p className="text-muted-foreground text-sm font-semibold">Хирургия</p>
-                <h1 className="text-foreground mt-3 max-w-2xl text-4xl leading-[1.08] font-extrabold sm:text-5xl">Комплексное хирургическое лечение</h1>
-                <p className="text-muted-foreground mt-4 max-w-2xl text-base leading-relaxed sm:text-lg">{hero.subtitle}</p>
-                <div className="mt-7 grid max-w-2xl gap-4 sm:grid-cols-3">
+          <section className="bg-about-mint">
+            <div className="mx-auto grid max-w-7xl overflow-hidden px-4 py-6 sm:px-6 sm:py-8 lg:h-[380px] lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
+              <Reveal className="flex flex-col justify-center py-2 lg:pr-10">
+                <p className="text-about-teal text-sm font-semibold">Хирургия</p>
+                <h1 className="text-about-ink mt-2 max-w-2xl text-4xl leading-[1.08] font-extrabold sm:text-5xl">Комплексное хирургическое лечение</h1>
+                <p className="text-about-copy mt-3 max-w-2xl text-base leading-relaxed">{hero.subtitle}</p>
+                <div className="mt-5 grid max-w-2xl gap-3 sm:grid-cols-3">
                   {parseRows(hero.body).slice(0, 3).map((item) => (
                     <div key={item.title} className="flex items-center gap-3">
-                      <span className="bg-surface-green text-brand-green grid size-10 shrink-0 place-items-center rounded-full"><Check className="size-5" aria-hidden="true" /></span>
-                      <span className="text-foreground text-sm font-bold leading-snug">{item.title}</span>
+                      <span className="bg-about-icon text-about-teal grid size-9 shrink-0 place-items-center rounded-full"><Check className="size-4" aria-hidden="true" /></span>
+                      <span className="text-about-ink text-sm font-bold leading-snug">{item.title}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <a href={hero.primary_url || BOOKING_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-green text-brand-white hover:bg-brand-green-dark rounded-md px-6 py-3.5 text-sm font-bold transition-colors">{hero.primary_label || "Записаться на консультацию"}</a>
-                  <a href="#directions" className="border-border bg-background text-foreground hover:border-brand-green rounded-md border px-6 py-3.5 text-sm font-bold transition-colors">Выбрать направление</a>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark shadow-none"><a href={hero.primary_url || BOOKING_URL} target="_blank" rel="noopener noreferrer">{hero.primary_label || "Записаться на консультацию"}</a></Button>
+                  <Button asChild variant="outline" className="border-about-line text-about-ink bg-about-canvas shadow-none"><a href="#directions">Выбрать направление</a></Button>
                 </div>
               </Reveal>
-              <div className="relative mt-8 min-h-[300px] overflow-hidden rounded-2xl lg:mt-0 lg:min-h-[430px]">
+              <div className="relative mt-6 h-60 overflow-hidden rounded-2xl lg:mt-0 lg:h-full">
                 <img src={heroImage} alt="Хирургическое отделение клиники «Авиценна»" className="absolute inset-0 size-full object-cover" />
-                <div className="from-surface-mint/30 absolute inset-0 bg-gradient-to-r to-transparent" />
-                <div className="bg-background/95 absolute right-0 bottom-0 grid grid-cols-2 gap-6 rounded-tl-2xl p-5 backdrop-blur-sm">
-                  <div><strong className="text-foreground block text-3xl">{Math.max(data.doctors.length, 14)}</strong><span className="text-muted-foreground text-xs">специалистов</span></div>
-                  <div><strong className="text-foreground block text-3xl">{directions.length}</strong><span className="text-muted-foreground text-xs">направлений</span></div>
+                <div className="from-about-mint/30 absolute inset-0 bg-gradient-to-r to-transparent" />
+                <div className="bg-about-canvas/95 absolute right-0 bottom-0 grid grid-cols-2 gap-6 rounded-tl-2xl p-4 backdrop-blur-sm">
+                  <div><strong className="text-about-ink block text-2xl">{Math.max(data.doctors.length, 14)}</strong><span className="text-about-copy text-xs">специалистов</span></div>
+                  <div><strong className="text-about-ink block text-2xl">{directions.length}</strong><span className="text-about-copy text-xs">направлений</span></div>
                 </div>
               </div>
             </div>
           </section>
         )}
 
-        <section id="directions" className="py-12 sm:py-16">
+        <section id="directions" className="bg-about-canvas py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionHeading eyebrow="" title="Направления хирургии" description={`${Math.max(data.doctors.length, 14)} специалистов оперируют по следующим направлениям:`} />
             <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {directions.map((direction, index) => (
                 <Reveal key={direction.slug} delay={index * 35}>
-                  <Link to="/hirurgiya/$slug" params={{ slug: direction.slug }} className="border-border hover:border-brand-green group flex min-h-28 items-center gap-4 rounded-xl border bg-card p-5 transition-colors">
-                    <DiagnosticsIcon icon={direction.icon} title={direction.title} className="size-12 rounded-full" />
-                    <div className="min-w-0 flex-1"><h2 className="text-foreground text-base font-bold">{direction.title}</h2><p className="text-muted-foreground mt-1 text-sm leading-snug">{direction.subtitle || "Диагностика и современные методы лечения."}</p></div>
-                    <ArrowRight className="text-brand-green size-5 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                   <Link to="/hirurgiya/$slug" params={{ slug: direction.slug }} className="border-about-line hover:border-about-teal group flex items-center gap-4 rounded-2xl border bg-about-canvas p-4 transition-colors">
+                     <DiagnosticsIcon icon={direction.icon} title={direction.title} className="bg-about-icon text-about-teal size-11 rounded-full" />
+                     <div className="min-w-0 flex-1"><h2 className="text-about-ink text-base font-bold">{direction.title}</h2><p className="text-about-copy mt-1 text-sm leading-snug">{direction.subtitle || "Диагностика и современные методы лечения."}</p></div>
+                     <ArrowRight className="text-about-teal size-5 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </Link>
                 </Reveal>
               ))}
@@ -300,44 +307,44 @@ function SurgeryPage() {
         </section>
 
         {stationar && (
-          <section className="pb-12 sm:pb-16">
+          <section className="bg-about-mint py-10 sm:py-12">
             <div className="mx-auto max-w-7xl px-4 sm:px-6">
               <SectionHeading eyebrow="" title={stationar.title} />
               <div className="mt-7 grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-                {stationar.image_url && <img src={stationar.image_url} alt={stationar.title} loading="lazy" className="h-72 w-full rounded-xl object-cover sm:h-80" />}
+                 {stationar.image_url && <img src={stationar.image_url} alt={stationar.title} loading="lazy" className="h-60 w-full rounded-2xl object-cover" />}
                 <ul className="grid gap-4 sm:grid-cols-2">
-                  {parseRows(stationar.body).map((item) => <li key={item.title} className="text-foreground flex items-center gap-3 text-sm sm:text-base"><span className="bg-surface-green text-brand-green grid size-10 shrink-0 place-items-center rounded-full"><Check className="size-5" /></span>{item.title}</li>)}
+                   {parseRows(stationar.body).map((item) => <li key={item.title} className="text-about-ink flex items-center gap-3 text-sm sm:text-base"><span className="bg-about-icon text-about-teal grid size-9 shrink-0 place-items-center rounded-full"><Check className="size-4" /></span>{item.title}</li>)}
                 </ul>
               </div>
             </div>
           </section>
         )}
 
-        <section className="bg-surface-soft py-12 sm:py-16">
+        <section className="bg-about-canvas py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionHeading eyebrow="" title={symptoms?.title || "Когда нужна консультация хирурга"} />
             <div className="mt-7 grid grid-cols-2 gap-3 lg:grid-cols-4">
-              {consultationItems.map((item) => <div key={item.title} className="border-border flex min-h-24 items-center gap-3 rounded-xl border bg-card p-4"><span className="bg-surface-green text-brand-green grid size-10 shrink-0 place-items-center rounded-full"><Check className="size-5" /></span><span className="text-foreground text-sm font-semibold leading-snug">{item.title}</span></div>)}
+               {consultationItems.map((item) => <div key={item.title} className="border-about-line flex items-center gap-3 rounded-2xl border bg-about-canvas p-4"><span className="bg-about-icon text-about-teal grid size-9 shrink-0 place-items-center rounded-full"><Check className="size-4" /></span><span className="text-about-ink text-sm font-semibold leading-snug">{item.title}</span></div>)}
             </div>
-            <div className="border-border mt-7 flex flex-wrap items-center gap-5 rounded-xl border bg-card p-5 sm:p-6">
-              <span className="border-brand-green text-brand-green grid size-12 shrink-0 place-items-center rounded-full border-2 text-2xl font-bold">?</span>
-              <div className="min-w-0 flex-1"><h2 className="text-foreground text-lg font-bold">Хотите проконсультироваться?</h2><p className="text-muted-foreground mt-1 text-sm">Мы поможем подобрать специалиста, доступ 24/7.</p></div>
-              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-green text-brand-white hover:bg-brand-green-dark rounded-md px-6 py-3 text-sm font-bold transition-colors">Записаться</a>
+             <div className="border-about-line mt-7 flex flex-wrap items-center gap-5 rounded-2xl border bg-about-mint p-4">
+               <span className="bg-about-icon text-about-teal grid size-11 shrink-0 place-items-center rounded-full text-xl font-bold">?</span>
+               <div className="min-w-0 flex-1"><h2 className="text-about-ink text-lg font-bold">Хотите проконсультироваться?</h2><p className="text-about-copy mt-1 text-sm">Мы поможем подобрать специалиста, доступ 24/7.</p></div>
+               <Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark shadow-none"><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Записаться</a></Button>
             </div>
           </div>
         </section>
 
-        {data.doctors.length > 0 && <section className="py-12 sm:py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SectionHeading eyebrow="" title="Наши специалисты" /><DoctorsGrid doctors={data.doctors} /></div></section>}
+        {data.doctors.length > 0 && <section className="bg-about-mint py-10 sm:py-12"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SectionHeading eyebrow="" title="Наши специалисты" /><DoctorsGrid doctors={data.doctors} /></div></section>}
 
         {faq && faqItems.length > 0 && (
-          <section id="faq" className="py-12 sm:py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SectionHeading eyebrow="" title={faq.title} /><div className="mt-7"><FaqList items={faqItems} /></div></div></section>
+          <section id="faq" className="bg-about-canvas py-10 sm:py-12"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SectionHeading eyebrow="" title={faq.title} /><div className="mt-7"><FaqList items={faqItems} /></div></div></section>
         )}
 
         {final && (
-          <section className="pb-12 sm:pb-16">
-            <div className="bg-surface-mint mx-auto grid max-w-7xl overflow-hidden rounded-2xl lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="flex flex-col justify-center p-6 sm:p-10"><h2 className="text-foreground text-3xl font-extrabold sm:text-4xl">Забота о вашем здоровье</h2><p className="text-muted-foreground mt-3 max-w-xl text-base leading-relaxed">{final.subtitle}</p><a href={final.primary_url || BOOKING_URL} target="_blank" rel="noopener noreferrer" className="bg-brand-green text-brand-white hover:bg-brand-green-dark mt-6 w-fit rounded-md px-6 py-3.5 text-sm font-bold transition-colors">Записаться на консультацию</a></div>
-              <img src={heroImage} alt="Консультация хирурга" loading="lazy" className="h-72 w-full object-cover lg:h-full lg:min-h-80" />
+          <section className="bg-about-mint py-10 sm:py-12">
+            <div className="mx-auto grid max-w-7xl overflow-hidden px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+              <div className="flex flex-col justify-center py-6 lg:pr-10"><h2 className="text-about-ink text-3xl font-extrabold sm:text-4xl">Забота о вашем здоровье</h2><p className="text-about-copy mt-3 max-w-xl text-base leading-relaxed">{final.subtitle}</p><Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark mt-6 w-fit shadow-none"><a href={final.primary_url || BOOKING_URL} target="_blank" rel="noopener noreferrer">Записаться на консультацию</a></Button></div>
+              <img src={heroImage} alt="Консультация хирурга" loading="lazy" className="h-60 w-full rounded-2xl object-cover" />
             </div>
           </section>
         )}
