@@ -1,44 +1,123 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
-import { ArrowRight, Check, Phone } from "lucide-react";
+import { ArrowRight, Check, MessageCircle, Plus, ShieldCheck, Sparkles, Stethoscope, UserRound } from "lucide-react";
+import { useState } from "react";
 
-import { ConsultCta } from "@/components/ConsultCta";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
+import { Button } from "@/components/ui/button";
 import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { specialtyImage } from "@/lib/specialty-images";
 import { parseRows, surgeryDirectionQueryOptions } from "@/lib/surgery.queries";
-import { DoctorsGrid, FaqList } from "./hirurgiya.index";
+import { DoctorsGrid } from "./hirurgiya.index";
 
 const truncate = (value: string, max = 158) =>
   value.length <= max ? value : `${value.slice(0, max - 1).trimEnd()}…`;
+
+const WHATSAPP_URL = `https://wa.me/${(CLINIC.phones[0] ?? "").replace(/\D/g, "")}`;
+
+const DEFAULT_SUBTITLE =
+  "Современные операции с использованием малоинвазивных технологий. Подходы и материалы помощи взрослым пациентам.";
+
+const DEFAULT_ADVANTAGES = [
+  { title: "Опытные хирурги", text: "Большой практический опыт." },
+  { title: "Современные методы", text: "Традиционные и лапароскопические операции." },
+  { title: "Полная диагностика", text: "Все обследования в одной клинике." },
+  { title: "Комплексное сопровождение", text: "От консультации до восстановления." },
+];
+
+const ADVANTAGE_ICONS = [UserRound, Sparkles, Stethoscope, ShieldCheck];
+
+const DEFAULT_SYMPTOMS = [
+  "Боли в животе",
+  "Появление грыжи",
+  "Новообразования кожи и мягких тканей",
+  "Вросший ноготь",
+  "Плохо заживающие раны",
+  "Воспалительные заболевания",
+  "Необходимость планового хирургического лечения",
+];
+
+const DEFAULT_DISEASES = [
+  "Грыжи передней брюшной стенки",
+  "Желчнокаменная болезнь",
+  "Доброкачественные образования кожи и мягких тканей (липомы, атеромы и др.)",
+  "Вросший ноготь",
+  "Гнойно-воспалительные заболевания",
+  "Другие хирургические патологии",
+];
+
+const DEFAULT_PROCEDURES = [
+  "Лапароскопические операции",
+  "Операции при грыжах",
+  "Операции на жёлчном пузыре",
+  "Удаление липом, атером и др. новообразований",
+  "Хирургическая обработка ран",
+  "Удаление вросшего ногтя",
+  "Вскрытие и лечение гнойных процессов",
+  "Другие вмешательства по показаниям",
+];
+
+const DEFAULT_FAQ = [
+  {
+    title: "Всегда ли нужна операция?",
+    text: "Нет. Хирург сначала оценивает состояние и результаты обследований: во многих случаях достаточно наблюдения или консервативного лечения, а операцию предлагают только по показаниям.",
+  },
+  {
+    title: "Сколько длится восстановление?",
+    text: "После малоинвазивных вмешательств обычно несколько дней, после более объёмных операций — до нескольких недель. Точные сроки врач называет после осмотра.",
+  },
+  {
+    title: "Как подготовиться к операции?",
+    text: "Нужно пройти назначенные анализы и обследования, сообщить о принимаемых препаратах и аллергии, а также соблюдать рекомендации врача по питанию перед вмешательством.",
+  },
+];
+
+const DIRECTION_TITLES: Record<string, string> = {
+  "obshchaya-hirurgiya": "Общая хирургия",
+  urologiya: "Урология",
+  ginekologiya: "Гинекология",
+  travmatologiya: "Травматология",
+  proktologiya: "Проктология",
+  mammologiya: "Маммология",
+  flebologiya: "Флебология",
+};
+
+const DIRECTION_IMAGES: Record<string, string> = {
+  "obshchaya-hirurgiya": "/assets/spec-hirurg.webp",
+  urologiya: "/assets/spec-urolog.webp",
+  ginekologiya: "/assets/spec-gineko.webp",
+  travmatologiya: "/assets/spec-travma.webp",
+  proktologiya: "/assets/doctor-patient-hero.webp",
+  mammologiya: "/assets/spec-gineko.webp",
+  flebologiya: "/assets/uslugi-hero.jpg",
+};
 
 export const Route = createFileRoute("/hirurgiya/$slug")({
   loader: async ({ params, context }) => {
     const direction = await context.queryClient.ensureQueryData(
       surgeryDirectionQueryOptions(params.slug),
     );
-    if (!direction) throw notFound();
-    return direction;
+    if (!direction && !DIRECTION_TITLES[params.slug]) throw notFound();
+    return direction ?? null;
   },
   head: ({ params, loaderData }) => {
     const path = `/hirurgiya/${params.slug}`;
-    if (!loaderData) {
+    const fallbackTitle = DIRECTION_TITLES[params.slug];
+    if (!loaderData && !fallbackTitle) {
       return {
         meta: [{ title: "Страница недоступна — Авиценна" }, { name: "robots", content: "noindex" }],
       };
     }
 
-    const title = loaderData.meta_title?.trim() || `${loaderData.title} — клиника «Авиценна»`;
+    const name = loaderData?.title || fallbackTitle || "Хирургия";
+    const title = loaderData?.meta_title?.trim() || `${name} в Бишкеке — клиника «Авиценна»`;
     const description =
-      loaderData.meta_description?.trim() ||
-      truncate(
-        loaderData.subtitle?.trim() ||
-          `${loaderData.title}: консультация хирурга, диагностика, операция и восстановление в клинике «Авиценна».`,
-      );
+      loaderData?.meta_description?.trim() ||
+      truncate(loaderData?.subtitle?.trim() || DEFAULT_SUBTITLE);
 
     return {
       meta: [
@@ -57,10 +136,10 @@ export const Route = createFileRoute("/hirurgiya/$slug")({
           children: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "MedicalWebPage",
-            name: loaderData.title,
+            name,
             description,
             url: absoluteUrl(path) || path,
-            about: { "@type": "MedicalSpecialty", name: loaderData.title },
+            about: { "@type": "MedicalSpecialty", name },
             provider: { "@type": "MedicalClinic", name: CLINIC.name },
           }),
         },
@@ -69,259 +148,258 @@ export const Route = createFileRoute("/hirurgiya/$slug")({
   },
   component: DirectionPage,
   notFoundComponent: () => (
-    <div className="bg-background min-h-screen">
+    <div className="bg-about-canvas min-h-screen">
       <SiteHeader breadcrumb="Хирургия" />
       <Breadcrumbs items={[{ label: "Хирургия" }]} />
       <main className="mx-auto max-w-3xl px-4 py-20 text-center">
-        <h1 className="text-foreground text-4xl font-extrabold">Направление не найдено</h1>
-        <Link
-          to="/hirurgiya"
-          className="bg-accent text-accent-foreground mt-8 inline-flex rounded-md px-7 py-4 text-base font-semibold"
-        >
-          Все направления хирургии
-        </Link>
+        <h1 className="text-about-ink text-3xl font-extrabold sm:text-4xl">Направление не найдено</h1>
+        <Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark mt-8 shadow-none">
+          <Link to="/hirurgiya">Все направления хирургии</Link>
+        </Button>
       </main>
       <SiteFooter />
     </div>
   ),
 });
 
-function ListBlock({
-  eyebrow,
-  title,
-  value,
-}: {
-  eyebrow: string;
-  title: string;
-  value: string | null;
-}) {
-  const rows = parseRows(value);
-  if (rows.length === 0) return null;
-
+function Heading({ title, description }: { title: string; description?: string }) {
   return (
-    <section className="border-border border-b py-14 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading eyebrow={eyebrow} title={title} />
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-          {rows.map((item) => (
-            <li key={item.title} className="border-border flex items-start gap-4 rounded-lg border p-5">
-              <span className="bg-surface-green text-brand-green mt-0.5 grid size-7 shrink-0 place-items-center rounded-full">
-                <Check className="size-4" aria-hidden="true" />
-              </span>
-              <span>
-                <span className="text-foreground block text-base font-bold">{item.title}</span>
-                {item.text && (
-                  <span className="text-muted-foreground mt-1 block text-sm">{item.text}</span>
-                )}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+    <div>
+      <h2 className="text-about-ink text-2xl leading-tight font-extrabold sm:text-3xl lg:text-4xl">
+        {title}
+      </h2>
+      {description && <p className="text-about-copy mt-3 max-w-2xl text-[13px] sm:text-base">{description}</p>}
+    </div>
+  );
+}
+
+function BulletList({ title, items }: { title: string; items: string[] }) {
+  if (items.length === 0) return null;
+  return (
+    <div>
+      <h3 className="text-about-ink text-lg font-bold sm:text-xl">{title}</h3>
+      <ul className="mt-4 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+        {items.map((item) => (
+          <li key={item} className="flex items-start gap-2.5">
+            <span className="bg-about-icon text-about-teal mt-0.5 grid size-5 shrink-0 place-items-center rounded-full">
+              <Check className="size-3" aria-hidden="true" />
+            </span>
+            <span className="text-about-copy text-[13px] leading-snug sm:text-sm">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function Faq({ items }: { items: { title: string; text?: string }[] }) {
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <dl className="mt-6 grid gap-3">
+      {items.map((item, index) => {
+        const isOpen = open === index;
+        return (
+          <div key={item.title} className="border-about-line bg-about-canvas rounded-2xl border">
+            <dt>
+              <button
+                type="button"
+                aria-expanded={isOpen}
+                onClick={() => setOpen(isOpen ? null : index)}
+                className="flex w-full items-center justify-between gap-4 p-4 text-left"
+              >
+                <span className="text-about-ink text-[13px] font-semibold sm:text-base">{item.title}</span>
+                <Plus
+                  className={`text-about-teal size-5 shrink-0 transition-transform ${isOpen ? "rotate-45" : ""}`}
+                  aria-hidden="true"
+                />
+              </button>
+            </dt>
+            {isOpen && item.text && (
+              <dd className="text-about-copy border-about-line border-t p-4 text-[13px] leading-relaxed sm:text-sm">
+                {item.text}
+              </dd>
+            )}
+          </div>
+        );
+      })}
+    </dl>
   );
 }
 
 function DirectionPage() {
   const { slug } = Route.useParams();
   const { data } = useSuspenseQuery(surgeryDirectionQueryOptions(slug));
-  if (!data) return null;
 
-  const steps = parseRows(data.steps);
-  const advantages = parseRows(data.advantages);
-  const symptoms = parseRows(data.symptoms);
-  const faqItems = parseRows(data.faq);
+  const name = data?.title || DIRECTION_TITLES[slug] || "Хирургия";
+  const subtitle = data?.subtitle?.trim() || DEFAULT_SUBTITLE;
+  const image = data?.image_url || DIRECTION_IMAGES[slug] || specialtyImage(slug);
+  const doctors = data?.doctors ?? [];
+
+  const dbAdvantages = parseRows(data?.advantages);
+  const advantages = (dbAdvantages.length > 0 ? dbAdvantages : DEFAULT_ADVANTAGES).slice(0, 4);
+
+  const rowTitles = (value: string | null | undefined, fallback: string[]) => {
+    const rows = parseRows(value).map((row) => row.title);
+    return rows.length > 0 ? rows : fallback;
+  };
+  const symptoms = rowTitles(data?.symptoms, DEFAULT_SYMPTOMS);
+  const diseases = rowTitles(data?.diseases, DEFAULT_DISEASES);
+  const procedures = rowTitles(data?.procedures, DEFAULT_PROCEDURES);
+
+  const dbFaq = parseRows(data?.faq);
+  const faqItems = dbFaq.length > 0 ? dbFaq : DEFAULT_FAQ;
 
   return (
-    <div className="bg-background min-h-screen">
-      <SiteHeader breadcrumb={data.title} />
-      <Breadcrumbs items={[{ label: "Хирургия", href: "/hirurgiya" }, { label: data.title }]} />
+    <div className="bg-about-canvas min-h-screen">
+      <SiteHeader breadcrumb={name} />
 
-      {faqItems.length > 0 && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(
-              faqPageJsonLd(
-                faqItems.map((item) => ({ question: item.title, answer: item.text ?? "" })),
-              ),
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            faqPageJsonLd(
+              faqItems.map((item) => ({ question: item.title, answer: item.text ?? "" })),
             ),
-          }}
-        />
-      )}
+          ),
+        }}
+      />
 
       <main>
-        <section className="border-border border-b">
-          <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:py-16">
-            <div>
-              <nav aria-label="Хлебные крошки" className="text-muted-foreground text-sm">
-                <Link to="/" className="hover:text-foreground">
+        <section className="bg-about-mint">
+          <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:px-6 sm:py-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+            <Reveal className="flex flex-col justify-center lg:pr-10">
+              <nav aria-label="Хлебные крошки" className="text-about-copy text-[13px]">
+                <Link to="/" className="hover:text-about-teal">
                   Главная
                 </Link>
                 <span className="mx-2">/</span>
-                <Link to="/hirurgiya" className="hover:text-foreground">
+                <Link to="/hirurgiya" className="hover:text-about-teal">
                   Хирургия
                 </Link>
                 <span className="mx-2">/</span>
-                <span className="text-foreground">{data.title}</span>
+                <span className="text-about-ink">{name}</span>
               </nav>
-              <h1 className="text-foreground mt-5 text-4xl leading-[1.08] font-extrabold sm:text-5xl">
-                {data.title}
+              <h1 className="text-about-ink mt-3 max-w-2xl text-2xl leading-[1.1] font-extrabold sm:text-4xl lg:text-5xl">
+                {name} в Бишкеке
               </h1>
-              {data.subtitle && (
-                <p className="text-muted-foreground mt-5 max-w-2xl text-lg leading-relaxed sm:text-xl">
-                  {data.subtitle}
-                </p>
-              )}
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a
-                  href={BOOKING_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-accent text-accent-foreground rounded-md px-7 py-4 text-base font-semibold transition-opacity hover:opacity-90"
+              <p className="text-about-copy mt-3 max-w-2xl text-[13px] leading-relaxed sm:text-base">
+                {subtitle}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2 sm:gap-3">
+                <Button
+                  asChild
+                  className="bg-brand-green text-brand-white hover:bg-brand-green-dark px-3 text-[13px] shadow-none sm:px-4 sm:text-sm"
                 >
-                  Записаться на консультацию
-                </a>
-                <a
-                  href={`tel:${CLINIC.phones[0]}`}
-                  className="border-border text-foreground hover:border-foreground inline-flex items-center gap-2 rounded-md border px-7 py-4 text-base font-semibold transition-colors"
+                  <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                    Записаться на консультацию
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-about-line text-about-ink bg-about-canvas px-3 text-[13px] shadow-none sm:px-4 sm:text-sm"
                 >
-                  <Phone className="size-4" aria-hidden="true" />
-                  +996 779 909 009
-                </a>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="size-4" aria-hidden="true" />
+                    Задать вопрос
+                  </a>
+                </Button>
               </div>
-            </div>
+            </Reveal>
             <img
-              src={data.image_url || specialtyImage(data.slug)}
-              alt={data.title}
-              className="h-full max-h-[380px] w-full rounded-2xl object-cover"
+              src={image}
+              alt={name}
+              className="h-48 w-full rounded-2xl object-cover lg:h-[300px]"
             />
           </div>
         </section>
 
-        {data.body && (
-          <section className="border-border border-b py-14 sm:py-20">
-            <div className="mx-auto max-w-3xl px-4 sm:px-6">
-              <p className="eyebrow">Направление</p>
-              <h2 className="text-foreground mt-3 text-3xl font-extrabold sm:text-4xl">
-                {data.about_title?.trim() || "О направлении"}
-              </h2>
-              <p className="text-muted-foreground mt-5 text-lg leading-relaxed whitespace-pre-line">
-                {data.body}
-              </p>
+        <section className="bg-about-canvas py-10 sm:py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <Heading title="Почему пациенты выбирают хирургию «Авиценны»" />
+            <div className="mt-7 grid grid-cols-2 gap-3 lg:grid-cols-4">
+              {advantages.map((item, index) => {
+                const Icon = ADVANTAGE_ICONS[index % ADVANTAGE_ICONS.length] ?? UserRound;
+                return (
+                  <Reveal key={item.title} delay={index * 35}>
+                    <div className="border-about-line bg-about-canvas h-full rounded-2xl border p-4">
+                      <span className="bg-about-icon text-about-teal grid size-10 place-items-center rounded-full">
+                        <Icon className="size-5" aria-hidden="true" />
+                      </span>
+                      <h3 className="text-about-ink mt-3 text-[13px] font-bold sm:text-base">
+                        {item.title}
+                      </h3>
+                      {item.text && (
+                        <p className="text-about-copy mt-1.5 text-[13px] leading-snug sm:text-sm">
+                          {item.text}
+                        </p>
+                      )}
+                    </div>
+                  </Reveal>
+                );
+              })}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
-        {advantages.length > 0 && (
-          <section className="border-border border-b py-14 sm:py-20">
+        <section className="bg-about-mint py-10 sm:py-12">
+          <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6">
+            <BulletList title="Когда необходима консультация хирурга" items={symptoms} />
+            <BulletList title="Какие заболевания мы лечим" items={diseases} />
+            <BulletList title="Какие операции мы выполняем" items={procedures} />
+          </div>
+        </section>
+
+        {doctors.length > 0 && (
+          <section id="vrachi" className="bg-about-canvas py-10 sm:py-12">
             <div className="mx-auto max-w-7xl px-4 sm:px-6">
-              <SectionHeading eyebrow="Преимущества" title="Почему выбирают Авиценну" />
-              <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                {advantages.map((item, index) => (
-                  <div key={item.title} className="border-border border-t pt-6">
-                    <p className="text-muted-foreground text-sm font-semibold">0{index + 1}</p>
-                    <h3 className="text-foreground mt-3 text-xl font-bold">{item.title}</h3>
-                    {item.text && (
-                      <p className="text-muted-foreground mt-3 text-base leading-relaxed">
-                        {item.text}
-                      </p>
-                    )}
-                  </div>
-                ))}
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <Heading title="Наши специалисты" />
+                <Link
+                  to="/vrachi"
+                  className="text-about-teal inline-flex items-center gap-1.5 text-[13px] font-semibold sm:text-sm"
+                >
+                  Все врачи направления
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
               </div>
+              <DoctorsGrid doctors={doctors} />
             </div>
           </section>
         )}
 
-        {symptoms.length > 0 && (
-          <section className="border-border bg-surface-soft border-b py-14 sm:py-20">
-            <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
-              <div>
-                <SectionHeading eyebrow="Симптомы" title="Когда обратиться" />
-                <a
-                  href={BOOKING_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-accent text-accent-foreground mt-8 inline-flex rounded-md px-7 py-4 text-base font-semibold transition-opacity hover:opacity-90"
-                >
+        <section id="faq" className="bg-about-mint py-10 sm:py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <Heading title="Часто задаваемые вопросы" />
+            <Faq items={faqItems} />
+          </div>
+        </section>
+
+        <section className="bg-about-canvas py-10 sm:py-12">
+          <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <h2 className="text-about-ink text-2xl font-extrabold sm:text-3xl lg:text-4xl">
+                Забота о вашем здоровье
+              </h2>
+              <p className="text-about-copy mt-3 max-w-xl text-[13px] leading-relaxed sm:text-base">
+                Запишитесь на консультацию — врач осмотрит, объяснит варианты лечения и составит
+                понятный план действий.
+              </p>
+              <Button
+                asChild
+                className="bg-brand-green text-brand-white hover:bg-brand-green-dark mt-6 w-fit shadow-none"
+              >
+                <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
                   Записаться на консультацию
                 </a>
-              </div>
-              <ul className="space-y-4 self-center">
-                {symptoms.map((item) => (
-                  <li key={item.title} className="flex items-start gap-3">
-                    <span className="bg-surface-green text-brand-green mt-0.5 grid size-6 shrink-0 place-items-center rounded-full">
-                      <Check className="size-3.5" aria-hidden="true" />
-                    </span>
-                    <span className="text-foreground text-base sm:text-lg">{item.title}</span>
-                  </li>
-                ))}
-              </ul>
+              </Button>
             </div>
-          </section>
-        )}
-
-        <ListBlock eyebrow="Заболевания" title="Какие заболевания лечим" value={data.diseases} />
-        <ListBlock eyebrow="Услуги" title="Операции и процедуры" value={data.procedures} />
-        {data.doctors.length > 0 && (
-          <section className="border-border border-b py-14 sm:py-20">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6">
-              <SectionHeading eyebrow="Специалисты" title={`Наши врачи — ${data.title.toLowerCase()}`} />
-              <DoctorsGrid doctors={data.doctors} />
-            </div>
-          </section>
-        )}
-
-        <ListBlock
-          eyebrow="Подготовка"
-          title="Диагностика перед операцией"
-          value={data.diagnostics}
-        />
-
-        {steps.length > 0 && (
-          <section className="border-border border-b py-14 sm:py-20">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6">
-              <SectionHeading eyebrow="Процесс" title="Как проходит лечение" />
-              <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {steps.map((item, index) => (
-                  <li key={item.title} className="border-border rounded-lg border p-6">
-                    <span className="bg-surface-green text-brand-green grid size-10 place-items-center rounded-full text-base font-bold">
-                      {index + 1}
-                    </span>
-                    <h3 className="text-foreground mt-4 text-lg font-bold">{item.title}</h3>
-                    {item.text && (
-                      <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-                        {item.text}
-                      </p>
-                    )}
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </section>
-        )}
-
-        {faqItems.length > 0 && (
-          <section className="border-border border-b py-14 sm:py-20">
-            <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
-              <SectionHeading eyebrow="FAQ" title="Часто задаваемые вопросы" />
-              <FaqList items={faqItems} />
-            </div>
-          </section>
-        )}
-
-        <ConsultCta defaultSlug={slug} />
-
-        <section className="border-border border-t py-10">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <Link
-              to="/hirurgiya"
-              className="text-foreground hover:text-brand-green inline-flex items-center gap-2 text-lg font-bold"
-            >
-              Все направления хирургии
-              <ArrowRight className="size-5" aria-hidden="true" />
-            </Link>
+            <img
+              src={image}
+              alt="Консультация хирурга"
+              loading="lazy"
+              className="h-48 w-full rounded-2xl object-cover sm:h-60"
+            />
           </div>
         </section>
       </main>
