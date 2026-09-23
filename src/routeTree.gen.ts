@@ -19,6 +19,7 @@ import { Route as GlavnayaV3RouteImport } from './routes/glavnaya-v3'
 import { Route as PoliklinikaRouteImport } from './routes/poliklinika'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TravmpunktRouteImport } from './routes/travmpunkt'
+import { Route as VrachiRouteImport } from './routes/vrachi'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as CheckupsIndexRouteImport } from './routes/checkups.index'
 import { Route as CheckupsSlugRouteImport } from './routes/checkups.$slug'
@@ -98,6 +99,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const TravmpunktRoute = TravmpunktRouteImport.update({
   id: '/travmpunkt',
   path: '/travmpunkt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VrachiRoute = VrachiRouteImport.update({
+  id: '/vrachi',
+  path: '/vrachi',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
@@ -279,6 +285,7 @@ export interface FileRoutesByFullPath {
   '/poliklinika': typeof PoliklinikaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
+  '/vrachi': typeof VrachiRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
@@ -321,6 +328,7 @@ export interface FileRoutesByTo {
   '/poliklinika': typeof PoliklinikaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
+  '/vrachi': typeof VrachiRoute
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
@@ -364,6 +372,7 @@ export interface FileRoutesById {
   '/poliklinika': typeof PoliklinikaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
+  '/vrachi': typeof VrachiRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
@@ -408,6 +417,7 @@ export interface FileRouteTypes {
     | '/poliklinika'
     | '/sitemap.xml'
     | '/travmpunkt'
+    | '/vrachi'
     | '/admin'
     | '/checkups/$slug'
     | '/chekapy/$slug'
@@ -450,6 +460,7 @@ export interface FileRouteTypes {
     | '/poliklinika'
     | '/sitemap.xml'
     | '/travmpunkt'
+    | '/vrachi'
     | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
@@ -492,6 +503,7 @@ export interface FileRouteTypes {
     | '/poliklinika'
     | '/sitemap.xml'
     | '/travmpunkt'
+    | '/vrachi'
     | '/_authenticated/admin'
     | '/checkups/$slug'
     | '/chekapy/$slug'
@@ -536,6 +548,7 @@ export interface RootRouteChildren {
   PoliklinikaRoute: typeof PoliklinikaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TravmpunktRoute: typeof TravmpunktRoute
+  VrachiRoute: typeof VrachiRoute
   CheckupsSlugRoute: typeof CheckupsSlugRoute
   ChekapySlugRoute: typeof ChekapySlugRoute
   DiagnostikaSlugRoute: typeof DiagnostikaSlugRoute
@@ -620,6 +633,13 @@ declare module '@tanstack/react-router' {
       path: '/travmpunkt'
       fullPath: '/travmpunkt'
       preLoaderRoute: typeof TravmpunktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vrachi': {
+      id: '/vrachi'
+      path: '/vrachi'
+      fullPath: '/vrachi'
+      preLoaderRoute: typeof VrachiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -912,6 +932,7 @@ const rootRouteChildren: RootRouteChildren = {
   PoliklinikaRoute: PoliklinikaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TravmpunktRoute: TravmpunktRoute,
+  VrachiRoute: VrachiRoute,
   CheckupsSlugRoute: CheckupsSlugRoute,
   ChekapySlugRoute: ChekapySlugRoute,
   DiagnostikaSlugRoute: DiagnostikaSlugRoute,
