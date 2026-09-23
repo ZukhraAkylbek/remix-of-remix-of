@@ -60,9 +60,9 @@ function SpecialtyMarquee() {
           onScroll={handleLoop}
           className="group marquee-mask no-scrollbar relative overflow-x-auto px-12 scroll-smooth"
         >
-          <div className={`${manual ? "" : "marquee-track-quarter"} flex w-max gap-3 pr-3`}>
+          <div className={`${manual ? "" : "marquee-track-quarter"} flex w-max`}>
             {[0, 1, 2, 3].map((copy) => (
-              <div key={copy} className="flex shrink-0 gap-3" aria-hidden={copy > 0}>
+              <div key={copy} className="flex shrink-0 gap-3 pr-3" aria-hidden={copy > 0}>
                 {SPECIALTY_PILLS.map((name) => (
                   <Link
                     key={`${copy}-${name}`}
@@ -488,9 +488,9 @@ export function HomeV3() {
         <Section tone="soft" eyebrow="Доверие" title="Отзывы пациентов">
           {/* Mobile: scrolling marquee */}
           <div className="group marquee-mask relative overflow-hidden md:hidden">
-            <div className="marquee-track-quarter flex w-max gap-4 pr-4">
+            <div className="marquee-track-quarter flex w-max">
               {[0, 1, 2, 3].map((copy) => (
-                <div key={copy} className="flex shrink-0 gap-4" aria-hidden={copy > 0}>
+                <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy > 0}>
                   {REVIEWS.map((review) => (
                     <ReviewCard
                       review={review}
@@ -505,9 +505,9 @@ export function HomeV3() {
 
           {/* Desktop: scrolling marquee */}
           <div className="group marquee-mask relative hidden overflow-hidden md:block">
-            <div className="marquee-track-quarter flex w-max gap-4 pr-4">
+            <div className="marquee-track-quarter flex w-max">
               {[0, 1, 2, 3].map((copy) => (
-                <div key={copy} className="flex shrink-0 gap-4" aria-hidden={copy > 0}>
+                <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy > 0}>
                   {REVIEWS.map((review) => (
                     <ReviewCard review={review} key={`${copy}-${review.text}`} />
                   ))}
