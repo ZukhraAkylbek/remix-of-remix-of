@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 
 import clinicExterior from "@/assets/about-clinic-exterior.jpg";
-import founderPortrait from "@/assets/about-founder-placeholder.jpg";
+import founderPortrait from "@/assets/founder-zhypar.png.asset.json";
 import receptionPhoto from "@/assets/about-reception.jpg";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Reveal } from "@/components/Reveal";
@@ -200,10 +200,10 @@ function AboutPage() {
               <article className="border-about-line bg-card overflow-hidden rounded-2xl border lg:grid lg:grid-cols-[0.85fr_1.35fr]">
                 <div className="bg-about-mint min-h-80 overflow-hidden rounded-b-[48%] lg:min-h-[510px] lg:rounded-r-[48%] lg:rounded-b-none">
                   <img
-                    src={founderPortrait}
-                    alt="Временный портрет основательницы клиники"
-                    width={1408}
-                    height={1200}
+                    src={founderPortrait.url}
+                    alt="Керималиева Жыпар Абдыказиевна — основательница сети клиник «Авиценна»"
+                    width={973}
+                    height={1298}
                     loading="lazy"
                     className="size-full object-cover object-top"
                   />
