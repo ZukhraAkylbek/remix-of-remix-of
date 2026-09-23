@@ -14,7 +14,7 @@ const STATIC_HITS: Hit[] = [
   { title: "Чекапы", group: "Разделы", to: "/checkups" },
   { title: "Услуги", group: "Разделы", to: "/uslugi" },
   { title: "Диагностика", group: "Разделы", to: "/#preimushchestva" },
-  { title: "Врачи", group: "Разделы", to: "/#vrachi" },
+  { title: "Врачи", group: "Разделы", to: "/vrachi" },
   { title: "Филиалы и контакты", group: "Разделы", to: "/#filialy" },
   { title: "Вопросы и ответы", group: "Разделы", to: "/#faq" },
 ];
