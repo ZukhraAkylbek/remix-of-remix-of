@@ -21,7 +21,7 @@ import { SiteSearch } from "@/components/SiteSearch";
 export const HEADER_NAV_SLOTS = [
   { label: "Главная", href: "/" },
   { label: "О нас", href: "/about" },
-  { label: "Услуги", href: "/uslugi" },
+  { label: "Поликлиника", href: "/poliklinika" },
   { label: "Врачи", href: "/glavnaya-v3" },
   { label: "Травмпункт 24/7", href: "/travmpunkt" },
   { label: "Хирургия", href: "/hirurgiya" },
