@@ -284,7 +284,7 @@ function SurgeryPage() {
 
         <section id="directions" className="py-12 sm:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <SectionHeading title="Направления хирургии" description={`${Math.max(data.doctors.length, 14)} специалистов оперируют по следующим направлениям:`} />
+            <SectionHeading eyebrow="" title="Направления хирургии" description={`${Math.max(data.doctors.length, 14)} специалистов оперируют по следующим направлениям:`} />
             <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {directions.map((direction, index) => (
                 <Reveal key={direction.slug} delay={index * 35}>
@@ -302,7 +302,7 @@ function SurgeryPage() {
         {stationar && (
           <section className="pb-12 sm:pb-16">
             <div className="mx-auto max-w-7xl px-4 sm:px-6">
-              <SectionHeading title={stationar.title} />
+              <SectionHeading eyebrow="" title={stationar.title} />
               <div className="mt-7 grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
                 {stationar.image_url && <img src={stationar.image_url} alt={stationar.title} loading="lazy" className="h-72 w-full rounded-xl object-cover sm:h-80" />}
                 <ul className="grid gap-4 sm:grid-cols-2">
@@ -315,7 +315,7 @@ function SurgeryPage() {
 
         <section className="bg-surface-soft py-12 sm:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <SectionHeading title={symptoms?.title || "Когда нужна консультация хирурга"} />
+            <SectionHeading eyebrow="" title={symptoms?.title || "Когда нужна консультация хирурга"} />
             <div className="mt-7 grid grid-cols-2 gap-3 lg:grid-cols-4">
               {consultationItems.map((item) => <div key={item.title} className="border-border flex min-h-24 items-center gap-3 rounded-xl border bg-card p-4"><span className="bg-surface-green text-brand-green grid size-10 shrink-0 place-items-center rounded-full"><Check className="size-5" /></span><span className="text-foreground text-sm font-semibold leading-snug">{item.title}</span></div>)}
             </div>
@@ -327,10 +327,10 @@ function SurgeryPage() {
           </div>
         </section>
 
-        {data.doctors.length > 0 && <section className="py-12 sm:py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SectionHeading title="Наши специалисты" /><DoctorsGrid doctors={data.doctors} /></div></section>}
+        {data.doctors.length > 0 && <section className="py-12 sm:py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SectionHeading eyebrow="" title="Наши специалисты" /><DoctorsGrid doctors={data.doctors} /></div></section>}
 
         {faq && faqItems.length > 0 && (
-          <section id="faq" className="py-12 sm:py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SectionHeading title={faq.title} /><div className="mt-7"><FaqList items={faqItems} /></div></div></section>
+          <section id="faq" className="py-12 sm:py-16"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SectionHeading eyebrow="" title={faq.title} /><div className="mt-7"><FaqList items={faqItems} /></div></div></section>
         )}
 
         {final && (
