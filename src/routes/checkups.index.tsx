@@ -82,6 +82,90 @@ const PROGRAM_CONTENT = [
   "Итоговое заключение и рекомендации врача",
 ];
 
+type ProgramDetail = {
+  label: string;
+  price: string;
+  title: string;
+  includes: string[];
+  note?: string;
+};
+
+const FEMALE_PROGRAMS: ProgramDetail[] = [
+  {
+    label: "Базовый",
+    price: "39 000 сом",
+    title: "Женский чекап — Базовый",
+    includes: [
+      "УЗИ 9 органов, ЭКГ, ЭХОКГ, ЭГДС, рентген/РКТ, дыхательный тест",
+      "27 видов анализов",
+      "Консультации: терапевт, проктолог и гинеколог, маммолог/уролог, невролог, ортопед",
+      "Паспорт здоровья с рекомендациями",
+    ],
+  },
+  {
+    label: "Расширенный",
+    price: "62 000 сом",
+    title: "Женский чекап — Расширенный",
+    includes: [
+      "УЗИ 9 органов, ЭКГ, ЭХОКГ, ЭГДС и колоноскопия под наркозом, спирометрия, Доплер сосудов, дыхательный тест на H. pylori, суточный мониторинг АД и ЭКГ",
+      "53 лабораторных анализа",
+      "Консультации гинеколога, терапевта, маммолога, ортопеда, невролога, проктолога, кардиолога",
+      "Паспорт здоровья с индивидуальными рекомендациями",
+    ],
+  },
+];
+
+const MALE_PROGRAMS: ProgramDetail[] = [
+  {
+    label: "Базовый",
+    price: "34 000 сом",
+    title: "Мужской чекап — Базовый",
+    includes: [
+      "УЗИ 9 органов, ЭКГ, ЭХОКГ, ЭГДС, рентген/РКТ, дыхательный тест",
+      "27 видов анализов",
+      "Консультации: терапевт, проктолог и гинеколог, маммолог/уролог, невролог, ортопед",
+      "Паспорт здоровья с рекомендациями",
+    ],
+  },
+  {
+    label: "Расширенный",
+    price: "62 000 сом",
+    title: "Мужской чекап — Расширенный",
+    includes: [
+      "Полное обследование, аналогичное женскому расширенному",
+      "54 лабораторных анализа",
+      "Консультации уролога, терапевта, кардиолога, ортопеда, невролога, проктолога",
+      "Паспорт здоровья с индивидуальными рекомендациями",
+    ],
+    note: "Рекомендуется мужчинам от 25 лет — 1 раз в год",
+  },
+];
+
+const CHILD_PROGRAMS: ProgramDetail[] = [
+  {
+    label: "С 3 до 9 лет",
+    price: "от 17 000 сом",
+    title: "Детский чекап — С 3 до 9 лет",
+    includes: [
+      "УЗИ 7 органов, ЭКГ (с 10 лет), РКТ (с 10 лет)",
+      "20 лабораторных анализов",
+      "Консультация педиатра, ортопеда",
+      "Паспорт здоровья",
+    ],
+  },
+  {
+    label: "С 10 до 16 лет",
+    price: "от 18 500 сом",
+    title: "Детский чекап — С 10 до 16 лет",
+    includes: [
+      "УЗИ 7 органов, ЭКГ, РКТ",
+      "20 лабораторных анализов",
+      "Консультация педиатра, ортопеда",
+      "Паспорт здоровья",
+    ],
+  },
+];
+
 const FAQ = [
   {
     q: "Сколько времени занимает чекап?",
@@ -103,6 +187,7 @@ const FAQ = [
 
 function CheckupsPage() {
   const [activeMini, setActiveMini] = useState<MiniProgram | null>(null);
+  const [activeProgram, setActiveProgram] = useState<ProgramDetail | null>(null);
 
   return (
     <div className="min-h-screen bg-about-canvas">
@@ -180,30 +265,24 @@ function CheckupsPage() {
                 icon={CircleUserRound}
                 title="Женские чекапы"
                 image="/assets/checkup-female.jpg"
-                programs={[
-                  { label: "Базовый", price: "35 000 сом" },
-                  { label: "Расширенный", price: "62 000 сом" },
-                ]}
+                programs={FEMALE_PROGRAMS}
+                onSelect={setActiveProgram}
               />
               <ProgramGroup
                 className="pastel-sky lg:col-span-4"
                 icon={Stethoscope}
                 title="Мужские чекапы"
                 image="/assets/checkup-male.jpg"
-                programs={[
-                  { label: "Базовый", price: "31 000 сом" },
-                  { label: "Расширенный", price: "62 000 сом" },
-                ]}
+                programs={MALE_PROGRAMS}
+                onSelect={setActiveProgram}
               />
               <ProgramGroup
                 className="pastel-sand lg:col-span-4"
                 icon={Baby}
                 title="Детские чекапы"
                 image="/assets/checkup-child.jpg"
-                programs={[
-                  { label: "С 3 до 9 лет", price: "от 15 000 сом" },
-                  { label: "С 10 до 16 лет", price: "от 18 000 сом" },
-                ]}
+                programs={CHILD_PROGRAMS}
+                onSelect={setActiveProgram}
               />
 
               <Button
@@ -257,7 +336,7 @@ function CheckupsPage() {
             <div className="flex flex-col justify-center p-5 sm:p-8">
               <HeartPulse className="text-brand-green size-7" />
               <blockquote className="text-about-ink mt-4 max-w-3xl text-xl leading-relaxed font-bold sm:text-2xl">
-                «Сохранение вашего здоровья — миссия „Авиценны“»
+                «Сохранение вашего здоровья — миссия „Авиценны"»
               </blockquote>
               <p className="text-about-copy mt-4 text-sm">Керималиева Жыпар Абдыказиевна, основатель клиники</p>
             </div>
@@ -325,6 +404,38 @@ function CheckupsPage() {
           )}
         </DialogContent>
       </Dialog>
+
+      <Dialog open={activeProgram !== null} onOpenChange={(open) => !open && setActiveProgram(null)}>
+        <DialogContent className="border-about-line max-h-[88vh] w-[calc(100%-2rem)] max-w-2xl overflow-y-auto rounded-2xl p-5 sm:p-7">
+          {activeProgram && (
+            <>
+              <DialogHeader className="pr-8 text-left">
+                <DialogTitle className="text-about-ink text-2xl font-extrabold">{activeProgram.title}</DialogTitle>
+                <DialogDescription className="text-about-copy">Что входит в программу</DialogDescription>
+              </DialogHeader>
+              <ul className="mt-4 space-y-3">
+                {activeProgram.includes.map((item) => (
+                  <li key={item} className="text-about-copy flex items-start gap-3 text-sm leading-relaxed">
+                    <span className="bg-about-icon text-about-teal mt-0.5 grid size-5 shrink-0 place-items-center rounded-full"><Check className="size-3" /></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              {activeProgram.note && (
+                <p className="text-about-teal mt-4 flex items-start gap-2 text-sm font-semibold">
+                  <Check className="size-4 shrink-0" />{activeProgram.note}
+                </p>
+              )}
+              <div className="border-about-line mt-6 flex flex-wrap items-center justify-between gap-3 border-t pt-5">
+                <strong className="text-brand-green text-xl">{activeProgram.price}</strong>
+                <Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark">
+                  <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Записаться на чекап</a>
+                </Button>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
@@ -335,12 +446,14 @@ function ProgramGroup({
   title,
   image,
   programs,
+  onSelect,
 }: {
   className: string;
   icon: typeof CircleUserRound;
   title: string;
   image: string;
-  programs: Array<{ label: string; price: string }>;
+  programs: ProgramDetail[];
+  onSelect: (program: ProgramDetail) => void;
 }) {
   return (
     <article className={`${className} border-about-line relative min-h-64 overflow-hidden rounded-2xl border p-5`}>
@@ -350,9 +463,15 @@ function ProgramGroup({
         <h3 className="text-about-ink mt-4 text-xl font-extrabold">{title}</h3>
         <div className="mt-auto space-y-2 pt-5">
           {programs.map((program) => (
-            <a key={program.label} href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="border-about-line bg-background/85 text-about-ink hover:border-brand-green flex items-center justify-between gap-2 rounded-xl border px-3 py-2.5 text-xs font-bold transition-colors sm:text-sm">
-              <span>{program.label}</span><span className="text-about-teal flex shrink-0 items-center gap-1">{program.price}<ChevronRight className="size-4" /></span>
-            </a>
+            <button
+              key={program.label}
+              type="button"
+              onClick={() => onSelect(program)}
+              className="border-about-line bg-background/85 text-about-ink hover:border-brand-green flex w-full items-center justify-between gap-2 rounded-xl border px-3 py-2.5 text-left text-xs font-bold transition-colors sm:text-sm"
+            >
+              <span>{program.label}</span>
+              <span className="text-about-teal flex shrink-0 items-center gap-1">{program.price}<ChevronRight className="size-4" /></span>
+            </button>
           ))}
         </div>
       </div>
