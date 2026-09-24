@@ -16,15 +16,13 @@ import {
 } from "lucide-react";
 
 import clinicExterior from "@/assets/about-clinic-exterior.jpg";
-import founderPortrait from "@/assets/founder-zhypar.png.asset.json";
+import founderPortrait from "@/assets/founder-zhypar.png";
 import receptionPhoto from "@/assets/about-reception.jpg";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/clinic";
-
-const FOUNDER_PORTRAIT_URL = `https://id-preview--29c8f5d6-b06d-4850-bda0-ed59691d16a4.lovable.app${founderPortrait.url}`;
 
 const STORY = [
   {
@@ -202,7 +200,7 @@ function AboutPage() {
               <article className="border-about-line bg-card overflow-hidden rounded-2xl border lg:grid lg:grid-cols-[0.85fr_1.35fr]">
                 <div className="bg-about-mint min-h-64 overflow-hidden rounded-b-[48%] lg:min-h-[380px] lg:rounded-r-[48%] lg:rounded-b-none">
                   <img
-                    src={FOUNDER_PORTRAIT_URL}
+                    src={founderPortrait}
                     alt="Керималиева Жыпар Абдыказиевна — основательница сети клиник «Авиценна»"
                     width={973}
                     height={1298}
