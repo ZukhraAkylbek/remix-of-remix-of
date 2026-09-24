@@ -267,7 +267,7 @@ function DoctorsDirectory({ doctors, initialCategory }: { doctors: ClinicDoctor[
             <Button
               asChild
               variant="outline"
-              className="border-about-teal text-about-ink mt-4 w-full bg-transparent shadow-none"
+              className="border-about-teal text-about-ink mt-auto w-full bg-transparent shadow-none"
             >
               <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>
                 Подробнее <ArrowRight className="size-4" aria-hidden="true" />
