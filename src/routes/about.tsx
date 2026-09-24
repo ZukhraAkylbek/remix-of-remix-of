@@ -196,11 +196,11 @@ function AboutPage() {
           </div>
         </section>
 
-        <section className="pb-16 sm:pb-20 lg:pb-24">
+        <section className="pb-10 sm:pb-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <Reveal>
               <article className="border-about-line bg-card overflow-hidden rounded-2xl border lg:grid lg:grid-cols-[0.85fr_1.35fr]">
-                <div className="bg-about-mint min-h-80 overflow-hidden rounded-b-[48%] lg:min-h-[510px] lg:rounded-r-[48%] lg:rounded-b-none">
+                <div className="bg-about-mint min-h-64 overflow-hidden rounded-b-[48%] lg:min-h-[380px] lg:rounded-r-[48%] lg:rounded-b-none">
                   <img
                     src={FOUNDER_PORTRAIT_URL}
                     alt="Керималиева Жыпар Абдыказиевна — основательница сети клиник «Авиценна»"
