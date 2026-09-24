@@ -180,13 +180,13 @@ function AboutPage() {
               {STORY.map(({ icon: Icon, title, text }, index) => (
                 <Reveal key={title} delay={index * 35} className="h-full">
                   <article className="border-about-line bg-card flex h-full min-h-40 flex-col rounded-2xl border p-4">
-                    <span className="bg-about-icon text-about-teal grid size-11 shrink-0 place-items-center rounded-full">
+                    <span className="bg-about-icon text-about-teal grid size-10 shrink-0 place-items-center rounded-full">
                       <Icon className="size-5" strokeWidth={1.6} aria-hidden="true" />
                     </span>
-                    <h3 className="text-about-ink mt-5 text-base leading-snug font-bold break-words">
+                    <h3 className="text-about-ink mt-4 text-base leading-snug font-bold break-words">
                       {title}
                     </h3>
-                    <p className="text-about-copy mt-2 text-sm leading-relaxed break-words hyphens-auto">
+                    <p className="text-about-copy mt-1.5 text-sm leading-relaxed break-words hyphens-auto">
                       {text}
                     </p>
                   </article>
