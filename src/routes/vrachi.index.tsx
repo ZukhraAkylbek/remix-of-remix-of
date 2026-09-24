@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ArrowRight,
   Check,
   ChevronLeft,
   ChevronRight,
@@ -267,10 +266,10 @@ function DoctorsDirectory({ doctors, initialCategory }: { doctors: ClinicDoctor[
             <Button
               asChild
               variant="outline"
-              className="border-about-teal text-about-ink mt-auto w-full bg-transparent shadow-none"
+              className="border-about-teal text-about-ink hover:bg-brand-green hover:border-brand-green hover:text-white mt-auto w-full bg-transparent shadow-none"
             >
               <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>
-                Подробнее <ArrowRight className="size-4" aria-hidden="true" />
+                Подробнее
               </Link>
             </Button>
           </article>
