@@ -28,5 +28,5 @@ export const PERSONAL_CHECKUP_OPTIONS: PersonalCheckupOption[] = [
 ];
 
 export function formatSom(value: number) {
-  return `${new Intl.NumberFormat("ru-RU").format(value)} сом`;
+  return `${String(value).replace(/\B(?=(\d{3})+(?!\d))/g, " ")} сом`;
 }

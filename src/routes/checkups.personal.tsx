@@ -1,13 +1,12 @@
 import { useMemo, useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { CalendarCheck, Check, ChevronRight, ShoppingBasket } from "lucide-react";
+import { CalendarCheck, Check, ShoppingBasket } from "lucide-react";
 
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CheckupIcon } from "@/components/checkups/CheckupIcon";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { absoluteUrl } from "@/lib/clinic";
 import {
   formatSom,
@@ -131,12 +130,25 @@ function PersonalCheckupPage() {
                   <span className="text-about-copy shrink-0 text-xs font-semibold sm:text-sm">
                     +{formatSom(item.price)}
                   </span>
-                  <Checkbox
-                    checked={checked}
-                    onCheckedChange={(value) => toggle(item.id, value === true)}
-                    className="size-6 rounded-md"
+                  <Button
+                    type="button"
+                    role="checkbox"
+                    aria-checked={checked}
                     aria-label={`Добавить ${item.title}`}
-                  />
+                    variant="outline"
+                    size="icon"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      toggle(item.id, !checked);
+                    }}
+                    className={`size-6 shrink-0 rounded-md p-0 shadow-none ${
+                      checked
+                        ? "border-brand-green bg-brand-green text-brand-white hover:bg-brand-green-dark hover:text-brand-white"
+                        : "border-about-teal bg-background text-transparent hover:bg-about-icon"
+                    }`}
+                  >
+                    <Check className="size-4" />
+                  </Button>
                 </label>
               );
             })}
