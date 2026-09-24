@@ -74,7 +74,10 @@ export const Route = createFileRoute("/uslugi/$slug")({
 function ServicePage() {
   const { slug } = Route.useParams();
   const { data } = useSuspenseQuery(servicePageQueryOptions(slug));
-  if (!data) return null;
+  const staticPage = STATIC_SERVICE_PAGES[slug];
+  if (!data) {
+    return staticPage ? <StaticServiceView page={staticPage} /> : null;
+  }
 
   const block = (key: string) => data.blocks.find((b) => b.key === key);
   const known = new Set([
