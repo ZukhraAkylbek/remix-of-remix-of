@@ -1,51 +1,67 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
+  Activity,
   ArrowRight,
   Check,
   ClipboardCheck,
+  Clock,
   HeartPulse,
+  MapPin,
   Microscope,
-  Phone,
+  Plus,
   ShieldCheck,
   Stethoscope,
   Users,
 } from "lucide-react";
+import { useState } from "react";
 
 import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { FaqAccordion } from "@/components/FaqAccordion";
-import { SectionHeading } from "@/components/SectionHeading";
+import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
+import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
+import { Button } from "@/components/ui/button";
+import { absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
-import { specialtyImage } from "@/lib/specialty-images";
+import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
 const TITLE = "Поликлиника в Бишкеке — врачи и диагностика | Авиценна";
 const DESCRIPTION =
   "Поликлиника «Авиценна» в Бишкеке: консультации врачей, диагностика, анализы и комплексное наблюдение для взрослых и детей.";
 
+const FALLBACK_SPECIALISTS = [
+  { slug: "terapevt", name: "Терапевты и семейные врачи" },
+  { slug: "pediatr", name: "Педиатры" },
+  { slug: "kardiolog", name: "Кардиологи" },
+  { slug: "nevrolog", name: "Неврологи" },
+  { slug: "gastroenterolog", name: "Гастроэнтерологи" },
+  { slug: "endokrinolog", name: "Эндокринологи" },
+  { slug: "ginekolog", name: "Гинекологи" },
+  { slug: "urolog", name: "Урологи" },
+  { slug: "hirurg", name: "Хирурги" },
+  { slug: "travmatolog", name: "Травматологи-ортопеды" },
+  { slug: "lor", name: "ЛОР-врачи" },
+  { slug: "proktolog", name: "Проктологи" },
+  { slug: "mammolog", name: "Маммологи" },
+  { slug: "flebolog", name: "Флебологи" },
+  { slug: "pulmonolog", name: "Пульмонологи" },
+  { slug: "dermatolog", name: "Дерматологи" },
+];
+
+const SPECIALTY_ICONS = ["Stethoscope", "Baby", "HeartPulse", "Brain", "Activity", "TestTube", "VenetianMask", "Microscope"];
+
 const BENEFITS = [
-  {
-    icon: Users,
-    title: "Более 100 специалистов",
-    text: "Врачи различных специальностей для взрослых и детей.",
-  },
-  {
-    icon: Stethoscope,
-    title: "Комплексный подход",
-    text: "Консультации, обследования и лечение в одной клинике.",
-  },
-  {
-    icon: Microscope,
-    title: "Точная диагностика",
-    text: "Лабораторные и инструментальные исследования на месте.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Забота о пациенте",
-    text: "Понятные рекомендации и сопровождение на каждом этапе.",
-  },
+  { icon: Users, title: "Более 100 врачей", text: "Опытные специалисты для взрослых и детей." },
+  { icon: Microscope, title: "Полная диагностика", text: "Лаборатория, КТ, МРТ и рентген." },
+  { icon: Clock, title: "Онлайн-запись 24/7", text: "Выберите врача и удобное время онлайн." },
+  { icon: ClipboardCheck, title: "Процедурный кабинет", text: "Манипуляции и лечение в одной клинике." },
+  { icon: Activity, title: "Травматолог 24/7", text: "Помощь при травмах круглосуточно." },
+  { icon: ShieldCheck, title: "Круглосуточный рентген", text: "Исследования доступны без выходных." },
+  { icon: Stethoscope, title: "Клинический подход", text: "Понятный план обследования и лечения." },
+  { icon: HeartPulse, title: "Современное оборудование", text: "Точная диагностика и бережные методы." },
+  { icon: MapPin, title: "Удобное расположение", text: "Филиалы в доступных районах Бишкека." },
 ];
 
 const CONSULTATION_REASONS = [
@@ -59,41 +75,24 @@ const CONSULTATION_REASONS = [
   "Подбор индивидуального плана лечения",
 ];
 
-const SERVICES = [
-  "Первичный и повторный приём врача",
-  "Профилактические осмотры",
-  "Лабораторные анализы",
-  "Ультразвуковая диагностика",
-  "Функциональная диагностика",
-  "Оформление справок и заключений",
-  "Медицинские чекапы",
-  "Наблюдение при хронических заболеваниях",
-];
-
-const SPECIALISTS = [
-  { title: "Терапевт", slug: "terapevt", image: "kardiolog" },
-  { title: "Педиатр", slug: "pediatr", image: "pediatr" },
-  { title: "Кардиолог", slug: "kardiolog", image: "kardiolog" },
-  { title: "Невролог", slug: "nevrolog", image: "nevrolog" },
-  { title: "Эндокринолог", slug: "endokrinolog", image: "endokrinolog" },
+const DIAGNOSTICS = [
+  { title: "Лабораторные исследования", text: "Широкий спектр анализов для точной диагностики." },
+  { title: "УЗИ, КТ и рентген", text: "Современные исследования в одном медицинском центре." },
+  { title: "Эндоскопические исследования", text: "ЭГДС и колоноскопия, в том числе под наркозом." },
+  { title: "Функциональная диагностика", text: "Оценка работы сердца, лёгких и других систем." },
 ];
 
 const FAQS = [
-  {
-    question: "Нужно ли направление для записи к врачу?",
-    answer: "Нет, вы можете записаться к нужному специалисту напрямую по телефону или онлайн.",
-  },
-  {
-    question: "Можно ли пройти обследования в день приёма?",
-    answer: "Большинство анализов и диагностических исследований доступны в клинике. Точный план уточнит врач.",
-  },
-  {
-    question: "Принимают ли врачи детей?",
-    answer: "Да, в поликлинике ведут приём детские специалисты. При записи укажите возраст ребёнка.",
-  },
+  { question: "Нужно ли направление для записи к врачу?", answer: "Нет, вы можете записаться к нужному специалисту напрямую по телефону или онлайн." },
+  { question: "Можно ли пройти обследования в день приёма?", answer: "Большинство анализов и диагностических исследований доступны в клинике. Точный план уточнит врач." },
+  { question: "Принимают ли врачи детей?", answer: "Да, в поликлинике ведут приём детские специалисты. При записи укажите возраст ребёнка." },
+  { question: "Как подготовиться к первичному приёму?", answer: "Возьмите результаты предыдущих обследований и список принимаемых препаратов, если они есть." },
 ];
 
 export const Route = createFileRoute("/poliklinika")({
+  loader: ({ context }) => {
+    void context.queryClient.ensureQueryData(specialtiesQueryOptions());
+  },
   head: () => ({
     meta: [
       { title: TITLE },
@@ -104,196 +103,159 @@ export const Route = createFileRoute("/poliklinika")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: absoluteUrl("/poliklinika") || "/poliklinika" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify(faqPageJsonLd(FAQS)),
-      },
-    ],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(faqPageJsonLd(FAQS)) }],
   }),
   component: PolyclinicPage,
 });
 
-function PolyclinicPage() {
+function PolyclinicHeading({ title, description }: { title: string; description?: string }) {
   return (
-    <div className="bg-background min-h-screen">
+    <div>
+      <h2 className="text-about-ink text-3xl leading-tight font-extrabold sm:text-4xl">{title}</h2>
+      {description && <p className="text-about-copy mt-3 max-w-2xl text-sm leading-relaxed sm:text-base">{description}</p>}
+    </div>
+  );
+}
+
+function PolyclinicFaq() {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <dl className="mt-7 grid items-start gap-3 lg:grid-cols-2">
+      {FAQS.map((item, index) => {
+        const isOpen = open === index;
+        return (
+          <div key={item.question} className="border-about-line bg-about-canvas rounded-2xl border">
+            <dt>
+              <Button variant="ghost" onClick={() => setOpen(isOpen ? null : index)} aria-expanded={isOpen} className="text-about-ink h-auto w-full justify-between gap-4 rounded-2xl p-4 text-left shadow-none hover:bg-transparent">
+                <span className="whitespace-normal text-sm font-semibold sm:text-base">{item.question}</span>
+                <Plus className={`text-about-teal size-5 shrink-0 transition-transform ${isOpen ? "rotate-45" : ""}`} aria-hidden="true" />
+              </Button>
+            </dt>
+            {isOpen && <dd className="text-about-copy border-about-line border-t p-4 text-[13px] leading-relaxed sm:text-sm">{item.answer}</dd>}
+          </div>
+        );
+      })}
+    </dl>
+  );
+}
+
+function PolyclinicPage() {
+  const { data } = useSuspenseQuery(specialtiesQueryOptions());
+  const specialists = data.length > 0
+    ? Array.from(new Map(data.map((item) => [item.slug, { slug: item.slug, name: item.name }])).values())
+    : FALLBACK_SPECIALISTS;
+
+  return (
+    <div className="bg-about-canvas min-h-screen">
       <SiteHeader breadcrumb="Поликлиника" />
       <Breadcrumbs items={[{ label: "Поликлиника" }]} />
-
       <main>
-        <section className="bg-surface-mint border-border border-b">
-          <div className="mx-auto grid max-w-7xl lg:grid-cols-[1.08fr_0.92fr]">
-            <div className="flex flex-col justify-center px-4 py-12 sm:px-6 sm:py-16 lg:py-20 lg:pr-12">
-              <p className="eyebrow">Многопрофильная помощь</p>
-              <h1 className="text-foreground mt-4 max-w-2xl text-4xl leading-[1.06] font-extrabold sm:text-5xl lg:text-6xl">
-                Поликлиника «Авиценна» в Бишкеке
-              </h1>
-              <p className="text-muted-foreground mt-5 max-w-xl text-lg leading-relaxed sm:text-xl">
-                Консультации врачей, диагностика и лечение для взрослых и детей — в одном месте и без лишнего ожидания.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <a
-                  href={BOOKING_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-accent text-accent-foreground inline-flex min-h-12 items-center justify-center rounded-md px-7 py-3.5 text-base font-semibold transition-opacity hover:opacity-90"
-                >
-                  Записаться на приём
-                </a>
-                <a
-                  href={`tel:${CLINIC.phones[0]}`}
-                  className="border-brand-green bg-background text-brand-green inline-flex min-h-12 items-center justify-center gap-2 rounded-md border px-7 py-3.5 text-base font-semibold"
-                >
-                  <Phone className="size-4" aria-hidden="true" />
-                  +996 779 909 009
-                </a>
+        <section className="bg-about-mint">
+          <div className="mx-auto grid max-w-7xl overflow-hidden px-4 py-4 sm:px-6 sm:py-6 lg:h-[380px] lg:grid-cols-[1.08fr_0.92fr] lg:py-8">
+            <Reveal className="flex flex-col justify-center lg:pr-10">
+              <p className="text-about-teal text-sm font-semibold">Многопрофильная помощь</p>
+              <h1 className="text-about-ink mt-2 max-w-2xl text-3xl leading-[1.08] font-extrabold sm:text-4xl lg:text-5xl">Поликлиника в Бишкеке</h1>
+              <p className="text-about-copy mt-3 max-w-2xl text-[13px] leading-relaxed sm:text-base">Современный многопрофильный медицинский центр, где вы сможете получить консультации врача, пройти диагностику, сдать анализы и начать лечение в одном месте.</p>
+              <div className="mt-4 flex flex-wrap gap-2 sm:gap-3">
+                <Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark px-3 text-xs shadow-none sm:px-4 sm:text-sm"><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Записаться на приём</a></Button>
+                <Button asChild variant="outline" className="border-about-line text-about-ink bg-about-canvas px-3 text-xs shadow-none sm:px-4 sm:text-sm"><a href="#specialists">Узнать больше</a></Button>
               </div>
-            </div>
-
-            <div className="relative min-h-[340px] overflow-hidden lg:min-h-[520px]">
-              <img
-                src={doctorPatientHeroAsset.url}
-                alt="Консультация врача в клинике Авиценна"
-                className="absolute inset-0 size-full object-cover"
-              />
-              <div className="from-surface-mint absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface-mint/20 lg:bg-gradient-to-r lg:from-surface-mint/50 lg:via-transparent lg:to-transparent" />
+            </Reveal>
+            <div className="relative mt-6 hidden overflow-hidden rounded-2xl lg:mt-0 lg:block lg:h-full">
+              <img src={doctorPatientHeroAsset.url} alt="Консультация врача в поликлинике «Авиценна»" className="absolute inset-0 size-full object-cover" />
+              <div className="from-about-mint/30 absolute inset-0 bg-gradient-to-r to-transparent" />
+              <div className="bg-about-canvas/95 absolute right-0 bottom-0 max-w-[290px] rounded-tl-2xl p-4 backdrop-blur-sm">
+                {["Более 100 врачей", "Полный диагностический спектр", "Онлайн-запись 24/7"].map((item) => <p key={item} className="text-about-ink flex items-center gap-2 py-1 text-xs font-semibold"><Check className="text-about-teal size-4" />{item}</p>)}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="border-border border-b py-14 sm:py-20">
+        <section id="specialists" className="bg-about-canvas py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <SectionHeading eyebrow="Преимущества" title="Почему выбирают поликлинику «Авиценна»" />
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <PolyclinicHeading title="Какие специалисты ведут приём" />
+              <Link to="/vrachi" className="text-about-teal inline-flex items-center gap-2 text-sm font-semibold">Все специалисты <ArrowRight className="size-4" /></Link>
+            </div>
+            <div className="mt-7 grid gap-5 lg:grid-cols-[280px_1fr]">
+              <img src="/assets/checkup-doctors.jpg" alt="Врачи поликлиники «Авиценна»" className="hidden h-full max-h-[560px] w-full rounded-2xl object-cover lg:block" />
+              <div className="grid gap-3 sm:grid-cols-2">
+                {specialists.slice(0, 16).map((item, index) => (
+                  <Reveal key={item.slug} delay={index * 20}>
+                    <Link to="/napravleniya/$slug" params={{ slug: item.slug }} className="border-about-line hover:border-about-teal group flex h-full items-center gap-3 rounded-2xl border bg-about-canvas p-4 transition-colors">
+                      <DiagnosticsIcon icon={SPECIALTY_ICONS[index % SPECIALTY_ICONS.length] ?? "Stethoscope"} title={item.name} className="bg-about-icon text-about-teal size-10 shrink-0 rounded-full" />
+                      <span className="text-about-ink min-w-0 flex-1 text-[13px] font-semibold sm:text-sm">{item.name}</span>
+                      <Plus className="text-about-teal size-5 shrink-0 transition-transform group-hover:rotate-90" aria-hidden="true" />
+                    </Link>
+                  </Reveal>
+                ))}
+                <Link to="/vrachi" className="border-about-line hover:border-about-teal group flex items-center gap-3 rounded-2xl border bg-about-canvas p-4 transition-colors">
+                  <span className="bg-about-icon text-about-teal grid size-10 shrink-0 place-items-center rounded-full"><Users className="size-5" /></span>
+                  <span className="text-about-ink min-w-0 flex-1 text-[13px] font-semibold sm:text-sm">Другие специалисты</span>
+                  <Plus className="text-about-teal size-5 shrink-0 transition-transform group-hover:rotate-90" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-about-mint py-10 sm:py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <PolyclinicHeading title="Почему пациенты выбирают «Авиценну»" />
+            <div className="mt-7 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
               {BENEFITS.map(({ icon: Icon, title, text }) => (
-                <article key={title} className="border-border rounded-2xl border p-6">
-                  <span className="bg-surface-green text-brand-green grid size-12 place-items-center rounded-full">
-                    <Icon className="size-6" aria-hidden="true" />
-                  </span>
-                  <h2 className="text-foreground mt-5 text-lg font-bold">{title}</h2>
-                  <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{text}</p>
+                <article key={title} className="border-about-line bg-about-canvas rounded-2xl border p-4 text-center">
+                  <span className="bg-about-icon text-about-teal mx-auto grid size-10 place-items-center rounded-full"><Icon className="size-5" /></span>
+                  <h3 className="text-about-ink mt-3 text-[13px] font-bold sm:text-sm">{title}</h3>
+                  <p className="text-about-copy mt-1 text-[13px] leading-relaxed">{text}</p>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-surface-soft border-border border-b py-14 sm:py-20">
-          <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-            <div>
-              <SectionHeading
-                eyebrow="Консультация"
-                title="Когда стоит обратиться к врачу"
-                description="Не откладывайте приём, если симптомы повторяются, усиливаются или мешают привычной жизни."
-              />
-              <a
-                href={BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-accent text-accent-foreground mt-8 inline-flex rounded-md px-7 py-4 text-base font-semibold"
-              >
-                Выбрать врача
-              </a>
-            </div>
-            <ul className="grid gap-x-10 gap-y-4 sm:grid-cols-2">
-              {CONSULTATION_REASONS.map((item) => (
-                <li key={item} className="border-border flex items-start gap-3 border-b pb-4">
-                  <span className="bg-surface-green text-brand-green mt-0.5 grid size-6 shrink-0 place-items-center rounded-full">
-                    <Check className="size-3.5" aria-hidden="true" />
-                  </span>
-                  <span className="text-foreground text-base leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section className="border-border border-b py-14 sm:py-20">
+        <section className="bg-about-canvas py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <SectionHeading
-              eyebrow="Услуги"
-              title="Помощь в поликлинике"
-              description="От первого обращения до контроля результатов лечения."
-            />
-            <div className="mt-10 grid gap-x-12 gap-y-0 md:grid-cols-2">
-              {SERVICES.map((item, index) => (
-                <div key={item} className="border-border grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 border-b py-5">
-                  <span className="text-brand-green text-sm font-bold">{String(index + 1).padStart(2, "0")}</span>
-                  <p className="text-foreground min-w-0 text-base font-semibold sm:text-lg">{item}</p>
-                  <ClipboardCheck className="text-muted-foreground size-5 shrink-0" aria-hidden="true" />
-                </div>
-              ))}
+            <PolyclinicHeading title="Когда стоит обратиться к врачу" description="Не откладывайте приём, если симптомы повторяются, усиливаются или мешают привычной жизни." />
+            <div className="mt-7 grid grid-cols-2 gap-3 lg:grid-cols-4">
+              {CONSULTATION_REASONS.map((item) => <div key={item} className="border-about-line flex items-center gap-3 rounded-2xl border p-4"><span className="bg-about-icon text-about-teal grid size-9 shrink-0 place-items-center rounded-full"><Check className="size-4" /></span><span className="text-about-ink text-[13px] font-semibold leading-snug sm:text-sm">{item}</span></div>)}
             </div>
           </div>
         </section>
 
-        <section className="border-border border-b py-14 sm:py-20">
+        <section className="bg-about-mint py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <SectionHeading
-              eyebrow="Специалисты"
-              title="Врачи поликлиники"
-              action={
-                <Link to="/napravleniya" className="text-brand-green inline-flex items-center gap-2 font-semibold">
-                  Все направления <ArrowRight className="size-4" />
-                </Link>
-              }
-            />
-            <div className="no-scrollbar mt-10 flex snap-x gap-4 overflow-x-auto pb-2">
-              {SPECIALISTS.map((item, index) => (
-                <Link
-                  key={item.title}
-                  to="/napravleniya/$slug"
-                  params={{ slug: item.slug }}
-                  className="border-border group w-[78vw] max-w-[260px] shrink-0 snap-start overflow-hidden rounded-2xl border sm:w-[240px]"
-                >
-                  <img
-                    src={specialtyImage(item.image, index)}
-                    alt={item.title}
-                    className="aspect-[4/3] w-full object-cover"
-                  />
-                  <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 p-5">
-                    <div className="min-w-0">
-                      <p className="text-foreground truncate text-lg font-bold">{item.title}</p>
-                      <p className="text-muted-foreground mt-1 text-sm">Запись на консультацию</p>
-                    </div>
-                    <ArrowRight className="text-brand-green size-5 shrink-0 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </Link>
-              ))}
+            <PolyclinicHeading title="Современная диагностика" description="Все необходимые исследования можно пройти в клинике." />
+            <div className="mt-7 grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+              <img src="/assets/uslugi-hero.jpg" alt="Диагностическое оборудование клиники" className="h-60 w-full rounded-2xl object-cover" />
+              <div className="grid gap-3 sm:grid-cols-2">
+                {DIAGNOSTICS.map((item, index) => <div key={item.title} className="border-about-line bg-about-canvas flex gap-3 rounded-2xl border p-4"><span className="bg-about-icon text-about-teal grid size-10 shrink-0 place-items-center rounded-full"><Microscope className="size-5" /></span><div><h3 className="text-about-ink text-sm font-bold">{item.title}</h3><p className="text-about-copy mt-1 text-[13px] leading-relaxed">{item.text}</p></div></div>)}
+              </div>
             </div>
           </div>
         </section>
 
-        <FaqAccordion faqs={FAQS} />
-
-        <section className="bg-surface-mint border-border border-y">
-          <div className="mx-auto grid max-w-7xl lg:grid-cols-[1fr_0.85fr]">
-            <div className="flex flex-col justify-center px-4 py-12 sm:px-6 lg:py-16 lg:pr-14">
-              <span className="bg-surface-green text-brand-green grid size-12 place-items-center rounded-full">
-                <HeartPulse className="size-6" aria-hidden="true" />
-              </span>
-              <h2 className="text-foreground mt-5 text-3xl font-extrabold sm:text-4xl">Забота о вашем здоровье</h2>
-              <p className="text-muted-foreground mt-4 max-w-xl text-lg leading-relaxed">
-                Запишитесь на консультацию — администратор поможет выбрать специалиста и удобное время.
-              </p>
-              <a
-                href={BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-accent text-accent-foreground mt-8 inline-flex w-fit rounded-md px-7 py-4 text-base font-semibold"
-              >
-                Записаться на консультацию
-              </a>
+        <section className="bg-about-canvas py-10 sm:py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <div className="border-about-line bg-about-mint flex flex-wrap items-center gap-5 rounded-2xl border p-4 sm:p-6">
+              <span className="bg-about-icon text-about-teal grid size-11 shrink-0 place-items-center rounded-full"><Stethoscope className="size-5" /></span>
+              <div className="min-w-0 flex-1"><h2 className="text-about-ink text-xl font-extrabold sm:text-2xl">Не знаете, к какому специалисту обратиться?</h2><p className="text-about-copy mt-1 text-[13px] sm:text-sm">Администратор поможет выбрать врача и удобное время приёма.</p></div>
+              <Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark shadow-none"><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Записаться на приём</a></Button>
             </div>
-            <img
-              src={doctorPatientHeroAsset.url}
-              alt="Врач консультирует пациента"
-              className="h-[300px] w-full object-cover lg:h-full lg:min-h-[390px]"
-            />
+          </div>
+        </section>
+
+        <section className="bg-about-mint py-10 sm:py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6"><PolyclinicHeading title="Часто задаваемые вопросы" /><PolyclinicFaq /></div>
+        </section>
+
+        <section className="bg-about-canvas py-10 sm:py-12">
+          <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div><h2 className="text-about-ink text-3xl font-extrabold sm:text-4xl">Забота о вашем здоровье</h2><p className="text-about-copy mt-3 max-w-xl text-sm leading-relaxed sm:text-base">Запишитесь на консультацию — администратор поможет выбрать специалиста и удобное время.</p><Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark mt-6 shadow-none"><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Записаться на консультацию</a></Button></div>
+            <img src={doctorPatientHeroAsset.url} alt="Врач консультирует пациента" className="h-60 w-full rounded-2xl object-cover" />
           </div>
         </section>
       </main>
-
       <SiteFooter />
     </div>
   );
