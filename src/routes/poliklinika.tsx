@@ -1,4 +1,3 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   Activity,
@@ -40,49 +39,26 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
+import { DOCTOR_CATEGORIES } from "@/lib/clinic-doctors";
 import { BOOKING_URL } from "@/lib/site-config";
-import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
 const TITLE = "Поликлиника в Бишкеке — врачи и диагностика | Авиценна";
 const DESCRIPTION =
   "Поликлиника «Авиценна» в Бишкеке: консультации врачей, диагностика, анализы и комплексное наблюдение для взрослых и детей.";
 
-const FALLBACK_SPECIALISTS = [
-  { slug: "terapevt", name: "Терапевты и семейные врачи" },
-  { slug: "pediatr", name: "Педиатры" },
-  { slug: "kardiolog", name: "Кардиологи" },
-  { slug: "nevrolog", name: "Неврологи" },
-  { slug: "gastroenterolog", name: "Гастроэнтерологи" },
-  { slug: "endokrinolog", name: "Эндокринологи" },
-  { slug: "ginekolog", name: "Гинекологи" },
-  { slug: "urolog", name: "Урологи" },
-  { slug: "hirurg", name: "Хирурги" },
-  { slug: "travmatolog", name: "Травматологи-ортопеды" },
-  { slug: "lor", name: "ЛОР-врачи" },
-  { slug: "proktolog", name: "Проктологи" },
-  { slug: "mammolog", name: "Маммологи" },
-  { slug: "flebolog", name: "Флебологи" },
-  { slug: "pulmonolog", name: "Пульмонологи" },
-  { slug: "dermatolog", name: "Дерматологи" },
-];
-
 const SPECIALTY_ICONS: Record<string, string> = {
-  terapevt: terapevtIcon,
-  pediatr: pediatrIcon,
-  kardiolog: kardiologIcon,
-  nevrolog: nevrologIcon,
-  gastroenterolog: gastroenterologIcon,
-  endokrinolog: endokrinologIcon,
-  ginekolog: ginekologIcon,
-  urolog: urologIcon,
-  hirurg: hirurgIcon,
-  travmatolog: travmatologIcon,
-  lor: lorIcon,
-  proktolog: proktologIcon,
-  mammolog: mammologIcon,
-  flebolog: flebologIcon,
-  pulmonolog: pulmonologIcon,
-  dermatolog: dermatologIcon,
+  uzi: kardiologIcon,
+  onkologiya: mammologIcon,
+  rentgen: pulmonologIcon,
+  endoskopiya: gastroenterologIcon,
+  ginekologiya: ginekologIcon,
+  urologiya: urologIcon,
+  travmatologiya: travmatologIcon,
+  hirurgiya: hirurgIcon,
+  nevrologiya: nevrologIcon,
+  pediatriya: pediatrIcon,
+  terapiya: terapevtIcon,
+  uzkie: dermatologIcon,
 };
 
 const BENEFITS = [
@@ -123,9 +99,6 @@ const FAQS = [
 ];
 
 export const Route = createFileRoute("/poliklinika")({
-  loader: ({ context }) => {
-    void context.queryClient.ensureQueryData(specialtiesQueryOptions());
-  },
   head: () => ({
     meta: [
       { title: TITLE },
@@ -173,11 +146,6 @@ function PolyclinicFaq() {
 }
 
 function PolyclinicPage() {
-  const { data } = useSuspenseQuery(specialtiesQueryOptions());
-  const specialists = data.length > 0
-    ? Array.from(new Map(data.map((item) => [item.slug, { slug: item.slug, name: item.name }])).values())
-    : FALLBACK_SPECIALISTS;
-
   return (
     <div className="bg-about-canvas min-h-screen">
       <SiteHeader breadcrumb="Поликлиника" />
@@ -213,9 +181,9 @@ function PolyclinicPage() {
             <div className="mt-7 grid gap-5 lg:grid-cols-[280px_1fr]">
               <img src="/assets/checkup-doctors.jpg" alt="Врачи поликлиники «Авиценна»" className="hidden h-full max-h-[560px] w-full rounded-2xl object-cover lg:block" />
               <div className="grid gap-3 sm:grid-cols-2">
-                {specialists.slice(0, 16).map((item, index) => (
+                {DOCTOR_CATEGORIES.map((item, index) => (
                   <Reveal key={item.slug} delay={index * 20}>
-                    <Link to="/napravleniya/$slug" params={{ slug: item.slug }} className="border-about-line hover:border-about-teal group flex h-full items-center gap-3 rounded-2xl border bg-about-canvas p-4 transition-colors">
+                    <Link to="/vrachi" search={{ category: item.slug }} hash="vrachi" className="border-about-line hover:border-about-teal group flex h-full items-center gap-3 rounded-2xl border bg-about-canvas p-4 transition-colors">
                       <span className="bg-about-icon grid size-10 shrink-0 place-items-center overflow-hidden rounded-full p-1">
                         <img src={SPECIALTY_ICONS[item.slug] ?? terapevtIcon} alt="" className="h-full w-full object-contain" loading="lazy" />
                       </span>
