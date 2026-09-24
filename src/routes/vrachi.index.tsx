@@ -59,6 +59,8 @@ const FAQ_ITEMS: Array<{ title: string; text?: string }> = [
 ];
 
 export const Route = createFileRoute("/vrachi/")({
+  validateSearch: (search: Record<string, unknown>) =>
+    typeof search["category"] === "string" ? { category: search["category"] } : {},
   head: () => ({
     meta: [
       { title: TITLE },
@@ -141,9 +143,13 @@ function FaqList({ items }: { items: { title: string; text?: string }[] }) {
 
 const DOCTORS_PER_PAGE = 6;
 
-function DoctorsDirectory({ doctors }: { doctors: ClinicDoctor[] }) {
+function DoctorsDirectory({ doctors, initialCategory }: { doctors: ClinicDoctor[]; initialCategory: string | undefined }) {
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("all");
+  const [category, setCategory] = useState(() =>
+    initialCategory && DOCTOR_CATEGORIES.some((item) => item.slug === initialCategory)
+      ? initialCategory
+      : "all",
+  );
   const [page, setPage] = useState(0);
   const filteredDoctors = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("ru");
@@ -285,6 +291,8 @@ function DoctorsDirectory({ doctors }: { doctors: ClinicDoctor[] }) {
 }
 
 function DoctorsPage() {
+  const search = Route.useSearch();
+  const category = "category" in search ? search.category : undefined;
   const heroImage = teamPhoto;
   const faqItems = FAQ_ITEMS;
 
@@ -386,7 +394,7 @@ function DoctorsPage() {
               title="Наши врачи"
               description="Подберите специалиста по направлению и запишитесь на приём онлайн."
             />
-            <DoctorsDirectory doctors={CLINIC_DOCTORS} />
+            <DoctorsDirectory doctors={CLINIC_DOCTORS} initialCategory={category} />
           </div>
         </section>
 
