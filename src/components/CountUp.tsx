@@ -18,7 +18,7 @@ export function CountUp({ value, className, duration = 1200 }: CountUpProps) {
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
-    if (!inView || !match) return;
+    if (!inView || target <= 0) return;
     if (typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
       setDisplay(value);
       return;
