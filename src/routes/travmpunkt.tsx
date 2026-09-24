@@ -167,7 +167,7 @@ function TraumaPage() {
             </div>
             <div className="relative">
               <img
-                src={specialtyImage("travma", 0)}
+                src="/assets/svc-priem.jpg"
                 alt="Травмпункт клиники Авиценна"
                 loading="eager"
                 className="aspect-[4/3] w-full rounded-2xl border border-about-line object-cover lg:h-[380px]"
@@ -323,7 +323,7 @@ function TraumaPage() {
                 </div>
               </div>
               <img
-                src={specialtyImage("travma", 1)}
+                src="/assets/doctor-patient-hero.webp"
                 alt="Приём травматолога"
                 loading="lazy"
                 className="hidden h-60 w-72 rounded-2xl border border-about-line object-cover lg:block"
