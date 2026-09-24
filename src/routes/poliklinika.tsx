@@ -18,8 +18,23 @@ import {
 import { useState } from "react";
 
 import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
+import terapevtIcon from "@/assets/specialty-icons/terapevt.png";
+import pediatrIcon from "@/assets/specialty-icons/pediatr.png";
+import kardiologIcon from "@/assets/specialty-icons/kardiolog.png";
+import nevrologIcon from "@/assets/specialty-icons/nevrolog.png";
+import gastroenterologIcon from "@/assets/specialty-icons/gastroenterolog.png";
+import endokrinologIcon from "@/assets/specialty-icons/endokrinolog.png";
+import ginekologIcon from "@/assets/specialty-icons/ginekolog.png";
+import urologIcon from "@/assets/specialty-icons/urolog.png";
+import hirurgIcon from "@/assets/specialty-icons/hirurg.png";
+import travmatologIcon from "@/assets/specialty-icons/travmatolog.png";
+import lorIcon from "@/assets/specialty-icons/lor.png";
+import proktologIcon from "@/assets/specialty-icons/proktolog.png";
+import mammologIcon from "@/assets/specialty-icons/mammolog.png";
+import flebologIcon from "@/assets/specialty-icons/flebolog.png";
+import pulmonologIcon from "@/assets/specialty-icons/pulmonolog.png";
+import dermatologIcon from "@/assets/specialty-icons/dermatolog.png";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -51,7 +66,24 @@ const FALLBACK_SPECIALISTS = [
   { slug: "dermatolog", name: "Дерматологи" },
 ];
 
-const SPECIALTY_ICONS = ["Stethoscope", "Baby", "HeartPulse", "Brain", "Activity", "TestTube", "VenetianMask", "Microscope"];
+const SPECIALTY_ICONS: Record<string, string> = {
+  terapevt: terapevtIcon,
+  pediatr: pediatrIcon,
+  kardiolog: kardiologIcon,
+  nevrolog: nevrologIcon,
+  gastroenterolog: gastroenterologIcon,
+  endokrinolog: endokrinologIcon,
+  ginekolog: ginekologIcon,
+  urolog: urologIcon,
+  hirurg: hirurgIcon,
+  travmatolog: travmatologIcon,
+  lor: lorIcon,
+  proktolog: proktologIcon,
+  mammolog: mammologIcon,
+  flebolog: flebologIcon,
+  pulmonolog: pulmonologIcon,
+  dermatolog: dermatologIcon,
+};
 
 const BENEFITS = [
   { icon: Users, title: "Более 100 врачей", text: "Опытные специалисты для взрослых и детей." },
@@ -184,7 +216,9 @@ function PolyclinicPage() {
                 {specialists.slice(0, 16).map((item, index) => (
                   <Reveal key={item.slug} delay={index * 20}>
                     <Link to="/napravleniya/$slug" params={{ slug: item.slug }} className="border-about-line hover:border-about-teal group flex h-full items-center gap-3 rounded-2xl border bg-about-canvas p-4 transition-colors">
-                      <DiagnosticsIcon icon={SPECIALTY_ICONS[index % SPECIALTY_ICONS.length] ?? "Stethoscope"} title={item.name} className="bg-about-icon text-about-teal size-10 shrink-0 rounded-full" />
+                      <span className="bg-about-icon grid size-10 shrink-0 place-items-center overflow-hidden rounded-full p-1">
+                        <img src={SPECIALTY_ICONS[item.slug] ?? terapevtIcon} alt="" className="h-full w-full object-contain" loading="lazy" />
+                      </span>
                       <span className="text-about-ink min-w-0 flex-1 text-[13px] font-semibold sm:text-sm">{item.name}</span>
                       <Plus className="text-about-teal size-5 shrink-0 transition-transform group-hover:rotate-90" aria-hidden="true" />
                     </Link>
