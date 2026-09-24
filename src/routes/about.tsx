@@ -173,13 +173,13 @@ function AboutPage() {
           <LeafOrnament className="text-about-ornament absolute bottom-3 left-3 z-10 w-32 opacity-60 sm:left-8 sm:w-40 lg:bottom-8" />
         </section>
 
-        <section className="py-16 sm:py-20 lg:py-24">
+        <section className="py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionTitle>Как создавалась «Авиценна»</SectionTitle>
-            <div className="mt-9 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-6">
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-6">
               {STORY.map(({ icon: Icon, title, text }, index) => (
                 <Reveal key={title} delay={index * 35} className="h-full">
-                  <article className="border-about-line bg-card flex h-full min-h-56 flex-col rounded-2xl border p-4 sm:p-5">
+                  <article className="border-about-line bg-card flex h-full min-h-40 flex-col rounded-2xl border p-4">
                     <span className="bg-about-icon text-about-teal grid size-11 shrink-0 place-items-center rounded-full">
                       <Icon className="size-5" strokeWidth={1.6} aria-hidden="true" />
                     </span>
