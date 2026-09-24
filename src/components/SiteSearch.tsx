@@ -105,7 +105,7 @@ export function SiteSearch({ className = "" }: { className?: string }) {
   const go = (to: string) => {
     setOpen(false);
     setQ("");
-    if (to.startsWith("/#")) {
+    if (to.startsWith("/#") || to.includes("?") || to.includes("#")) {
       window.location.href = to;
       return;
     }
