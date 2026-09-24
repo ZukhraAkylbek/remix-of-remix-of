@@ -232,7 +232,7 @@ function AboutPage() {
                       С самого начала нашей работы мы руководствовались простой и важной целью —
                       сделать качественную медицинскую помощь доступной для каждого человека.
                     </p>
-                    <div className="mt-9 flex items-end gap-4">
+                    <div className="mt-7 flex items-end gap-4">
                       <span className="bg-about-icon text-about-teal grid size-12 shrink-0 place-items-center rounded-full">
                         <HeartHandshake className="size-6" strokeWidth={1.5} aria-hidden="true" />
                       </span>
