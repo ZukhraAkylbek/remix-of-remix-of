@@ -248,9 +248,10 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                   href={item.href}
                   onClick={() => setOpen(false)}
                   {...(isExternal(item.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className={`block border-b border-brand-white/20 py-4 text-lg font-semibold transition-colors ${
+                  className={`-mx-2 block rounded-xl border-b border-brand-white/20 px-2 py-4 text-lg font-semibold transition-all duration-200 hover:bg-brand-white/15 hover:pl-4 active:scale-[0.98] active:bg-brand-white/25 ${
                     isActive(item.href) ? "bg-brand-white/10" : ""
                   }`}
+
                 >
                   {item.label}
                 </a>
@@ -259,7 +260,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               <a
                 href="/auth"
                 onClick={() => setOpen(false)}
-                className="mt-2 inline-flex items-center gap-2 rounded-xl border border-brand-white/40 px-4 py-3 text-base font-bold"
+                className="mt-2 inline-flex items-center gap-2 rounded-xl border border-brand-white/40 px-4 py-3 text-base font-bold transition-all duration-200 hover:border-brand-white hover:bg-brand-white/15 active:scale-[0.97]"
               >
                 <User className="size-5" />
                 {t("Личный кабинет", "Личный кабинет")}
@@ -273,14 +274,14 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                   href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand-white/40 bg-brand-white/10 px-3 py-3 text-sm font-bold"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand-white/40 bg-brand-white/10 px-3 py-3 text-sm font-bold transition-all duration-200 hover:bg-brand-white/25 active:scale-[0.97]"
                 >
                   <WhatsAppIcon className="size-4 shrink-0" />
                   WhatsApp
                 </a>
                 <a
                   href={`tel:${phone}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-white px-3 py-3 text-sm font-bold text-brand-green"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-white px-3 py-3 text-sm font-bold text-brand-green transition-all duration-200 hover:brightness-95 active:scale-[0.97]"
                 >
                   <Phone className="size-4 shrink-0" />
                   {t("Позвонить", "Позвонить")}
@@ -290,7 +291,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="gradient-accent text-accent-foreground mt-2 flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold"
+                className="gradient-accent text-accent-foreground mt-2 flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200 hover:brightness-105 active:scale-[0.98]"
               >
                 <Calendar className="size-4 shrink-0" />
                 {t("Записаться онлайн", "Записаться онлайн")}
