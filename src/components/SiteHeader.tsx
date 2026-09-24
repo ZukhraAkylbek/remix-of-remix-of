@@ -248,9 +248,10 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                   href={item.href}
                   onClick={() => setOpen(false)}
                   {...(isExternal(item.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className={`block border-b border-brand-white/20 py-4 text-lg font-semibold transition-colors ${
+                  className={`-mx-2 block rounded-xl border-b border-brand-white/20 px-2 py-4 text-lg font-semibold transition-all duration-200 hover:bg-brand-white/15 hover:pl-4 active:scale-[0.98] active:bg-brand-white/25 ${
                     isActive(item.href) ? "bg-brand-white/10" : ""
                   }`}
+
                 >
                   {item.label}
                 </a>
