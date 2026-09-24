@@ -16,7 +16,6 @@ import {
   UsersRound,
 } from "lucide-react";
 
-import founderPortrait from "@/assets/founder-zhypar.png";
 import asianFamilyHeroAsset from "@/assets/chat/asian-family-hero.webp";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CheckupIcon } from "@/components/checkups/CheckupIcon";
