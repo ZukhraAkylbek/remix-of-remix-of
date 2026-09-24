@@ -3,7 +3,6 @@ import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import {
   Activity,
   CalendarCheck,
-  ChevronRight,
   Clock,
   MapPin,
   Microscope,
