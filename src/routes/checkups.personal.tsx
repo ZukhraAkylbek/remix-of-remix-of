@@ -62,7 +62,7 @@ function PersonalCheckupPage() {
     <div className="min-h-screen bg-about-canvas">
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Чекапы", href: "/checkups" }, { label: "Персональный чекап" }]} />
-      <main className="pb-32 sm:pb-36">
+      <main className="pb-44 sm:pb-36">
         <section className="bg-about-mint border-about-line border-y">
           <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-12">
             <p className="text-about-teal text-xs font-bold uppercase">Конструктор программы</p>
