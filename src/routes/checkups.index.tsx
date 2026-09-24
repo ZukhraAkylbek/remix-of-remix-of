@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
@@ -10,14 +11,24 @@ import {
   FlaskConical,
   Heart,
   Sparkles,
+  SlidersHorizontal,
   Users,
 } from "lucide-react";
 
 import asianFamilyHeroAsset from "@/assets/chat/asian-family-hero.webp";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { CheckupIcon } from "@/components/checkups/CheckupIcon";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { absoluteUrl } from "@/lib/clinic";
 import { checkupPageQueryOptions } from "@/lib/checkups.queries";
 import { BOOKING_URL } from "@/lib/site-config";
@@ -143,14 +154,23 @@ const LAB_PACKAGES = [
   { title: "Онкомаркеры для мужчин", price: "+4 700 сом" },
 ];
 
-const BASIC = [
-  { title: "Здоровые лёгкие", price: "+1 300 сом" },
-  { title: "Здоровый желудок", price: "+8 400 сом" },
-  { title: "Здоровое сердце", price: "+5 800 сом" },
-  { title: "Лишний вес", price: "+5 000 сом" },
-  { title: "Эндокринологический", price: "+5 300 сом" },
-  { title: "Проктологический", price: "+5 000 сом" },
-  { title: "Спортивный", price: "+4 800 сом" },
+const MINI_CHECKUPS = [
+  { title: "Здоровые лёгкие", price: "1 300 сом", icon: "lungs", tone: "pastel-sky" },
+  { title: "Здоровый желудок", price: "8 400 сом", icon: "stomach", tone: "pastel-coral" },
+  { title: "Здоровое сердце", price: "5 800 сом", icon: "heart", tone: "pastel-rose" },
+  { title: "Лишний вес", price: "5 000 сом", icon: "weight", tone: "pastel-sand" },
+  { title: "Эндокринологический", price: "5 300 сом", icon: "thyroid", tone: "pastel-mint" },
+  { title: "Проктологический", price: "5 000 сом", icon: "clipboard", tone: "pastel-sky" },
+  { title: "Спортивный", price: "4 800 сом", icon: "activity", tone: "pastel-mint" },
+];
+
+type MiniCheckup = (typeof MINI_CHECKUPS)[number];
+
+const PROGRAM_FORMAT = [
+  "Лабораторные исследования по направлению пакета",
+  "Диагностические исследования, предусмотренные программой",
+  "Консультации профильных специалистов",
+  "Итоговое заключение врача",
 ];
 
 const FAQ = [
@@ -183,6 +203,7 @@ const FAQ = [
 function CheckupsPage() {
   const { data } = useSuspenseQuery(checkupPageQueryOptions());
   const cards = data.cards ?? [];
+  const [activeMini, setActiveMini] = useState<MiniCheckup | null>(null);
 
   /** Ссылка «Подробнее»: на страницу чекапа из базы, если нашли по названию, иначе на запись. */
   const detailHref = (def: ProgramDef) =>
@@ -352,33 +373,103 @@ function CheckupsPage() {
           </div>
         </section>
 
-        {/* Базовые чекапы */}
-        <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:pb-16">
-          <h2 className="text-foreground text-2xl font-extrabold tracking-tight sm:text-[30px]">
-            Базовые чекапы
-          </h2>
-          <p className="text-muted-foreground mt-3 max-w-2xl text-[15px] leading-relaxed">
-            Точечные программы для проверки конкретных систем организма.
-          </p>
-          <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {BASIC.map((item) => (
-              <div
-                key={item.title}
-                className="border-border bg-card card-lift flex items-center gap-3 rounded-2xl border p-4"
-              >
-                <span className="bg-surface-green text-brand-green-dark grid size-11 shrink-0 place-items-center rounded-full">
-                  <FlaskConical className="size-5" strokeWidth={2.2} />
-                </span>
-                <div className="min-w-0">
-                  <p className="text-foreground text-[14px] leading-snug font-bold">{item.title}</p>
-                  <p className="text-muted-foreground mt-1 text-[13px] font-semibold">
-                    {item.price}
-                  </p>
-                </div>
+        {/* Мини и персональные чекапы */}
+        <section className="bg-about-mint">
+          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <h2 className="text-about-ink text-2xl font-extrabold tracking-tight sm:text-[30px]">
+                  Мини-чекапы
+                </h2>
+                <p className="text-about-copy mt-2 max-w-2xl text-sm leading-relaxed">
+                  Компактные программы для проверки отдельных систем организма.
+                </p>
               </div>
-            ))}
+              <p className="text-about-teal text-xs font-bold">Нажмите на карточку, чтобы увидеть состав</p>
+            </div>
+
+            <div className="mt-6 grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+              {MINI_CHECKUPS.map((item) => (
+                <Button
+                  key={item.title}
+                  type="button"
+                  variant="outline"
+                  onClick={() => setActiveMini(item)}
+                  className={`${item.tone} border-about-line hover:border-brand-green h-auto min-w-0 flex-col items-stretch gap-4 whitespace-normal rounded-2xl p-4 text-left shadow-none hover:bg-inherit`}
+                >
+                  <span className="text-about-ink flex items-start justify-between gap-2">
+                    <span className="text-sm leading-snug font-extrabold sm:text-base">{item.title}</span>
+                    <span className="bg-background/70 text-about-teal grid size-10 shrink-0 place-items-center rounded-full">
+                      <CheckupIcon name={item.icon} className="size-5" />
+                    </span>
+                  </span>
+                  <span className="text-about-teal text-sm font-extrabold">{item.price}</span>
+                </Button>
+              ))}
+
+              <Button
+                asChild
+                variant="outline"
+                className="border-about-teal bg-about-canvas hover:bg-about-icon col-span-2 h-auto min-w-0 items-center justify-between whitespace-normal rounded-2xl p-4 text-left shadow-none sm:col-span-1 lg:col-span-1"
+              >
+                <Link to="/checkups/personal">
+                  <span>
+                    <span className="text-about-ink block text-base font-extrabold">Персональный чекап</span>
+                    <span className="text-about-copy mt-1 block text-xs leading-snug">
+                      Соберите собственную программу
+                    </span>
+                  </span>
+                  <span className="bg-brand-green text-brand-white grid size-11 shrink-0 place-items-center rounded-full">
+                    <SlidersHorizontal className="size-5" />
+                  </span>
+                </Link>
+              </Button>
+            </div>
           </div>
         </section>
+
+        <Dialog open={activeMini !== null} onOpenChange={(open) => !open && setActiveMini(null)}>
+          <DialogContent className="border-about-line max-h-[88vh] w-[calc(100%-2rem)] max-w-2xl overflow-y-auto rounded-2xl p-5 sm:p-7">
+            {activeMini && (
+              <>
+                <DialogHeader className="pr-8 text-left">
+                  <span className="bg-about-icon text-about-teal mb-2 grid size-12 place-items-center rounded-full">
+                    <CheckupIcon name={activeMini.icon} className="size-6" />
+                  </span>
+                  <DialogTitle className="text-about-ink text-2xl font-extrabold">
+                    {activeMini.title}
+                  </DialogTitle>
+                  <DialogDescription className="text-about-copy text-sm leading-relaxed">
+                    Точечная программа для проверки выбранного направления здоровья.
+                  </DialogDescription>
+                </DialogHeader>
+                <p className="text-brand-green mt-1 text-2xl font-extrabold">{activeMini.price}</p>
+                <div className="border-about-line mt-2 border-t pt-5">
+                  <h3 className="text-about-ink text-base font-extrabold">Что входит в чекап</h3>
+                  <ul className="mt-4 space-y-3">
+                    {PROGRAM_FORMAT.map((item) => (
+                      <li key={item} className="text-about-copy flex items-start gap-3 text-sm leading-relaxed">
+                        <span className="bg-about-icon text-about-teal mt-0.5 grid size-5 shrink-0 place-items-center rounded-full">
+                          <Check className="size-3" strokeWidth={2.5} />
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-about-copy mt-4 text-xs leading-relaxed">
+                    Точный перечень исследований администратор подтвердит при записи.
+                  </p>
+                </div>
+                <Button asChild className="mt-2 h-11 w-full rounded-xl bg-brand-green font-bold text-brand-white hover:bg-brand-green-dark sm:w-auto">
+                  <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                    <CalendarCheck className="size-4" />
+                    Записаться на чекап
+                  </a>
+                </Button>
+              </>
+            )}
+          </DialogContent>
+        </Dialog>
 
         {/* FAQ */}
         <section className="bg-surface-soft">
