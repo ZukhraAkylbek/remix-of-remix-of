@@ -62,28 +62,44 @@ const ADVANTAGES = [
     icon: Stethoscope,
     title: "Более 100 специалистов",
     text: "Врачи различных специальностей.",
+    href: "/vrachi",
+    external: false,
   },
   {
     icon: HeartHandshake,
     title: "Круглосуточный терапевтический стационар",
     text: "Комфортные условия для лечения и наблюдения.",
+    href: "/uslugi/statsionar",
+    external: false,
   },
   {
     icon: ShieldCheck,
     title: "Хирургическое отделение",
     text: "Современные методики и опытные специалисты.",
+    href: "/hirurgiya",
+    external: false,
   },
   {
     icon: Microscope,
     title: "Собственная лаборатория Экспресс Плюс",
     text: "Быстрая и точная диагностика.",
+    href: "https://expresslab.kg/",
+    external: true,
   },
   {
     icon: Activity,
     title: "Медицинские чекапы",
     text: "Комплексные обследования для вашего здоровья.",
+    href: "/checkups",
+    external: false,
   },
-] satisfies Array<{ icon: LucideIcon; title: string; text: string }>;
+] satisfies Array<{
+  icon: LucideIcon;
+  title: string;
+  text: string;
+  href: string;
+  external: boolean;
+}>;
 
 export const Route = createFileRoute("/about")({
   head: () => {
