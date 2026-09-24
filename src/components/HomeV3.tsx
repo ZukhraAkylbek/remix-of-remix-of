@@ -13,6 +13,7 @@ import { ScrollArrowPair } from "@/components/ScrollArrows";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
+import { HeroSlider } from "@/components/HeroSlider";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC } from "@/lib/clinic";
@@ -304,44 +305,8 @@ export function HomeV3() {
         {/* Оффер */}
         <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
           <div className="grid gap-5 lg:grid-cols-[1.15fr_1fr] lg:items-stretch">
-            {/* Большой баннер с фото на всю область */}
-            <div className="border-border relative min-h-[460px] overflow-hidden rounded-3xl border sm:min-h-[420px]">
-              <img
-                src={asianFamilyHeroAsset}
-                alt="Счастливая семья на фоне голубого неба"
-                className="absolute inset-0 h-full w-full scale-110 object-cover object-[72%_bottom] sm:scale-100 sm:object-[right_center]"
-                loading="eager"
-                fetchPriority="high"
-                width={1344}
-                height={768}
-              />
-              <div className="from-brand-white/97 via-brand-white/80 absolute inset-0 bg-gradient-to-b to-transparent sm:bg-gradient-to-r sm:via-brand-white/70" />
-              <div className="relative flex h-full max-w-[560px] flex-col justify-start p-6 sm:justify-center sm:p-10">
-                <Eyebrow>Здоровье без лишней сложности</Eyebrow>
-                <h1 className="text-foreground mt-4 text-3xl leading-[1.22] font-extrabold tracking-tight sm:text-[42px] sm:leading-[1.18]">
-                  Проверьте здоровье сегодня — предотвратите{" "}
-                  <span className="bg-brand-green text-brand-white rounded-md px-2 py-0.5 align-middle text-[0.92em] leading-none">
-                    {"\n"}проблемы завтра
-                  </span>
-                </h1>
-                <p className="text-muted-foreground mt-4 max-w-md text-[16px] leading-relaxed">
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link
-                    to="/checkups"
-                    className="gradient-accent text-accent-foreground inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-[16px] font-extrabold transition-all hover:-translate-y-0.5 hover:brightness-105"
-                  >
-                    Пройти чекап
-                  </Link>
-                  <Link
-                    to="/uslugi"
-                    className="border-border bg-background/80 text-foreground hover:border-brand-green inline-flex items-center gap-2 rounded-2xl border px-6 py-3.5 text-[16px] font-extrabold transition-colors"
-                  >
-                    Найти услугу
-                  </Link>
-                </div>
-              </div>
-            </div>
+            {/* Большой баннер — слайдер с новостями и акциями */}
+            <HeroSlider />
 
             {/* Быстрый маршрут — сетка 3×3 справа */}
             <div className="grid auto-rows-fr grid-cols-2 gap-3 sm:grid-cols-3">
