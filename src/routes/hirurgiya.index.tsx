@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Check, ChevronLeft, ChevronRight, Plus, UserRound } from "lucide-react";
+import { ArrowRight, Building2, CalendarDays, Check, ChevronLeft, ChevronRight, Plus, UserRound } from "lucide-react";
 import { useRef, useState } from "react";
 
 import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
@@ -237,39 +237,27 @@ export function DoctorsGrid({
   );
 }
 
-function SurgeryDoctorsCarousel({ doctors }: { doctors: ClinicDoctor[] }) {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const scroll = (direction: -1 | 1) => {
-    carouselRef.current?.scrollBy({ left: direction * 320, behavior: "smooth" });
-  };
-
+function SurgeryDoctorsGrid({ doctors }: { doctors: ClinicDoctor[] }) {
   return (
-    <div className="relative mt-6">
-      <div className="mb-4 flex justify-end gap-2">
-        <Button variant="outline" size="icon" aria-label="Прокрутить врачей влево" onClick={() => scroll(-1)} className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none">
-          <ChevronLeft aria-hidden="true" />
-        </Button>
-        <Button variant="outline" size="icon" aria-label="Прокрутить врачей вправо" onClick={() => scroll(1)} className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none">
-          <ChevronRight aria-hidden="true" />
-        </Button>
-      </div>
-      <div ref={carouselRef} className="scrollbar-hide flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
-        {doctors.map((doctor) => (
-          <article key={doctor.slug} className="border-about-line bg-about-canvas w-[260px] shrink-0 snap-start rounded-2xl border p-4 sm:w-[280px]">
-            {doctor.photo ? (
-              <img src={doctor.photo} alt={doctor.name} loading="lazy" className="size-24 rounded-full object-cover" />
-            ) : (
-              <span className="bg-about-icon text-about-teal grid size-24 place-items-center rounded-full"><UserRound className="size-10" aria-hidden="true" /></span>
-            )}
-            <h3 className="text-about-ink mt-4 text-lg font-bold">{doctor.name}</h3>
-            <p className="text-about-teal mt-1 text-sm font-semibold">{doctor.specialty}</p>
-            {doctor.experience != null && <p className="text-about-copy mt-2 text-sm">Стаж: {experienceLabel(doctor.experience)}</p>}
-            <Button asChild variant="outline" className="border-about-teal text-about-ink hover:bg-brand-green hover:border-brand-green hover:text-white mt-4 w-full bg-transparent shadow-none">
-              <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>Подробнее</Link>
-            </Button>
-          </article>
-        ))}
-      </div>
+    <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {doctors.map((doctor) => (
+        <article key={doctor.slug} className="border-about-line bg-about-canvas flex min-w-0 flex-col rounded-2xl border p-4">
+          {doctor.photo ? (
+            <img src={doctor.photo} alt={doctor.name} loading="lazy" className="aspect-[4/3] w-full rounded-xl object-cover object-top" />
+          ) : (
+            <span className="bg-about-icon text-about-teal grid aspect-[4/3] w-full place-items-center rounded-xl"><UserRound className="size-16" aria-hidden="true" /></span>
+          )}
+          <h3 className="text-about-ink mt-4 text-lg leading-snug font-bold">{doctor.name}</h3>
+          <p className="bg-about-icon text-about-teal mt-3 w-fit rounded-full px-3 py-1 text-[13px] font-semibold">{doctor.specialty}</p>
+          <div className="mt-4 space-y-2">
+            <p className="text-about-copy flex items-center gap-2 text-[13px] sm:text-sm"><Building2 className="text-about-teal size-4 shrink-0" aria-hidden="true" />{doctor.branch}</p>
+            {doctor.experience != null && <p className="text-about-copy flex items-center gap-2 text-[13px] sm:text-sm"><CalendarDays className="text-about-teal size-4 shrink-0" aria-hidden="true" />Стаж: {experienceLabel(doctor.experience)}</p>}
+          </div>
+          <Button asChild variant="outline" className="border-about-teal text-about-ink hover:bg-brand-green hover:border-brand-green hover:text-white mt-auto w-full bg-transparent shadow-none">
+            <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>Подробнее</Link>
+          </Button>
+        </article>
+      ))}
     </div>
   );
 }
@@ -386,7 +374,7 @@ function SurgeryPage() {
         <section id="vrachi" className="bg-about-mint py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SurgeryHeading title="Наши хирурги" description="Опытные специалисты хирургических направлений клиники «Авиценна»." />
-            <SurgeryDoctorsCarousel doctors={surgeryDoctors} />
+            <SurgeryDoctorsGrid doctors={surgeryDoctors} />
             <div className="mt-6">
               <Button asChild variant="outline" className="border-about-teal text-about-ink hover:bg-brand-green hover:border-brand-green hover:text-white bg-transparent shadow-none">
                 <a href="/vrachi?category=hirurgiya#vrachi">Все врачи →</a>
