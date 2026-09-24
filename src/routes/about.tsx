@@ -274,24 +274,24 @@ function AboutPage() {
               <article className="border-about-line bg-card overflow-hidden rounded-2xl border lg:grid lg:grid-cols-[1fr_1.02fr]">
                 <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
                   <SectionTitle>Наша миссия</SectionTitle>
-                  <p className="text-about-ink mt-7 text-lg leading-relaxed sm:text-xl">
+                  <p className="text-about-ink mt-5 text-base leading-relaxed sm:text-lg">
                     Мы создаем современную систему медицинской помощи, где пациент получает
                     качественное и доступное лечение, а забота о его здоровье становится
                     приоритетом.
                   </p>
-                  <div className="my-7 flex items-center gap-4">
+                  <div className="my-5 flex items-center gap-4">
                     <span className="bg-about-line h-px flex-1" />
-                    <LeafOrnament className="text-about-ornament w-24" />
+                    <LeafOrnament className="text-about-ornament w-20" />
                     <span className="bg-about-line h-px flex-1" />
                   </div>
-                  <p className="text-about-copy text-base leading-relaxed sm:text-lg">
+                  <p className="text-about-copy text-sm leading-relaxed sm:text-base">
                     Мы стремимся к тому, чтобы каждый человек в нашей стране мог получить
                     квалифицированную медицинскую помощь, основанную на современных технологиях,
                     опыте наших специалистов и внимательном отношении.
                   </p>
                 </div>
 
-                <div className="min-h-80 overflow-hidden rounded-t-[42%] lg:min-h-[570px] lg:rounded-t-none lg:rounded-l-[42%]">
+                <div className="min-h-64 overflow-hidden rounded-t-[42%] lg:min-h-[420px] lg:rounded-t-none lg:rounded-l-[42%]">
                   <img
                     src={receptionPhoto}
                     alt="Светлая современная зона регистрации клиники с растениями"
