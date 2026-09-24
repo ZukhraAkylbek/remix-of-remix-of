@@ -9,7 +9,6 @@ import {
   ChevronRight,
   CircleUserRound,
   Clock3,
-  HeartPulse,
   ShieldCheck,
   SlidersHorizontal,
   Sparkles,
