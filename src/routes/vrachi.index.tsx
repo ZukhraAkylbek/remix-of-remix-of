@@ -174,9 +174,10 @@ function FilterSelect({
   children: React.ReactNode;
   icon?: LucideIcon;
 }) {
+  const Icon = icon;
   return (
     <label className="border-about-line bg-about-canvas focus-within:border-about-teal flex h-11 min-w-0 items-center gap-2 rounded-xl border px-3">
-      {icon && <icon className="text-about-teal size-4 shrink-0" aria-hidden="true" />}
+      {Icon && <Icon className="text-about-teal size-4 shrink-0" aria-hidden="true" />}
       <select
         aria-label={ariaLabel}
         value={value}
