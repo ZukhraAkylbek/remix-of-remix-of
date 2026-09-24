@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { MapPin, Navigation, Phone } from "lucide-react";
 
-import { ScrollArrowPair } from "@/components/ScrollArrows";
+import { ScrollArrow } from "@/components/ScrollArrows";
 import "leaflet/dist/leaflet.css";
 
 import { CLINIC, doubleGisSearchUrl, googleMapsDirectionsUrl } from "@/lib/clinic";
@@ -149,16 +149,28 @@ export function BranchesWithMap() {
 
         <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)]">
           {/* Список адресов: горизонтальный скролл на мобильном */}
-          <div className="relative min-w-0">
-            <ScrollArrowPair
-              onScroll={(dir) => switchBranch(dir === -1 ? "left" : "right")}
-              label="Прокрутить филиалы"
-              className="lg:hidden"
-            />
+          <div className="min-w-0">
+            <div className="mb-3 flex items-center justify-between lg:hidden">
+              <span className="text-muted-foreground text-xs">Листайте адреса</span>
+              <div className="flex gap-2">
+                <ScrollArrow
+                  dir={-1}
+                  label="Прокрутить филиалы влево"
+                  onClick={() => switchBranch("left")}
+                  className="relative"
+                />
+                <ScrollArrow
+                  dir={1}
+                  label="Прокрутить филиалы вправо"
+                  onClick={() => switchBranch("right")}
+                  className="relative"
+                />
+              </div>
+            </div>
 
             <ul
               ref={listRef}
-              className="no-scrollbar flex snap-x gap-2 overflow-x-auto px-12 pb-1 lg:grid lg:gap-2 lg:overflow-visible lg:px-0"
+              className="no-scrollbar flex snap-x gap-2 overflow-x-auto pb-1 lg:grid lg:gap-2 lg:overflow-visible"
             >
               {branches.map((b, i) => {
                 const isActive = i === active;
