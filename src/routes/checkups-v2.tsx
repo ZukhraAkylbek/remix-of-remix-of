@@ -68,6 +68,12 @@ const MINI_PROGRAMS: MiniProgram[] = [
   { title: "Спортивный", price: "4 800 сом", icon: "weight" },
 ];
 
+const DEFAULT_MINI_PROGRAM: MiniProgram = {
+  title: "Здоровое сердце",
+  price: "5 800 сом",
+  icon: "heart",
+};
+
 const PROGRAM_CONTENT = [
   "Лабораторные исследования по направлению программы",
   "Необходимые диагностические исследования",
@@ -202,7 +208,7 @@ function CheckupsV2Page() {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => setActiveMini(MINI_PROGRAMS[0])}
+                onClick={() => setActiveMini(DEFAULT_MINI_PROGRAM)}
                 className="border-about-line bg-about-mint hover:border-brand-green hover:bg-about-mint h-auto min-h-56 items-stretch justify-between whitespace-normal rounded-2xl p-5 text-left shadow-none lg:col-span-4"
               >
                 <span className="flex w-full flex-col">
