@@ -27,7 +27,9 @@ import { Button } from "@/components/ui/button";
 import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { CLINIC_DOCTORS, DOCTOR_CATEGORIES, experienceLabel, type ClinicDoctor } from "@/lib/clinic-doctors";
-import { specialtyImage } from "@/lib/specialty-images";
+import teamPhotoAsset from "@/assets/vrachi-team.jpg.asset.json";
+
+const teamPhoto = teamPhotoAsset.url;
 
 const TITLE = "Врачи клиники «Авиценна» в Бишкеке — специалисты и запись | Авиценна";
 const DESCRIPTION =
@@ -206,7 +208,7 @@ function DoctorsCarousel({ doctors }: { doctors: ClinicDoctor[] }) {
 }
 
 function DoctorsPage() {
-  const heroImage = specialtyImage("kardio", 0);
+  const heroImage = teamPhoto;
   const faqItems = FAQ_ITEMS;
 
   return (
