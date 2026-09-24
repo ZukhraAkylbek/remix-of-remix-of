@@ -142,6 +142,48 @@ function FaqList({ items }: { items: { title: string; text?: string }[] }) {
 
 const DOCTORS_PER_PAGE = 6;
 
+const EXPERIENCE_RANGES: Array<{ value: string; label: string; test: (years: number | null) => boolean }> = [
+  { value: "lt5", label: "до 5 лет", test: (y) => y != null && y <= 5 },
+  { value: "5to10", label: "5–10 лет", test: (y) => y != null && y >= 6 && y <= 10 },
+  { value: "10to20", label: "10–20 лет", test: (y) => y != null && y >= 11 && y <= 20 },
+  { value: "gt20", label: "более 20 лет", test: (y) => y != null && y > 20 },
+];
+
+const selectClass =
+  "border-about-line bg-about-canvas text-about-ink h-11 cursor-pointer rounded-xl border px-3 text-sm font-semibold outline-none focus:border-about-teal appearance-none bg-[length:16px] bg-[right_0.75rem_center] bg-no-repeat pr-9";
+// SVG chevron as data URI for native select arrow
+const chevronDataUri =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230a5b4b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E\")";
+
+function FilterSelect({
+  value,
+  onChange,
+  "aria-label": ariaLabel,
+  children,
+  icon,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  "aria-label": string;
+  children: React.ReactNode;
+  icon?: LucideIcon;
+}) {
+  return (
+    <label className="border-about-line bg-about-canvas focus-within:border-about-teal flex h-11 min-w-0 items-center gap-2 rounded-xl border px-3">
+      {icon && <icon className="text-about-teal size-4 shrink-0" aria-hidden="true" />}
+      <select
+        aria-label={ariaLabel}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={`${selectClass} border-0 bg-transparent px-0 pr-6 text-sm font-semibold outline-none`}
+        style={{ backgroundImage: `url(${chevronDataUri})` }}
+      >
+        {children}
+      </select>
+    </label>
+  );
+}
+
 function DoctorsDirectory({ doctors, initialCategory }: { doctors: ClinicDoctor[]; initialCategory: string | undefined }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(() =>
@@ -149,19 +191,43 @@ function DoctorsDirectory({ doctors, initialCategory }: { doctors: ClinicDoctor[
       ? initialCategory
       : "all",
   );
+  const [branch, setBranch] = useState("all");
+  const [experience, setExperience] = useState("all");
+  const [sort, setSort] = useState("default");
   const [page, setPage] = useState(0);
+
+  const branches = useMemo(
+    () => Array.from(new Set(doctors.map((d) => d.branch))).sort((a, b) => a.localeCompare(b, "ru")),
+    [doctors],
+  );
+
   const filteredDoctors = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("ru");
-    return doctors.filter((doctor) => {
+    const result = doctors.filter((doctor) => {
       if (normalizedQuery.length > 0) {
         const haystack = `${doctor.name} ${doctor.specialty} ${doctor.branch} ${
           DOCTOR_CATEGORIES.find((c) => c.slug === doctor.category)?.name ?? ""
         }`.toLocaleLowerCase("ru");
-        return normalizedQuery.split(/\s+/).every((word) => haystack.includes(word));
+        if (!normalizedQuery.split(/\s+/).every((word) => haystack.includes(word))) {
+          return false;
+        }
       }
-      return category === "all" || doctor.category === category;
+      if (category !== "all" && doctor.category !== category) return false;
+      if (branch !== "all" && doctor.branch !== branch) return false;
+      if (experience !== "all") {
+        const range = EXPERIENCE_RANGES.find((r) => r.value === experience);
+        if (range && !range.test(doctor.experience)) return false;
+      }
+      return true;
     });
-  }, [category, doctors, query]);
+    if (sort === "exp") {
+      result.sort((a, b) => (b.experience ?? -1) - (a.experience ?? -1));
+    } else if (sort === "name") {
+      result.sort((a, b) => a.name.localeCompare(b.name, "ru"));
+    }
+    return result;
+  }, [branch, category, doctors, experience, query, sort]);
+
   const pageCount = Math.max(1, Math.ceil(filteredDoctors.length / DOCTORS_PER_PAGE));
   const safePage = Math.min(page, pageCount - 1);
   const visibleDoctors = filteredDoctors.slice(
@@ -169,123 +235,186 @@ function DoctorsDirectory({ doctors, initialCategory }: { doctors: ClinicDoctor[
     (safePage + 1) * DOCTORS_PER_PAGE,
   );
 
-  const changeQuery = (value: string) => {
-    setQuery(value);
+  const hasActiveFilters =
+    query.trim() !== "" || category !== "all" || branch !== "all" || experience !== "all" || sort !== "default";
+
+  const resetAll = () => {
+    setQuery("");
+    setCategory("all");
+    setBranch("all");
+    setExperience("all");
+    setSort("default");
     setPage(0);
   };
 
-  const changeCategory = (value: string) => {
-    setCategory(value);
+  const update = <T,>(setter: (v: T) => void) => (v: T) => {
+    setter(v);
     setPage(0);
   };
 
   return (
     <div className="mt-6">
-      <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(240px,0.62fr)_auto] md:items-center">
-        <label className="border-about-line bg-about-canvas focus-within:border-about-teal flex h-11 items-center gap-3 rounded-xl border px-4">
+      {/* Search + reset */}
+      <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+        <label className="border-about-line bg-about-canvas focus-within:border-about-teal flex h-11 min-w-0 flex-1 items-center gap-2 rounded-xl border px-3 sm:px-4">
           <Search className="text-about-teal size-5 shrink-0" aria-hidden="true" />
           <span className="sr-only">Поиск врача</span>
           <input
             type="search"
             value={query}
-            onChange={(event) => changeQuery(event.target.value)}
-            placeholder="Поиск врача, специальности..."
+            onChange={(event) => update(setQuery)(event.target.value)}
+            placeholder="Поиск врача, специальности, услуги..."
             className="text-about-ink placeholder:text-about-copy min-w-0 flex-1 bg-transparent text-sm outline-none"
           />
         </label>
-        <label className="border-about-line bg-about-canvas focus-within:border-about-teal flex h-11 items-center gap-3 rounded-xl border px-4">
-          <Stethoscope className="text-about-teal size-5 shrink-0" aria-hidden="true" />
-          <span className="sr-only">Выберите специальность</span>
-          <select
-            value={category}
-            onChange={(event) => changeCategory(event.target.value)}
-            className="text-about-ink min-w-0 flex-1 bg-transparent text-sm font-semibold outline-none"
+        {hasActiveFilters && (
+          <button
+            type="button"
+            onClick={resetAll}
+            className="border-about-line text-about-teal hover:bg-about-icon flex h-11 shrink-0 items-center gap-2 rounded-xl border px-4 text-sm font-semibold transition-colors"
           >
-            <option value="all">Все специальности</option>
-            {DOCTOR_CATEGORIES.filter((item) => doctors.some((doctor) => doctor.category === item.slug)).map((item) => (
-              <option key={item.slug} value={item.slug}>{item.name}</option>
-            ))}
-          </select>
-        </label>
-        <div className="flex justify-end gap-2">
-        <Button
-          variant="outline"
-          size="icon"
-          aria-label="Предыдущая страница врачей"
-          disabled={safePage === 0}
-          onClick={() => setPage((current) => Math.max(0, current - 1))}
-          className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none"
-        >
-          <ChevronLeft aria-hidden="true" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          aria-label="Следующая страница врачей"
-          disabled={safePage >= pageCount - 1}
-          onClick={() => setPage((current) => Math.min(pageCount - 1, current + 1))}
-          className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none"
-        >
-          <ChevronRight aria-hidden="true" />
-        </Button>
+            <RotateCcw className="size-4" aria-hidden="true" />
+            Сбросить
+          </button>
+        )}
       </div>
+
+      {/* Filter dropdowns */}
+      <div className="mt-3 flex flex-wrap items-center gap-2 sm:gap-3">
+        <FilterSelect
+          aria-label="Специальность"
+          icon={Stethoscope}
+          value={category}
+          onChange={update(setCategory)}
+        >
+          <option value="all">Все специальности</option>
+          {DOCTOR_CATEGORIES.filter((item) => doctors.some((doctor) => doctor.category === item.slug)).map((item) => (
+            <option key={item.slug} value={item.slug}>{item.name}</option>
+          ))}
+        </FilterSelect>
+
+        <FilterSelect
+          aria-label="Клиника"
+          icon={Building2}
+          value={branch}
+          onChange={update(setBranch)}
+        >
+          <option value="all">Все клиники</option>
+          {branches.map((b) => (
+            <option key={b} value={b}>{b}</option>
+          ))}
+        </FilterSelect>
+
+        <FilterSelect
+          aria-label="Стаж"
+          icon={CalendarDays}
+          value={experience}
+          onChange={update(setExperience)}
+        >
+          <option value="all">Любой стаж</option>
+          {EXPERIENCE_RANGES.map((r) => (
+            <option key={r.value} value={r.value}>{r.label}</option>
+          ))}
+        </FilterSelect>
+
+        <FilterSelect
+          aria-label="Сортировка"
+          icon={ArrowDownUp}
+          value={sort}
+          onChange={update(setSort)}
+        >
+          <option value="default">По умолчанию</option>
+          <option value="exp">По стажу ↓</option>
+          <option value="name">По имени А–Я</option>
+        </FilterSelect>
       </div>
+
+      {/* Count + pagination */}
+      <div className="mt-4 flex items-center justify-between">
+        <p className="text-about-copy text-sm">
+          {filteredDoctors.length > 0
+            ? `${filteredDoctors.length} ${pluralize(filteredDoctors.length, "врач", "врача", "врачей")}`
+            : "Врачи не найдены"}
+        </p>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            aria-label="Предыдущая страница"
+            disabled={safePage === 0}
+            onClick={() => setPage((current) => Math.max(0, current - 1))}
+            className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none"
+          >
+            <ChevronLeft aria-hidden="true" />
+          </Button>
+          <span className="text-about-copy text-sm font-semibold tabular-nums">
+            {safePage + 1} / {pageCount}
+          </span>
+          <Button
+            variant="outline"
+            size="icon"
+            aria-label="Следующая страница"
+            disabled={safePage >= pageCount - 1}
+            onClick={() => setPage((current) => Math.min(pageCount - 1, current + 1))}
+            className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none"
+          >
+            <ChevronRight aria-hidden="true" />
+          </Button>
+        </div>
+      </div>
+
+      {/* Cards grid */}
       {visibleDoctors.length > 0 ? (
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {visibleDoctors.map((doctor) => (
-          <article
-            key={doctor.slug}
-            className="border-about-line bg-about-canvas flex min-w-0 flex-col rounded-2xl border p-4"
-          >
-            {doctor.photo ? (
-              <img
-                src={doctor.photo}
-                alt={doctor.name}
-                loading="lazy"
-                className="aspect-[4/3] w-full rounded-xl object-cover object-top"
-              />
-            ) : (
-              <span className="bg-about-icon text-about-teal grid aspect-[4/3] w-full place-items-center rounded-xl">
-                <UserRound className="size-16" aria-hidden="true" />
-              </span>
-            )}
-            <h3 className="text-about-ink mt-4 text-lg leading-snug font-bold">{doctor.name}</h3>
-            <p className="bg-about-icon text-about-teal mt-3 w-fit rounded-full px-3 py-1 text-[13px] font-semibold">
-              {doctor.specialty}
-            </p>
-            <div className="mt-4 space-y-2">
-              <p className="text-about-copy flex items-center gap-2 text-[13px] sm:text-sm">
-                <Building2 className="text-about-teal size-4 shrink-0" aria-hidden="true" />
-                {doctor.branch}
-              </p>
-              {doctor.experience != null && (
-                <p className="text-about-copy flex items-center gap-2 text-[13px] sm:text-sm">
-                  <CalendarDays className="text-about-teal size-4 shrink-0" aria-hidden="true" />
-                  Стаж: {experienceLabel(doctor.experience)}
-                </p>
-              )}
-            </div>
-            <Button
-              asChild
-              variant="outline"
-              className="border-about-teal text-about-ink hover:bg-brand-green hover:border-brand-green hover:text-white mt-auto w-full bg-transparent shadow-none"
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {visibleDoctors.map((doctor) => (
+            <article
+              key={doctor.slug}
+              className="border-about-line bg-about-canvas flex min-w-0 flex-col rounded-2xl border p-4"
             >
-              <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>
-                Подробнее
-              </Link>
-            </Button>
-          </article>
-        ))}
+              {doctor.photo ? (
+                <img
+                  src={doctor.photo}
+                  alt={doctor.name}
+                  loading="lazy"
+                  className="aspect-[4/3] w-full rounded-xl object-cover object-top"
+                />
+              ) : (
+                <span className="bg-about-icon text-about-teal grid aspect-[4/3] w-full place-items-center rounded-xl">
+                  <UserRound className="size-16" aria-hidden="true" />
+                </span>
+              )}
+              <h3 className="text-about-ink mt-4 text-lg leading-snug font-bold">{doctor.name}</h3>
+              <p className="bg-about-icon text-about-teal mt-3 w-fit rounded-full px-3 py-1 text-[13px] font-semibold">
+                {doctor.specialty}
+              </p>
+              <div className="mt-4 space-y-2">
+                <p className="text-about-copy flex items-center gap-2 text-[13px] sm:text-sm">
+                  <Building2 className="text-about-teal size-4 shrink-0" aria-hidden="true" />
+                  {doctor.branch}
+                </p>
+                {doctor.experience != null && (
+                  <p className="text-about-copy flex items-center gap-2 text-[13px] sm:text-sm">
+                    <CalendarDays className="text-about-teal size-4 shrink-0" aria-hidden="true" />
+                    Стаж: {experienceLabel(doctor.experience)}
+                  </p>
+                )}
+              </div>
+              <Button
+                asChild
+                variant="outline"
+                className="border-about-teal text-about-ink hover:bg-brand-green hover:border-brand-green hover:text-white mt-auto w-full bg-transparent shadow-none"
+              >
+                <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>
+                  Подробнее
+                </Link>
+              </Button>
+            </article>
+          ))}
         </div>
       ) : (
-        <div className="border-about-line text-about-copy mt-6 rounded-2xl border p-6 text-center text-sm">
+        <div className="border-about-line text-about-copy mt-5 rounded-2xl border p-6 text-center text-sm">
           По вашему запросу врачи не найдены.
         </div>
-      )}
-      {filteredDoctors.length > 0 && (
-        <p className="text-about-copy mt-4 text-center text-[13px]">
-          {safePage + 1} из {pageCount}
-        </p>
       )}
     </div>
   );
