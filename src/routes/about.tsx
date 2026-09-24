@@ -247,13 +247,13 @@ function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-about-mint py-16 sm:py-20 lg:py-24">
+        <section className="bg-about-mint py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionTitle>Наши преимущества</SectionTitle>
-            <div className="mt-9 grid auto-rows-fr gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 grid auto-rows-fr gap-3 md:grid-cols-2 lg:grid-cols-3">
               {ADVANTAGES.map(({ icon: Icon, title, text }, index) => (
                 <Reveal key={title} delay={index * 35} className="h-full">
-                  <article className="border-about-line bg-card flex h-full gap-4 rounded-2xl border p-5 sm:p-6">
+                  <article className="border-about-line bg-card flex h-full gap-4 rounded-2xl border p-4 sm:p-5">
                     <span className="bg-about-icon text-about-teal grid size-12 shrink-0 place-items-center rounded-full">
                       <Icon className="size-6" strokeWidth={1.6} aria-hidden="true" />
                     </span>
