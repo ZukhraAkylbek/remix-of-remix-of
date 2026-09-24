@@ -4,13 +4,16 @@ import { Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { checkupPageQueryOptions } from "@/lib/checkups.queries";
+import { CLINIC_DOCTORS, DOCTOR_CATEGORIES } from "@/lib/clinic-doctors";
 import { pagesQueryOptions } from "@/lib/pages.queries";
 import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
 type Hit = { title: string; subtitle?: string | undefined; group: string; to: string };
 
 const STATIC_HITS: Hit[] = [
-  { title: "Направления", group: "Разделы", to: "/napravleniya" },
+  { title: "Поликлиника", group: "Разделы", to: "/poliklinika" },
+  { title: "Хирургия", group: "Разделы", to: "/hirurgiya" },
+  { title: "О клинике", group: "Разделы", to: "/about" },
   { title: "Чекапы", group: "Разделы", to: "/checkups" },
   { title: "Услуги", group: "Разделы", to: "/uslugi" },
   { title: "Диагностика", group: "Разделы", to: "/#preimushchestva" },
@@ -53,6 +56,21 @@ export function SiteSearch({ className = "" }: { className?: string }) {
     for (const p of pages.data ?? []) {
       hits.push({ title: p.title, group: "Страницы", to: p.path });
     }
+    for (const cat of DOCTOR_CATEGORIES) {
+      hits.push({
+        title: cat.name,
+        group: "Специалисты",
+        to: `/vrachi?category=${cat.slug}#vrachi`,
+      });
+    }
+    for (const d of CLINIC_DOCTORS) {
+      hits.push({
+        title: d.name,
+        subtitle: d.specialty,
+        group: "Врачи",
+        to: `/vrachi/${d.slug}`,
+      });
+    }
     return hits;
   }, [specialties.data, checkups.data, pages.data]);
 
@@ -87,7 +105,7 @@ export function SiteSearch({ className = "" }: { className?: string }) {
   const go = (to: string) => {
     setOpen(false);
     setQ("");
-    if (to.startsWith("/#")) {
+    if (to.startsWith("/#") || to.includes("?") || to.includes("#")) {
       window.location.href = to;
       return;
     }
