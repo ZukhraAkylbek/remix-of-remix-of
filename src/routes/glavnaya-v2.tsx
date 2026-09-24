@@ -2,10 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowRight, ArrowUpRight, CalendarCheck, Clock, Home, MessageCircle, Phone, Star } from "lucide-react";
 
-import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
-import image2Asset from "@/assets/image-2.png.asset.json";
-import imageAsset from "@/assets/image.png.asset.json";
-import imageWebpAsset from "@/assets/image.webp.asset.json";
+import aboutHeroAsset from "@/assets/chat/about-hero.webp";
+import image2Asset from "@/assets/chat/image-2.webp";
+import imageAsset from "@/assets/chat/image.webp";
+import imageWebpAsset from "@/assets/chat/image.webp";
 
 import { GradientBanner } from "@/components/GradientBanner";
 import { BranchesWithMap } from "@/components/BranchesWithMap";
@@ -91,28 +91,28 @@ const HERO_OFFERS = [
     text: "Круглосуточная помощь",
     href: "/travmpunkt",
     tone: "banner-red",
-    image: aboutHeroAsset.url,
+    image: aboutHeroAsset,
   },
   {
     title: "Пройти чекап",
     text: "Обследование за 1–4 дня",
     href: "/checkups",
     tone: "banner-brand",
-    image: imageWebpAsset.url,
+    image: imageWebpAsset,
   },
   {
     title: "Вызвать врача на дом",
     text: "По предварительной записи",
     href: "/uslugi/vyzov-vracha-na-dom",
     tone: "banner-sand",
-    image: image2Asset.url,
+    image: image2Asset,
   },
   {
     title: "Онлайн-консультация",
     text: "Запись удалённо",
     href: "/uslugi/online-konsultacii-vrachej",
     tone: "banner-sky",
-    image: imageAsset.url,
+    image: imageAsset,
   },
 ];
 
@@ -329,17 +329,17 @@ function HomeV2() {
               {
                 name: "Айбек Токтосунов",
                 profile: "Хирург общей практики, маммолог",
-                image: imageAsset.url,
+                image: imageAsset,
               },
               {
                 name: "Гульнара Сатыбалдиева",
                 profile: "Гинеколог, ведение беременности",
-                image: imageWebpAsset.url,
+                image: imageWebpAsset,
               },
               {
                 name: "Нурлан Жетигенов",
                 profile: "Кардиолог, функциональная диагностика",
-                image: image2Asset.url,
+                image: image2Asset,
               },
             ].map((doctor) => (
               <div
@@ -366,7 +366,7 @@ function HomeV2() {
               className="bg-surface-green hover:bg-surface-green/80 flex w-[260px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl transition-colors"
             >
               <img
-                src={aboutHeroAsset.url}
+                src={aboutHeroAsset}
                 alt="Команда врачей клиники Авиценна"
                 loading="lazy"
                 className="h-44 w-full object-cover"

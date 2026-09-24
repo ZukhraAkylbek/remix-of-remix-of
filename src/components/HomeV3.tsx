@@ -1,12 +1,12 @@
 import { ArrowRight, ClipboardCheck, Award, Waves, MapPin, Star, Stethoscope, TrendingUp } from "lucide-react";
 import { useRef, useState } from "react";
 
-import aboutHeroAsset from "@/assets/about-hero.jpg.asset.json";
-import aboutMissionAsset from "@/assets/about-mission.jpg.asset.json";
-import asianFamilyHeroAsset from "@/assets/asian-family-hero.png.asset.json";
-import clinicVideoAsset from "@/assets/clinic-video.mp4.asset.json";
-import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
-import image2Asset from "@/assets/image-2.png.asset.json";
+import aboutHeroAsset from "@/assets/chat/about-hero.webp";
+import aboutMissionAsset from "@/assets/chat/about-mission.webp";
+import asianFamilyHeroAsset from "@/assets/chat/asian-family-hero.webp";
+import clinicVideoAsset from "@/assets/chat/clinic-video.mp4";
+import doctorPatientHeroAsset from "@/assets/chat/doctor-patient-hero.webp";
+import image2Asset from "@/assets/chat/image-2.webp";
 
 import { BranchesWithMap } from "@/components/BranchesWithMap";
 import { ScrollArrowPair } from "@/components/ScrollArrows";
@@ -18,7 +18,7 @@ import { CLINIC } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { Link } from "@tanstack/react-router";
 
-export const HOME_HERO_IMAGE = asianFamilyHeroAsset.url;
+export const HOME_HERO_IMAGE = asianFamilyHeroAsset;
 
 function Eyebrow({ children }: { children: string }) {
   return (
@@ -185,7 +185,7 @@ const OFFER_CARDS = [
     price: "3 700 с",
     oldPrice: "4 900 с",
     href: "/diagnostika",
-    image: aboutHeroAsset.url,
+    image: aboutHeroAsset,
     tone: "pastel-peach",
   },
   {
@@ -194,7 +194,7 @@ const OFFER_CARDS = [
     title: "Счастливые часы",
     description: "Пройдите чекап утром и получите дополнительную скидку 10%",
     href: "/checkups",
-    image: doctorPatientHeroAsset.url,
+    image: doctorPatientHeroAsset,
     tone: "pastel-mint",
   },
   {
@@ -203,7 +203,7 @@ const OFFER_CARDS = [
     title: "Услуги на дому",
     description: "Врач, анализы и процедуры без выезда в клинику",
     href: "/uslugi/analizy",
-    image: image2Asset.url,
+    image: image2Asset,
     tone: "pastel-sky",
   },
   {
@@ -212,7 +212,7 @@ const OFFER_CARDS = [
     title: "Бесплатная консультация хирурга",
     description: "Разбор анализов и плана операции без оплаты приёма",
     href: "/hirurgiya",
-    image: aboutMissionAsset.url,
+    image: aboutMissionAsset,
     tone: "pastel-lavender",
   },
 ];
@@ -306,7 +306,7 @@ export function HomeV3() {
             {/* Большой баннер с фото на всю область */}
             <div className="border-border relative min-h-[460px] overflow-hidden rounded-3xl border sm:min-h-[420px]">
               <img
-                src={asianFamilyHeroAsset.url}
+                src={asianFamilyHeroAsset}
                 alt="Счастливая семья на фоне голубого неба"
                 className="absolute inset-0 h-full w-full scale-110 object-cover object-[72%_bottom] sm:scale-100 sm:object-[right_center]"
                 loading="eager"
@@ -451,7 +451,7 @@ export function HomeV3() {
         {/* Баннер перед картой */}
         <section className="relative overflow-hidden">
           <img
-            src={aboutHeroAsset.url}
+            src={aboutHeroAsset}
             alt="Врач проводит онлайн-консультацию"
             className="absolute inset-0 h-full w-full object-cover"
             loading="lazy"

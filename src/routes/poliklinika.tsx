@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
+import doctorPatientHeroAsset from "@/assets/chat/doctor-patient-hero.webp";
 import terapevtIcon from "@/assets/specialty-icons/terapevt.png";
 import pediatrIcon from "@/assets/specialty-icons/pediatr.png";
 import kardiologIcon from "@/assets/specialty-icons/kardiolog.png";
@@ -159,7 +159,7 @@ function PolyclinicPage() {
               </div>
             </Reveal>
             <div className="relative mt-6 hidden overflow-hidden rounded-2xl lg:mt-0 lg:block lg:h-full">
-              <img src={doctorPatientHeroAsset.url} alt="Консультация врача в поликлинике «Авиценна»" className="absolute inset-0 size-full object-cover" />
+              <img src={doctorPatientHeroAsset} alt="Консультация врача в поликлинике «Авиценна»" className="absolute inset-0 size-full object-cover" />
               <div className="from-about-mint/30 absolute inset-0 bg-gradient-to-r to-transparent" />
               <div className="bg-about-canvas/95 absolute right-0 bottom-0 max-w-[290px] rounded-tl-2xl p-4 backdrop-blur-sm">
                 {["Более 100 врачей", "Полный диагностический спектр", "Онлайн-запись 24/7"].map((item) => <p key={item} className="text-about-ink flex items-center gap-2 py-1 text-xs font-semibold"><Check className="text-about-teal size-4" />{item}</p>)}
@@ -246,7 +246,7 @@ function PolyclinicPage() {
         <section className="bg-about-canvas py-10 sm:py-12">
           <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div><h2 className="text-about-ink text-3xl font-extrabold sm:text-4xl">Забота о вашем здоровье</h2><p className="text-about-copy mt-3 max-w-xl text-sm leading-relaxed sm:text-base">Запишитесь на консультацию — администратор поможет выбрать специалиста и удобное время.</p><Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark mt-6 shadow-none"><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Записаться на консультацию</a></Button></div>
-            <img src={doctorPatientHeroAsset.url} alt="Врач консультирует пациента" className="h-60 w-full rounded-2xl object-cover" />
+            <img src={doctorPatientHeroAsset} alt="Врач консультирует пациента" className="h-60 w-full rounded-2xl object-cover" />
           </div>
         </section>
       </main>
