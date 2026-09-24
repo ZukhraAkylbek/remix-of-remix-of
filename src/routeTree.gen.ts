@@ -22,6 +22,7 @@ import { Route as TravmpunktRouteImport } from './routes/travmpunkt'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as CheckupsIndexRouteImport } from './routes/checkups.index'
 import { Route as CheckupsSlugRouteImport } from './routes/checkups.$slug'
+import { Route as CheckupsPersonalRouteImport } from './routes/checkups.personal'
 import { Route as ChekapyIndexRouteImport } from './routes/chekapy.index'
 import { Route as ChekapySlugRouteImport } from './routes/chekapy.$slug'
 import { Route as DiagnostikaIndexRouteImport } from './routes/diagnostika.index'
@@ -115,6 +116,11 @@ const CheckupsIndexRoute = CheckupsIndexRouteImport.update({
 const CheckupsSlugRoute = CheckupsSlugRouteImport.update({
   id: '/checkups/$slug',
   path: '/checkups/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckupsPersonalRoute = CheckupsPersonalRouteImport.update({
+  id: '/checkups/personal',
+  path: '/checkups/personal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChekapyIndexRoute = ChekapyIndexRouteImport.update({
@@ -293,6 +299,7 @@ export interface FileRoutesByFullPath {
   '/travmpunkt': typeof TravmpunktRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
+  '/checkups/personal': typeof CheckupsPersonalRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
@@ -336,6 +343,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
   '/checkups/$slug': typeof CheckupsSlugRoute
+  '/checkups/personal': typeof CheckupsPersonalRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
@@ -382,6 +390,7 @@ export interface FileRoutesById {
   '/travmpunkt': typeof TravmpunktRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
+  '/checkups/personal': typeof CheckupsPersonalRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
@@ -428,6 +437,7 @@ export interface FileRouteTypes {
     | '/travmpunkt'
     | '/admin'
     | '/checkups/$slug'
+    | '/checkups/personal'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
     | '/hirurgiya/$slug'
@@ -471,6 +481,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/travmpunkt'
     | '/checkups/$slug'
+    | '/checkups/personal'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
     | '/hirurgiya/$slug'
@@ -516,6 +527,7 @@ export interface FileRouteTypes {
     | '/travmpunkt'
     | '/_authenticated/admin'
     | '/checkups/$slug'
+    | '/checkups/personal'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
     | '/hirurgiya/$slug'
@@ -561,6 +573,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TravmpunktRoute: typeof TravmpunktRoute
   CheckupsSlugRoute: typeof CheckupsSlugRoute
+  CheckupsPersonalRoute: typeof CheckupsPersonalRoute
   ChekapySlugRoute: typeof ChekapySlugRoute
   DiagnostikaSlugRoute: typeof DiagnostikaSlugRoute
   HirurgiyaSlugRoute: typeof HirurgiyaSlugRoute
@@ -667,6 +680,13 @@ declare module '@tanstack/react-router' {
       path: '/checkups/$slug'
       fullPath: '/checkups/$slug'
       preLoaderRoute: typeof CheckupsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkups/personal': {
+      id: '/checkups/personal'
+      path: '/checkups/personal'
+      fullPath: '/checkups/personal'
+      preLoaderRoute: typeof CheckupsPersonalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chekapy/': {
@@ -953,6 +973,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TravmpunktRoute: TravmpunktRoute,
   CheckupsSlugRoute: CheckupsSlugRoute,
+  CheckupsPersonalRoute: CheckupsPersonalRoute,
   ChekapySlugRoute: ChekapySlugRoute,
   DiagnostikaSlugRoute: DiagnostikaSlugRoute,
   HirurgiyaSlugRoute: HirurgiyaSlugRoute,
