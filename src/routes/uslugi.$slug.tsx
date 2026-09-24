@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { Check, Info, Phone } from "lucide-react";
+import { ArrowRight, Check, Clock3, Info, MapPin, Phone } from "lucide-react";
 
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Reveal } from "@/components/Reveal";
