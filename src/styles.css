@@ -566,3 +566,9 @@
     display: none;
   }
 }
+
+/* Hide native search cancel button (we render our own X) */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
