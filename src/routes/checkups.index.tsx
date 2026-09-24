@@ -9,7 +9,6 @@ import {
   ChevronRight,
   CircleUserRound,
   Clock3,
-  HeartPulse,
   ShieldCheck,
   SlidersHorizontal,
   Sparkles,
@@ -17,7 +16,6 @@ import {
   UsersRound,
 } from "lucide-react";
 
-import founderPortrait from "@/assets/founder-zhypar.png";
 import asianFamilyHeroAsset from "@/assets/chat/asian-family-hero.webp";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CheckupIcon } from "@/components/checkups/CheckupIcon";
@@ -324,21 +322,6 @@ function CheckupsPage() {
               <Button asChild variant="outline" className="border-about-teal text-about-ink hover:bg-about-icon">
                 <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Обсудить программу</a>
               </Button>
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12">
-          <div className="border-about-line grid overflow-hidden rounded-2xl border lg:grid-cols-[280px_1fr]">
-            <div className="bg-about-mint h-56 lg:h-64">
-              <img src={founderPortrait} alt="Керималиева Жыпар Абдыказиевна" className="h-full w-full object-cover object-top" loading="lazy" />
-            </div>
-            <div className="flex flex-col justify-center p-5 sm:p-8">
-              <HeartPulse className="text-brand-green size-7" />
-              <blockquote className="text-about-ink mt-4 max-w-3xl text-xl leading-relaxed font-bold sm:text-2xl">
-                «Сохранение вашего здоровья — миссия „Авиценны"»
-              </blockquote>
-              <p className="text-about-copy mt-4 text-sm">Керималиева Жыпар Абдыказиевна, основатель клиники</p>
             </div>
           </div>
         </section>
