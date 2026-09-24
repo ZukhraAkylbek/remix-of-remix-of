@@ -1,4 +1,4 @@
-import logo from "@/assets/logo-avicenna-kg.jpg.asset.json";
+import logo from "@/assets/chat/logo-avicenna-kg.webp";
 import { Editable } from "@/components/live-edit/LiveEdit";
 import { CLINIC } from "@/lib/clinic";
 import { doubleGisSearchUrl } from "@/lib/clinic";
@@ -11,7 +11,7 @@ export function SiteFooter() {
         <div>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <img
-              src={logo.url}
+              src={logo}
               alt="Клинико-диагностический центр «Авиценна»"
               width={440}
               height={95}

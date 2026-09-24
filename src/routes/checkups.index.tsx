@@ -13,7 +13,7 @@ import {
   Users,
 } from "lucide-react";
 
-import asianFamilyHeroAsset from "@/assets/asian-family-hero.png.asset.json";
+import asianFamilyHeroAsset from "@/assets/chat/asian-family-hero.webp";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -197,7 +197,7 @@ function CheckupsPage() {
         <section className="mx-auto max-w-7xl px-4 pt-4 pb-10 sm:px-6 sm:pt-6 sm:pb-14">
           <div className="border-border relative min-h-[440px] overflow-hidden rounded-3xl border sm:min-h-[480px]">
             <img
-              src={asianFamilyHeroAsset.url}
+              src={asianFamilyHeroAsset}
               alt="Счастливая семья на фоне голубого неба"
               className="absolute inset-0 h-full w-full scale-110 object-cover object-[72%_bottom] sm:scale-100 sm:object-[right_center]"
               loading="eager"

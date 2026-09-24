@@ -10,7 +10,7 @@ function WhatsAppIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-import logo from "@/assets/logo-avicenna-kg.jpg.asset.json";
+import logo from "@/assets/chat/logo-avicenna-kg.webp";
 import { CLINIC } from "@/lib/clinic";
 import { useLanguage } from "@/lib/i18n";
 import { BOOKING_URL } from "@/lib/site-config";
@@ -57,7 +57,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
           <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
             <Link to="/" className="flex shrink-0 items-center" aria-label="Авиценна — на главную">
               <img
-                src={logo.url}
+                src={logo}
                 alt="Клинико-диагностический центр «Авиценна»"
                 width={440}
                 height={95}

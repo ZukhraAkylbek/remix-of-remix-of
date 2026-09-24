@@ -30,9 +30,9 @@ import { Button } from "@/components/ui/button";
 import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { CLINIC_DOCTORS, DOCTOR_CATEGORIES, experienceLabel, type ClinicDoctor } from "@/lib/clinic-doctors";
-import teamPhotoAsset from "@/assets/vrachi-team.jpg.asset.json";
+import teamPhotoAsset from "@/assets/chat/vrachi-team.jpg";
 
-const teamPhoto = teamPhotoAsset.url;
+const teamPhoto = teamPhotoAsset;
 
 const TITLE = "Врачи клиники «Авиценна» в Бишкеке — специалисты и запись | Авиценна";
 const DESCRIPTION =
