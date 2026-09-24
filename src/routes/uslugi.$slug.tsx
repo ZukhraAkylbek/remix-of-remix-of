@@ -23,7 +23,10 @@ export const Route = createFileRoute("/uslugi/$slug")({
   loader: async ({ context, params }) => {
     const data = await context.queryClient.ensureQueryData(servicePageQueryOptions(params.slug));
     if (data) {
-      return { title: data.meta_title || data.title, description: data.meta_description || data.summary };
+      return {
+        title: `${data.meta_title || data.title} — клиника «Авиценна» в Бишкеке`,
+        description: data.meta_description || data.summary,
+      };
     }
     const staticPage = STATIC_SERVICE_PAGES[params.slug];
     if (!staticPage) throw notFound();
@@ -35,7 +38,7 @@ export const Route = createFileRoute("/uslugi/$slug")({
         meta: [{ title: "Услуга не найдена — Авиценна" }, { name: "robots", content: "noindex" }],
       };
     }
-    const title = `${loaderData.title} — клиника «Авиценна» в Бишкеке`;
+    const title = loaderData.title;
     const description =
       loaderData.description ?? `${loaderData.title} в клинике «Авиценна» в Бишкеке.`;
     return {
