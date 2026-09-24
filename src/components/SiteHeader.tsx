@@ -274,7 +274,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                   href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand-white/40 bg-brand-white/10 px-3 py-3 text-sm font-bold"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand-white/40 bg-brand-white/10 px-3 py-3 text-sm font-bold transition-all duration-200 hover:bg-brand-white/25 active:scale-[0.97]"
                 >
                   <WhatsAppIcon className="size-4 shrink-0" />
                   WhatsApp
