@@ -12,6 +12,7 @@ import { BranchesWithMap } from "@/components/BranchesWithMap";
 import { ScrollArrowPair } from "@/components/ScrollArrows";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { Reveal } from "@/components/Reveal";
+import { CountUp } from "@/components/CountUp";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC } from "@/lib/clinic";
@@ -410,7 +411,7 @@ export function HomeV3() {
                       <stat.icon className="text-brand-green size-5 sm:size-6" />
                       <div>
                         <p className="text-foreground text-xl font-extrabold sm:text-2xl">
-                          {stat.value}
+                          <CountUp value={stat.value} />
                         </p>
                         <p className="text-muted-foreground mt-0.5 text-[11px] leading-tight sm:text-xs">
                           {stat.label}
