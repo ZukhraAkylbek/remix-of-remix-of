@@ -262,6 +262,157 @@ function ServicePage() {
   );
 }
 
+/** Статическая страница услуги по структуре макета УЗИ (когда в базе страницы нет). */
+function StaticServiceView({ page }: { page: StaticServicePage }) {
+  return (
+    <div className="bg-about-canvas min-h-screen">
+      <SiteHeader breadcrumb={page.crumb} />
+      <Breadcrumbs items={[{ label: "Услуги", href: "/uslugi" }, { label: page.crumb }]} />
+
+      <main>
+        {/* Герой */}
+        <section className="bg-about-mint py-10 sm:py-12">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6">
+            <h1 className="text-about-ink text-3xl font-extrabold sm:text-5xl">{page.title}</h1>
+            <p className="text-about-copy mt-4 max-w-2xl text-base leading-relaxed sm:text-lg">
+              {page.subtitle}
+            </p>
+          </div>
+        </section>
+
+        <div className="mx-auto max-w-4xl space-y-4 px-4 py-10 sm:px-6 sm:py-12">
+          {/* Что такое — раскрывающаяся строка */}
+          <details className="group border-about-line rounded-2xl border bg-white p-4 sm:p-5">
+            <summary className="flex cursor-pointer list-none items-center gap-3 [&::-webkit-details-marker]:hidden">
+              <span className="bg-about-icon text-about-teal grid size-10 shrink-0 place-items-center rounded-full">
+                <Info className="size-5" aria-hidden="true" />
+              </span>
+              <span className="text-about-ink min-w-0 text-sm font-bold sm:text-base">
+                {page.aboutTitle}
+              </span>
+              <span className="bg-about-icon text-about-teal ml-auto grid size-8 shrink-0 place-items-center rounded-full transition-transform duration-300 group-open:-rotate-90">
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </span>
+            </summary>
+            <p className="text-about-copy mt-3 text-sm leading-relaxed sm:text-base">
+              {page.aboutText}
+            </p>
+          </details>
+
+          {/* Где можно пройти */}
+          <section className="border-about-line rounded-2xl border bg-white p-4 sm:p-6">
+            <div className="flex items-center gap-3">
+              <span className="bg-about-icon text-about-teal grid size-10 shrink-0 place-items-center rounded-full">
+                <MapPin className="size-5" aria-hidden="true" />
+              </span>
+              <h2 className="text-about-ink text-lg font-extrabold sm:text-xl">
+                Где можно пройти {page.crumb}?
+              </h2>
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {SERVICE_BRANCHES.map((branch) => (
+                <a
+                  key={branch.street}
+                  href={doubleGisUrl(branch.street)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-about-line hover:border-brand-green hover:bg-about-mint rounded-xl border p-3 transition-colors"
+                >
+                  <span className="text-about-ink flex items-center gap-2 text-sm font-bold">
+                    <MapPin className="text-about-teal size-4 shrink-0" aria-hidden="true" />
+                    {branch.street}
+                  </span>
+                  <span className="text-about-copy mt-1.5 flex items-center gap-2 text-xs">
+                    <Clock3 className="text-about-teal size-3.5 shrink-0" aria-hidden="true" />
+                    {branch.hours}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          {/* Какие виды есть — раскрывающаяся строка */}
+          <details className="group border-about-line rounded-2xl border bg-white p-4 sm:p-5">
+            <summary className="flex cursor-pointer list-none items-center gap-3 [&::-webkit-details-marker]:hidden">
+              <span className="bg-about-icon text-about-teal grid size-10 shrink-0 place-items-center rounded-full">
+                <Check className="size-5" aria-hidden="true" />
+              </span>
+              <span className="text-about-ink min-w-0 text-sm font-bold sm:text-base">
+                {page.typesTitle}
+              </span>
+              <span className="bg-about-icon text-about-teal ml-auto grid size-8 shrink-0 place-items-center rounded-full transition-transform duration-300 group-open:-rotate-90">
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </span>
+            </summary>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              {page.types.map((type) => (
+                <li
+                  key={type}
+                  className="text-about-copy flex items-start gap-2 text-sm leading-snug"
+                >
+                  <Check className="text-brand-green mt-0.5 size-4 shrink-0" aria-hidden="true" />
+                  {type}
+                </li>
+              ))}
+            </ul>
+          </details>
+
+          {/* Когда проводят + шаги */}
+          <section className="border-about-line rounded-2xl border bg-white p-4 sm:p-6">
+            <h2 className="text-about-ink text-base font-extrabold sm:text-lg">{page.whenTitle}</h2>
+            <p className="text-about-copy mt-2 text-sm leading-relaxed sm:text-base">
+              {page.whenText}
+            </p>
+
+            <h3 className="text-about-ink mt-6 text-base font-extrabold sm:text-lg">
+              Как проходит исследование
+            </h3>
+            <ol className="mt-4 space-y-4">
+              {page.steps.map((step, index) => (
+                <li key={step.title} className="flex items-start gap-3">
+                  <span className="bg-about-icon text-about-teal grid size-8 shrink-0 place-items-center rounded-full text-sm font-bold">
+                    {index + 1}
+                  </span>
+                  <span>
+                    <span className="text-about-ink block text-sm font-bold sm:text-base">
+                      {step.title}
+                    </span>
+                    <span className="text-about-copy mt-0.5 block text-xs leading-relaxed sm:text-sm">
+                      {step.text}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          {/* CTA */}
+          <div className="flex flex-wrap gap-2 pt-2 sm:gap-3">
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-brand-green text-brand-white inline-flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-bold transition-transform duration-300 hover:-translate-y-0.5 sm:px-6"
+            >
+              Записаться
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </a>
+            <a
+              href={`tel:${CLINIC.phones[0]}`}
+              className="border-about-line text-about-ink hover:border-brand-green inline-flex items-center gap-2 rounded-xl border bg-white px-4 py-3 text-sm font-bold transition-colors sm:px-6"
+            >
+              <Phone className="size-4" aria-hidden="true" />
+              Позвонить
+            </a>
+          </div>
+        </div>
+      </main>
+
+      <SiteFooter />
+    </div>
+  );
+}
+
 type Block = {
   id: string;
   title: string;
