@@ -13,6 +13,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { servicePagesQueryOptions } from "@/lib/services.queries";
+import { SERVICE_LINKS } from "@/lib/uslugi-pages";
 
 const TITLE = "Услуги клиники «Авиценна» в Бишкеке — полный список";
 const DESCRIPTION =
@@ -396,7 +397,8 @@ function ServicesIndex() {
                         </span>
                       </a>
                     </Reveal>
-                  ))}
+                    );
+                  })}
             </div>
           </div>
         </section>
