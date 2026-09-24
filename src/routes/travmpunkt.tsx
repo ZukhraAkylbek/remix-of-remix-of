@@ -20,7 +20,6 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { CLINIC_DOCTORS, experienceLabel, type ClinicDoctor } from "@/lib/clinic-doctors";
-import { specialtyImage } from "@/lib/specialty-images";
 import { FaqList } from "./hirurgiya.index";
 
 const TITLE = "Травмпункт 24/7 в Бишкеке — круглосуточно | Авиценна";
