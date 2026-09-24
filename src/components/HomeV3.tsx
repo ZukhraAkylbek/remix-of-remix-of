@@ -410,7 +410,7 @@ export function HomeV3() {
                       <stat.icon className="text-brand-green size-5 sm:size-6" />
                       <div>
                         <p className="text-foreground text-xl font-extrabold sm:text-2xl">
-                          {stat.value}
+                          <CountUp value={stat.value} />
                         </p>
                         <p className="text-muted-foreground mt-0.5 text-[11px] leading-tight sm:text-xs">
                           {stat.label}
