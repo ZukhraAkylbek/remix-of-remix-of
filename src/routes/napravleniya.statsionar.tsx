@@ -112,6 +112,7 @@ function StatsionarPage() {
   return (
     <div className="bg-about-canvas min-h-screen">
       <SiteHeader breadcrumb="Стационар" />
+      <Breadcrumbs items={[{ label: "Услуги", href: "/uslugi" }, { label: "Стационар" }]} />
 
       <script
         type="application/ld+json"
