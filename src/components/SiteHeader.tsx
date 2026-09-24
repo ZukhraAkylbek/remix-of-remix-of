@@ -281,7 +281,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                 </a>
                 <a
                   href={`tel:${phone}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-white px-3 py-3 text-sm font-bold text-brand-green"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-white px-3 py-3 text-sm font-bold text-brand-green transition-all duration-200 hover:brightness-95 active:scale-[0.97]"
                 >
                   <Phone className="size-4 shrink-0" />
                   {t("Позвонить", "Позвонить")}
