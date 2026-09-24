@@ -19,7 +19,6 @@ import { Route as GlavnayaV3RouteImport } from './routes/glavnaya-v3'
 import { Route as PoliklinikaRouteImport } from './routes/poliklinika'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TravmpunktRouteImport } from './routes/travmpunkt'
-import { Route as VrachiRouteImport } from './routes/vrachi'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as CheckupsIndexRouteImport } from './routes/checkups.index'
 import { Route as CheckupsSlugRouteImport } from './routes/checkups.$slug'
@@ -33,6 +32,8 @@ import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.ind
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as UslugiIndexRouteImport } from './routes/uslugi.index'
 import { Route as UslugiSlugRouteImport } from './routes/uslugi.$slug'
+import { Route as VrachiIndexRouteImport } from './routes/vrachi.index'
+import { Route as VrachiSlugRouteImport } from './routes/vrachi.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminBranchesRouteImport } from './routes/_authenticated/admin/branches'
 import { Route as AuthenticatedAdminCheckupsRouteImport } from './routes/_authenticated/admin/checkups'
@@ -101,11 +102,6 @@ const TravmpunktRoute = TravmpunktRouteImport.update({
   path: '/travmpunkt',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VrachiRoute = VrachiRouteImport.update({
-  id: '/vrachi',
-  path: '/vrachi',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -169,6 +165,16 @@ const UslugiIndexRoute = UslugiIndexRouteImport.update({
 const UslugiSlugRoute = UslugiSlugRouteImport.update({
   id: '/uslugi/$slug',
   path: '/uslugi/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VrachiIndexRoute = VrachiIndexRouteImport.update({
+  id: '/vrachi/',
+  path: '/vrachi/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VrachiSlugRoute = VrachiSlugRouteImport.update({
+  id: '/vrachi/$slug',
+  path: '/vrachi/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
@@ -285,7 +291,6 @@ export interface FileRoutesByFullPath {
   '/poliklinika': typeof PoliklinikaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
-  '/vrachi': typeof VrachiRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
@@ -293,12 +298,14 @@ export interface FileRoutesByFullPath {
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/vrachi/$slug': typeof VrachiSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
   '/diagnostika/': typeof DiagnostikaIndexRoute
   '/hirurgiya/': typeof HirurgiyaIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/uslugi/': typeof UslugiIndexRoute
+  '/vrachi/': typeof VrachiIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
@@ -328,19 +335,20 @@ export interface FileRoutesByTo {
   '/poliklinika': typeof PoliklinikaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
-  '/vrachi': typeof VrachiRoute
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/vrachi/$slug': typeof VrachiSlugRoute
   '/checkups': typeof CheckupsIndexRoute
   '/chekapy': typeof ChekapyIndexRoute
   '/diagnostika': typeof DiagnostikaIndexRoute
   '/hirurgiya': typeof HirurgiyaIndexRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/uslugi': typeof UslugiIndexRoute
+  '/vrachi': typeof VrachiIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
@@ -372,7 +380,6 @@ export interface FileRoutesById {
   '/poliklinika': typeof PoliklinikaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/travmpunkt': typeof TravmpunktRoute
-  '/vrachi': typeof VrachiRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
@@ -380,12 +387,14 @@ export interface FileRoutesById {
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/vrachi/$slug': typeof VrachiSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
   '/diagnostika/': typeof DiagnostikaIndexRoute
   '/hirurgiya/': typeof HirurgiyaIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/uslugi/': typeof UslugiIndexRoute
+  '/vrachi/': typeof VrachiIndexRoute
   '/_authenticated/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/_authenticated/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
@@ -417,7 +426,6 @@ export interface FileRouteTypes {
     | '/poliklinika'
     | '/sitemap.xml'
     | '/travmpunkt'
-    | '/vrachi'
     | '/admin'
     | '/checkups/$slug'
     | '/chekapy/$slug'
@@ -425,12 +433,14 @@ export interface FileRouteTypes {
     | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/uslugi/$slug'
+    | '/vrachi/$slug'
     | '/checkups/'
     | '/chekapy/'
     | '/diagnostika/'
     | '/hirurgiya/'
     | '/napravleniya/'
     | '/uslugi/'
+    | '/vrachi/'
     | '/admin/branches'
     | '/admin/checkups'
     | '/admin/content'
@@ -460,19 +470,20 @@ export interface FileRouteTypes {
     | '/poliklinika'
     | '/sitemap.xml'
     | '/travmpunkt'
-    | '/vrachi'
     | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/diagnostika/$slug'
     | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/uslugi/$slug'
+    | '/vrachi/$slug'
     | '/checkups'
     | '/chekapy'
     | '/diagnostika'
     | '/hirurgiya'
     | '/napravleniya'
     | '/uslugi'
+    | '/vrachi'
     | '/admin/branches'
     | '/admin/checkups'
     | '/admin/content'
@@ -503,7 +514,6 @@ export interface FileRouteTypes {
     | '/poliklinika'
     | '/sitemap.xml'
     | '/travmpunkt'
-    | '/vrachi'
     | '/_authenticated/admin'
     | '/checkups/$slug'
     | '/chekapy/$slug'
@@ -511,12 +521,14 @@ export interface FileRouteTypes {
     | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/uslugi/$slug'
+    | '/vrachi/$slug'
     | '/checkups/'
     | '/chekapy/'
     | '/diagnostika/'
     | '/hirurgiya/'
     | '/napravleniya/'
     | '/uslugi/'
+    | '/vrachi/'
     | '/_authenticated/admin/branches'
     | '/_authenticated/admin/checkups'
     | '/_authenticated/admin/content'
@@ -548,19 +560,20 @@ export interface RootRouteChildren {
   PoliklinikaRoute: typeof PoliklinikaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TravmpunktRoute: typeof TravmpunktRoute
-  VrachiRoute: typeof VrachiRoute
   CheckupsSlugRoute: typeof CheckupsSlugRoute
   ChekapySlugRoute: typeof ChekapySlugRoute
   DiagnostikaSlugRoute: typeof DiagnostikaSlugRoute
   HirurgiyaSlugRoute: typeof HirurgiyaSlugRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
   UslugiSlugRoute: typeof UslugiSlugRoute
+  VrachiSlugRoute: typeof VrachiSlugRoute
   CheckupsIndexRoute: typeof CheckupsIndexRoute
   ChekapyIndexRoute: typeof ChekapyIndexRoute
   DiagnostikaIndexRoute: typeof DiagnostikaIndexRoute
   HirurgiyaIndexRoute: typeof HirurgiyaIndexRoute
   NapravleniyaIndexRoute: typeof NapravleniyaIndexRoute
   UslugiIndexRoute: typeof UslugiIndexRoute
+  VrachiIndexRoute: typeof VrachiIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -633,13 +646,6 @@ declare module '@tanstack/react-router' {
       path: '/travmpunkt'
       fullPath: '/travmpunkt'
       preLoaderRoute: typeof TravmpunktRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/vrachi': {
-      id: '/vrachi'
-      path: '/vrachi'
-      fullPath: '/vrachi'
-      preLoaderRoute: typeof VrachiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -731,6 +737,20 @@ declare module '@tanstack/react-router' {
       path: '/uslugi/$slug'
       fullPath: '/uslugi/$slug'
       preLoaderRoute: typeof UslugiSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vrachi/': {
+      id: '/vrachi/'
+      path: '/vrachi'
+      fullPath: '/vrachi/'
+      preLoaderRoute: typeof VrachiIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vrachi/$slug': {
+      id: '/vrachi/$slug'
+      path: '/vrachi/$slug'
+      fullPath: '/vrachi/$slug'
+      preLoaderRoute: typeof VrachiSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/': {
@@ -932,19 +952,20 @@ const rootRouteChildren: RootRouteChildren = {
   PoliklinikaRoute: PoliklinikaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TravmpunktRoute: TravmpunktRoute,
-  VrachiRoute: VrachiRoute,
   CheckupsSlugRoute: CheckupsSlugRoute,
   ChekapySlugRoute: ChekapySlugRoute,
   DiagnostikaSlugRoute: DiagnostikaSlugRoute,
   HirurgiyaSlugRoute: HirurgiyaSlugRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
   UslugiSlugRoute: UslugiSlugRoute,
+  VrachiSlugRoute: VrachiSlugRoute,
   CheckupsIndexRoute: CheckupsIndexRoute,
   ChekapyIndexRoute: ChekapyIndexRoute,
   DiagnostikaIndexRoute: DiagnostikaIndexRoute,
   HirurgiyaIndexRoute: HirurgiyaIndexRoute,
   NapravleniyaIndexRoute: NapravleniyaIndexRoute,
   UslugiIndexRoute: UslugiIndexRoute,
+  VrachiIndexRoute: VrachiIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

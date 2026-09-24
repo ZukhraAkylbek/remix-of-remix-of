@@ -1,4 +1,3 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -27,7 +26,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
-import { doctorsQueryOptions } from "@/lib/doctors.queries";
+import { CLINIC_DOCTORS, DOCTOR_CATEGORIES, experienceLabel, type ClinicDoctor } from "@/lib/clinic-doctors";
 import { specialtyImage } from "@/lib/specialty-images";
 
 const TITLE = "Врачи клиники «Авиценна» в Бишкеке — специалисты и запись | Авиценна";
@@ -54,10 +53,7 @@ const FAQ_ITEMS: Array<{ title: string; text?: string }> = [
   { title: "Принимают ли врачи детей?", text: "Да, в клинике ведут приём педиатры и узкие детские специалисты." },
 ];
 
-export const Route = createFileRoute("/vrachi")({
-  loader: ({ context }) => {
-    void context.queryClient.ensureQueryData(doctorsQueryOptions());
-  },
+export const Route = createFileRoute("/vrachi/")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -138,27 +134,15 @@ function FaqList({ items }: { items: { title: string; text?: string }[] }) {
   );
 }
 
-function DoctorsCarousel({
-  doctors,
-}: {
-  doctors: {
-    slug: string;
-    full_name: string;
-    job_title: string | null;
-    photo_url: string | null;
-    experience_years: number | null;
-    specialty_name: string | null;
-    specialty_slug: string | null;
-  }[];
-}) {
+function DoctorsCarousel({ doctors }: { doctors: ClinicDoctor[] }) {
   const carouselRef = useRef<HTMLDivElement>(null);
   const scroll = (direction: -1 | 1) => {
     carouselRef.current?.scrollBy({ left: direction * 320, behavior: "smooth" });
   };
 
   return (
-    <div className="relative mt-6">
-      <div className="mb-4 flex justify-end gap-2">
+    <div className="relative mt-3">
+      <div className="mb-3 flex justify-end gap-2">
         <Button
           variant="outline"
           size="icon"
@@ -187,37 +171,32 @@ function DoctorsCarousel({
             key={doctor.slug}
             className="border-about-line bg-about-canvas w-[260px] shrink-0 snap-start rounded-2xl border p-4 sm:w-[280px]"
           >
-            {doctor.photo_url ? (
+            {doctor.photo ? (
               <img
-                src={doctor.photo_url}
-                alt={doctor.full_name}
+                src={doctor.photo}
+                alt={doctor.name}
                 loading="lazy"
-                className="size-24 rounded-full object-cover"
+                className="size-24 rounded-full object-cover object-top"
               />
             ) : (
               <span className="bg-about-icon text-about-teal grid size-24 place-items-center rounded-full">
                 <UserRound className="size-10" aria-hidden="true" />
               </span>
             )}
-            <h3 className="text-about-ink mt-4 text-lg font-bold">{doctor.full_name}</h3>
+            <h3 className="text-about-ink mt-4 text-lg font-bold">{doctor.name}</h3>
             <p className="text-about-teal mt-1 text-sm font-semibold">
-              {doctor.job_title || doctor.specialty_name || "Врач"}
+              {doctor.specialty}
             </p>
-            {doctor.experience_years != null && (
-              <p className="text-about-copy mt-2 text-sm">Стаж: {doctor.experience_years} лет</p>
+            {doctor.experience != null && (
+              <p className="text-about-copy mt-2 text-sm">Стаж: {experienceLabel(doctor.experience)}</p>
             )}
+            <p className="text-about-copy mt-1 text-[13px]">{doctor.branch}</p>
             <Button
               asChild
               variant="outline"
               className="border-about-line text-about-ink mt-4 bg-transparent shadow-none"
             >
-              {doctor.specialty_slug ? (
-                <Link to="/napravleniya/$slug" params={{ slug: doctor.specialty_slug }}>
-                  Подробнее
-                </Link>
-              ) : (
-                <Link to="/poliklinika">Подробнее</Link>
-              )}
+              <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>Подробнее</Link>
             </Button>
           </article>
         ))}
@@ -226,18 +205,7 @@ function DoctorsCarousel({
   );
 }
 
-const FALLBACK_DOCTORS = [
-  { slug: "terapevt-1", full_name: "Иванова Анна Петровна", job_title: "Терапевт", photo_url: null, experience_years: 15, specialty_name: "Терапия", specialty_slug: "terapiya" },
-  { slug: "hirurg-1", full_name: "Петров Сергей Иванович", job_title: "Хирург", photo_url: null, experience_years: 12, specialty_name: "Хирургия", specialty_slug: "obshchaya-hirurgiya" },
-  { slug: "kardiolog-1", full_name: "Кадырова Гульнара Акматовна", job_title: "Кардиолог", photo_url: null, experience_years: 10, specialty_name: "Кардиология", specialty_slug: "kardiologiya" },
-  { slug: "ginekolog-1", full_name: "Сидорова Елена Николаевна", job_title: "Гинеколог", photo_url: null, experience_years: 18, specialty_name: "Гинекология", specialty_slug: "ginekologiya" },
-  { slug: "nevrolog-1", full_name: "Бектуров Нурлан Жумабекович", job_title: "Невролог", photo_url: null, experience_years: 14, specialty_name: "Неврология", specialty_slug: "nevrologiya" },
-  { slug: "pediatr-1", full_name: "Асанова Айгуль Туратовна", job_title: "Педиатр", photo_url: null, experience_years: 9, specialty_name: "Педиатрия", specialty_slug: "pediatriya" },
-];
-
 function DoctorsPage() {
-  const { data: doctors } = useSuspenseQuery(doctorsQueryOptions());
-  const doctorList = doctors.length > 0 ? doctors : FALLBACK_DOCTORS;
   const heroImage = specialtyImage("kardio", 0);
   const faqItems = FAQ_ITEMS;
 
@@ -339,7 +307,25 @@ function DoctorsPage() {
               title="Наши врачи"
               description="Подберите специалиста по направлению и запишитесь на приём онлайн."
             />
-            <DoctorsCarousel doctors={doctorList} />
+            <nav aria-label="Виды услуг" className="mt-5 flex flex-wrap gap-2">
+              {DOCTOR_CATEGORIES.filter((c) => CLINIC_DOCTORS.some((d) => d.category === c.slug)).map((c) => (
+                <a key={c.slug} href={`#${c.slug}`} className="border-about-line text-about-ink hover:bg-about-mint rounded-full border px-3 py-1.5 text-[13px] font-semibold sm:text-sm">
+                  {c.name}
+                </a>
+              ))}
+            </nav>
+            {DOCTOR_CATEGORIES.map((c) => {
+              const list = CLINIC_DOCTORS.filter((d) => d.category === c.slug);
+              if (list.length === 0) return null;
+              return (
+                <div key={c.slug} id={c.slug} className="mt-8 scroll-mt-24">
+                  <h3 className="text-about-ink text-xl font-bold sm:text-2xl">
+                    {c.name} <span className="text-about-teal text-base font-semibold">· {list.length}</span>
+                  </h3>
+                  <DoctorsCarousel doctors={list} />
+                </div>
+              );
+            })}
           </div>
         </section>
 
