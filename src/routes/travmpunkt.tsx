@@ -80,6 +80,10 @@ const FAQ_ITEMS = [
     title: "Когда требуется регулярное наблюдение травматолога-ортопеда?",
     text: "Регулярное наблюдение важно после травм и операций, при нарушениях осанки и плоскостопии, заболеваниях суставов и костной системы, а также детям — для контроля правильного формирования опорно-двигательного аппарата.",
   },
+  {
+    title: "Нужно ли записываться в травмпункт?",
+    text: "Нет, травмпункт работает круглосуточно и принимает без записи. Приходите сразу после травмы — чем раньше начато лечение, тем быстрее восстановление. При необходимости можно предварительно позвонить.",
+  },
 ];
 
 const traumaDoctors = CLINIC_DOCTORS.filter((d) => d.category === "travmatologiya");
@@ -279,13 +283,13 @@ function TraumaPage() {
         )}
 
         {/* FAQ */}
-        <section className="py-10 sm:py-12">
+        <section className="bg-about-canvas border-y border-about-line py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <TraumaHeading
               title="Часто задаваемые вопросы"
               description="Отвечаем на популярные вопросы о приёме травматолога-ортопеда."
             />
-            <div className="mt-6 lg:grid lg:grid-cols-2 lg:gap-4">
+            <div className="mt-7">
               <FaqList items={FAQ_ITEMS} />
             </div>
           </div>

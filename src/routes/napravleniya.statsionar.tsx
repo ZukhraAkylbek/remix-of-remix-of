@@ -82,6 +82,10 @@ const FAQ_ITEMS = [
     title: "Как проходит госпитализация?",
     text: "Госпитализация для планового стационарного лечения проводится в течение 2 часов с момента обращения в приёмный покой в назначенный день. Если госпитализировать в назначенный день невозможно, врач стационара обязан известить вас и согласовать новый срок.",
   },
+  {
+    title: "Что взять с собой в стационар?",
+    text: "Паспорт, результаты предыдущих обследований, сменную обувь и предметы личной гигиены. Полный список необходимого администратор пришлёт при бронировании места.",
+  },
 ];
 
 export const Route = createFileRoute("/napravleniya/statsionar")({
@@ -262,14 +266,14 @@ function StatsionarPage() {
         </section>
 
         {/* FAQ */}
-        <section className="bg-about-mint border-y border-about-line py-10 sm:py-12">
+        <section className="bg-about-canvas border-y border-about-line py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <StatsionarHeading
               icon={<CalendarClock className="size-5" aria-hidden="true" />}
               title="Часто задаваемые вопросы"
               description="Всё о стационарном лечении и госпитализации в «Авиценне»."
             />
-            <div className="mt-6 lg:grid lg:grid-cols-2 lg:gap-4">
+            <div className="mt-7">
               <FaqList items={FAQ_ITEMS} />
             </div>
           </div>
