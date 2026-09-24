@@ -56,6 +56,21 @@ export function SiteSearch({ className = "" }: { className?: string }) {
     for (const p of pages.data ?? []) {
       hits.push({ title: p.title, group: "Страницы", to: p.path });
     }
+    for (const cat of DOCTOR_CATEGORIES) {
+      hits.push({
+        title: cat.name,
+        group: "Специалисты",
+        to: `/vrachi?category=${cat.slug}#vrachi`,
+      });
+    }
+    for (const d of CLINIC_DOCTORS) {
+      hits.push({
+        title: d.name,
+        subtitle: d.specialty,
+        group: "Врачи",
+        to: `/vrachi/${d.slug}`,
+      });
+    }
     return hits;
   }, [specialties.data, checkups.data, pages.data]);
 
