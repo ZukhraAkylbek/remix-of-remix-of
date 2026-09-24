@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Activity,
   Award,
@@ -62,28 +62,44 @@ const ADVANTAGES = [
     icon: Stethoscope,
     title: "Более 100 специалистов",
     text: "Врачи различных специальностей.",
+    href: "/vrachi",
+    external: false,
   },
   {
     icon: HeartHandshake,
     title: "Круглосуточный терапевтический стационар",
     text: "Комфортные условия для лечения и наблюдения.",
+    href: "/uslugi/statsionar",
+    external: false,
   },
   {
     icon: ShieldCheck,
     title: "Хирургическое отделение",
     text: "Современные методики и опытные специалисты.",
+    href: "/hirurgiya",
+    external: false,
   },
   {
     icon: Microscope,
     title: "Собственная лаборатория Экспресс Плюс",
     text: "Быстрая и точная диагностика.",
+    href: "https://expresslab.kg/",
+    external: true,
   },
   {
     icon: Activity,
     title: "Медицинские чекапы",
     text: "Комплексные обследования для вашего здоровья.",
+    href: "/checkups",
+    external: false,
   },
-] satisfies Array<{ icon: LucideIcon; title: string; text: string }>;
+] satisfies Array<{
+  icon: LucideIcon;
+  title: string;
+  text: string;
+  href: string;
+  external: boolean;
+}>;
 
 export const Route = createFileRoute("/about")({
   head: () => {
@@ -248,20 +264,33 @@ function AboutPage() {
         <section className="bg-about-mint py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionTitle>Наши преимущества</SectionTitle>
-            <div className="mt-6 grid auto-rows-fr gap-3 md:grid-cols-2 lg:grid-cols-3">
-              {ADVANTAGES.map(({ icon: Icon, title, text }, index) => (
-                <Reveal key={title} delay={index * 35} className="h-full">
-                  <article className="border-about-line bg-card flex h-full gap-4 rounded-2xl border p-4 sm:p-5">
-                    <span className="bg-about-icon text-about-teal grid size-12 shrink-0 place-items-center rounded-full">
-                      <Icon className="size-6" strokeWidth={1.6} aria-hidden="true" />
+            <div className="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+              {ADVANTAGES.map(({ icon: Icon, title, text, href, external }, index) => {
+                const card = (
+                  <article className="border-about-line bg-card group flex items-start gap-3 rounded-2xl border p-4 transition-colors hover:border-brand-green hover:bg-about-mint/60 sm:gap-4 sm:p-4">
+                    <span className="bg-about-icon text-about-teal grid size-10 shrink-0 place-items-center rounded-full sm:size-11">
+                      <Icon className="size-5 sm:size-[22px]" strokeWidth={1.6} aria-hidden="true" />
                     </span>
-                    <div>
-                      <h3 className="text-about-ink text-lg leading-snug font-bold">{title}</h3>
-                      <p className="text-about-copy mt-2 text-sm leading-relaxed sm:text-base">{text}</p>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-about-ink text-base leading-snug font-bold sm:text-lg">{title}</h3>
+                      <p className="text-about-copy mt-1 text-sm leading-snug sm:mt-1.5">{text}</p>
                     </div>
                   </article>
-                </Reveal>
-              ))}
+                );
+                return (
+                  <Reveal key={title} delay={index * 35} className="h-full">
+                    {external ? (
+                      <a href={href} target="_blank" rel="noopener noreferrer" className="block h-full">
+                        {card}
+                      </a>
+                    ) : (
+                      <Link to={href} className="block h-full">
+                        {card}
+                      </Link>
+                    )}
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </section>
