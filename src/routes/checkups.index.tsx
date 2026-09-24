@@ -184,6 +184,7 @@ const FAQ = [
 ];
 
 function CheckupsPage() {
+  const [miniListOpen, setMiniListOpen] = useState(false);
   const [activeMini, setActiveMini] = useState<MiniProgram | null>(null);
   const [activeProgram, setActiveProgram] = useState<ProgramDetail | null>(null);
 
@@ -286,7 +287,7 @@ function CheckupsPage() {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => setActiveMini(DEFAULT_MINI_PROGRAM)}
+                onClick={() => setMiniListOpen(true)}
                 className="border-about-line bg-about-mint hover:border-brand-green hover:bg-about-mint h-auto min-h-56 items-stretch justify-between whitespace-normal rounded-2xl p-5 text-left shadow-none lg:col-span-4"
               >
                 <span className="flex w-full flex-col">
