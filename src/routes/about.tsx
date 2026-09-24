@@ -211,21 +211,21 @@ function AboutPage() {
                   />
                 </div>
 
-                <div className="grid gap-8 p-6 sm:p-10 lg:grid-cols-[0.9fr_auto_1.1fr] lg:items-center lg:p-12">
+                <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[0.9fr_auto_1.1fr] lg:items-center lg:p-10">
                   <div>
                     <Award className="text-about-teal size-8" strokeWidth={1.5} aria-hidden="true" />
-                    <h2 className="font-serif-editorial text-about-ink mt-5 text-4xl leading-tight font-normal italic sm:text-5xl">
+                    <h2 className="font-serif-editorial text-about-ink mt-4 text-3xl leading-tight font-normal italic sm:text-4xl">
                       «Главное — ден соолук!»
                     </h2>
-                    <p className="text-about-ink mt-8 text-lg font-bold">
+                    <p className="text-about-ink mt-6 text-lg font-bold">
                       Керималиева Жыпар Абдыказиевна
                     </p>
-                    <p className="text-about-copy mt-2 text-sm leading-relaxed">
+                    <p className="text-about-copy mt-1.5 text-sm leading-relaxed">
                       Основательница сети клиник «Авиценна»
                     </p>
                   </div>
 
-                  <div className="bg-about-line h-px w-full lg:h-full lg:min-h-72 lg:w-px" />
+                  <div className="bg-about-line h-px w-full lg:h-full lg:min-h-56 lg:w-px" />
 
                   <div>
                     <p className="text-about-ink text-lg leading-relaxed sm:text-xl">
