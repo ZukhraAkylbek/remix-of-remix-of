@@ -328,21 +328,6 @@ function CheckupsPage() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12">
-          <div className="border-about-line grid overflow-hidden rounded-2xl border lg:grid-cols-[280px_1fr]">
-            <div className="bg-about-mint h-56 lg:h-64">
-              <img src={founderPortrait} alt="Керималиева Жыпар Абдыказиевна" className="h-full w-full object-cover object-top" loading="lazy" />
-            </div>
-            <div className="flex flex-col justify-center p-5 sm:p-8">
-              <HeartPulse className="text-brand-green size-7" />
-              <blockquote className="text-about-ink mt-4 max-w-3xl text-xl leading-relaxed font-bold sm:text-2xl">
-                «Сохранение вашего здоровья — миссия „Авиценны"»
-              </blockquote>
-              <p className="text-about-copy mt-4 text-sm">Керималиева Жыпар Абдыказиевна, основатель клиники</p>
-            </div>
-          </div>
-        </section>
-
         <section className="bg-about-mint border-about-line border-y">
           <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12">
             <h2 className="text-about-ink text-2xl font-extrabold sm:text-3xl">Часто задаваемые вопросы</h2>
