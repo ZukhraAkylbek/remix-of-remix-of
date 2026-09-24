@@ -4,13 +4,16 @@ import { Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { checkupPageQueryOptions } from "@/lib/checkups.queries";
+import { CLINIC_DOCTORS, DOCTOR_CATEGORIES } from "@/lib/clinic-doctors";
 import { pagesQueryOptions } from "@/lib/pages.queries";
 import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
 type Hit = { title: string; subtitle?: string | undefined; group: string; to: string };
 
 const STATIC_HITS: Hit[] = [
-  { title: "Направления", group: "Разделы", to: "/napravleniya" },
+  { title: "Поликлиника", group: "Разделы", to: "/poliklinika" },
+  { title: "Хирургия", group: "Разделы", to: "/hirurgiya" },
+  { title: "О клинике", group: "Разделы", to: "/about" },
   { title: "Чекапы", group: "Разделы", to: "/checkups" },
   { title: "Услуги", group: "Разделы", to: "/uslugi" },
   { title: "Диагностика", group: "Разделы", to: "/#preimushchestva" },
