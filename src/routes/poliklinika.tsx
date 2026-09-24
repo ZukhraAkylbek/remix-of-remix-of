@@ -216,7 +216,9 @@ function PolyclinicPage() {
                 {specialists.slice(0, 16).map((item, index) => (
                   <Reveal key={item.slug} delay={index * 20}>
                     <Link to="/napravleniya/$slug" params={{ slug: item.slug }} className="border-about-line hover:border-about-teal group flex h-full items-center gap-3 rounded-2xl border bg-about-canvas p-4 transition-colors">
-                      <DiagnosticsIcon icon={SPECIALTY_ICONS[index % SPECIALTY_ICONS.length] ?? "Stethoscope"} title={item.name} className="bg-about-icon text-about-teal size-10 shrink-0 rounded-full" />
+                      <span className="bg-about-icon grid size-10 shrink-0 place-items-center overflow-hidden rounded-full p-1">
+                        <img src={SPECIALTY_ICONS[item.slug] ?? terapevtIcon} alt="" className="h-full w-full object-contain" loading="lazy" />
+                      </span>
                       <span className="text-about-ink min-w-0 flex-1 text-[13px] font-semibold sm:text-sm">{item.name}</span>
                       <Plus className="text-about-teal size-5 shrink-0 transition-transform group-hover:rotate-90" aria-hidden="true" />
                     </Link>
