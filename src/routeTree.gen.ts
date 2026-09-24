@@ -14,6 +14,7 @@ import { Route as SplatRouteImport } from './routes/$'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CheckupsV2RouteImport } from './routes/checkups-v2'
 import { Route as GlavnayaV2RouteImport } from './routes/glavnaya-v2'
 import { Route as GlavnayaV3RouteImport } from './routes/glavnaya-v3'
 import { Route as PoliklinikaRouteImport } from './routes/poliklinika'
@@ -76,6 +77,11 @@ const AboutRoute = AboutRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckupsV2Route = CheckupsV2RouteImport.update({
+  id: '/checkups-v2',
+  path: '/checkups-v2',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GlavnayaV2Route = GlavnayaV2RouteImport.update({
@@ -292,6 +298,7 @@ export interface FileRoutesByFullPath {
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/checkups-v2': typeof CheckupsV2Route
   '/glavnaya-v2': typeof GlavnayaV2Route
   '/glavnaya-v3': typeof GlavnayaV3Route
   '/poliklinika': typeof PoliklinikaRoute
@@ -337,6 +344,7 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/checkups-v2': typeof CheckupsV2Route
   '/glavnaya-v2': typeof GlavnayaV2Route
   '/glavnaya-v3': typeof GlavnayaV3Route
   '/poliklinika': typeof PoliklinikaRoute
@@ -383,6 +391,7 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/checkups-v2': typeof CheckupsV2Route
   '/glavnaya-v2': typeof GlavnayaV2Route
   '/glavnaya-v3': typeof GlavnayaV3Route
   '/poliklinika': typeof PoliklinikaRoute
@@ -430,6 +439,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/about'
     | '/auth'
+    | '/checkups-v2'
     | '/glavnaya-v2'
     | '/glavnaya-v3'
     | '/poliklinika'
@@ -475,6 +485,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/about'
     | '/auth'
+    | '/checkups-v2'
     | '/glavnaya-v2'
     | '/glavnaya-v3'
     | '/poliklinika'
@@ -520,6 +531,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/about'
     | '/auth'
+    | '/checkups-v2'
     | '/glavnaya-v2'
     | '/glavnaya-v3'
     | '/poliklinika'
@@ -567,6 +579,7 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
+  CheckupsV2Route: typeof CheckupsV2Route
   GlavnayaV2Route: typeof GlavnayaV2Route
   GlavnayaV3Route: typeof GlavnayaV3Route
   PoliklinikaRoute: typeof PoliklinikaRoute
@@ -624,6 +637,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkups-v2': {
+      id: '/checkups-v2'
+      path: '/checkups-v2'
+      fullPath: '/checkups-v2'
+      preLoaderRoute: typeof CheckupsV2RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/glavnaya-v2': {
@@ -967,6 +987,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
+  CheckupsV2Route: CheckupsV2Route,
   GlavnayaV2Route: GlavnayaV2Route,
   GlavnayaV3Route: GlavnayaV3Route,
   PoliklinikaRoute: PoliklinikaRoute,
