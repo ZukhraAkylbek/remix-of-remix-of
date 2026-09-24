@@ -141,7 +141,7 @@ function AboutPage() {
       <Breadcrumbs items={[{ label: "О нас" }]} />
 
       <main>
-        <section className="bg-about-mint relative isolate min-h-[620px] overflow-hidden lg:min-h-[650px]">
+        <section className="bg-about-mint relative isolate min-h-[440px] overflow-hidden lg:min-h-[460px]">
           <div className="absolute inset-x-0 bottom-0 h-[55%] lg:inset-y-0 lg:right-0 lg:left-auto lg:h-auto lg:w-[57%]">
             <img
               src={clinicExterior}
@@ -154,39 +154,39 @@ function AboutPage() {
             <div className="from-about-mint absolute inset-0 bg-gradient-to-b from-15% via-about-mint/30 to-transparent lg:bg-gradient-to-r lg:from-0% lg:via-about-mint/40 lg:to-transparent" />
           </div>
 
-          <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-start px-4 pt-12 sm:px-6 sm:pt-16 lg:min-h-[650px] lg:items-center lg:pt-0">
-            <Reveal className="relative z-10 max-w-2xl pb-72 lg:pb-0">
-              <p className="font-serif-editorial text-about-ink text-4xl leading-[1.13] italic sm:text-5xl lg:text-[3.7rem]">
+          <div className="relative mx-auto flex min-h-[440px] max-w-7xl items-start px-4 pt-10 sm:px-6 sm:pt-12 lg:min-h-[460px] lg:items-center lg:pt-0">
+            <Reveal className="relative z-10 max-w-2xl pb-56 lg:pb-0">
+              <p className="font-serif-editorial text-about-ink text-4xl leading-[1.13] italic sm:text-5xl lg:text-[3.2rem]">
                 Мы заботимся о Вас
                 <br />с 2000 года
               </p>
-              <h1 className="font-serif-editorial text-about-ink mt-4 text-3xl leading-tight font-normal italic sm:text-4xl lg:text-[2.75rem]">
+              <h1 className="font-serif-editorial text-about-ink mt-3 text-2xl leading-tight font-normal italic sm:text-3xl lg:text-[2.25rem]">
                 Биринчи байлык – ден соолук
               </h1>
-              <p className="text-about-copy mt-7 max-w-xl text-base leading-relaxed sm:text-lg">
+              <p className="text-about-copy mt-5 max-w-xl text-base leading-relaxed sm:text-lg">
                 Современная многопрофильная медицинская сеть, которая объединяет опыт,
                 профессионализм и заботу о каждом пациенте.
               </p>
             </Reveal>
           </div>
 
-          <LeafOrnament className="text-about-ornament absolute bottom-5 left-3 z-10 w-36 opacity-60 sm:left-8 sm:w-44 lg:bottom-10" />
+          <LeafOrnament className="text-about-ornament absolute bottom-3 left-3 z-10 w-32 opacity-60 sm:left-8 sm:w-40 lg:bottom-8" />
         </section>
 
-        <section className="py-16 sm:py-20 lg:py-24">
+        <section className="py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionTitle>Как создавалась «Авиценна»</SectionTitle>
-            <div className="mt-9 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-6">
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-6">
               {STORY.map(({ icon: Icon, title, text }, index) => (
                 <Reveal key={title} delay={index * 35} className="h-full">
-                  <article className="border-about-line bg-card flex h-full min-h-56 flex-col rounded-2xl border p-4 sm:p-5">
-                    <span className="bg-about-icon text-about-teal grid size-11 shrink-0 place-items-center rounded-full">
+                  <article className="border-about-line bg-card flex h-full min-h-40 flex-col rounded-2xl border p-4">
+                    <span className="bg-about-icon text-about-teal grid size-10 shrink-0 place-items-center rounded-full">
                       <Icon className="size-5" strokeWidth={1.6} aria-hidden="true" />
                     </span>
-                    <h3 className="text-about-ink mt-5 text-base leading-snug font-bold break-words">
+                    <h3 className="text-about-ink mt-4 text-base leading-snug font-bold break-words">
                       {title}
                     </h3>
-                    <p className="text-about-copy mt-2 text-sm leading-relaxed break-words hyphens-auto">
+                    <p className="text-about-copy mt-1.5 text-sm leading-relaxed break-words hyphens-auto">
                       {text}
                     </p>
                   </article>
@@ -196,11 +196,11 @@ function AboutPage() {
           </div>
         </section>
 
-        <section className="pb-16 sm:pb-20 lg:pb-24">
+        <section className="pb-10 sm:pb-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <Reveal>
               <article className="border-about-line bg-card overflow-hidden rounded-2xl border lg:grid lg:grid-cols-[0.85fr_1.35fr]">
-                <div className="bg-about-mint min-h-80 overflow-hidden rounded-b-[48%] lg:min-h-[510px] lg:rounded-r-[48%] lg:rounded-b-none">
+                <div className="bg-about-mint min-h-64 overflow-hidden rounded-b-[48%] lg:min-h-[380px] lg:rounded-r-[48%] lg:rounded-b-none">
                   <img
                     src={FOUNDER_PORTRAIT_URL}
                     alt="Керималиева Жыпар Абдыказиевна — основательница сети клиник «Авиценна»"
@@ -211,28 +211,28 @@ function AboutPage() {
                   />
                 </div>
 
-                <div className="grid gap-8 p-6 sm:p-10 lg:grid-cols-[0.9fr_auto_1.1fr] lg:items-center lg:p-12">
+                <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[0.9fr_auto_1.1fr] lg:items-center lg:p-10">
                   <div>
                     <Award className="text-about-teal size-8" strokeWidth={1.5} aria-hidden="true" />
-                    <h2 className="font-serif-editorial text-about-ink mt-5 text-4xl leading-tight font-normal italic sm:text-5xl">
+                    <h2 className="font-serif-editorial text-about-ink mt-4 text-3xl leading-tight font-normal italic sm:text-4xl">
                       «Главное — ден соолук!»
                     </h2>
-                    <p className="text-about-ink mt-8 text-lg font-bold">
+                    <p className="text-about-ink mt-6 text-lg font-bold">
                       Керималиева Жыпар Абдыказиевна
                     </p>
-                    <p className="text-about-copy mt-2 text-sm leading-relaxed">
+                    <p className="text-about-copy mt-1.5 text-sm leading-relaxed">
                       Основательница сети клиник «Авиценна»
                     </p>
                   </div>
 
-                  <div className="bg-about-line h-px w-full lg:h-full lg:min-h-72 lg:w-px" />
+                  <div className="bg-about-line h-px w-full lg:h-full lg:min-h-56 lg:w-px" />
 
                   <div>
                     <p className="text-about-ink text-lg leading-relaxed sm:text-xl">
                       С самого начала нашей работы мы руководствовались простой и важной целью —
                       сделать качественную медицинскую помощь доступной для каждого человека.
                     </p>
-                    <div className="mt-9 flex items-end gap-4">
+                    <div className="mt-7 flex items-end gap-4">
                       <span className="bg-about-icon text-about-teal grid size-12 shrink-0 place-items-center rounded-full">
                         <HeartHandshake className="size-6" strokeWidth={1.5} aria-hidden="true" />
                       </span>
@@ -247,13 +247,13 @@ function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-about-mint py-16 sm:py-20 lg:py-24">
+        <section className="bg-about-mint py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionTitle>Наши преимущества</SectionTitle>
-            <div className="mt-9 grid auto-rows-fr gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 grid auto-rows-fr gap-3 md:grid-cols-2 lg:grid-cols-3">
               {ADVANTAGES.map(({ icon: Icon, title, text }, index) => (
                 <Reveal key={title} delay={index * 35} className="h-full">
-                  <article className="border-about-line bg-card flex h-full gap-4 rounded-2xl border p-5 sm:p-6">
+                  <article className="border-about-line bg-card flex h-full gap-4 rounded-2xl border p-4 sm:p-5">
                     <span className="bg-about-icon text-about-teal grid size-12 shrink-0 place-items-center rounded-full">
                       <Icon className="size-6" strokeWidth={1.6} aria-hidden="true" />
                     </span>
@@ -268,30 +268,30 @@ function AboutPage() {
           </div>
         </section>
 
-        <section className="py-16 sm:py-20 lg:py-24">
+        <section className="py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <Reveal>
               <article className="border-about-line bg-card overflow-hidden rounded-2xl border lg:grid lg:grid-cols-[1fr_1.02fr]">
-                <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-14">
+                <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
                   <SectionTitle>Наша миссия</SectionTitle>
-                  <p className="text-about-ink mt-7 text-lg leading-relaxed sm:text-xl">
+                  <p className="text-about-ink mt-5 text-base leading-relaxed sm:text-lg">
                     Мы создаем современную систему медицинской помощи, где пациент получает
                     качественное и доступное лечение, а забота о его здоровье становится
                     приоритетом.
                   </p>
-                  <div className="my-7 flex items-center gap-4">
+                  <div className="my-5 flex items-center gap-4">
                     <span className="bg-about-line h-px flex-1" />
-                    <LeafOrnament className="text-about-ornament w-24" />
+                    <LeafOrnament className="text-about-ornament w-20" />
                     <span className="bg-about-line h-px flex-1" />
                   </div>
-                  <p className="text-about-copy text-base leading-relaxed sm:text-lg">
+                  <p className="text-about-copy text-sm leading-relaxed sm:text-base">
                     Мы стремимся к тому, чтобы каждый человек в нашей стране мог получить
                     квалифицированную медицинскую помощь, основанную на современных технологиях,
                     опыте наших специалистов и внимательном отношении.
                   </p>
                 </div>
 
-                <div className="min-h-80 overflow-hidden rounded-t-[42%] lg:min-h-[570px] lg:rounded-t-none lg:rounded-l-[42%]">
+                <div className="min-h-64 overflow-hidden rounded-t-[42%] lg:min-h-[420px] lg:rounded-t-none lg:rounded-l-[42%]">
                   <img
                     src={receptionPhoto}
                     alt="Светлая современная зона регистрации клиники с растениями"
