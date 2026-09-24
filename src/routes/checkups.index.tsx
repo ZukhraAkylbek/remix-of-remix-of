@@ -365,10 +365,10 @@ function CheckupsPage() {
           </DialogHeader>
           <div className="grid gap-2 sm:grid-cols-2">
             {MINI_PROGRAMS.map((item) => (
-              <Button key={item.title} type="button" variant="outline" onClick={() => setActiveMini(item)} className={`border-about-line h-auto justify-start gap-3 whitespace-normal rounded-xl p-3 text-left shadow-none ${activeMini?.title === item.title ? "border-brand-green bg-about-mint" : "hover:bg-about-icon"}`}>
+              <button key={item.title} type="button" onClick={() => setActiveMini(item)} className={`border-about-line h-auto justify-start gap-3 whitespace-normal rounded-xl border p-3 text-left shadow-none transition-colors ${activeMini?.title === item.title ? "border-brand-green bg-about-mint" : "hover:border-brand-green hover:bg-about-mint"}`}>
                 <span className="bg-about-icon text-about-teal grid size-9 shrink-0 place-items-center rounded-full"><CheckupIcon name={item.icon} className="size-4" /></span>
                 <span><strong className="text-about-ink block text-sm">{item.title}</strong><span className="text-about-teal mt-1 block text-xs font-bold">{item.price}</span></span>
-              </Button>
+              </button>
             ))}
           </div>
           {activeMini && (
