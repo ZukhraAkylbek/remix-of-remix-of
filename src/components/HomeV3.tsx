@@ -401,30 +401,10 @@ export function HomeV3() {
                   необходимую качественную медицинскую помощь в одном клинике.
                 </p>
               </Reveal>
-              <Reveal delay={160}>
-                <div className="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-6">
-                  {CLINIC_STATS.map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="bg-surface-soft border-border flex flex-col items-center gap-2 rounded-2xl border p-3 text-center sm:p-4"
-                    >
-                      <stat.icon className="text-brand-green size-5 sm:size-6" />
-                      <div>
-                        <p className="text-foreground text-xl font-extrabold sm:text-2xl">
-                          <CountUp value={stat.value} />
-                        </p>
-                        <p className="text-muted-foreground mt-0.5 text-[11px] leading-tight sm:text-xs">
-                          {stat.label}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Reveal>
               <Reveal delay={200}>
                 <Link
                   to="/about"
-                  className="text-brand-green hover:text-brand-green-dark inline-flex w-fit items-center gap-2 text-[15px] font-extrabold transition-colors"
+                  className="text-brand-green hover:text-brand-green-dark group inline-flex w-fit items-center gap-2 text-[15px] font-extrabold transition-colors"
                 >
                   Подробнее о Авиценне{"\n"}
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
@@ -432,6 +412,26 @@ export function HomeV3() {
               </Reveal>
             </div>
           </div>
+          <Reveal delay={160}>
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
+              {CLINIC_STATS.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="bg-surface-soft border-border flex flex-col items-center gap-2 rounded-2xl border p-4 text-center sm:p-5"
+                >
+                  <stat.icon className="text-brand-green size-6 sm:size-7" />
+                  <div>
+                    <p className="text-foreground text-2xl font-extrabold sm:text-3xl">
+                      <CountUp value={stat.value} />
+                    </p>
+                    <p className="text-muted-foreground mt-1 text-xs leading-snug sm:text-sm">
+                      {stat.label}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </Section>
 
         {/* Новости и специальные предложения */}
