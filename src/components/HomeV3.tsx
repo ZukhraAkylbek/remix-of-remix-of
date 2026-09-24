@@ -13,6 +13,7 @@ import { ScrollArrowPair } from "@/components/ScrollArrows";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
+import { HeroSlider } from "@/components/HeroSlider";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CLINIC } from "@/lib/clinic";
