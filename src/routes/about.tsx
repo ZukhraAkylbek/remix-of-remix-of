@@ -141,7 +141,7 @@ function AboutPage() {
       <Breadcrumbs items={[{ label: "О нас" }]} />
 
       <main>
-        <section className="bg-about-mint relative isolate min-h-[620px] overflow-hidden lg:min-h-[650px]">
+        <section className="bg-about-mint relative isolate min-h-[440px] overflow-hidden lg:min-h-[460px]">
           <div className="absolute inset-x-0 bottom-0 h-[55%] lg:inset-y-0 lg:right-0 lg:left-auto lg:h-auto lg:w-[57%]">
             <img
               src={clinicExterior}
@@ -154,23 +154,23 @@ function AboutPage() {
             <div className="from-about-mint absolute inset-0 bg-gradient-to-b from-15% via-about-mint/30 to-transparent lg:bg-gradient-to-r lg:from-0% lg:via-about-mint/40 lg:to-transparent" />
           </div>
 
-          <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-start px-4 pt-12 sm:px-6 sm:pt-16 lg:min-h-[650px] lg:items-center lg:pt-0">
-            <Reveal className="relative z-10 max-w-2xl pb-72 lg:pb-0">
-              <p className="font-serif-editorial text-about-ink text-4xl leading-[1.13] italic sm:text-5xl lg:text-[3.7rem]">
+          <div className="relative mx-auto flex min-h-[440px] max-w-7xl items-start px-4 pt-10 sm:px-6 sm:pt-12 lg:min-h-[460px] lg:items-center lg:pt-0">
+            <Reveal className="relative z-10 max-w-2xl pb-56 lg:pb-0">
+              <p className="font-serif-editorial text-about-ink text-4xl leading-[1.13] italic sm:text-5xl lg:text-[3.2rem]">
                 Мы заботимся о Вас
                 <br />с 2000 года
               </p>
-              <h1 className="font-serif-editorial text-about-ink mt-4 text-3xl leading-tight font-normal italic sm:text-4xl lg:text-[2.75rem]">
+              <h1 className="font-serif-editorial text-about-ink mt-3 text-2xl leading-tight font-normal italic sm:text-3xl lg:text-[2.25rem]">
                 Биринчи байлык – ден соолук
               </h1>
-              <p className="text-about-copy mt-7 max-w-xl text-base leading-relaxed sm:text-lg">
+              <p className="text-about-copy mt-5 max-w-xl text-base leading-relaxed sm:text-lg">
                 Современная многопрофильная медицинская сеть, которая объединяет опыт,
                 профессионализм и заботу о каждом пациенте.
               </p>
             </Reveal>
           </div>
 
-          <LeafOrnament className="text-about-ornament absolute bottom-5 left-3 z-10 w-36 opacity-60 sm:left-8 sm:w-44 lg:bottom-10" />
+          <LeafOrnament className="text-about-ornament absolute bottom-3 left-3 z-10 w-32 opacity-60 sm:left-8 sm:w-40 lg:bottom-8" />
         </section>
 
         <section className="py-16 sm:py-20 lg:py-24">
