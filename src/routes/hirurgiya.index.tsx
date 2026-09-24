@@ -13,6 +13,10 @@ import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { parseRows, surgeryPageQueryOptions } from "@/lib/surgery.queries";
 import { specialtyImage } from "@/lib/specialty-images";
+import { CLINIC_DOCTORS, experienceLabel, type ClinicDoctor } from "@/lib/clinic-doctors";
+
+const SURGERY_CATEGORIES = ["hirurgiya", "onkologiya", "urologiya", "ginekologiya", "travmatologiya"];
+const surgeryDoctors = CLINIC_DOCTORS.filter((d) => SURGERY_CATEGORIES.includes(d.category));
 
 const TITLE = "Хирургия в Бишкеке — операции и стационар | Авиценна";
 const DESCRIPTION =
@@ -233,6 +237,43 @@ export function DoctorsGrid({
   );
 }
 
+function SurgeryDoctorsCarousel({ doctors }: { doctors: ClinicDoctor[] }) {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const scroll = (direction: -1 | 1) => {
+    carouselRef.current?.scrollBy({ left: direction * 320, behavior: "smooth" });
+  };
+
+  return (
+    <div className="relative mt-6">
+      <div className="mb-4 flex justify-end gap-2">
+        <Button variant="outline" size="icon" aria-label="Прокрутить врачей влево" onClick={() => scroll(-1)} className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none">
+          <ChevronLeft aria-hidden="true" />
+        </Button>
+        <Button variant="outline" size="icon" aria-label="Прокрутить врачей вправо" onClick={() => scroll(1)} className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none">
+          <ChevronRight aria-hidden="true" />
+        </Button>
+      </div>
+      <div ref={carouselRef} className="scrollbar-hide flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
+        {doctors.map((doctor) => (
+          <article key={doctor.slug} className="border-about-line bg-about-canvas w-[260px] shrink-0 snap-start rounded-2xl border p-4 sm:w-[280px]">
+            {doctor.photo ? (
+              <img src={doctor.photo} alt={doctor.name} loading="lazy" className="size-24 rounded-full object-cover" />
+            ) : (
+              <span className="bg-about-icon text-about-teal grid size-24 place-items-center rounded-full"><UserRound className="size-10" aria-hidden="true" /></span>
+            )}
+            <h3 className="text-about-ink mt-4 text-lg font-bold">{doctor.name}</h3>
+            <p className="text-about-teal mt-1 text-sm font-semibold">{doctor.specialty}</p>
+            {doctor.experience != null && <p className="text-about-copy mt-2 text-sm">Стаж: {experienceLabel(doctor.experience)}</p>}
+            <Button asChild variant="outline" className="border-about-teal text-about-ink hover:bg-brand-green hover:border-brand-green hover:text-white mt-4 w-full bg-transparent shadow-none">
+              <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>Подробнее</Link>
+            </Button>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function SurgeryPage() {
   const { data } = useSuspenseQuery(surgeryPageQueryOptions());
   const section = (key: string): SurgeryContentSection | undefined =>
@@ -342,7 +383,17 @@ function SurgeryPage() {
           </div>
         </section>
 
-        {data.doctors.length > 0 && <section id="vrachi" className="bg-about-mint py-10 sm:py-12"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SurgeryHeading title="Наши специалисты" /><DoctorsGrid doctors={data.doctors} /></div></section>}
+        <section id="vrachi" className="bg-about-mint py-10 sm:py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <SurgeryHeading title="Наши хирурги" description="Опытные специалисты хирургических направлений клиники «Авиценна»." />
+            <SurgeryDoctorsCarousel doctors={surgeryDoctors} />
+            <div className="mt-6">
+              <Button asChild variant="outline" className="border-about-teal text-about-ink hover:bg-brand-green hover:border-brand-green hover:text-white bg-transparent shadow-none">
+                <a href="/vrachi?category=hirurgiya#vrachi">Все врачи →</a>
+              </Button>
+            </div>
+          </div>
+        </section>
 
         {faq && faqItems.length > 0 && (
           <section id="faq" className="bg-about-canvas py-10 sm:py-12"><div className="mx-auto max-w-7xl px-4 sm:px-6"><SurgeryHeading title={faq.title} /><div className="mt-7"><FaqList items={faqItems} /></div></div></section>
