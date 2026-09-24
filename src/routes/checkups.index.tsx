@@ -67,11 +67,6 @@ const MINI_PROGRAMS: MiniProgram[] = [
   { title: "Спортивный", price: "4 800 сом", icon: "activity" },
 ];
 
-const DEFAULT_MINI_PROGRAM: MiniProgram = {
-  title: "Здоровое сердце",
-  price: "5 800 сом",
-  icon: "heart",
-};
 
 const PROGRAM_CONTENT = [
   "Лабораторные исследования по направлению программы",
@@ -184,6 +179,7 @@ const FAQ = [
 ];
 
 function CheckupsPage() {
+  const [miniListOpen, setMiniListOpen] = useState(false);
   const [activeMini, setActiveMini] = useState<MiniProgram | null>(null);
   const [activeProgram, setActiveProgram] = useState<ProgramDetail | null>(null);
 
@@ -286,7 +282,7 @@ function CheckupsPage() {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => setActiveMini(DEFAULT_MINI_PROGRAM)}
+                onClick={() => setMiniListOpen(true)}
                 className="border-about-line bg-about-mint hover:border-brand-green hover:bg-about-mint h-auto min-h-56 items-stretch justify-between whitespace-normal rounded-2xl p-5 text-left shadow-none lg:col-span-4"
               >
                 <span className="flex w-full flex-col">
@@ -357,23 +353,36 @@ function CheckupsPage() {
       </main>
       <SiteFooter />
 
-      <Dialog open={activeMini !== null} onOpenChange={(open) => !open && setActiveMini(null)}>
+      {/* Список мини-чекапов */}
+      <Dialog open={miniListOpen} onOpenChange={setMiniListOpen}>
         <DialogContent className="border-about-line max-h-[88vh] w-[calc(100%-2rem)] max-w-3xl overflow-y-auto rounded-2xl p-5 sm:p-7">
           <DialogHeader className="pr-8 text-left">
             <DialogTitle className="text-about-ink text-2xl font-extrabold">Мини-чекапы</DialogTitle>
-            <DialogDescription className="text-about-copy">Выберите программу, чтобы посмотреть её состав.</DialogDescription>
+            <DialogDescription className="text-about-copy">Нажмите на программу, чтобы сразу увидеть состав и записаться.</DialogDescription>
           </DialogHeader>
           <div className="grid gap-2 sm:grid-cols-2">
             {MINI_PROGRAMS.map((item) => (
-              <button key={item.title} type="button" onClick={() => setActiveMini(item)} className={`border-about-line h-auto justify-start gap-3 whitespace-normal rounded-xl border p-3 text-left shadow-none transition-colors ${activeMini?.title === item.title ? "border-brand-green bg-about-mint" : "hover:border-brand-green hover:bg-about-mint"}`}>
+              <button key={item.title} type="button" onClick={() => { setMiniListOpen(false); setActiveMini(item); }} className="border-about-line hover:border-brand-green hover:bg-about-mint h-auto justify-start gap-3 whitespace-normal rounded-xl border p-3 text-left shadow-none transition-colors">
                 <span className="bg-about-icon text-about-teal grid size-9 shrink-0 place-items-center rounded-full"><CheckupIcon name={item.icon} className="size-4" /></span>
                 <span><strong className="text-about-ink block text-sm">{item.title}</strong><span className="text-about-teal mt-1 block text-xs font-bold">{item.price}</span></span>
               </button>
             ))}
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Состав выбранного мини-чекапа */}
+      <Dialog open={activeMini !== null} onOpenChange={(open) => !open && setActiveMini(null)}>
+        <DialogContent className="border-about-line max-h-[88vh] w-[calc(100%-2rem)] max-w-2xl overflow-y-auto rounded-2xl p-5 sm:p-7">
           {activeMini && (
-            <div className="border-about-line mt-2 border-t pt-5">
-              <h3 className="text-about-ink text-lg font-extrabold">Что входит в «{activeMini.title}»</h3>
+            <>
+              <DialogHeader className="pr-8 text-left">
+                <DialogTitle className="text-about-ink flex items-center gap-3 text-2xl font-extrabold">
+                  <span className="bg-about-icon text-about-teal grid size-10 shrink-0 place-items-center rounded-full"><CheckupIcon name={activeMini.icon} className="size-5" /></span>
+                  {activeMini.title}
+                </DialogTitle>
+                <DialogDescription className="text-about-copy">Что входит в программу</DialogDescription>
+              </DialogHeader>
               <ul className="mt-4 space-y-3">
                 {PROGRAM_CONTENT.map((item) => (
                   <li key={item} className="text-about-copy flex items-start gap-3 text-sm"><span className="bg-about-icon text-about-teal mt-0.5 grid size-5 shrink-0 place-items-center rounded-full"><Check className="size-3" /></span>{item}</li>
@@ -383,7 +392,10 @@ function CheckupsPage() {
                 <strong className="text-brand-green text-xl">{activeMini.price}</strong>
                 <Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark"><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Записаться</a></Button>
               </div>
-            </div>
+              <button type="button" onClick={() => { setActiveMini(null); setMiniListOpen(true); }} className="text-about-teal mt-3 text-sm font-bold underline-offset-4 hover:underline">
+                ← Назад к списку мини-чекапов
+              </button>
+            </>
           )}
         </DialogContent>
       </Dialog>
