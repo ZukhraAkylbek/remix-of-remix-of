@@ -66,7 +66,24 @@ const FALLBACK_SPECIALISTS = [
   { slug: "dermatolog", name: "Дерматологи" },
 ];
 
-const SPECIALTY_ICONS = ["Stethoscope", "Baby", "HeartPulse", "Brain", "Activity", "TestTube", "VenetianMask", "Microscope"];
+const SPECIALTY_ICONS: Record<string, string> = {
+  terapevt: terapevtIcon,
+  pediatr: pediatrIcon,
+  kardiolog: kardiologIcon,
+  nevrolog: nevrologIcon,
+  gastroenterolog: gastroenterologIcon,
+  endokrinolog: endokrinologIcon,
+  ginekolog: ginekologIcon,
+  urolog: urologIcon,
+  hirurg: hirurgIcon,
+  travmatolog: travmatologIcon,
+  lor: lorIcon,
+  proktolog: proktologIcon,
+  mammolog: mammologIcon,
+  flebolog: flebologIcon,
+  pulmonolog: pulmonologIcon,
+  dermatolog: dermatologIcon,
+};
 
 const BENEFITS = [
   { icon: Users, title: "Более 100 врачей", text: "Опытные специалисты для взрослых и детей." },
