@@ -208,7 +208,7 @@ function DoctorsCarousel({ doctors }: { doctors: ClinicDoctor[] }) {
 }
 
 function DoctorsPage() {
-  const heroImage = specialtyImage("kardio", 0);
+  const heroImage = teamPhoto;
   const faqItems = FAQ_ITEMS;
 
   return (
