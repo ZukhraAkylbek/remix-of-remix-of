@@ -268,11 +268,11 @@ function AboutPage() {
           </div>
         </section>
 
-        <section className="py-16 sm:py-20 lg:py-24">
+        <section className="py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <Reveal>
               <article className="border-about-line bg-card overflow-hidden rounded-2xl border lg:grid lg:grid-cols-[1fr_1.02fr]">
-                <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-14">
+                <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
                   <SectionTitle>Наша миссия</SectionTitle>
                   <p className="text-about-ink mt-7 text-lg leading-relaxed sm:text-xl">
                     Мы создаем современную систему медицинской помощи, где пациент получает
