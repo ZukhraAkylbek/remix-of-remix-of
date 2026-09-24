@@ -13,10 +13,13 @@ import {
   ShieldCheck,
   Clock,
   Activity,
+  Building2,
+  CalendarDays,
   ClipboardCheck,
   MapPin,
+  Search,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 
 import { Reveal } from "@/components/Reveal";
@@ -136,20 +139,74 @@ function FaqList({ items }: { items: { title: string; text?: string }[] }) {
   );
 }
 
-function DoctorsCarousel({ doctors }: { doctors: ClinicDoctor[] }) {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const scroll = (direction: -1 | 1) => {
-    carouselRef.current?.scrollBy({ left: direction * 320, behavior: "smooth" });
+const DOCTORS_PER_PAGE = 6;
+
+function DoctorsDirectory({ doctors }: { doctors: ClinicDoctor[] }) {
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("all");
+  const [page, setPage] = useState(0);
+  const filteredDoctors = useMemo(() => {
+    const normalizedQuery = query.trim().toLocaleLowerCase("ru");
+    return doctors.filter((doctor) => {
+      const matchesCategory = category === "all" || doctor.category === category;
+      const matchesQuery =
+        normalizedQuery.length === 0 ||
+        `${doctor.name} ${doctor.specialty}`.toLocaleLowerCase("ru").includes(normalizedQuery);
+      return matchesCategory && matchesQuery;
+    });
+  }, [category, doctors, query]);
+  const pageCount = Math.max(1, Math.ceil(filteredDoctors.length / DOCTORS_PER_PAGE));
+  const safePage = Math.min(page, pageCount - 1);
+  const visibleDoctors = filteredDoctors.slice(
+    safePage * DOCTORS_PER_PAGE,
+    (safePage + 1) * DOCTORS_PER_PAGE,
+  );
+
+  const changeQuery = (value: string) => {
+    setQuery(value);
+    setPage(0);
+  };
+
+  const changeCategory = (value: string) => {
+    setCategory(value);
+    setPage(0);
   };
 
   return (
-    <div className="relative mt-3">
-      <div className="mb-3 flex justify-end gap-2">
+    <div className="mt-6">
+      <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(240px,0.62fr)_auto] md:items-center">
+        <label className="border-about-line bg-about-canvas focus-within:border-about-teal flex h-11 items-center gap-3 rounded-xl border px-4">
+          <Search className="text-about-teal size-5 shrink-0" aria-hidden="true" />
+          <span className="sr-only">Поиск врача</span>
+          <input
+            type="search"
+            value={query}
+            onChange={(event) => changeQuery(event.target.value)}
+            placeholder="Поиск врача, специальности..."
+            className="text-about-ink placeholder:text-about-copy min-w-0 flex-1 bg-transparent text-sm outline-none"
+          />
+        </label>
+        <label className="border-about-line bg-about-canvas focus-within:border-about-teal flex h-11 items-center gap-3 rounded-xl border px-4">
+          <Stethoscope className="text-about-teal size-5 shrink-0" aria-hidden="true" />
+          <span className="sr-only">Выберите специальность</span>
+          <select
+            value={category}
+            onChange={(event) => changeCategory(event.target.value)}
+            className="text-about-ink min-w-0 flex-1 bg-transparent text-sm font-semibold outline-none"
+          >
+            <option value="all">Все специальности</option>
+            {DOCTOR_CATEGORIES.filter((item) => doctors.some((doctor) => doctor.category === item.slug)).map((item) => (
+              <option key={item.slug} value={item.slug}>{item.name}</option>
+            ))}
+          </select>
+        </label>
+        <div className="flex justify-end gap-2">
         <Button
           variant="outline"
           size="icon"
-          aria-label="Прокрутить врачей влево"
-          onClick={() => scroll(-1)}
+          aria-label="Предыдущая страница врачей"
+          disabled={safePage === 0}
+          onClick={() => setPage((current) => Math.max(0, current - 1))}
           className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none"
         >
           <ChevronLeft aria-hidden="true" />
@@ -157,52 +214,73 @@ function DoctorsCarousel({ doctors }: { doctors: ClinicDoctor[] }) {
         <Button
           variant="outline"
           size="icon"
-          aria-label="Прокрутить врачей вправо"
-          onClick={() => scroll(1)}
+          aria-label="Следующая страница врачей"
+          disabled={safePage >= pageCount - 1}
+          onClick={() => setPage((current) => Math.min(pageCount - 1, current + 1))}
           className="border-about-line text-about-teal rounded-full bg-about-canvas shadow-none"
         >
           <ChevronRight aria-hidden="true" />
         </Button>
       </div>
-      <div
-        ref={carouselRef}
-        className="scrollbar-hide flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2"
-      >
-        {doctors.map((doctor) => (
+        </div>
+      </div>
+      {visibleDoctors.length > 0 ? (
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {visibleDoctors.map((doctor) => (
           <article
             key={doctor.slug}
-            className="border-about-line bg-about-canvas w-[260px] shrink-0 snap-start rounded-2xl border p-4 sm:w-[280px]"
+            className="border-about-line bg-about-canvas flex min-w-0 flex-col rounded-2xl border p-4"
           >
             {doctor.photo ? (
               <img
                 src={doctor.photo}
                 alt={doctor.name}
                 loading="lazy"
-                className="size-24 rounded-full object-cover object-top"
+                className="aspect-[4/3] w-full rounded-xl object-cover object-top"
               />
             ) : (
-              <span className="bg-about-icon text-about-teal grid size-24 place-items-center rounded-full">
-                <UserRound className="size-10" aria-hidden="true" />
+              <span className="bg-about-icon text-about-teal grid aspect-[4/3] w-full place-items-center rounded-xl">
+                <UserRound className="size-16" aria-hidden="true" />
               </span>
             )}
-            <h3 className="text-about-ink mt-4 text-lg font-bold">{doctor.name}</h3>
-            <p className="text-about-teal mt-1 text-sm font-semibold">
+            <h3 className="text-about-ink mt-4 text-lg leading-snug font-bold">{doctor.name}</h3>
+            <p className="bg-about-icon text-about-teal mt-3 w-fit rounded-full px-3 py-1 text-[13px] font-semibold">
               {doctor.specialty}
             </p>
-            {doctor.experience != null && (
-              <p className="text-about-copy mt-2 text-sm">Стаж: {experienceLabel(doctor.experience)}</p>
-            )}
-            <p className="text-about-copy mt-1 text-[13px]">{doctor.branch}</p>
+            <div className="mt-4 space-y-2">
+              <p className="text-about-copy flex items-center gap-2 text-[13px] sm:text-sm">
+                <Building2 className="text-about-teal size-4 shrink-0" aria-hidden="true" />
+                {doctor.branch}
+              </p>
+              {doctor.experience != null && (
+                <p className="text-about-copy flex items-center gap-2 text-[13px] sm:text-sm">
+                  <CalendarDays className="text-about-teal size-4 shrink-0" aria-hidden="true" />
+                  Стаж: {experienceLabel(doctor.experience)}
+                </p>
+              )}
+            </div>
             <Button
               asChild
               variant="outline"
-              className="border-about-line text-about-ink mt-4 bg-transparent shadow-none"
+              className="border-about-teal text-about-ink mt-auto w-full bg-transparent pt-4 shadow-none"
             >
-              <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>Подробнее</Link>
+              <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>
+                Подробнее <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
             </Button>
           </article>
         ))}
-      </div>
+        </div>
+      ) : (
+        <div className="border-about-line text-about-copy mt-6 rounded-2xl border p-6 text-center text-sm">
+          По вашему запросу врачи не найдены.
+        </div>
+      )}
+      {filteredDoctors.length > 0 && (
+        <p className="text-about-copy mt-4 text-center text-[13px]">
+          {safePage + 1} из {pageCount}
+        </p>
+      )}
     </div>
   );
 }
@@ -309,25 +387,7 @@ function DoctorsPage() {
               title="Наши врачи"
               description="Подберите специалиста по направлению и запишитесь на приём онлайн."
             />
-            <nav aria-label="Виды услуг" className="mt-5 flex flex-wrap gap-2">
-              {DOCTOR_CATEGORIES.filter((c) => CLINIC_DOCTORS.some((d) => d.category === c.slug)).map((c) => (
-                <a key={c.slug} href={`#${c.slug}`} className="border-about-line text-about-ink hover:bg-about-mint rounded-full border px-3 py-1.5 text-[13px] font-semibold sm:text-sm">
-                  {c.name}
-                </a>
-              ))}
-            </nav>
-            {DOCTOR_CATEGORIES.map((c) => {
-              const list = CLINIC_DOCTORS.filter((d) => d.category === c.slug);
-              if (list.length === 0) return null;
-              return (
-                <div key={c.slug} id={c.slug} className="mt-8 scroll-mt-24">
-                  <h3 className="text-about-ink text-xl font-bold sm:text-2xl">
-                    {c.name} <span className="text-about-teal text-base font-semibold">· {list.length}</span>
-                  </h3>
-                  <DoctorsCarousel doctors={list} />
-                </div>
-              );
-            })}
+            <DoctorsDirectory doctors={CLINIC_DOCTORS} />
           </div>
         </section>
 
