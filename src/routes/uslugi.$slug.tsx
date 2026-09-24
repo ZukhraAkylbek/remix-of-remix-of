@@ -11,13 +11,23 @@ import { BOOKING_URL } from "@/lib/site-config";
 import { CLINIC, absoluteUrl, faqPageJsonLd } from "@/lib/clinic";
 import { servicePageQueryOptions } from "@/lib/services.queries";
 import { parseRows } from "@/lib/surgery.queries";
+import {
+  SERVICE_BRANCHES,
+  STATIC_SERVICE_PAGES,
+  doubleGisUrl,
+  type StaticServicePage,
+} from "@/lib/uslugi-pages";
 import { DoctorsGrid, FaqList } from "./hirurgiya.index";
 
 export const Route = createFileRoute("/uslugi/$slug")({
   loader: async ({ context, params }) => {
     const data = await context.queryClient.ensureQueryData(servicePageQueryOptions(params.slug));
-    if (!data) throw notFound();
-    return { title: data.meta_title || data.title, description: data.meta_description || data.summary };
+    if (data) {
+      return { title: data.meta_title || data.title, description: data.meta_description || data.summary };
+    }
+    const staticPage = STATIC_SERVICE_PAGES[params.slug];
+    if (!staticPage) throw notFound();
+    return { title: staticPage.metaTitle, description: staticPage.metaDescription };
   },
   head: ({ loaderData, params }) => {
     if (!loaderData) {
