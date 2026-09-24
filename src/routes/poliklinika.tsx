@@ -3,6 +3,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   Activity,
   ArrowRight,
+  BriefcaseMedical,
   Check,
   ClipboardCheck,
   Clock,
@@ -232,13 +233,8 @@ function PolyclinicPage() {
                 {DIAGNOSTICS.map((item, index) => <div key={item.title} className="border-about-line bg-about-canvas flex gap-3 rounded-2xl border p-4"><span className="bg-about-icon text-about-teal grid size-10 shrink-0 place-items-center rounded-full"><Microscope className="size-5" /></span><div><h3 className="text-about-ink text-sm font-bold">{item.title}</h3><p className="text-about-copy mt-1 text-[13px] leading-relaxed">{item.text}</p></div></div>)}
               </div>
             </div>
-          </div>
-        </section>
-
-        <section className="bg-about-canvas py-10 sm:py-12">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <div className="border-about-line bg-about-mint flex flex-wrap items-center gap-5 rounded-2xl border p-4 sm:p-6">
-              <span className="bg-about-icon text-about-teal grid size-11 shrink-0 place-items-center rounded-full"><Stethoscope className="size-5" /></span>
+            <div className="border-about-line bg-about-canvas mt-7 flex flex-wrap items-center gap-5 rounded-2xl border p-4 sm:p-6">
+              <span className="bg-about-icon text-about-teal grid size-11 shrink-0 place-items-center rounded-full"><BriefcaseMedical className="size-5" /></span>
               <div className="min-w-0 flex-1"><h2 className="text-about-ink text-xl font-extrabold sm:text-2xl">Не знаете, к какому специалисту обратиться?</h2><p className="text-about-copy mt-1 text-[13px] sm:text-sm">Администратор поможет выбрать врача и удобное время приёма.</p></div>
               <Button asChild className="bg-brand-green text-brand-white hover:bg-brand-green-dark shadow-none"><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Записаться на приём</a></Button>
             </div>
