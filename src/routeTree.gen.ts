@@ -32,6 +32,7 @@ import { Route as HirurgiyaIndexRouteImport } from './routes/hirurgiya.index'
 import { Route as HirurgiyaSlugRouteImport } from './routes/hirurgiya.$slug'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
+import { Route as NapravleniyaStatsionarRouteImport } from './routes/napravleniya.statsionar'
 import { Route as UslugiIndexRouteImport } from './routes/uslugi.index'
 import { Route as UslugiSlugRouteImport } from './routes/uslugi.$slug'
 import { Route as VrachiIndexRouteImport } from './routes/vrachi.index'
@@ -167,6 +168,11 @@ const NapravleniyaIndexRoute = NapravleniyaIndexRouteImport.update({
 const NapravleniyaSlugRoute = NapravleniyaSlugRouteImport.update({
   id: '/napravleniya/$slug',
   path: '/napravleniya/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NapravleniyaStatsionarRoute = NapravleniyaStatsionarRouteImport.update({
+  id: '/napravleniya/statsionar',
+  path: '/napravleniya/statsionar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UslugiIndexRoute = UslugiIndexRouteImport.update({
@@ -311,6 +317,7 @@ export interface FileRoutesByFullPath {
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/napravleniya/statsionar': typeof NapravleniyaStatsionarRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
   '/vrachi/$slug': typeof VrachiSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
@@ -356,6 +363,7 @@ export interface FileRoutesByTo {
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/napravleniya/statsionar': typeof NapravleniyaStatsionarRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
   '/vrachi/$slug': typeof VrachiSlugRoute
   '/checkups': typeof CheckupsIndexRoute
@@ -404,6 +412,7 @@ export interface FileRoutesById {
   '/diagnostika/$slug': typeof DiagnostikaSlugRoute
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/napravleniya/statsionar': typeof NapravleniyaStatsionarRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
   '/vrachi/$slug': typeof VrachiSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
@@ -452,6 +461,7 @@ export interface FileRouteTypes {
     | '/diagnostika/$slug'
     | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
+    | '/napravleniya/statsionar'
     | '/uslugi/$slug'
     | '/vrachi/$slug'
     | '/checkups/'
@@ -497,6 +507,7 @@ export interface FileRouteTypes {
     | '/diagnostika/$slug'
     | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
+    | '/napravleniya/statsionar'
     | '/uslugi/$slug'
     | '/vrachi/$slug'
     | '/checkups'
@@ -544,6 +555,7 @@ export interface FileRouteTypes {
     | '/diagnostika/$slug'
     | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
+    | '/napravleniya/statsionar'
     | '/uslugi/$slug'
     | '/vrachi/$slug'
     | '/checkups/'
@@ -591,6 +603,7 @@ export interface RootRouteChildren {
   DiagnostikaSlugRoute: typeof DiagnostikaSlugRoute
   HirurgiyaSlugRoute: typeof HirurgiyaSlugRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
+  NapravleniyaStatsionarRoute: typeof NapravleniyaStatsionarRoute
   UslugiSlugRoute: typeof UslugiSlugRoute
   VrachiSlugRoute: typeof VrachiSlugRoute
   CheckupsIndexRoute: typeof CheckupsIndexRoute
@@ -763,6 +776,13 @@ declare module '@tanstack/react-router' {
       path: '/napravleniya/$slug'
       fullPath: '/napravleniya/$slug'
       preLoaderRoute: typeof NapravleniyaSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/napravleniya/statsionar': {
+      id: '/napravleniya/statsionar'
+      path: '/napravleniya/statsionar'
+      fullPath: '/napravleniya/statsionar'
+      preLoaderRoute: typeof NapravleniyaStatsionarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/uslugi/': {
@@ -999,6 +1019,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiagnostikaSlugRoute: DiagnostikaSlugRoute,
   HirurgiyaSlugRoute: HirurgiyaSlugRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
+  NapravleniyaStatsionarRoute: NapravleniyaStatsionarRoute,
   UslugiSlugRoute: UslugiSlugRoute,
   VrachiSlugRoute: VrachiSlugRoute,
   CheckupsIndexRoute: CheckupsIndexRoute,
