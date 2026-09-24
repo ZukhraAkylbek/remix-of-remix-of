@@ -59,9 +59,8 @@ const FAQ_ITEMS: Array<{ title: string; text?: string }> = [
 ];
 
 export const Route = createFileRoute("/vrachi/")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    category: typeof search.category === "string" ? search.category : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>) =>
+    typeof search["category"] === "string" ? { category: search["category"] } : {},
   head: () => ({
     meta: [
       { title: TITLE },
@@ -144,7 +143,7 @@ function FaqList({ items }: { items: { title: string; text?: string }[] }) {
 
 const DOCTORS_PER_PAGE = 6;
 
-function DoctorsDirectory({ doctors, initialCategory }: { doctors: ClinicDoctor[]; initialCategory?: string }) {
+function DoctorsDirectory({ doctors, initialCategory }: { doctors: ClinicDoctor[]; initialCategory: string | undefined }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(() =>
     initialCategory && DOCTOR_CATEGORIES.some((item) => item.slug === initialCategory)
@@ -292,7 +291,8 @@ function DoctorsDirectory({ doctors, initialCategory }: { doctors: ClinicDoctor[
 }
 
 function DoctorsPage() {
-  const { category } = Route.useSearch();
+  const search = Route.useSearch();
+  const category = "category" in search ? search.category : undefined;
   const heroImage = teamPhoto;
   const faqItems = FAQ_ITEMS;
 
