@@ -361,72 +361,72 @@
 @utility pastel-mint {
   background-image: linear-gradient(
     135deg,
-    var(--pastel-mint-start) 0%,
-    var(--pastel-mint-end) 100%
+    color-mix(in oklch, var(--pastel-mint-start) 55%, transparent) 0%,
+    color-mix(in oklch, var(--pastel-mint-end) 55%, transparent) 100%
   );
 }
 
 @utility pastel-coral {
   background-image: linear-gradient(
     135deg,
-    var(--pastel-coral-start) 0%,
-    var(--pastel-coral-end) 100%
+    color-mix(in oklch, var(--pastel-coral-start) 55%, transparent) 0%,
+    color-mix(in oklch, var(--pastel-coral-end) 55%, transparent) 100%
   );
 }
 
 @utility pastel-sky {
   background-image: linear-gradient(
     135deg,
-    var(--pastel-sky-start) 0%,
-    var(--pastel-sky-end) 100%
+    color-mix(in oklch, var(--pastel-sky-start) 55%, transparent) 0%,
+    color-mix(in oklch, var(--pastel-sky-end) 55%, transparent) 100%
   );
 }
 
 @utility pastel-lavender {
   background-image: linear-gradient(
     135deg,
-    var(--pastel-lavender-start) 0%,
-    var(--pastel-lavender-end) 100%
+    color-mix(in oklch, var(--pastel-lavender-start) 55%, transparent) 0%,
+    color-mix(in oklch, var(--pastel-lavender-end) 55%, transparent) 100%
   );
 }
 
 @utility pastel-sand {
   background-image: linear-gradient(
     135deg,
-    var(--pastel-sand-start) 0%,
-    var(--pastel-sand-end) 100%
+    color-mix(in oklch, var(--pastel-sand-start) 55%, transparent) 0%,
+    color-mix(in oklch, var(--pastel-sand-end) 55%, transparent) 100%
   );
 }
 
 @utility pastel-rose {
   background-image: linear-gradient(
     135deg,
-    var(--pastel-rose-start) 0%,
-    var(--pastel-rose-end) 100%
+    color-mix(in oklch, var(--pastel-rose-start) 55%, transparent) 0%,
+    color-mix(in oklch, var(--pastel-rose-end) 55%, transparent) 100%
   );
 }
 
 @utility pastel-lime {
   background-image: linear-gradient(
     135deg,
-    var(--pastel-lime-start) 0%,
-    var(--pastel-lime-end) 100%
+    color-mix(in oklch, var(--pastel-lime-start) 55%, transparent) 0%,
+    color-mix(in oklch, var(--pastel-lime-end) 55%, transparent) 100%
   );
 }
 
 @utility pastel-azure {
   background-image: linear-gradient(
     135deg,
-    var(--pastel-azure-start) 0%,
-    var(--pastel-azure-end) 100%
+    color-mix(in oklch, var(--pastel-azure-start) 55%, transparent) 0%,
+    color-mix(in oklch, var(--pastel-azure-end) 55%, transparent) 100%
   );
 }
 
 @utility pastel-peach {
   background-image: linear-gradient(
     135deg,
-    var(--pastel-peach-start) 0%,
-    var(--pastel-peach-end) 100%
+    color-mix(in oklch, var(--pastel-peach-start) 55%, transparent) 0%,
+    color-mix(in oklch, var(--pastel-peach-end) 55%, transparent) 100%
   );
 }
 
