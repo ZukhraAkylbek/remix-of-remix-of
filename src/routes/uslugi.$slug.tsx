@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { ArrowRight, Check, Clock3, Info, MapPin, Phone } from "lucide-react";
 
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -21,6 +21,9 @@ import { DoctorsGrid, FaqList } from "./hirurgiya.index";
 
 export const Route = createFileRoute("/uslugi/$slug")({
   loader: async ({ context, params }) => {
+    if (params.slug === "statsionar") {
+      throw redirect({ to: "/napravleniya/statsionar", replace: true });
+    }
     const data = await context.queryClient.ensureQueryData(servicePageQueryOptions(params.slug));
     if (data) {
       return {
