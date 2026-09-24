@@ -385,10 +385,10 @@ function TraumaDoctorCard({ doctor }: { doctor: ClinicDoctor }) {
           <Building2 className="size-3.5 text-about-teal" aria-hidden="true" />
           {doctor.branch}
         </span>
-        {doctor.experienceYears != null && (
+        {doctor.experience != null && (
           <span className="inline-flex items-center gap-1.5">
             <CalendarDays className="size-3.5 text-about-teal" aria-hidden="true" />
-            {experienceLabel(doctor.experienceYears)}
+            Стаж: {experienceLabel(doctor.experience)}
           </span>
         )}
       </div>
