@@ -33,6 +33,7 @@ import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slu
 import { Route as UslugiIndexRouteImport } from './routes/uslugi.index'
 import { Route as UslugiSlugRouteImport } from './routes/uslugi.$slug'
 import { Route as VrachiIndexRouteImport } from './routes/vrachi.index'
+import { Route as VrachiSlugRouteImport } from './routes/vrachi.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminBranchesRouteImport } from './routes/_authenticated/admin/branches'
 import { Route as AuthenticatedAdminCheckupsRouteImport } from './routes/_authenticated/admin/checkups'
@@ -171,6 +172,11 @@ const VrachiIndexRoute = VrachiIndexRouteImport.update({
   path: '/vrachi/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VrachiSlugRoute = VrachiSlugRouteImport.update({
+  id: '/vrachi/$slug',
+  path: '/vrachi/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -292,6 +298,7 @@ export interface FileRoutesByFullPath {
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/vrachi/$slug': typeof VrachiSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
   '/diagnostika/': typeof DiagnostikaIndexRoute
@@ -334,6 +341,7 @@ export interface FileRoutesByTo {
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/vrachi/$slug': typeof VrachiSlugRoute
   '/checkups': typeof CheckupsIndexRoute
   '/chekapy': typeof ChekapyIndexRoute
   '/diagnostika': typeof DiagnostikaIndexRoute
@@ -379,6 +387,7 @@ export interface FileRoutesById {
   '/hirurgiya/$slug': typeof HirurgiyaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/vrachi/$slug': typeof VrachiSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
   '/diagnostika/': typeof DiagnostikaIndexRoute
@@ -424,6 +433,7 @@ export interface FileRouteTypes {
     | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/uslugi/$slug'
+    | '/vrachi/$slug'
     | '/checkups/'
     | '/chekapy/'
     | '/diagnostika/'
@@ -466,6 +476,7 @@ export interface FileRouteTypes {
     | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/uslugi/$slug'
+    | '/vrachi/$slug'
     | '/checkups'
     | '/chekapy'
     | '/diagnostika'
@@ -510,6 +521,7 @@ export interface FileRouteTypes {
     | '/hirurgiya/$slug'
     | '/napravleniya/$slug'
     | '/uslugi/$slug'
+    | '/vrachi/$slug'
     | '/checkups/'
     | '/chekapy/'
     | '/diagnostika/'
@@ -554,6 +566,7 @@ export interface RootRouteChildren {
   HirurgiyaSlugRoute: typeof HirurgiyaSlugRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
   UslugiSlugRoute: typeof UslugiSlugRoute
+  VrachiSlugRoute: typeof VrachiSlugRoute
   CheckupsIndexRoute: typeof CheckupsIndexRoute
   ChekapyIndexRoute: typeof ChekapyIndexRoute
   DiagnostikaIndexRoute: typeof DiagnostikaIndexRoute
@@ -731,6 +744,13 @@ declare module '@tanstack/react-router' {
       path: '/vrachi'
       fullPath: '/vrachi/'
       preLoaderRoute: typeof VrachiIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vrachi/$slug': {
+      id: '/vrachi/$slug'
+      path: '/vrachi/$slug'
+      fullPath: '/vrachi/$slug'
+      preLoaderRoute: typeof VrachiSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/': {
@@ -938,6 +958,7 @@ const rootRouteChildren: RootRouteChildren = {
   HirurgiyaSlugRoute: HirurgiyaSlugRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
   UslugiSlugRoute: UslugiSlugRoute,
+  VrachiSlugRoute: VrachiSlugRoute,
   CheckupsIndexRoute: CheckupsIndexRoute,
   ChekapyIndexRoute: ChekapyIndexRoute,
   DiagnostikaIndexRoute: DiagnostikaIndexRoute,
