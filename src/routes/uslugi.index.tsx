@@ -13,6 +13,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { servicePagesQueryOptions } from "@/lib/services.queries";
+import { SERVICE_LINKS } from "@/lib/uslugi-pages";
 
 const TITLE = "Услуги клиники «Авиценна» в Бишкеке — полный список";
 const DESCRIPTION =
@@ -370,12 +371,15 @@ function ServicesIndex() {
                       </Link>
                     </Reveal>
                   ))
-                : FALLBACK_SERVICES.map((service, index) => (
+                : FALLBACK_SERVICES.map((service, index) => {
+                    const href = SERVICE_LINKS[service.title] ?? BOOKING_URL;
+                    const external = href.startsWith("http");
+                    return (
                     <Reveal key={service.title} delay={index * 30}>
                       <a
-                        href={BOOKING_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href={href}
+                        target={external ? "_blank" : undefined}
+                        rel={external ? "noopener noreferrer" : undefined}
                         className="border-border hover:border-brand-green group flex h-full items-start gap-2.5 rounded-2xl border bg-white p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:p-4"
                       >
                         <DiagnosticsIcon
@@ -393,7 +397,8 @@ function ServicesIndex() {
                         </span>
                       </a>
                     </Reveal>
-                  ))}
+                    );
+                  })}
             </div>
           </div>
         </section>
