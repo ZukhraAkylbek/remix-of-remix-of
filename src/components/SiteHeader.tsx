@@ -260,7 +260,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               <a
                 href="/auth"
                 onClick={() => setOpen(false)}
-                className="mt-2 inline-flex items-center gap-2 rounded-xl border border-brand-white/40 px-4 py-3 text-base font-bold"
+                className="mt-2 inline-flex items-center gap-2 rounded-xl border border-brand-white/40 px-4 py-3 text-base font-bold transition-all duration-200 hover:border-brand-white hover:bg-brand-white/15 active:scale-[0.97]"
               >
                 <User className="size-5" />
                 {t("Личный кабинет", "Личный кабинет")}
