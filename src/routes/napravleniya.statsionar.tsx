@@ -262,14 +262,14 @@ function StatsionarPage() {
         </section>
 
         {/* FAQ */}
-        <section className="bg-about-mint border-y border-about-line py-10 sm:py-12">
+        <section className="bg-about-canvas border-y border-about-line py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <StatsionarHeading
               icon={<CalendarClock className="size-5" aria-hidden="true" />}
               title="Часто задаваемые вопросы"
               description="Всё о стационарном лечении и госпитализации в «Авиценне»."
             />
-            <div className="mt-6 lg:grid lg:grid-cols-2 lg:gap-4">
+            <div className="mt-7">
               <FaqList items={FAQ_ITEMS} />
             </div>
           </div>

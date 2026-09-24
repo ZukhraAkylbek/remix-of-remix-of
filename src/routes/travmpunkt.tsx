@@ -279,13 +279,13 @@ function TraumaPage() {
         )}
 
         {/* FAQ */}
-        <section className="py-10 sm:py-12">
+        <section className="bg-about-canvas border-y border-about-line py-10 sm:py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <TraumaHeading
               title="Часто задаваемые вопросы"
               description="Отвечаем на популярные вопросы о приёме травматолога-ортопеда."
             />
-            <div className="mt-6 lg:grid lg:grid-cols-2 lg:gap-4">
+            <div className="mt-7">
               <FaqList items={FAQ_ITEMS} />
             </div>
           </div>
