@@ -153,11 +153,13 @@ function DoctorsDirectory({ doctors, initialCategory }: { doctors: ClinicDoctor[
   const filteredDoctors = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("ru");
     return doctors.filter((doctor) => {
-      const matchesCategory = category === "all" || doctor.category === category;
-      const matchesQuery =
-        normalizedQuery.length === 0 ||
-        `${doctor.name} ${doctor.specialty}`.toLocaleLowerCase("ru").includes(normalizedQuery);
-      return matchesCategory && matchesQuery;
+      if (normalizedQuery.length > 0) {
+        const haystack = `${doctor.name} ${doctor.specialty} ${doctor.branch} ${
+          DOCTOR_CATEGORIES.find((c) => c.slug === doctor.category)?.name ?? ""
+        }`.toLocaleLowerCase("ru");
+        return normalizedQuery.split(/\s+/).every((word) => haystack.includes(word));
+      }
+      return category === "all" || doctor.category === category;
     });
   }, [category, doctors, query]);
   const pageCount = Math.max(1, Math.ceil(filteredDoctors.length / DOCTORS_PER_PAGE));
