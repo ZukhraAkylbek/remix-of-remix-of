@@ -18,8 +18,23 @@ import {
 import { useState } from "react";
 
 import doctorPatientHeroAsset from "@/assets/doctor-patient-hero.jpg.asset.json";
+import terapevtIcon from "@/assets/specialty-icons/terapevt.png";
+import pediatrIcon from "@/assets/specialty-icons/pediatr.png";
+import kardiologIcon from "@/assets/specialty-icons/kardiolog.png";
+import nevrologIcon from "@/assets/specialty-icons/nevrolog.png";
+import gastroenterologIcon from "@/assets/specialty-icons/gastroenterolog.png";
+import endokrinologIcon from "@/assets/specialty-icons/endokrinolog.png";
+import ginekologIcon from "@/assets/specialty-icons/ginekolog.png";
+import urologIcon from "@/assets/specialty-icons/urolog.png";
+import hirurgIcon from "@/assets/specialty-icons/hirurg.png";
+import travmatologIcon from "@/assets/specialty-icons/travmatolog.png";
+import lorIcon from "@/assets/specialty-icons/lor.png";
+import proktologIcon from "@/assets/specialty-icons/proktolog.png";
+import mammologIcon from "@/assets/specialty-icons/mammolog.png";
+import flebologIcon from "@/assets/specialty-icons/flebolog.png";
+import pulmonologIcon from "@/assets/specialty-icons/pulmonolog.png";
+import dermatologIcon from "@/assets/specialty-icons/dermatolog.png";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
