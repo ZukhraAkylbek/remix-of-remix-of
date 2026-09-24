@@ -252,6 +252,7 @@ function DirectionPage() {
   return (
     <div className="bg-about-canvas min-h-screen">
       <SiteHeader breadcrumb={name} />
+      <Breadcrumbs items={[{ label: "Хирургия", href: "/hirurgiya" }, { label: name }]} />
 
       <script
         type="application/ld+json"
@@ -268,17 +269,6 @@ function DirectionPage() {
         <section className="bg-about-mint">
           <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:px-6 sm:py-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
             <Reveal className="flex flex-col justify-center lg:pr-10">
-              <nav aria-label="Хлебные крошки" className="text-about-copy text-[13px]">
-                <Link to="/" className="hover:text-about-teal">
-                  Главная
-                </Link>
-                <span className="mx-2">/</span>
-                <Link to="/hirurgiya" className="hover:text-about-teal">
-                  Хирургия
-                </Link>
-                <span className="mx-2">/</span>
-                <span className="text-about-ink">{name}</span>
-              </nav>
               <h1 className="text-about-ink mt-3 max-w-2xl text-2xl leading-[1.1] font-extrabold sm:text-4xl lg:text-5xl">
                 {name} в Бишкеке
               </h1>

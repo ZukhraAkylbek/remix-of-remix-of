@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, CalendarCheck, ChevronRight } from "lucide-react";
+import { ArrowRight, CalendarCheck } from "lucide-react";
 
 import { DiagnosticsIcon } from "@/components/DiagnosticsIcon";
 import { Reveal } from "@/components/Reveal";
@@ -85,13 +85,6 @@ function DiagnosticsPage() {
         {hero && (
           <section className="border-border border-b">
             <div className="mx-auto max-w-7xl px-4 py-9 sm:px-6 sm:py-12 lg:py-16">
-              <nav className="text-muted-foreground flex items-center gap-1.5 text-[13px] font-semibold">
-                <Link to="/" className="hover:text-foreground">
-                  Главная
-                </Link>
-                <ChevronRight className="size-3.5" />
-                <span className="text-foreground">Диагностика</span>
-              </nav>
 
               <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-center">
                 <div>

@@ -121,21 +121,11 @@ function SpecialtyPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Направления" }, { label: data.name }]} />
       <main>
         <section className="border-border border-b">
           <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.3fr_1fr] lg:py-16">
             <div>
-              <nav aria-label="Хлебные крошки" className="text-muted-foreground text-sm">
-                <Link to="/" className="hover:text-foreground">
-                  Главная
-                </Link>
-                <span className="mx-2">/</span>
-                <Link to="/napravleniya" className="hover:text-foreground">
-                  Направления
-                </Link>
-                <span className="mx-2">/</span>
-                <span className="text-foreground">{data.name}</span>
-              </nav>
               <h1 className="text-foreground mt-5 text-4xl leading-[1.08] font-extrabold sm:text-5xl lg:text-6xl">
                 {data.h1_title}
               </h1>

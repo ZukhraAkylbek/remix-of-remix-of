@@ -104,6 +104,7 @@ function TraumaPage() {
   return (
     <div className="bg-about-canvas min-h-screen">
       <SiteHeader breadcrumb="Травмпункт 24/7" />
+      <Breadcrumbs items={[{ label: "Услуги", href: "/uslugi" }, { label: "Травмпункт" }]} />
 
       <script
         type="application/ld+json"
@@ -119,7 +120,6 @@ function TraumaPage() {
         <section className="bg-about-mint border-b border-about-line">
           <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-[1.15fr_1fr]">
             <div>
-              <Breadcrumbs items={[{ label: "Услуги", href: "/uslugi" }, { label: "Травмпункт" }]} />
               <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-about-icon px-4 py-1.5 text-sm font-semibold text-about-teal">
                 <Clock3 className="size-4" aria-hidden="true" />
                 Работаем круглосуточно

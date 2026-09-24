@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
-import { CalendarCheck, ChevronRight } from "lucide-react";
+import { CalendarCheck } from "lucide-react";
 
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -69,21 +69,11 @@ function CheckupCardPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Чекапы", href: "/checkups" }, { label: card.title }]} />
       <main>
         <section className="border-border border-b">
           <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_460px] lg:items-center lg:py-16">
             <div>
-              <nav className="text-muted-foreground flex flex-wrap items-center gap-1.5 text-[13px] font-semibold">
-                <Link to="/" className="hover:text-foreground">
-                  Главная
-                </Link>
-                <ChevronRight className="size-3.5" />
-                <Link to="/checkups" className="hover:text-foreground">
-                  Чекапы
-                </Link>
-                <ChevronRight className="size-3.5" />
-                <span className="text-foreground">{card.title}</span>
-              </nav>
               {card.badge && (
                 <span className="text-primary bg-primary/10 mt-5 inline-block rounded-full px-3 py-1 text-[13px] font-bold">
                   {card.badge}
