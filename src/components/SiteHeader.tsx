@@ -291,7 +291,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="gradient-accent text-accent-foreground mt-2 flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold"
+                className="gradient-accent text-accent-foreground mt-2 flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200 hover:brightness-105 active:scale-[0.98]"
               >
                 <Calendar className="size-4 shrink-0" />
                 {t("Записаться онлайн", "Записаться онлайн")}
