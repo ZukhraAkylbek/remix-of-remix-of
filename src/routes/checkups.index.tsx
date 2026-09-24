@@ -67,11 +67,6 @@ const MINI_PROGRAMS: MiniProgram[] = [
   { title: "Спортивный", price: "4 800 сом", icon: "activity" },
 ];
 
-const DEFAULT_MINI_PROGRAM: MiniProgram = {
-  title: "Здоровое сердце",
-  price: "5 800 сом",
-  icon: "heart",
-};
 
 const PROGRAM_CONTENT = [
   "Лабораторные исследования по направлению программы",
