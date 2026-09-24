@@ -369,7 +369,7 @@ export function HomeV3() {
 
         {/* О клинике */}
         <Section id="o-klinike" eyebrow="" title="">
-          <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-start">
             <Reveal className="order-2 lg:order-1">
               <div className="relative overflow-hidden rounded-3xl border border-border shadow-lg">
                 <div className="relative aspect-video w-full bg-black">
@@ -401,7 +401,7 @@ export function HomeV3() {
                 </p>
               </Reveal>
               <Reveal delay={160}>
-                <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                <div className="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-6">
                   {CLINIC_STATS.map((stat) => (
                     <div
                       key={stat.label}
