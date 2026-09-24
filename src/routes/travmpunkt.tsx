@@ -104,6 +104,7 @@ function TraumaPage() {
   return (
     <div className="bg-about-canvas min-h-screen">
       <SiteHeader breadcrumb="Травмпункт 24/7" />
+      <Breadcrumbs items={[{ label: "Услуги", href: "/uslugi" }, { label: "Травмпункт" }]} />
 
       <script
         type="application/ld+json"

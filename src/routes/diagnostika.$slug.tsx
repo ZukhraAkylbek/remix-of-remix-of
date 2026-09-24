@@ -140,21 +140,14 @@ function DiagnosticsItemPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
+      <Breadcrumbs
+        items={[{ label: "Диагностика", href: "/diagnostika" }, { label: item.title }]}
+      />
       <main>
         {/* Hero */}
         <section className="border-border border-b">
           <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:py-16">
-            <nav className="text-muted-foreground flex flex-wrap items-center gap-1.5 text-[13px] font-semibold">
-              <Link to="/" className="hover:text-foreground">
-                Главная
-              </Link>
-              <ChevronRight className="size-3.5" />
-              <Link to="/diagnostika" className="hover:text-foreground">
-                Диагностика
-              </Link>
-              <ChevronRight className="size-3.5" />
-              <span className="text-foreground">{item.title}</span>
-            </nav>
+
 
             <div className="mt-6 grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_420px]">
               <div>

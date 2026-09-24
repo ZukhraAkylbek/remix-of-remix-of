@@ -69,6 +69,7 @@ function DoctorPage() {
   return (
     <div className="bg-about-canvas min-h-screen">
       <SiteHeader breadcrumb="Врачи" />
+      <Breadcrumbs items={[{ label: "Врачи", href: "/vrachi" }, { label: doctor.name }]} />
       <main>
         <section className="bg-about-mint">
           <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:px-6 sm:py-10 md:grid-cols-[260px_1fr] md:items-center">
@@ -82,11 +83,6 @@ function DoctorPage() {
               )}
             </div>
             <div>
-              <nav className="text-about-copy text-[13px]" aria-label="Хлебные крошки">
-                <Link to="/" className="hover:underline">Главная</Link> /{" "}
-                <Link to="/vrachi" className="hover:underline">Врачи</Link> /{" "}
-                <a href={`/vrachi#${doctor.category}`} className="hover:underline">{categoryName(doctor.category)}</a>
-              </nav>
               <h1 className="text-about-ink mt-2 text-2xl leading-tight font-extrabold sm:text-4xl">
                 {doctor.name}
               </h1>
